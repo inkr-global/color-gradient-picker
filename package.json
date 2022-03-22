@@ -1,0 +1,25 @@
+{
+  "name": "color-gradient-picker",
+  "version": "0.0.1",
+  "description": "beautiful ReactJs color gradient picker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inkrglobal/color-gradient-picker.git"
+  },
+  "keywords": [
+    "color",
+    "picker",
+    "gradient",
+    "picker"
+  ],
+  "author": "INKR Global",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inkrglobal/color-gradient-picker/issues"
+  },
+  "homepage": "https://github.com/inkrglobal/color-gradient-picker#readme"
+}
