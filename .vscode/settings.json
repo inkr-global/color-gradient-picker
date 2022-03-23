@@ -40,5 +40,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnPaste": false,
     "editor.formatOnSave": false
-  }
+  },
+  "cSpell.words": ["clsx"]
 }

@@ -1,10 +1,6 @@
-import React from "react";
 
-import s from "./app.module.css";
-
-// TODO: move to package.json
-// eslint-disable-next-line import/no-relative-packages
 import ColorGradientPicker from "../../packages";
+import s from "./app.module.css";
 
 function App() {
   return (

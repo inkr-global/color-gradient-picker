@@ -1,3 +1,7 @@
+body {
+  background-color: black;
+}
+
 .app {
   max-width: 1600px;
   width: 100%;
