@@ -15,8 +15,22 @@
 .input,
 .input_extra {
   border: none;
+  line-height: 1.5;
 }
 
 .info {
   margin-right: 8px;
+}
+
+.color_preview,
+.text_info {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.color_preview {
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }

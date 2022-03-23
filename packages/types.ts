@@ -1,14 +1,13 @@
-import { CSSProperties, ReactElement } from "react";
+import { CSSProperties, ReactElement, ReactText } from "react";
 
-export interface ColorGradientPickerProps {
+interface BaseProps {
   classNamePrefix?: string;
   className?: string;
 }
 
+export type ColorGradientPickerProps = BaseProps;
 
-export interface InputProps {
-  classNamePrefix: string;
-  className?: string;
+export interface InputProps extends BaseProps {
   inputWrapperClassName?: string;
   info: ReactElement;
   label?: string;
@@ -16,7 +15,10 @@ export interface InputProps {
   hasExtraInput?: boolean;
 }
 
-
-export interface InputColorPreviewProps {
+export interface InputColorPreviewProps extends BaseProps {
   value: string;
+}
+
+export interface InputTextInfoProps extends BaseProps {
+  children: ReactText;
 }

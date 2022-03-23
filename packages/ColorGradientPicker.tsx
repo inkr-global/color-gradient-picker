@@ -12,7 +12,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     <div className={cn(s.wrapper, classNamePrefix, className)}>
       <Input
         label="HEX"
-        info={<div>R</div>}
+        info={<Input.ColorPreview value="red" />}
+        classNamePrefix={classNamePrefix}
+      />
+
+      <hr />
+      <Input
+        label="HEX"
+        info={<Input.InputTextInfo>R</Input.InputTextInfo>}
         classNamePrefix={classNamePrefix}
       />
     </div>

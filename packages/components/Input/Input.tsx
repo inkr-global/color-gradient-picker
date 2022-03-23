@@ -1,8 +1,47 @@
 import clsx from "clsx";
 
-import { InputProps } from "../../types";
+import {
+  InputColorPreviewProps,
+  InputProps,
+  InputTextInfoProps,
+} from "../../types";
 import { applyPrefixToName } from "../../utils";
 import s from "./Input.module.css";
+
+function InputColorPreview(props: InputColorPreviewProps) {
+  const { value, className, classNamePrefix } = props;
+
+  const getPrefixClassName = applyPrefixToName(classNamePrefix);
+
+  return (
+    <div
+      style={{ background: value }}
+      className={clsx(
+        s.color_preview,
+        className,
+        getPrefixClassName("input-color-preview"),
+      )}
+    />
+  );
+}
+
+function InputTextInfo(props: InputTextInfoProps) {
+  const { children, className, classNamePrefix } = props;
+
+  const getPrefixClassName = applyPrefixToName(classNamePrefix);
+
+  return (
+    <div
+      className={clsx(
+        s.text_info,
+        className,
+        getPrefixClassName("input-text-info"),
+      )}
+    >
+      {children}
+    </div>
+  );
+}
 
 function Input(props: InputProps) {
   const {
@@ -21,8 +60,8 @@ function Input(props: InputProps) {
     <div
       className={clsx(
         s.container,
-        getPrefixClassName("input-container"),
         className,
+        getPrefixClassName("input-container"),
       )}
       style={style}
     >
@@ -54,5 +93,8 @@ function Input(props: InputProps) {
     </div>
   );
 }
+
+Input.ColorPreview = InputColorPreview;
+Input.InputTextInfo = InputTextInfo;
 
 export default Input;

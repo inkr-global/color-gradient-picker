@@ -7,12 +7,12 @@
  - className('comp', { some: true, state: false })
    @returns 'react-select__comp react-select__comp--some'
 */
-export const applyPrefixToName = (prefix: string) => (name: string) => {
-  if (!name) {
-    return prefix;
+export const applyPrefixToName = (prefix?: string) => (name: string) => {
+  if (!prefix) {
+    return name;
   } else if (name[0] === "-") {
     return prefix + name;
   } else {
     return prefix + "__" + name;
   }
-}
+};
