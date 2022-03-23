@@ -11,10 +11,8 @@
     "url": "git+https://github.com/inkrglobal/color-gradient-picker.git"
   },
   "keywords": [
-    "color",
-    "picker",
-    "gradient",
-    "picker"
+    "color picker",
+    "gradient picker"
   ],
   "author": "INKR Global",
   "license": "MIT",
