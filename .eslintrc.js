@@ -8,7 +8,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
 
   extends: [
-
     "eslint:recommended",
 
     "plugin:@typescript-eslint/recommended",
@@ -25,9 +24,7 @@ module.exports = {
     // - eslint-vscode with auto-fix works but always changes result every save.
     //   This happens with conflicting rules like 'array-bracket-newline'.
 
-
     "plugin:react-hooks/recommended",
-
   ],
 
   plugins: [
@@ -83,5 +80,19 @@ module.exports = {
         allowMultiplePropertiesPerLine: false,
       },
     ],
+
+    // ==> simple-import-sort
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
+
+    // ==> unused-imports
+
+    // Turned on: auto-fix
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-imports-ts": "warn",
+
+    // Turned off: no auto-fix and duplicate @typescript-eslint/no-unused-vars
+    "unused-imports/no-unused-vars": "off",
+    "unused-imports/no-unused-vars-ts": "off",
   },
 };
