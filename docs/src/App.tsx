@@ -1,9 +1,11 @@
 import React from "react";
 
+import ColorGradientPicker from "../../packages";
+
 function App() {
   return (
-    <div className="App">
-      <div>color gradient picker</div>
+    <div>
+      <ColorGradientPicker />
     </div>
   );
 }
