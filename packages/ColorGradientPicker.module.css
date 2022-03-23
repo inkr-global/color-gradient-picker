@@ -1,0 +1,14 @@
+:root {
+  --color-gradient-picker-font-family: -apple-system, blinkmacsystemfont,
+    "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --color-gradient-picker-base-font-size: 14px;
+  --color-gradient-picker-text-color: rgba(255, 255, 255, 0.65);
+}
+
+.wrapper {
+  box-sizing: border-box;
+  font-family: var(--color-gradient-picker-font-family);
+  font-size: var(--color-gradient-picker-base-font-size);
+  color: var(--color-gradient-picker-text-color);
+}

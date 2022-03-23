@@ -1,0 +1,22 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.label {
+  margin-right: 12px;
+}
+
+.input,
+.input_extra {
+  border: none;
+}
+
+.info {
+  margin-right: 8px;
+}
