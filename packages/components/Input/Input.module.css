@@ -1,11 +1,24 @@
 .container {
   display: inline-flex;
   align-items: center;
+  height: 26px;
+}
+
+.container:hover .wrapper {
+  border: 1px solid #262626;
 }
 
 .wrapper {
   display: inline-flex;
   align-items: center;
+  border-radius: 2px;
+  height: 100%;
+  border: 1px solid transparent;
+  transition: border-color 0.25s ease;
+}
+
+.container .wrapper.isFocus {
+  border: 1px solid #a58d12;
 }
 
 .label {
@@ -16,10 +29,29 @@
 .input_extra {
   border: none;
   line-height: 1.5;
+  background-color: transparent;
+  color: var(--color-gradient-picker-text-color);
+  border: none;
+  outline: none;
+}
+
+.input {
+  margin-right: 8px;
+}
+
+.input_extra {
+  margin-left: 6px;
+}
+
+.extra_input_divider {
+  width: 1px;
+  height: 24px; /* 26px - 2px */
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .info {
   margin-right: 8px;
+  margin-left: 6px;
 }
 
 .color_preview,

@@ -18,10 +18,21 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
       <hr />
       <Input
-        label="HEX"
+        label="RGB"
         info={<Input.InputTextInfo>R</Input.InputTextInfo>}
         classNamePrefix={classNamePrefix}
+        hasExtraInput
       />
+      <Input
+        info={<Input.InputTextInfo>G</Input.InputTextInfo>}
+        classNamePrefix={classNamePrefix}
+      />
+      <Input
+        info={<Input.InputTextInfo>B</Input.InputTextInfo>}
+        classNamePrefix={classNamePrefix}
+      />
+
+      
     </div>
   );
 }

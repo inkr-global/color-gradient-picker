@@ -1,4 +1,4 @@
-import { CSSProperties, ReactElement, ReactText } from "react";
+import { CSSProperties, HTMLProps, ReactElement, ReactText } from "react";
 
 interface BaseProps {
   classNamePrefix?: string;
@@ -13,6 +13,10 @@ export interface InputProps extends BaseProps {
   label?: string;
   style?: CSSProperties;
   hasExtraInput?: boolean;
+  placeholder?: string;
+  inputProps?: HTMLProps<HTMLInputElement>;
+  extraPlaceholder?: string;
+  extraInputProps?: HTMLProps<HTMLInputElement>;
 }
 
 export interface InputColorPreviewProps extends BaseProps {

@@ -12,3 +12,7 @@
   font-size: var(--color-gradient-picker-base-font-size);
   color: var(--color-gradient-picker-text-color);
 }
+
+.wrapper * {
+  box-sizing: border-box;
+}

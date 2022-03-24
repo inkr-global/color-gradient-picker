@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useState } from "react";
 
 import {
   InputColorPreviewProps,
@@ -44,6 +45,7 @@ function InputTextInfo(props: InputTextInfoProps) {
 }
 
 function Input(props: InputProps) {
+  // ------------------------------------------------------------------------------------------
   const {
     classNamePrefix,
     className,
@@ -52,7 +54,14 @@ function Input(props: InputProps) {
     style,
     hasExtraInput,
     inputWrapperClassName,
+    inputProps,
+    placeholder,
+    extraPlaceholder,
+    extraInputProps,
   } = props;
+
+  // ------------------------------------------------------------------------------------------
+  const [isFocus, setFocus] = useState<boolean>();
 
   const getPrefixClassName = applyPrefixToName(classNamePrefix);
 
@@ -74,6 +83,7 @@ function Input(props: InputProps) {
       <div
         className={clsx(
           s.wrapper,
+          isFocus && s.isFocus,
           inputWrapperClassName,
           getPrefixClassName("input-wrapper"),
         )}
@@ -82,12 +92,34 @@ function Input(props: InputProps) {
           {info}
         </div>
 
-        <input className={clsx(s.input, getPrefixClassName("input"))} />
+        <input
+          {...inputProps}
+          onFocus={() => {
+            setFocus(true);
+          }}
+          onBlur={() => {
+            setFocus(false);
+          }}
+          placeholder={placeholder}
+          className={clsx(s.input, getPrefixClassName("input"))}
+        />
 
         {hasExtraInput && (
-          <input
-            className={clsx(s.input_extra, getPrefixClassName("input-extra"))}
-          />
+          <>
+            <div className={s.extra_input_divider} />
+
+            <input
+              {...extraInputProps}
+              onFocus={() => {
+                setFocus(true);
+              }}
+              onBlur={() => {
+                setFocus(false);
+              }}
+              placeholder={extraPlaceholder}
+              className={clsx(s.input_extra, getPrefixClassName("input-extra"))}
+            />
+          </>
         )}
       </div>
     </div>
