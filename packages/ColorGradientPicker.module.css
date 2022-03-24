@@ -6,13 +6,13 @@
   --color-gradient-picker-text-color: rgba(255, 255, 255, 0.65);
 }
 
-.wrapper {
+.wrapper,
+.wrapper * {
   box-sizing: border-box;
+}
+
+.wrapper {
   font-family: var(--color-gradient-picker-font-family);
   font-size: var(--color-gradient-picker-base-font-size);
   color: var(--color-gradient-picker-text-color);
-}
-
-.wrapper * {
-  box-sizing: border-box;
 }

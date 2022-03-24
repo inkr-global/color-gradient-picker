@@ -17,6 +17,10 @@ export interface InputProps extends BaseProps {
   inputProps?: HTMLProps<HTMLInputElement>;
   extraPlaceholder?: string;
   extraInputProps?: HTMLProps<HTMLInputElement>;
+  onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
+  onExtraInputFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onExtraInputBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 
 export interface InputColorPreviewProps extends BaseProps {

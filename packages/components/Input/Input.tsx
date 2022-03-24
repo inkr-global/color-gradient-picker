@@ -58,6 +58,10 @@ function Input(props: InputProps) {
     placeholder,
     extraPlaceholder,
     extraInputProps,
+    onInputFocus,
+    onInputBlur,
+    onExtraInputFocus,
+    onExtraInputBlur,
   } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -94,10 +98,12 @@ function Input(props: InputProps) {
 
         <input
           {...inputProps}
-          onFocus={() => {
+          onFocus={(e) => {
+            if (typeof onInputFocus === "function") onInputFocus(e);
             setFocus(true);
           }}
-          onBlur={() => {
+          onBlur={(e) => {
+            if (typeof onInputBlur === "function") onInputBlur(e);
             setFocus(false);
           }}
           placeholder={placeholder}
@@ -110,10 +116,13 @@ function Input(props: InputProps) {
 
             <input
               {...extraInputProps}
-              onFocus={() => {
+              onFocus={(e) => {
+                if (typeof onExtraInputFocus === "function")
+                  onExtraInputFocus(e);
                 setFocus(true);
               }}
-              onBlur={() => {
+              onBlur={(e) => {
+                if (typeof onExtraInputBlur === "function") onExtraInputBlur(e);
                 setFocus(false);
               }}
               placeholder={extraPlaceholder}

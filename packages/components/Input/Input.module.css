@@ -46,7 +46,7 @@
 .extra_input_divider {
   width: 1px;
   height: 24px; /* 26px - 2px */
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .info {
