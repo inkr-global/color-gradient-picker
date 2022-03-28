@@ -5,7 +5,7 @@
     (var(--color-gradient-picker-value-picker-width) - 4px) / 2
   );
 
-  background-color: #7e7e84 !important;
+  background-color: #7e7e84;
   background-image: linear-gradient(
       45deg,
       #4c4c52 25%,
@@ -21,14 +21,14 @@
       transparent 75%,
       #4c4c52 75%,
       #4c4c52
-    ) !important;
+    );
   background-position: 0 0,
     calc((var(--color-gradient-picker-value-picker-width) - 4px) / 2)
-      calc((var(--color-gradient-picker-value-picker-width) - 4px) / 2) !important;
+      calc((var(--color-gradient-picker-value-picker-width) - 4px) / 2);
   background-size: calc(var(--color-gradient-picker-value-picker-width) - 4px)
       calc(var(--color-gradient-picker-value-picker-width) - 4px),
     calc(var(--color-gradient-picker-value-picker-width) - 4px)
-      calc(var(--color-gradient-picker-value-picker-width) - 4px) !important;
+      calc(var(--color-gradient-picker-value-picker-width) - 4px);
   background-repeat: repeat, repeat;
 }
 

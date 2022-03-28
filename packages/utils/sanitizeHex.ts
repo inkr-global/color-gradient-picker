@@ -15,7 +15,6 @@
   } else if (sanitizedHex.length >= 3 && sanitizedHex.length < 6) {
     sanitizedHex = `${sanitizedHex[0].repeat(2)}${sanitizedHex[1].repeat(2)}${sanitizedHex[2].repeat(2)}`;
   } else if (sanitizedHex.length > 6) {
-    // sanitizedHex = sanitizedHex.substr(0, 6);
     sanitizedHex = sanitizedHex.slice(0, 6);
   }
 

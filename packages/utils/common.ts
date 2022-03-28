@@ -31,15 +31,15 @@ export function getHueFromPosition(x: number, width: number): number {
  * @param {number} width The width of the alpha slider
  * @returns {number} The alpha based on the x position
  */
- export function getAlphaFromPosition(x: number, width: number): number {
+export function getAlphaFromPosition(x: number, width: number): number {
   if (!width) {
     return 0;
   }
 
   const percentage = x / width;
-  const hue = Math.max(Math.min(percentage, 1), 0);
+  const alpha = Math.max(Math.min(percentage, 1), 0) * 100;
 
-  return hue;
+  return Math.round(alpha);
 }
 
 /**

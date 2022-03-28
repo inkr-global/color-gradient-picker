@@ -7,11 +7,13 @@ export interface InputProps {
   style?: CSSProperties;
   placeholder?: string;
   inputProps?: HTMLProps<HTMLInputElement>;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
   onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
   onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
   value?: string | number;
   extraInputValue?: string | number;
   inputWrapperClassName?: string;
+  inputClassName?: string;
   className?: string;
 }
 

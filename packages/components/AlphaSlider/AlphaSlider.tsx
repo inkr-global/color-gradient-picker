@@ -95,7 +95,7 @@ const AlphaSlider = (props: AlphaSliderProps) => {
       };
 
   const sliderStyle: CSSProperties = {
-    left: `${alpha * 100}%`,
+    left: `${alpha}%`,
     backgroundColor: hex,
   };
 

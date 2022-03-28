@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HTMLProps, useState } from "react";
+import React, { HTMLProps, useState } from "react";
 
 import s from "./Input.module.css";
 import {
@@ -25,6 +25,10 @@ function InputTextInfo(props: InputTextInfoProps) {
   return <div className={clsx(s.text_info, className)}>{children}</div>;
 }
 
+function InputAlphaInfo() {
+  return <div className={s.alpha_info} />;
+}
+
 function Input(props: InputProps) {
   // ------------------------------------------------------------------------------------------
   const {
@@ -33,10 +37,12 @@ function Input(props: InputProps) {
     label,
     style,
     inputWrapperClassName,
+    inputClassName,
     inputProps,
     placeholder,
     onInputFocus,
     onInputBlur,
+    onChange,
     value,
   } = props;
 
@@ -56,6 +62,7 @@ function Input(props: InputProps) {
           {...inputProps}
           onFocus={(e) => {
             if (typeof onInputFocus === "function") onInputFocus(e);
+            e.target.select();
             setFocus(true);
           }}
           onBlur={(e) => {
@@ -63,16 +70,19 @@ function Input(props: InputProps) {
             setFocus(false);
           }}
           placeholder={placeholder}
-          className={clsx(s.input)}
+          className={clsx(s.input, inputClassName)}
           value={value}
+          onChange={onChange}
         />
       </div>
     </div>
   );
 }
 
-function Rgb(props: InputProps) {
-  const { inputProps, info, ...rest } = props;
+function Rgb(
+  props: Omit<InputProps, "onChange"> & { onChange: (value: number) => void },
+) {
+  const { inputProps, info, onChange, ...rest } = props;
 
   const customInputProps: HTMLProps<HTMLInputElement> = {
     ...inputProps,
@@ -81,42 +91,65 @@ function Rgb(props: InputProps) {
     max: 255,
   };
 
-  return (
-    <Input
-      {...rest}
-      info={<InputTextInfo>{info}</InputTextInfo>}
-      inputProps={customInputProps}
-    />
-  );
-}
-
-function Alpha(props: InputProps) {
-  const { inputProps, info, ...rest } = props;
-
-  const customInputProps: HTMLProps<HTMLInputElement> = {
-    ...inputProps,
-    type: "number",
-    min: 0,
-    max: 1,
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const value = parseInt(e.currentTarget.value);
+    if (value < 0 || value > 255) return;
+    onChange(value);
   };
 
   return (
     <Input
       {...rest}
+      onChange={_onChange}
       info={<InputTextInfo>{info}</InputTextInfo>}
       inputProps={customInputProps}
     />
   );
 }
 
-function Color(props: InputProps) {
-  const { value, ...rest } = props;
+function Alpha(
+  props: Omit<InputProps, "onChange"> & { onChange: (value: number) => void },
+) {
+  const { onChange, value, ...rest } = props;
 
   delete rest.info;
+
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const _value = e.currentTarget.value.replace("%", "");
+    let value = Math.round(parseInt(_value));
+    if (value < 0) value = 0;
+    if (value > 100) value = 100;
+    onChange(value);
+  };
 
   return (
     <Input
       {...rest}
+      info={<InputAlphaInfo />}
+      onChange={_onChange}
+      value={value + "%"}
+      inputClassName={s.alpha_input}
+    />
+  );
+}
+
+function ColorHex(
+  props: Omit<InputProps, "onChange"> & { onChange: (value: string) => void },
+) {
+  const { value, onChange, ...rest } = props;
+
+  delete rest.info;
+
+  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const _value = e.currentTarget.value;
+
+    onChange(_value);
+  };
+
+  return (
+    <Input
+      {...rest}
+      onChange={_onChange}
       value={value}
       info={<InputColorPreview value={(value as string) || "#000"} />}
     />
@@ -125,6 +158,6 @@ function Color(props: InputProps) {
 
 Input.Alpha = Alpha;
 Input.Rgb = Rgb;
-Input.Color = Color;
+Input.ColorHex = ColorHex;
 
 export default Input;
