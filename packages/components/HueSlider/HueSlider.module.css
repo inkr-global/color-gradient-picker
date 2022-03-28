@@ -1,0 +1,35 @@
+.hue_slider {
+  position: relative;
+  height: 16px;
+
+  background-image: linear-gradient(
+    to left,
+    #ff0000 0%,
+    #ff00ff 16.66%,
+    #0000ff 33.33%,
+    #00ffff 50%,
+    #00ff00 66.66%,
+    #ffff00 80.33%,
+    #ff0000 100%
+  );
+}
+
+.hue_slider_picker {
+  position: absolute;
+  /* -$pickerBorderWidth;  */
+  top: -2px;
+  left: 0;
+
+  width: 18px;
+  height: 100%;
+
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ff0000;
+
+  border-radius: 55%;
+
+  cursor: pointer;
+
+  transform: translateX(-50%);
+}
