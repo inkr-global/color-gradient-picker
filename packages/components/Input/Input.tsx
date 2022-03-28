@@ -1,102 +1,58 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { HTMLProps, useState } from "react";
 
+import s from "./Input.module.css";
 import {
   InputColorPreviewProps,
   InputProps,
   InputTextInfoProps,
-} from "../../types";
-import { applyPrefixToName } from "../../utils/common";
-import s from "./Input.module.css";
+} from "./types";
 
 function InputColorPreview(props: InputColorPreviewProps) {
-  const { value, className, classNamePrefix } = props;
-
-  const getPrefixClassName = applyPrefixToName(classNamePrefix);
+  const { value, className } = props;
 
   return (
     <div
       style={{ background: value }}
-      className={clsx(
-        s.color_preview,
-        className,
-        getPrefixClassName("input-color-preview"),
-      )}
+      className={clsx(s.color_preview, className)}
     />
   );
 }
 
 function InputTextInfo(props: InputTextInfoProps) {
-  const { children, className, classNamePrefix } = props;
+  const { children, className } = props;
 
-  const getPrefixClassName = applyPrefixToName(classNamePrefix);
-
-  return (
-    <div
-      className={clsx(
-        s.text_info,
-        className,
-        getPrefixClassName("input-text-info"),
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={clsx(s.text_info, className)}>{children}</div>;
 }
 
 function Input(props: InputProps) {
   // ------------------------------------------------------------------------------------------
   const {
-    classNamePrefix,
     className,
     info,
     label,
     style,
-    hasExtraInput,
     inputWrapperClassName,
     inputProps,
     placeholder,
-    extraPlaceholder,
-    extraInputProps,
     onInputFocus,
     onInputBlur,
-    onExtraInputFocus,
-    onExtraInputBlur,
     value,
-    extraInputValue,
   } = props;
 
   // ------------------------------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
 
-  const getPrefixClassName = applyPrefixToName(classNamePrefix);
+  const customInputProps: HTMLProps<HTMLInputElement> = {};
 
   return (
-    <div
-      className={clsx(
-        s.container,
-        className,
-        getPrefixClassName("input-container"),
-      )}
-      style={style}
-    >
-      {label && (
-        <div className={clsx(s.label, getPrefixClassName("input-label"))}>
-          {label}
-        </div>
-      )}
+    <div className={clsx(s.container, className)} style={style}>
+      {label && <div className={clsx(s.label)}>{label}</div>}
 
       <div
-        className={clsx(
-          s.wrapper,
-          isFocus && s.isFocus,
-          inputWrapperClassName,
-          getPrefixClassName("input-wrapper"),
-        )}
+        className={clsx(s.wrapper, isFocus && s.isFocus, inputWrapperClassName)}
       >
-        <div className={clsx(s.info, getPrefixClassName("input-icon"))}>
-          {info}
-        </div>
+        <div className={clsx(s.info)}>{info}</div>
 
         <input
           {...inputProps}
@@ -109,31 +65,10 @@ function Input(props: InputProps) {
             setFocus(false);
           }}
           placeholder={placeholder}
-          className={clsx(s.input, getPrefixClassName("input"))}
+          className={clsx(s.input)}
           value={value}
+          {...customInputProps}
         />
-
-        {hasExtraInput && (
-          <>
-            <div className={s.extra_input_divider} />
-
-            <input
-              {...extraInputProps}
-              onFocus={(e) => {
-                if (typeof onExtraInputFocus === "function")
-                  onExtraInputFocus(e);
-                setFocus(true);
-              }}
-              onBlur={(e) => {
-                if (typeof onExtraInputBlur === "function") onExtraInputBlur(e);
-                setFocus(false);
-              }}
-              placeholder={extraPlaceholder}
-              className={clsx(s.input_extra, getPrefixClassName("input-extra"))}
-              value={extraInputValue}
-            />
-          </>
-        )}
       </div>
     </div>
   );

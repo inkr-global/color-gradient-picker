@@ -25,8 +25,7 @@
   margin-right: 12px;
 }
 
-.input,
-.input_extra {
+.input {
   border: none;
   line-height: 1.5;
   background-color: transparent;
@@ -39,14 +38,14 @@
   margin-right: 8px;
 }
 
-.input_extra {
-  margin-left: 6px;
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-.extra_input_divider {
-  width: 1px;
-  height: 24px; /* 26px - 2px */
-  background-color: rgba(255, 255, 255, 0.12);
+.input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 .info {

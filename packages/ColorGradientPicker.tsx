@@ -81,12 +81,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     <div className={cn(s.wrapper, classNamePrefix, className)}>
       <Input
         info={<Input.ColorPreview value="red" />}
-        classNamePrefix={classNamePrefix}
-        hasExtraInput
         onInputFocus={onShowPanel}
-        // onInputBlur={onHidePanel}
-        onExtraInputFocus={onShowPanel}
-        // onExtraInputBlur={onHidePanel}
+        value={hex}
+        extraInputValue={alpha}
       />
 
       {isOpenPicker && (
@@ -130,7 +127,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             <Input
               label="HEX"
               info={<Input.ColorPreview value={hex} />}
-              classNamePrefix={classNamePrefix}
               inputProps={{
                 style: {
                   width: 100,
@@ -142,11 +138,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
             <Input
               info={<Input.ColorPreview value={hex} />}
-              classNamePrefix={classNamePrefix}
               inputProps={{
                 style: {
                   width: 28,
                 },
+                type: "number",
               }}
               style={{ gridArea: "alpha" }}
               value={alpha}
@@ -155,11 +151,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             <Input
               label="RGB"
               info={<Input.InputTextInfo>R</Input.InputTextInfo>}
-              classNamePrefix={classNamePrefix}
               inputProps={{
                 style: {
                   width: 26,
                 },
+                type: "number",
               }}
               style={{
                 gridArea: "red",
@@ -170,11 +166,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
             <Input
               info={<Input.InputTextInfo>G</Input.InputTextInfo>}
-              classNamePrefix={classNamePrefix}
               inputProps={{
                 style: {
                   width: 26,
                 },
+                type: "number",
               }}
               style={{ gridArea: "green" }}
               value={green}
@@ -182,11 +178,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
             <Input
               info={<Input.InputTextInfo>B</Input.InputTextInfo>}
-              classNamePrefix={classNamePrefix}
               inputProps={{
                 style: {
                   width: 26,
                 },
+                type: "number",
               }}
               style={{ gridArea: "blue" }}
               value={blue}
