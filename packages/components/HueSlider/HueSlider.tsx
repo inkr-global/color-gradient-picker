@@ -10,15 +10,17 @@ type HueSliderProps = {
   onChange: (hue: number) => void;
 };
 
-const HueSlider = ({
-  hue,
-  onChange,
-}: HueSliderProps) => {
+const HueSlider = (props: HueSliderProps) => {
+  // ------------------------------------------------------------------------------------------
+  const { hue, onChange } = props;
+
+  // ------------------------------------------------------------------------------------------
   const [isInteracting, setIsInteracting] = useState(false);
   const sliderDivRef = useRef<HTMLDivElement>(null);
 
   const hueColor = hsvToHex(hue, 1, 1);
 
+  // ------------------------------------------------------------------------------------------
   const updateHue = useCallback(
     (
       evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
@@ -48,13 +50,10 @@ const HueSlider = ({
     [updateHue],
   );
 
-  const onPointerUp = useCallback(
-    (evt: React.PointerEvent<Element>): void => {
-      (evt.target as HTMLElement).releasePointerCapture(evt.pointerId);
-      setIsInteracting(false);
-    },
-    [],
-  );
+  const onPointerUp = useCallback((evt: React.PointerEvent<Element>): void => {
+    (evt.target as HTMLElement).releasePointerCapture(evt.pointerId);
+    setIsInteracting(false);
+  }, []);
 
   const onMouseDown = useCallback(
     (evt: React.MouseEvent<Element, MouseEvent>): void => {
@@ -107,10 +106,7 @@ const HueSlider = ({
       title="Hue"
       {...interactionCallbacks}
     >
-      <div
-        className={clsx(s.hue_slider_picker)}
-        style={sliderStyle}
-      />
+      <div className={clsx(s.hue_slider_picker)} style={sliderStyle} />
     </div>
   );
 };
