@@ -2,6 +2,7 @@ import cn from "clsx";
 import { useCallback, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
+import AlphaSlider from "./components/AlphaSlider";
 import EyeDropperBtn from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider/HueSlider";
 import Input from "./components/Input";
@@ -24,9 +25,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // const sanitizedColor = sanitizeHex(color || "#000000");
   const sanitizedColor = sanitizeHex("#000000");
 
+  const [alpha, setAlpha] = useState<number>(1);
   const [hex, setHex] = useState<string>(sanitizedColor);
   const [hsv, setHsv] = useState(hexToHsv(sanitizedColor));
-  const [rgb, setRgb] = useState(hexToRgb(sanitizedColor));
 
   const [isOpenPicker, setOpenPicker] = useState<boolean>(false);
 
@@ -49,7 +50,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     const _hex = await openNativeEyeDropper();
 
     if (_hex !== null) {
-      setColor(_hex, hexToHsv(_hex))
+      setColor(_hex, hexToHsv(_hex));
     }
   }, []);
 
@@ -60,7 +61,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
     setHex(updatedHex);
     setHsv(updatedHsv);
-    setRgb(hexToRgb(updatedHex))
 
     // onChange(updatedHex);
   };
@@ -72,8 +72,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       updatedHsv,
     );
 
+  // ------------------------------------------------------------------------------------------
+
   const { hue, saturation, value } = hsv;
-  const { red, green, blue } = rgb;
+  const { red, green, blue } = hexToRgb(hex);
 
   return (
     <div className={cn(s.wrapper, classNamePrefix, className)}>
@@ -116,14 +118,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
                 className={s.hue_slider}
               />
 
-              <HueSlider
-                hue={hue}
-                onChange={(updatedHue) =>
-                  setColorFromHsv({
-                    ...hsvRef.current,
-                    hue: updatedHue,
-                  })
-                }
+              <AlphaSlider
+                alpha={alpha}
+                hex={hex}
+                onChange={(updatedAlpha) => setAlpha(updatedAlpha)}
               />
             </div>
           </div>
@@ -151,6 +149,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
                 },
               }}
               style={{ gridArea: "alpha" }}
+              value={alpha}
             />
 
             <Input

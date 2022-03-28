@@ -1,7 +1,9 @@
 .hue_slider {
   position: relative;
   height: calc(var(--color-gradient-picker-value-picker-width) - 4px);
-  border-radius: 4px;
+  border-radius: calc(
+    (var(--color-gradient-picker-value-picker-width) - 4px) / 2
+  );
 
   background-image: linear-gradient(
     to left,
@@ -19,17 +21,12 @@
   position: absolute;
   top: calc(0px - var(--color-gradient-picker-value-picker-border));
   left: 0;
-
   width: var(--color-gradient-picker-value-picker-width);
   height: var(--color-gradient-picker-value-picker-width);
-
   border: var(--color-gradient-picker-value-picker-border) solid #ffffff;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
   background-color: #ff0000;
-
   border-radius: 55%;
-
   cursor: pointer;
-
   transform: translateX(-50%);
 }

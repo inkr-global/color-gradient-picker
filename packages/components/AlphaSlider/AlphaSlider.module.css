@@ -1,0 +1,58 @@
+.alpha_slider {
+  position: relative;
+  height: calc(var(--color-gradient-picker-value-picker-width) - 4px);
+  border-radius: calc(
+    (var(--color-gradient-picker-value-picker-width) - 4px) / 2
+  );
+
+  background-color: #7e7e84 !important;
+  background-image: linear-gradient(
+      45deg,
+      #4c4c52 25%,
+      transparent 25%,
+      transparent 75%,
+      #4c4c52 75%,
+      #4c4c52
+    ),
+    linear-gradient(
+      45deg,
+      #4c4c52 25%,
+      transparent 25%,
+      transparent 75%,
+      #4c4c52 75%,
+      #4c4c52
+    ) !important;
+  background-position: 0 0,
+    calc((var(--color-gradient-picker-value-picker-width) - 4px) / 2)
+      calc((var(--color-gradient-picker-value-picker-width) - 4px) / 2) !important;
+  background-size: calc(var(--color-gradient-picker-value-picker-width) - 4px)
+      calc(var(--color-gradient-picker-value-picker-width) - 4px),
+    calc(var(--color-gradient-picker-value-picker-width) - 4px)
+      calc(var(--color-gradient-picker-value-picker-width) - 4px) !important;
+  background-repeat: repeat, repeat;
+}
+
+.alpha_slider_picker {
+  position: absolute;
+  top: calc(0px - var(--color-gradient-picker-value-picker-border));
+  left: 0;
+  width: var(--color-gradient-picker-value-picker-width);
+  height: var(--color-gradient-picker-value-picker-width);
+  border: var(--color-gradient-picker-value-picker-border) solid #ffffff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #ff0000;
+  border-radius: 55%;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.alpha_slider_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: calc(
+    (var(--color-gradient-picker-value-picker-width) - 4px) / 2
+  );
+}
