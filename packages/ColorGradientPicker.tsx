@@ -10,6 +10,7 @@ import { DEFAULT_CLASS_NAME } from "./constants";
 import { ColorGradientPickerProps } from "./types";
 import { Hsv } from "./utils/colorTypes";
 import hexToHsv from "./utils/hexToHsv";
+import hexToRgb from "./utils/hexToRgb";
 import hsvToHex from "./utils/hsvToHex";
 import sanitizeHex from "./utils/sanitizeHex";
 
@@ -24,6 +25,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   const [hex, setHex] = useState<string>(sanitizedColor);
   const [hsv, setHsv] = useState(hexToHsv(sanitizedColor));
+  const [rgb, setRgb] = useState(hexToRgb(sanitizedColor));
 
   const [isOpenPicker, setOpenPicker] = useState<boolean>(false);
 
@@ -53,6 +55,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
     setHex(updatedHex);
     setHsv(updatedHsv);
+    setRgb(hexToRgb(updatedHex))
 
     // onChange(updatedHex);
   };
@@ -65,6 +68,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     );
 
   const { hue, saturation, value } = hsv;
+  const { red, green, blue } = rgb;
 
   return (
     <div className={cn(s.wrapper, classNamePrefix, className)}>
@@ -157,6 +161,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
                 gridArea: "red",
                 marginLeft: -2,
               }}
+              value={red}
             />
 
             <Input
@@ -168,6 +173,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
                 },
               }}
               style={{ gridArea: "green" }}
+              value={green}
             />
 
             <Input
@@ -179,6 +185,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
                 },
               }}
               style={{ gridArea: "blue" }}
+              value={blue}
             />
           </div>
         </div>
