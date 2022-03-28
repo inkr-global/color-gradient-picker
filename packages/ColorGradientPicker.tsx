@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import s from "./ColorGradientPicker.module.css";
 import HueSlider from "./components/HueSlider/HueSlider";
 import Input from "./components/Input";
+import SaturationPicker from "./components/SaturationPicker";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import { ColorGradientPickerProps } from "./types";
 import { Hsv } from "./utils/colorTypes";
@@ -57,8 +58,8 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   const {
     hue,
-    // saturation,
-    //  value
+    saturation,
+     value
   } = hsv;
 
   return (
@@ -68,13 +69,25 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         classNamePrefix={classNamePrefix}
         hasExtraInput
         onInputFocus={onShowPanel}
-        onInputBlur={onHidePanel}
+        // onInputBlur={onHidePanel}
         onExtraInputFocus={onShowPanel}
-        onExtraInputBlur={onHidePanel}
+        // onExtraInputBlur={onHidePanel}
       />
 
       {isOpenPicker && (
         <div>
+          <SaturationPicker
+            hue={hue}
+            saturation={saturation}
+            value={value}
+            onChange={(updatedSaturationValue) =>
+              setColorFromHsv({
+                ...hsvRef.current,
+                ...updatedSaturationValue,
+              })
+            }
+          />
+
           <HueSlider
             hue={hue}
             onChange={(updatedHue) =>

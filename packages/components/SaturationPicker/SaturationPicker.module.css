@@ -1,0 +1,29 @@
+.saturation_value_selector {
+  position: relative;
+  box-sizing: border-box;
+  width: 290px;
+  height: 290px;
+  overflow: hidden;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      #000000 100%
+    ),
+    linear-gradient(to left, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+  background-color: #ffffff;
+}
+
+.saturation_value_picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 8px;
+  height: 8px;
+  box-sizing: border-box;
+
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+}
