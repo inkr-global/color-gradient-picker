@@ -66,3 +66,7 @@
 .color_preview {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+.text_info {
+  color: rgba(255, 255, 255, 0.3);
+}

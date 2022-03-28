@@ -119,6 +119,68 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             </div>
           </div>
 
+          <div className={s.color_inputs_wrapper}>
+            <Input
+              label="HEX"
+              info={<Input.ColorPreview value={hex} />}
+              classNamePrefix={classNamePrefix}
+              inputProps={{
+                style: {
+                  width: 100,
+                },
+              }}
+              style={{ gridArea: "hex" }}
+              value={hex}
+            />
+
+            <Input
+              info={<Input.ColorPreview value={hex} />}
+              classNamePrefix={classNamePrefix}
+              inputProps={{
+                style: {
+                  width: 28,
+                },
+              }}
+              style={{ gridArea: "alpha" }}
+            />
+
+            <Input
+              label="RGB"
+              info={<Input.InputTextInfo>R</Input.InputTextInfo>}
+              classNamePrefix={classNamePrefix}
+              inputProps={{
+                style: {
+                  width: 26,
+                },
+              }}
+              style={{
+                gridArea: "red",
+                marginLeft: -2,
+              }}
+            />
+
+            <Input
+              info={<Input.InputTextInfo>G</Input.InputTextInfo>}
+              classNamePrefix={classNamePrefix}
+              inputProps={{
+                style: {
+                  width: 26,
+                },
+              }}
+              style={{ gridArea: "green" }}
+            />
+
+            <Input
+              info={<Input.InputTextInfo>B</Input.InputTextInfo>}
+              classNamePrefix={classNamePrefix}
+              inputProps={{
+                style: {
+                  width: 26,
+                },
+              }}
+              style={{ gridArea: "blue" }}
+            />
+          </div>
         </div>
       )}
     </div>

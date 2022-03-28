@@ -62,6 +62,8 @@ function Input(props: InputProps) {
     onInputBlur,
     onExtraInputFocus,
     onExtraInputBlur,
+    value,
+    extraInputValue,
   } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -108,6 +110,7 @@ function Input(props: InputProps) {
           }}
           placeholder={placeholder}
           className={clsx(s.input, getPrefixClassName("input"))}
+          value={value}
         />
 
         {hasExtraInput && (
@@ -127,6 +130,7 @@ function Input(props: InputProps) {
               }}
               placeholder={extraPlaceholder}
               className={clsx(s.input_extra, getPrefixClassName("input-extra"))}
+              value={extraInputValue}
             />
           </>
         )}
