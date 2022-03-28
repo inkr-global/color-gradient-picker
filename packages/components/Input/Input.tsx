@@ -6,7 +6,7 @@ import {
   InputProps,
   InputTextInfoProps,
 } from "../../types";
-import { applyPrefixToName } from "../../utils";
+import { applyPrefixToName } from "../../utils/common";
 import s from "./Input.module.css";
 
 function InputColorPreview(props: InputColorPreviewProps) {
