@@ -8,11 +8,12 @@ import s from "./HueSlider.module.css";
 type HueSliderProps = {
   hue: number;
   onChange: (hue: number) => void;
+  className?: string;
 };
 
 const HueSlider = (props: HueSliderProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hue, onChange } = props;
+  const { hue, onChange, className } = props;
 
   // ------------------------------------------------------------------------------------------
   const [isInteracting, setIsInteracting] = useState(false);
@@ -101,7 +102,7 @@ const HueSlider = (props: HueSliderProps) => {
 
   return (
     <div
-      className={clsx(s.hue_slider)}
+      className={clsx(s.hue_slider, className)}
       ref={sliderDivRef}
       title="Hue"
       {...interactionCallbacks}

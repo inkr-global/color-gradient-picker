@@ -2,6 +2,7 @@ import cn from "clsx";
 import { useCallback, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
+import EyeDropper from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider/HueSlider";
 import Input from "./components/Input";
 import SaturationPicker from "./components/SaturationPicker";
@@ -39,9 +40,16 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     setOpenPicker(false);
   }, []);
 
+  // ------------------------------------------------------------------------------------------
+
+  const onEyeDropperClick = useCallback(() => {
+    console.log("Eye dropper click");
+  }, []);
+
   // Set the hex and hsv states/refs with updated data
   const setColor = (updatedHex: string, updatedHsv: Hsv) => {
     hexRef.current = updatedHex;
+    hsvRef.current = updatedHsv;
 
     setHex(updatedHex);
     setHsv(updatedHsv);
@@ -56,11 +64,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       updatedHsv,
     );
 
-  const {
-    hue,
-    saturation,
-     value
-  } = hsv;
+  const { hue, saturation, value } = hsv;
 
   return (
     <div className={cn(s.wrapper, classNamePrefix, className)}>
@@ -75,7 +79,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       />
 
       {isOpenPicker && (
-        <div>
+        <div className={cn(s.picking_panel)}>
           <SaturationPicker
             hue={hue}
             saturation={saturation}
@@ -88,15 +92,33 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             }
           />
 
-          <HueSlider
-            hue={hue}
-            onChange={(updatedHue) =>
-              setColorFromHsv({
-                ...hsvRef.current,
-                hue: updatedHue,
-              })
-            }
-          />
+          <div className={cn(s.sliders_wrapper)}>
+            <EyeDropper onClick={onEyeDropperClick} />
+
+            <div className={cn(s.sliders)}>
+              <HueSlider
+                hue={hue}
+                onChange={(updatedHue) =>
+                  setColorFromHsv({
+                    ...hsvRef.current,
+                    hue: updatedHue,
+                  })
+                }
+                className={s.hue_slider}
+              />
+
+              <HueSlider
+                hue={hue}
+                onChange={(updatedHue) =>
+                  setColorFromHsv({
+                    ...hsvRef.current,
+                    hue: updatedHue,
+                  })
+                }
+              />
+            </div>
+          </div>
+
         </div>
       )}
     </div>
