@@ -69,3 +69,18 @@ export const applyPrefixToName = (prefix?: string) => (name: string) => {
     return prefix + "__" + name;
   }
 };
+
+export const openNativeEyeDropper = async () => {
+  const abortController = new AbortController();
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore this is new EyeDropper API
+  const eyeDropper = new EyeDropper();
+
+  try {
+    const result = await eyeDropper.open({ signal: abortController.signal });
+    return result.sRGBHex;
+  } catch (e) {
+    return null;
+  }
+};

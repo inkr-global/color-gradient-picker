@@ -2,13 +2,14 @@ import cn from "clsx";
 import { useCallback, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
-import EyeDropper from "./components/EyeDropper";
+import EyeDropperBtn from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider/HueSlider";
 import Input from "./components/Input";
 import SaturationPicker from "./components/SaturationPicker";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import { ColorGradientPickerProps } from "./types";
 import { Hsv } from "./utils/colorTypes";
+import { openNativeEyeDropper } from "./utils/common";
 import hexToHsv from "./utils/hexToHsv";
 import hexToRgb from "./utils/hexToRgb";
 import hsvToHex from "./utils/hsvToHex";
@@ -38,14 +39,18 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     setOpenPicker(true);
   }, []);
 
-  const onHidePanel = useCallback(() => {
-    setOpenPicker(false);
-  }, []);
+  // const onHidePanel = useCallback(() => {
+  //   setOpenPicker(false);
+  // }, []);
 
   // ------------------------------------------------------------------------------------------
 
-  const onEyeDropperClick = useCallback(() => {
-    console.log("Eye dropper click");
+  const onEyeDropperClick = useCallback(async () => {
+    const _hex = await openNativeEyeDropper();
+
+    if (_hex !== null) {
+      setColor(_hex, hexToHsv(_hex))
+    }
   }, []);
 
   // Set the hex and hsv states/refs with updated data
@@ -97,7 +102,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           />
 
           <div className={cn(s.sliders_wrapper)}>
-            <EyeDropper onClick={onEyeDropperClick} />
+            <EyeDropperBtn onClick={onEyeDropperClick} />
 
             <div className={cn(s.sliders)}>
               <HueSlider
