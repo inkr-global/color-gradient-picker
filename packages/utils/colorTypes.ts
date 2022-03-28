@@ -42,3 +42,5 @@ export type Cmyk = {
   yellow: number;
   black: number;
 }
+
+export type Hex = string;

@@ -79,8 +79,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   return (
     <div className={cn(s.wrapper, classNamePrefix, className)}>
-      <Input
-        info={<Input.ColorPreview value="red" />}
+      <Input.Color
         onInputFocus={onShowPanel}
         value={hex}
         extraInputValue={alpha}
@@ -124,9 +123,8 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           </div>
 
           <div className={s.color_inputs_wrapper}>
-            <Input
+            <Input.Color
               label="HEX"
-              info={<Input.ColorPreview value={hex} />}
               inputProps={{
                 style: {
                   width: 100,
@@ -136,26 +134,23 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               value={hex}
             />
 
-            <Input
-              info={<Input.ColorPreview value={hex} />}
+            <Input.Alpha
               inputProps={{
                 style: {
                   width: 28,
                 },
-                type: "number",
               }}
               style={{ gridArea: "alpha" }}
               value={alpha}
             />
 
-            <Input
+            <Input.Rgb
               label="RGB"
-              info={<Input.InputTextInfo>R</Input.InputTextInfo>}
+              info="R"
               inputProps={{
                 style: {
                   width: 26,
                 },
-                type: "number",
               }}
               style={{
                 gridArea: "red",
@@ -164,25 +159,23 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               value={red}
             />
 
-            <Input
-              info={<Input.InputTextInfo>G</Input.InputTextInfo>}
+            <Input.Rgb
+              info="G"
               inputProps={{
                 style: {
                   width: 26,
                 },
-                type: "number",
               }}
               style={{ gridArea: "green" }}
               value={green}
             />
 
-            <Input
-              info={<Input.InputTextInfo>B</Input.InputTextInfo>}
+            <Input.Rgb
+              info="B"
               inputProps={{
                 style: {
                   width: 26,
                 },
-                type: "number",
               }}
               style={{ gridArea: "blue" }}
               value={blue}

@@ -1,7 +1,8 @@
-import { CSSProperties, HTMLProps, ReactElement, ReactText } from "react";
+import { CSSProperties, HTMLProps, ReactNode } from "react";
+
 
 export interface InputProps {
-  info: ReactElement;
+  info?: ReactNode;
   label?: string;
   style?: CSSProperties;
   placeholder?: string;
@@ -20,6 +21,6 @@ export interface InputColorPreviewProps {
 }
 
 export interface InputTextInfoProps {
-  children: ReactText;
+  children: ReactNode;
   className?: string;
 }

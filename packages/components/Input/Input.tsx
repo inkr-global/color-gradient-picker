@@ -43,8 +43,6 @@ function Input(props: InputProps) {
   // ------------------------------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
 
-  const customInputProps: HTMLProps<HTMLInputElement> = {};
-
   return (
     <div className={clsx(s.container, className)} style={style}>
       {label && <div className={clsx(s.label)}>{label}</div>}
@@ -67,14 +65,66 @@ function Input(props: InputProps) {
           placeholder={placeholder}
           className={clsx(s.input)}
           value={value}
-          {...customInputProps}
         />
       </div>
     </div>
   );
 }
 
-Input.ColorPreview = InputColorPreview;
-Input.InputTextInfo = InputTextInfo;
+function Rgb(props: InputProps) {
+  const { inputProps, info, ...rest } = props;
+
+  const customInputProps: HTMLProps<HTMLInputElement> = {
+    ...inputProps,
+    type: "number",
+    min: 0,
+    max: 255,
+  };
+
+  return (
+    <Input
+      {...rest}
+      info={<InputTextInfo>{info}</InputTextInfo>}
+      inputProps={customInputProps}
+    />
+  );
+}
+
+function Alpha(props: InputProps) {
+  const { inputProps, info, ...rest } = props;
+
+  const customInputProps: HTMLProps<HTMLInputElement> = {
+    ...inputProps,
+    type: "number",
+    min: 0,
+    max: 1,
+  };
+
+  return (
+    <Input
+      {...rest}
+      info={<InputTextInfo>{info}</InputTextInfo>}
+      inputProps={customInputProps}
+    />
+  );
+}
+
+function Color(props: InputProps) {
+  const { value, ...rest } = props;
+
+  delete rest.info;
+
+  return (
+    <Input
+      {...rest}
+      value={value}
+      info={<InputColorPreview value={(value as string) || "#000"} />}
+    />
+  );
+}
+
+Input.Alpha = Alpha;
+Input.Rgb = Rgb;
+Input.Color = Color;
 
 export default Input;
