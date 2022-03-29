@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
 import AlphaSlider from "./components/AlphaSlider";
@@ -39,15 +39,49 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const hsvRef = useRef(hexToHsv(hex));
   const hexRef = useRef(hex);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // ------------------------------------------------------------------------------------------
+  // close picker when click outside
+  useEffect(() => {
+    if (typeof document === "undefined") return () => undefined;
+
+    const handler = (e: Event) => {
+      if (!containerRef.current?.contains(e.target as HTMLElement)) {
+        setOpenPicker(false);
+      }
+    };
+
+    document.addEventListener("click", handler);
+    document.addEventListener("touchstart", handler);
+
+    return () => {
+      document.removeEventListener("click", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return () => undefined;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpenPicker(false);
+        (document.activeElement as HTMLInputElement)?.blur();
+      } 
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
+  }, []);
+
   // ------------------------------------------------------------------------------------------
 
   const onShowPanel = useCallback(() => {
     setOpenPicker(true);
   }, []);
-
-  // const onHidePanel = useCallback(() => {
-  //   setOpenPicker(false);
-  // }, []);
 
   // ------------------------------------------------------------------------------------------
 
@@ -102,7 +136,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const { red, green, blue } = hexToRgb(propColorHex);
 
   return (
-    <div className={cn(s.wrapper, classNamePrefix, className)}>
+    <div
+      ref={containerRef}
+      className={cn(s.wrapper, classNamePrefix, className)}
+    >
       <Input.ColorHex
         onInputFocus={onShowPanel}
         value={propColorHex}
