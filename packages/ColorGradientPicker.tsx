@@ -10,12 +10,13 @@ import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import { ColorGradientPickerProps } from "./types";
-import { Hsv, Rgb } from "./utils/colorTypes";
+import { Hex, Hsv, Rgb } from "./utils/colorTypes";
 import { openNativeEyeDropper } from "./utils/common";
 import hexToHsv from "./utils/hexToHsv";
 import hexToRgb from "./utils/hexToRgb";
 import hsvToHex from "./utils/hsvToHex";
 import rgbToHex from "./utils/rgbToHex";
+import rgbToHsv from "./utils/rgbToHsv";
 import sanitizeHex from "./utils/sanitizeHex";
 
 function ColorGradientPicker(props: ColorGradientPickerProps) {
@@ -90,11 +91,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
 
   // Set the hex and hsv states/refs with updated data
-  const setColor = (_updatedHex: string) => {
-    const updatedHsv = hexToHsv(_updatedHex);
-
+  const setColor = (_updatedHex: Hex, _updatedHsv: Hsv) => {
     hexRef.current = _updatedHex;
-    hsvRef.current = updatedHsv;
+    hsvRef.current = _updatedHsv;
 
     setHex(_updatedHex);
 
@@ -117,7 +116,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     const _hex = await openNativeEyeDropper();
 
     if (_hex !== null) {
-      setColor(_hex);
+      setColor(_hex, hexToHsv(_hex));
     }
   };
 
@@ -125,19 +124,20 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const setColorFromHsv = (_updatedHsv: Hsv) => {
     setColor(
       hsvToHex(_updatedHsv.hue, _updatedHsv.saturation, _updatedHsv.value),
+      _updatedHsv,
     );
   };
 
   const setColorFromRgb = (updatedRgb: Rgb) => {
     const { red, green, blue } = updatedRgb;
 
-    setColor(rgbToHex(red, green, blue));
+    setColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
   };
 
   // ------------------------------------------------------------------------------------------
 
-  const { hue, saturation, value } = hexToHsv(propColorHex);
-  const propRgb = hexToRgb(propColorHex);
+  const { hue, saturation, value } = hsvRef.current;
+  const rgb = hexToRgb(hexRef.current);
 
   return (
     <div
@@ -146,9 +146,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     >
       <Input.ColorHex
         onInputFocus={onShowPanel}
-        value={propColorHex}
+        value={hex}
         onChange={(_hex) => {
-          setColor(_hex);
+          setColor(_hex, hexToHsv(_hex));
         }}
         inputWidth={inputWidth}
         onInputBlur={onInputBlur}
@@ -174,12 +174,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             hue={hue}
             saturation={saturation}
             value={value}
-            onChange={(updatedSaturationValue) =>
+            onChange={(updatedSaturationValue) => {
               setColorFromHsv({
                 ...hsvRef.current,
                 ...updatedSaturationValue,
-              })
-            }
+              });
+            }}
           />
 
           <div className={cn(s.sliders_wrapper)}>
@@ -199,15 +199,15 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
               <AlphaSlider
                 alpha={propAlpha}
-                hex={propColorHex}
+                hex={hex}
                 onChange={(updatedAlpha) => setAlpha(updatedAlpha)}
               />
             </div>
           </div>
 
           <InputFields
-            hex={propColorHex}
-            rgb={propRgb}
+            hex={hex}
+            rgb={rgb}
             alpha={propAlpha}
             setAlpha={setAlpha}
             setColor={setColor}

@@ -1,4 +1,5 @@
-import { Hex, Rgb } from "../../utils/colorTypes";
+import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
+import hexToHsv from "../../utils/hexToHsv";
 import Input from "../Input";
 import s from "./InputFields.module.css";
 
@@ -6,7 +7,7 @@ interface InputFieldsProps {
   hex: Hex;
   alpha: number;
   rgb: Rgb;
-  setColor: (hex: Hex) => void;
+  setColor: (hex: Hex, hsv: Hsv) => void;
   setAlpha: (alpha: number) => void;
   setColorFromRgb: (rgb: Rgb) => void;
 }
@@ -23,7 +24,7 @@ const InputFields = (props: InputFieldsProps) => {
         style={{ gridArea: "hex" }}
         value={hex}
         onChange={(_hex) => {
-          setColor(_hex);
+          setColor(_hex, hexToHsv(_hex));
         }}
       />
 
