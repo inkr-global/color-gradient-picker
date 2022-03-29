@@ -1,12 +1,15 @@
 import clsx from "clsx";
-import React, { HTMLProps, useState } from "react";
+import React, { HTMLProps, useEffect, useState } from "react";
 
+import sanitizeHex from "../../utils/sanitizeHex";
 import s from "./Input.module.css";
 import {
   InputColorPreviewProps,
   InputProps,
   InputTextInfoProps,
 } from "./types";
+
+const ENTER_KEY = "Enter";
 
 function InputColorPreview(props: InputColorPreviewProps) {
   const { value, className } = props;
@@ -43,10 +46,11 @@ function Input(props: InputProps) {
     onInputFocus,
     onInputBlur,
     onChange,
+    onKeyDown,
     value,
   } = props;
 
-  // ------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
 
   return (
@@ -62,7 +66,9 @@ function Input(props: InputProps) {
           {...inputProps}
           onFocus={(e) => {
             if (typeof onInputFocus === "function") onInputFocus(e);
-            e.target.select();
+            setTimeout(() => {
+              e.target.select();
+            }, 100);
             setFocus(true);
           }}
           onBlur={(e) => {
@@ -73,16 +79,23 @@ function Input(props: InputProps) {
           className={clsx(s.input, inputClassName)}
           value={value}
           onChange={onChange}
+          onKeyDown={onKeyDown}
         />
       </div>
     </div>
   );
 }
 
+// ------------------------------------------------------------------------------------------
 function Rgb(
-  props: Omit<InputProps, "onChange"> & { onChange: (value: number) => void },
+  props: Omit<InputProps, "onChange" | "value"> & {
+    onChange: (value: number) => void;
+    value: number;
+  },
 ) {
-  const { inputProps, info, onChange, ...rest } = props;
+  const { inputProps, info, onChange, value, onInputBlur, ...rest } = props;
+
+  const [valueState, setValueState] = useState<number>(value);
 
   const customInputProps: HTMLProps<HTMLInputElement> = {
     ...inputProps,
@@ -91,71 +104,167 @@ function Rgb(
     max: 255,
   };
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const value = parseInt(e.currentTarget.value);
-    if (value < 0 || value > 255) return;
-    onChange(value);
+  // -----------------------------------------------------------------------
+  useEffect(() => {
+    setValueState(value);
+  }, [value]);
+
+  // -----------------------------------------------------------------------
+
+  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    let _value = parseInt(e.currentTarget.value);
+    if (_value < 0) _value = 0;
+    if (_value > 255) _value = 255;
+    if (isNaN(_value)) _value = 0;
+    setValueState(_value);
   };
+
+  const _onOutsideChange = () => {
+    onChange(valueState as number);
+    setValueState(valueState);
+  };
+
+  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === ENTER_KEY) _onOutsideChange();
+  };
+
+  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    _onOutsideChange();
+    if (typeof onInputBlur === "function") onInputBlur(e);
+  };
+
+  // -----------------------------------------------------------------------
 
   return (
     <Input
       {...rest}
-      onChange={_onChange}
+      onChange={_onInternalChange}
+      onKeyDown={_onKeyDown}
+      value={valueState}
+      onInputBlur={_onBlur}
       info={<InputTextInfo>{info}</InputTextInfo>}
       inputProps={customInputProps}
     />
   );
 }
 
+// ------------------------------------------------------------------------------------------
+const getAlphaString = (alpha: number) => `${alpha}%`;
+
 function Alpha(
-  props: Omit<InputProps, "onChange"> & { onChange: (value: number) => void },
+  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+    onChange: (value: number) => void;
+    value: number;
+  },
 ) {
-  const { onChange, value, ...rest } = props;
+  const { value, onChange, onInputBlur, ...rest } = props;
 
-  delete rest.info;
+  const [valueState, setValueState] = useState<string | number | undefined>(
+    getAlphaString(value),
+  );
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const _value = e.currentTarget.value.replace("%", "");
-    let value = Math.round(parseInt(_value));
-    if (value < 0) value = 0;
-    if (value > 100) value = 100;
-    onChange(value);
+  // -----------------------------------------------------------------------
+  useEffect(() => {
+    setValueState(getAlphaString(value));
+  }, [value]);
+
+  // -----------------------------------------------------------------------
+  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    let _value = parseInt(e.currentTarget.value.replace("%", ""));
+    _value = Math.round(_value);
+    if (_value < 0) _value = 0;
+    if (_value > 100) _value = 100;
+    if (isNaN(_value)) _value = 0;
+
+    setValueState(_value);
   };
+
+  const _onOutsideChange = () => {
+    // remove % if the valueState has it
+    const _valueState = parseInt(
+      (valueState?.toString() || "100")?.replace("%", ""),
+    );
+    onChange(_valueState);
+    setValueState(getAlphaString(_valueState));
+  };
+
+  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === ENTER_KEY) _onOutsideChange();
+  };
+
+  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    _onOutsideChange();
+    if (typeof onInputBlur === "function") onInputBlur(e);
+  };
+
+  // -----------------------------------------------------------------------
 
   return (
     <Input
       {...rest}
       info={<InputAlphaInfo />}
-      onChange={_onChange}
-      value={value + "%"}
+      onChange={_onInternalChange}
+      onKeyDown={_onKeyDown}
+      onInputBlur={_onBlur}
+      value={valueState}
       inputClassName={s.alpha_input}
     />
   );
 }
 
+// ------------------------------------------------------------------------------------------
 function ColorHex(
-  props: Omit<InputProps, "onChange"> & { onChange: (value: string) => void },
+  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+    onChange: (value: string) => void;
+    value: string;
+  },
 ) {
-  const { value, onChange, ...rest } = props;
+  const { value, onChange, onInputBlur, ...rest } = props;
 
-  delete rest.info;
+  const [valueState, setValueState] = useState<string>(value);
 
-  const _onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  // -----------------------------------------------------------------------
+
+  useEffect(() => {
+    setValueState(value);
+  }, [value]);
+
+  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const _value = e.currentTarget.value;
 
-    onChange(_value);
+    setValueState(_value);
   };
+
+  const _onOutsideChange = () => {
+    const _valueState = sanitizeHex(valueState);
+    onChange(_valueState);
+    setValueState(_valueState);
+  };
+
+  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === ENTER_KEY) _onOutsideChange();
+  };
+
+  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    _onOutsideChange();
+    if (typeof onInputBlur === "function") onInputBlur(e);
+  };
+
+  // -----------------------------------------------------------------------
 
   return (
     <Input
       {...rest}
-      onChange={_onChange}
-      value={value}
-      info={<InputColorPreview value={(value as string) || "#000"} />}
+      onChange={_onInternalChange}
+      onKeyDown={_onKeyDown}
+      onInputBlur={_onBlur}
+      value={valueState}
+      info={<InputColorPreview value={value as string} />}
     />
   );
 }
 
+// ------------------------------------------------------------------------------------------
 Input.Alpha = Alpha;
 Input.Rgb = Rgb;
 Input.ColorHex = ColorHex;

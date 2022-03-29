@@ -1,4 +1,4 @@
-import { CSSProperties, HTMLProps, ReactNode } from "react";
+import React, { CSSProperties, HTMLProps, ReactNode } from "react";
 
 
 export interface InputProps {
@@ -7,7 +7,8 @@ export interface InputProps {
   style?: CSSProperties;
   placeholder?: string;
   inputProps?: HTMLProps<HTMLInputElement>;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
   onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
   value?: string | number;
