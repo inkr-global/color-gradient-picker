@@ -15,6 +15,7 @@ export interface InputProps {
   inputWrapperClassName?: string;
   inputClassName?: string;
   className?: string;
+  inputWidth?: number;
 }
 
 export interface InputColorPreviewProps {

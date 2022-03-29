@@ -67,7 +67,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       if (e.key === "Escape") {
         setOpenPicker(false);
         (document.activeElement as HTMLInputElement)?.blur();
-      } 
+      }
     };
 
     document.addEventListener("keydown", handler);
@@ -188,11 +188,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           <div className={s.color_inputs_wrapper}>
             <Input.ColorHex
               label="HEX"
-              inputProps={{
-                style: {
-                  width: 100,
-                },
-              }}
+              inputWidth={100}
               style={{ gridArea: "hex" }}
               value={propColorHex}
               onChange={(_hex) => {
@@ -201,11 +197,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             />
 
             <Input.Alpha
-              inputProps={{
-                style: {
-                  width: 40,
-                },
-              }}
+              inputWidth={40}
               style={{ gridArea: "alpha" }}
               value={propAlpha}
               onChange={(_alpha) => {
@@ -216,11 +208,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             <Input.Rgb
               label="RGB"
               info="R"
-              inputProps={{
-                style: {
-                  width: 26,
-                },
-              }}
+              inputWidth={26}
               style={{
                 gridArea: "red",
                 marginLeft: -2,
@@ -237,11 +225,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
             <Input.Rgb
               info="G"
-              inputProps={{
-                style: {
-                  width: 26,
-                },
-              }}
+              inputWidth={26}
               style={{ gridArea: "green" }}
               value={green}
               onChange={(_green) => {
@@ -255,11 +239,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
             <Input.Rgb
               info="B"
-              inputProps={{
-                style: {
-                  width: 26,
-                },
-              }}
+              inputWidth={26}
               style={{ gridArea: "blue" }}
               value={blue}
               onChange={(_blue) => {

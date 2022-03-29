@@ -48,10 +48,13 @@ function Input(props: InputProps) {
     onChange,
     onKeyDown,
     value,
+    inputWidth,
   } = props;
 
   // -----------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
+
+  const { style: inputStyle, ...restInputProps } = inputProps || {};
 
   return (
     <div className={clsx(s.container, className)} style={style}>
@@ -63,7 +66,11 @@ function Input(props: InputProps) {
         <div className={clsx(s.info)}>{info}</div>
 
         <input
-          {...inputProps}
+          {...restInputProps}
+          style={{
+            ...inputStyle,
+            width: inputWidth,
+          }}
           onFocus={(e) => {
             if (typeof onInputFocus === "function") onInputFocus(e);
             setTimeout(() => {
