@@ -1,0 +1,7 @@
+.color_inputs_wrapper {
+  padding-left: 16px;
+  padding-right: 16px;
+  display: grid;
+  grid-template-areas: "hex hex alpha" "red green blue";
+  gap: 8px;
+}

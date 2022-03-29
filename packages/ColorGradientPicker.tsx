@@ -6,6 +6,7 @@ import AlphaSlider from "./components/AlphaSlider";
 import EyeDropperBtn from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider/HueSlider";
 import Input from "./components/Input";
+import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import { ColorGradientPickerProps } from "./types";
@@ -133,7 +134,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
 
   const { hue, saturation, value } = hexToHsv(propColorHex);
-  const { red, green, blue } = hexToRgb(propColorHex);
+  const propRgb = hexToRgb(propColorHex);
 
   return (
     <div
@@ -185,72 +186,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             </div>
           </div>
 
-          <div className={s.color_inputs_wrapper}>
-            <Input.ColorHex
-              label="HEX"
-              inputWidth={100}
-              style={{ gridArea: "hex" }}
-              value={propColorHex}
-              onChange={(_hex) => {
-                setColor(_hex);
-              }}
-            />
-
-            <Input.Alpha
-              inputWidth={40}
-              style={{ gridArea: "alpha" }}
-              value={propAlpha}
-              onChange={(_alpha) => {
-                setAlpha(_alpha);
-              }}
-            />
-
-            <Input.Rgb
-              label="RGB"
-              info="R"
-              inputWidth={26}
-              style={{
-                gridArea: "red",
-                marginLeft: -2,
-              }}
-              value={red}
-              onChange={(_red) => {
-                setColorFromRgb({
-                  red: _red,
-                  green,
-                  blue,
-                });
-              }}
-            />
-
-            <Input.Rgb
-              info="G"
-              inputWidth={26}
-              style={{ gridArea: "green" }}
-              value={green}
-              onChange={(_green) => {
-                setColorFromRgb({
-                  red,
-                  green: _green,
-                  blue,
-                });
-              }}
-            />
-
-            <Input.Rgb
-              info="B"
-              inputWidth={26}
-              style={{ gridArea: "blue" }}
-              value={blue}
-              onChange={(_blue) => {
-                setColorFromRgb({
-                  red,
-                  green,
-                  blue: _blue,
-                });
-              }}
-            />
-          </div>
+          <InputFields
+            hex={propColorHex}
+            rgb={propRgb}
+            alpha={propAlpha}
+            setAlpha={setAlpha}
+            setColor={setColor}
+            setColorFromRgb={setColorFromRgb}
+          />
         </div>
       )}
     </div>
