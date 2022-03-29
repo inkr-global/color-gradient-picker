@@ -12,7 +12,6 @@ export interface InputProps {
   onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
   onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
   value?: string | number;
-  extraInputValue?: string | number;
   inputWrapperClassName?: string;
   inputClassName?: string;
   className?: string;
