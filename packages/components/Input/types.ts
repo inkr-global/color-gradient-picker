@@ -1,21 +1,28 @@
-import React, { CSSProperties, HTMLProps, ReactNode } from "react";
+import React, { CSSProperties, HTMLProps, ReactElement, ReactNode } from "react";
 
 
 export interface InputProps {
-  info?: ReactNode;
-  label?: string;
-  style?: CSSProperties;
-  placeholder?: string;
-  inputProps?: HTMLProps<HTMLInputElement>;
+  value?: string | number;
+
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
   onInputBlur?: React.FocusEventHandler<HTMLInputElement>;
-  value?: string | number;
+
+  info?: ReactNode;
+  label?: string;
+  placeholder?: string;
+
+  style?: CSSProperties;
+  className?: string;
+
+  inputWidth?: number;
+  inputProps?: HTMLProps<HTMLInputElement>;
   inputWrapperClassName?: string;
   inputClassName?: string;
-  className?: string;
-  inputWidth?: number;
+
+  extraInput?: ReactElement;
+  isExtraComponent?: boolean;
 }
 
 export interface InputColorPreviewProps {

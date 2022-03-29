@@ -6,6 +6,7 @@
   --color-gradient-picker-text-color: rgba(255, 255, 255, 0.65);
   --color-gradient-picker-value-picker-width: 12px;
   --color-gradient-picker-value-picker-border: 2px;
+  --color-gradient-picker-input-focus-color: #a58d12;
 }
 
 .wrapper,
@@ -42,4 +43,10 @@
 
 .hue_slider {
   margin-bottom: 16px;
+}
+
+.vertical_divider {
+  border-left: 1px solid #262626;
+  width: 1px;
+  height: 100%;
 }

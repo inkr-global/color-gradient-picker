@@ -1,3 +1,4 @@
+import { InputProps } from "./components/Input/types";
 import { Hex } from "./utils/colorTypes";
 
 export interface ColorValue {
@@ -6,8 +7,11 @@ export interface ColorValue {
 }
 
 export interface ColorGradientPickerProps {
-  classNamePrefix?: string;
-  className?: string;
   value?: ColorValue;
   onChange: (value: ColorValue) => void;
+  classNamePrefix?: string;
+  className?: string;
+  inputWidth?: InputProps["inputWidth"];
+  onInputBlur?: InputProps["onInputBlur"];
+  onKeyDown?: InputProps["onKeyDown"];
 }

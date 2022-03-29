@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { HTMLProps, useEffect, useState } from "react";
+import React, { HTMLProps, useEffect, useRef, useState } from "react";
 
 import sanitizeHex from "../../utils/sanitizeHex";
 import s from "./Input.module.css";
@@ -49,21 +49,55 @@ function Input(props: InputProps) {
     onKeyDown,
     value,
     inputWidth,
+    extraInput: extra,
+    isExtraComponent,
   } = props;
+
+  const { style: inputStyle, ...restInputProps } = inputProps || {};
 
   // -----------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
 
-  const { style: inputStyle, ...restInputProps } = inputProps || {};
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return () => undefined;
+
+    const handler = (e: Event) => {
+      if (containerRef.current?.contains(e.target as HTMLElement)) {
+        setFocus(true);
+      } else {
+        setFocus(false);
+      }
+    };
+
+    document.addEventListener("click", handler);
+    document.addEventListener("touchstart", handler);
+
+    return () => {
+      document.removeEventListener("click", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, []);
+
+  // -----------------------------------------------------------------------
 
   return (
     <div className={clsx(s.container, className)} style={style}>
       {label && <div className={clsx(s.label)}>{label}</div>}
 
       <div
-        className={clsx(s.wrapper, isFocus && s.isFocus, inputWrapperClassName)}
+        className={clsx(
+          s.wrapper,
+          isFocus && s.isFocus,
+          isExtraComponent && s.extra_component,
+          inputWrapperClassName,
+        )}
+        ref={containerRef}
       >
-        <div className={clsx(s.info)}>{info}</div>
+        {info && !isExtraComponent && (
+          <div className={clsx(s.info)}>{info}</div>
+        )}
 
         <input
           {...restInputProps}
@@ -88,6 +122,8 @@ function Input(props: InputProps) {
           onChange={onChange}
           onKeyDown={onKeyDown}
         />
+
+        {extra}
       </div>
     </div>
   );

@@ -25,6 +25,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     className,
     value: valueProp,
     onChange,
+    inputWidth,
+    onInputBlur,
+    onKeyDown,
   } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -147,6 +150,22 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         onChange={(_hex) => {
           setColor(_hex);
         }}
+        inputWidth={inputWidth}
+        onInputBlur={onInputBlur}
+        onKeyDown={onKeyDown}
+        extraInput={
+          <>
+            <div className={s.vertical_divider} />
+            <Input.Alpha
+              isExtraComponent
+              value={propAlpha}
+              onChange={setAlpha}
+              inputWidth={45}
+              onInputBlur={onInputBlur}
+              onKeyDown={onKeyDown}
+            />
+          </>
+        }
       />
 
       {isOpenPicker && (
