@@ -7,7 +7,7 @@ import Input from "./components/Input";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
-import { ColorGradientPickerProps } from "./types";
+import { ColorGradientPickerProps, VALUE_COLOR_TYPE } from "./types";
 import { Hex } from "./utils/colorTypes";
 import sanitizeHex from "./utils/sanitizeHex";
 
@@ -27,6 +27,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   const propColorHex = sanitizeHex(valueProp?.hex || "#000");
   const propAlpha = valueProp?.alpha || 100;
+  const propColorType = valueProp?.type || VALUE_COLOR_TYPE.SOLID;
+
+  // ------------------------------------------------------------------------------------------
 
   const [alpha, setAlpha] = useState<number>(propAlpha);
   const [hex, setHex] = useState<string>(propColorHex);
@@ -57,8 +60,15 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     setHex(_updatedHex);
 
     onChange({
+      ...valueProp,
       hex: _updatedHex,
-      alpha,
+    });
+  };
+
+  const onSetColorType = (_type: VALUE_COLOR_TYPE) => {
+    onChange({
+      ...valueProp,
+      type: _type,
     });
   };
 
@@ -87,7 +97,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         onKeyDown={onKeyDown}
         extraInput={
           <>
-            <div className={s.vertical_divider} />
+            <div className={s.input_vertical_divider} />
             <Input.Alpha
               isExtraComponent
               value={alpha}
@@ -104,7 +114,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         <ColorPicker
           hex={hex}
           alpha={alpha}
+          type={propColorType}
           onSetColor={onSetColor}
+          onSetColorType={onSetColorType}
           onAlphaChange={onSetAlpha}
         />
       )}

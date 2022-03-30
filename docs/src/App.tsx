@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import ColorGradientPicker from "../../packages";
-import { ColorValue } from "../../packages/types";
+import { ColorValue, VALUE_COLOR_TYPE } from "../../packages/types";
 import s from "./app.module.css";
 
 function App() {
   const [color, setColor] = useState<ColorValue>({
     alpha: 100,
     hex: "#000",
+    type: VALUE_COLOR_TYPE.SOLID,
   });
 
   return (

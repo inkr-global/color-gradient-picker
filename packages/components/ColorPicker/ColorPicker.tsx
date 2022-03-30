@@ -1,6 +1,7 @@
 import cn from "clsx";
 import { useRef } from "react";
 
+import { VALUE_COLOR_TYPE } from "../../types";
 import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
 import { openNativeEyeDropper } from "../../utils/common";
 import hexToHsv from "../../utils/hexToHsv";
@@ -9,6 +10,7 @@ import hsvToHex from "../../utils/hsvToHex";
 import rgbToHex from "../../utils/rgbToHex";
 import rgbToHsv from "../../utils/rgbToHsv";
 import AlphaSlider from "../AlphaSlider";
+import ColorTypeSelect from "../ColorTypeSelect";
 import EyeDropperBtn from "../EyeDropper";
 import HueSlider from "../HueSlider";
 import SaturationPicker from "../SaturationPicker";
@@ -18,18 +20,15 @@ import InputFields from "./InputFields";
 interface ColorPickerProps {
   hex: Hex;
   alpha: number;
+  type: VALUE_COLOR_TYPE;
   onSetColor: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: number) => void;
+  onSetColorType: (type: VALUE_COLOR_TYPE) => void;
 }
 
 const ColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const {
-    hex,
-    alpha,
-    onSetColor,
-    onAlphaChange,
-  } = props;
+  const { hex, alpha, type, onSetColor, onAlphaChange, onSetColorType } = props;
 
   const hsvRef = useRef(hexToHsv(hex));
   const hexRef = useRef(hex);
@@ -70,6 +69,10 @@ const ColorPicker = (props: ColorPickerProps) => {
 
   return (
     <div className={cn(s.picking_panel)}>
+      <div className={s.select_wrapper}>
+        <ColorTypeSelect value={type} onChange={onSetColorType} />
+      </div>
+
       <SaturationPicker
         hue={hue}
         saturation={saturation}

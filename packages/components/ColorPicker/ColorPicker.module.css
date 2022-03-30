@@ -21,3 +21,11 @@
 .hue_slider {
   margin-bottom: 16px;
 }
+
+.select_wrapper {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+}
