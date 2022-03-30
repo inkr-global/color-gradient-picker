@@ -158,7 +158,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             <div className={s.vertical_divider} />
             <Input.Alpha
               isExtraComponent
-              value={propAlpha}
+              value={alpha}
               onChange={setAlpha}
               inputWidth={45}
               onInputBlur={onInputBlur}
@@ -198,7 +198,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               />
 
               <AlphaSlider
-                alpha={propAlpha}
+                alpha={alpha}
                 hex={hex}
                 onChange={(updatedAlpha) => setAlpha(updatedAlpha)}
               />
@@ -208,7 +208,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           <InputFields
             hex={hex}
             rgb={rgb}
-            alpha={propAlpha}
+            alpha={alpha}
             setAlpha={setAlpha}
             setColor={setColor}
             setColorFromRgb={setColorFromRgb}
