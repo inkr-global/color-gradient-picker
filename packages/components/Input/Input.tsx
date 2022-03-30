@@ -301,7 +301,7 @@ function ColorHex(
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
-      value={valueState}
+      value={valueState.toUpperCase()}
       info={<InputColorPreview value={value as string} />}
     />
   );
