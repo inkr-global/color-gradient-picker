@@ -7,6 +7,7 @@ import hexToHsv from "../../utils/hexToHsv";
 import hexToRgb from "../../utils/hexToRgb";
 import hsvToHex from "../../utils/hsvToHex";
 import rgbToHex from "../../utils/rgbToHex";
+import rgbToHsv from "../../utils/rgbToHsv";
 import AlphaSlider from "../AlphaSlider";
 import EyeDropperBtn from "../EyeDropper";
 import HueSlider from "../HueSlider";
@@ -48,14 +49,14 @@ const ColorPicker = (props: ColorPickerProps) => {
   const _onSetColorFromRgb = (updatedRgb: Rgb) => {
     const { red, green, blue } = updatedRgb;
 
-    onSetColor(rgbToHex(red, green, blue));
+    _onSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
   };
 
   const _onEyeDropperClick = async () => {
     const _hex = await openNativeEyeDropper();
 
     if (_hex !== null) {
-      onSetColor(_hex);
+      _onSetColor(_hex, hexToHsv(_hex));
     }
   };
 
