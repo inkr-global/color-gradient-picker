@@ -21,30 +21,6 @@
   position: relative;
 }
 
-.picking_panel {
-  width: 290px;
-  border-radius: 4px;
-  background-color: #1f1f1f;
-  position: absolute;
-  top: calc(26px + 10px); /* 26px: input height */
-  padding-bottom: 16px;
-}
-
-.sliders_wrapper {
-  display: flex;
-  padding: 10px 16px 16px 8px;
-  align-items: flex-start;
-}
-
-.sliders {
-  flex-grow: 1;
-  padding-top: 8px;
-}
-
-.hue_slider {
-  margin-bottom: 16px;
-}
-
 .vertical_divider {
   border-left: 1px solid #262626;
   width: 1px;
