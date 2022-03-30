@@ -1,10 +1,12 @@
 import cn from "clsx";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
 import ColorPicker from "./components/ColorPicker";
 import Input from "./components/Input";
 import { DEFAULT_CLASS_NAME } from "./constants";
+import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
+import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
 import { ColorGradientPickerProps } from "./types";
 import { Hex } from "./utils/colorTypes";
 import sanitizeHex from "./utils/sanitizeHex";
@@ -34,46 +36,19 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // ------------------------------------------------------------------------------------------
-  // close picker when click outside
-  useEffect(() => {
-    if (typeof document === "undefined") return () => undefined;
-
-    const handler = (e: Event) => {
-      if (!containerRef.current?.contains(e.target as HTMLElement)) {
-        setOpenPicker(false);
-      }
-    };
-
-    document.addEventListener("click", handler);
-    document.addEventListener("touchstart", handler);
-
-    return () => {
-      document.removeEventListener("click", handler);
-      document.removeEventListener("touchstart", handler);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return () => undefined;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpenPicker(false);
-        (document.activeElement as HTMLInputElement)?.blur();
-      }
-    };
-
-    document.addEventListener("keydown", handler);
-
-    return () => {
-      document.removeEventListener("keydown", handler);
-    };
-  }, []);
-
-  // ------------------------------------------------------------------------------------------
 
   const onShowPanel = useCallback(() => {
     setOpenPicker(true);
   }, []);
+
+  const onHidePicker = useCallback(() => {
+    setOpenPicker(false);
+  }, []);
+
+  // ------------------------------------------------------------------------------------------
+
+  useCloseWhenClickOutside(containerRef, onHidePicker);
+  useCloseWhenPressEcs(onHidePicker);
 
   // ------------------------------------------------------------------------------------------
 
