@@ -1,6 +1,6 @@
-import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
-import hexToHsv from "../../utils/hexToHsv";
-import Input from "../Input";
+import { Hex, Hsv, Rgb } from "../../../utils/colorTypes";
+import hexToHsv from "../../../utils/hexToHsv";
+import Input from "../../Input";
 import s from "./InputFields.module.css";
 
 interface InputFieldsProps {

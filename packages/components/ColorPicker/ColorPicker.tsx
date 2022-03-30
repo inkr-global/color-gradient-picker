@@ -11,9 +11,9 @@ import rgbToHsv from "../../utils/rgbToHsv";
 import AlphaSlider from "../AlphaSlider";
 import EyeDropperBtn from "../EyeDropper";
 import HueSlider from "../HueSlider";
-import InputFields from "../InputFields";
 import SaturationPicker from "../SaturationPicker";
 import s from "./ColorPicker.module.css";
+import InputFields from "./InputFields";
 
 interface ColorPickerProps {
   hex: Hex;
