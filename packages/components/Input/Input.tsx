@@ -110,12 +110,8 @@ function Input(props: InputProps) {
             setTimeout(() => {
               e.target.select();
             }, 100);
-            setFocus(true);
           }}
-          onBlur={(e) => {
-            if (typeof onInputBlur === "function") onInputBlur(e);
-            setFocus(false);
-          }}
+          onBlur={onInputBlur}
           placeholder={placeholder}
           className={clsx(s.input, inputClassName)}
           value={value}

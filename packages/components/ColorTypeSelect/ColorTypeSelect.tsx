@@ -8,7 +8,7 @@ interface ColorTypeSelectProps {
 
 const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
   return (
-    <>
+    <div className={s.select_wrapper}>
       <svg
         width="16"
         height="14"
@@ -47,7 +47,7 @@ const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
           fill="#8C8C8C"
         />
       </svg>
-    </>
+    </div>
   );
 };
 

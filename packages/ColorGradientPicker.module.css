@@ -27,6 +27,11 @@
   height: 100%;
 }
 
-.select_wrapper {
-  height: 42px;
+.picking_panel {
+  width: 290px;
+  border-radius: 4px;
+  background-color: #1f1f1f;
+  position: absolute;
+  top: calc(26px + 10px); /* 26px: input height */
+  padding-bottom: 16px;
 }

@@ -1,3 +1,4 @@
+import { PalletteColor } from "./components/GradientPicker/types";
 import { InputProps } from "./components/Input/types";
 import { Hex } from "./utils/colorTypes";
 
@@ -6,9 +7,15 @@ export enum VALUE_COLOR_TYPE {
   GRADIENT = "GRADIENT",
 }
 
+export interface GradientColor {
+  degree: number;
+  palette: PalletteColor[];
+}
+
 export interface ColorValue {
   alpha?: number;
   hex?: Hex;
+  gradient?: GradientColor;
   type?: VALUE_COLOR_TYPE;
 }
 

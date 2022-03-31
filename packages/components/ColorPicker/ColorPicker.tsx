@@ -10,7 +10,6 @@ import hsvToHex from "../../utils/hsvToHex";
 import rgbToHex from "../../utils/rgbToHex";
 import rgbToHsv from "../../utils/rgbToHsv";
 import AlphaSlider from "../AlphaSlider";
-import ColorTypeSelect from "../ColorTypeSelect";
 import EyeDropperBtn from "../EyeDropper";
 import HueSlider from "../HueSlider";
 import SaturationPicker from "../SaturationPicker";
@@ -28,7 +27,7 @@ interface ColorPickerProps {
 
 const ColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hex, alpha, type, onSetColor, onAlphaChange, onSetColorType } = props;
+  const { hex, alpha, onSetColor, onAlphaChange } = props;
 
   const hsvRef = useRef(hexToHsv(hex));
   const hexRef = useRef(hex);
@@ -68,11 +67,7 @@ const ColorPicker = (props: ColorPickerProps) => {
   };
 
   return (
-    <div className={cn(s.picking_panel)}>
-      <div className={s.select_wrapper}>
-        <ColorTypeSelect value={type} onChange={onSetColorType} />
-      </div>
-
+    <>
       <SaturationPicker
         hue={hue}
         saturation={saturation}
@@ -112,7 +107,7 @@ const ColorPicker = (props: ColorPickerProps) => {
         setColor={_onSetColor}
         setColorFromRgb={_onSetColorFromRgb}
       />
-    </div>
+    </>
   );
 };
 
