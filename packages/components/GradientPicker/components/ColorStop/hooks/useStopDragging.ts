@@ -9,7 +9,7 @@ import useDragging from "./useDragging";
 const limitPos = (offset: number, min: number, max: number) =>
   Math.max(Math.min(offset, max), min);
 
-const getColorStopRefTop = (ref) => {
+const getColorStopRefTop = (ref: React.RefObject<HTMLDivElement>) => {
   if (!ref.current) return 0;
   return ref.current.getBoundingClientRect().top;
 };
@@ -21,6 +21,7 @@ interface Params {
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
+  onDragEnd: (id: number) => void;
 }
 
 const useStopDragging = ({

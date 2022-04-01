@@ -6,8 +6,6 @@ const compare = (
 ) => offset1 - offset2;
 
 export const sortPalette = (palette: PalletteColor[]) => {
-  console.log('palette :>> ', palette);
-
   return palette.sort(compare);
 };
 

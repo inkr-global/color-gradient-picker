@@ -1,12 +1,13 @@
+import { DEFAULT_PALETTE_WIDTH } from "../constants";
 import { StopHoldersProps } from "../types";
 import ColorStop from "./ColorStop/ColorStop";
 
 const ColorStopsHolder = (props: StopHoldersProps) => {
-  const { width, stops, disabled = false, onAddColor, ...rest } = props;
+  const { stops, disabled = false, onAddColor, ...rest } = props;
 
   const handleColorAdd: React.MouseEventHandler<HTMLDivElement> = (e) => {
-    e.preventDefault();
 
+    e.preventDefault();
     if (e.button) return;
 
     const offset = e.clientX - e.target.getBoundingClientRect().left;
@@ -15,9 +16,8 @@ const ColorStopsHolder = (props: StopHoldersProps) => {
 
   return (
     <div
-      className="csh"
       style={{
-        width,
+        width: DEFAULT_PALETTE_WIDTH,
         height: 17,
         position: "relative",
         cursor: disabled ? "default" : "crosshair",

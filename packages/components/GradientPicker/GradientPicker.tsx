@@ -42,8 +42,8 @@ const mapPaletteToStops = ({
     };
   });
 
-const getPaletteColor = (palette: PalletteColor[], id: number) => {
-  const color = palette.find((color) => color.id === id) || palette[0];
+const getPaletteColor = (_palette: PalletteColor[], _id: number) => {
+  const color = _palette.find((color) => color.id === _id) || _palette[0];
   return {
     ...color,
     offset: Number(color.offset),
@@ -60,13 +60,16 @@ const GradientPicker = (props: GradientPickerProps) => {
     minStops = DEFAULT_MIN_STOPS,
     maxStops = DEFAULT_MAX_STOPS,
     onPaletteChange,
-    onColorStopSelect = noop,
+    onColorStopSelect,
   } = props;
 
   const palette = mapIdToPalette(paletteProp);
 
+  // ------------------------------------------------------------------------------------------
   const [defaultActiveColor] = palette;
   const [activeColorId, setActiveColorId] = useState(defaultActiveColor.id);
+
+  // ------------------------------------------------------------------------------------------
 
   const limits = useMemo(() => {
     const min = -HALF_STOP_WIDTH;
@@ -83,16 +86,18 @@ const GradientPicker = (props: GradientPickerProps) => {
     if (palette.length >= maxStops) return;
 
     const { color } = getPaletteColor(palette, activeColorId);
-    const entry = {
+    const entry: PalletteColor = {
       id: nextColorId(palette),
       offset: offset / DEFAULT_PALETTE_WIDTH,
       color,
+      alpha: 100,
     };
 
     const updatedPalette = [...palette, entry];
 
     setActiveColorId(entry.id);
     handlePaletteChange(updatedPalette);
+    onColorStopSelect(entry)
   };
 
   const handleColorDelete = (id: number) => {
@@ -111,25 +116,11 @@ const GradientPicker = (props: GradientPickerProps) => {
   const onStopDragStart = (id: number) => {
     if (id !== activeColorId) {
       setActiveColorId(id);
-      const color = palette.find((color) => color.id === id);
+      const _palette = palette.find((_p) => _p.id === id);
 
-      if (color) onColorStopSelect(color);
+      if (_palette) onColorStopSelect(_palette);
     }
   };
-
-  // const handleColorSelect = (color, opacity = 1) => {
-  //   palette = palette.map((c) =>
-  //     activeColorId === c.id
-  //       ? {
-  //           ...c,
-  //           color,
-  //           opacity,
-  //         }
-  //       : c,
-  //   );
-
-  //   handlePaletteChange(palette);
-  // };
 
   const handlePaletteChange = (palette: PalletteColor[]) => {
     const sortedPalette = sortPalette(palette).map(
@@ -164,7 +155,6 @@ const GradientPicker = (props: GradientPickerProps) => {
       <div className={s.gp}>
         <Palette degree={degree} palette={palette} />
         <ColorStopsHolder
-          width={DEFAULT_PALETTE_WIDTH}
           disabled={stopsHolderDisabled}
           stops={mapPaletteToStops({
             palette,
@@ -176,6 +166,7 @@ const GradientPicker = (props: GradientPickerProps) => {
           onAddColor={handleColorAdd}
           onDeleteColor={handleColorDelete}
           onDragStart={onStopDragStart}
+          onDragEnd={noop} 
         />
       </div>
     </div>

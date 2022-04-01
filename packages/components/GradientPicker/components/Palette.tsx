@@ -27,7 +27,7 @@ const Palette = (props: PalletteProps) => {
                 key={id}
                 offset={offset}
                 style={{
-                  stopColor: color,
+                  stopColor: `rgb(${color.red}, ${color.green}, ${color.blue})`,
                   stopOpacity: alpha,
                 }}
               />

@@ -13,7 +13,7 @@ const ColorStop = (props: ColorStopProps) => {
     onPosChange,
     onDeleteColor,
     onDragStart = noop,
-    // onDragEnd = noop,
+    onDragEnd = noop,
   } = props;
 
   const colorStopRef = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ const ColorStop = (props: ColorStopProps) => {
     limits,
     onPosChange,
     onDragStart,
-    // onDragEnd,
+    onDragEnd,
     onDeleteColor,
     colorStopRef,
   });
@@ -40,7 +40,7 @@ const ColorStop = (props: ColorStopProps) => {
     >
       <div
         style={{
-          backgroundColor: color,
+          backgroundColor: `rgb(${color.red}, ${color.green}, ${color.blue})`,
           opacity: alpha,
         }}
       />

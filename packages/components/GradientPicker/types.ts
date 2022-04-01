@@ -1,6 +1,9 @@
+import { Rgb } from "../../utils/colorTypes";
+
 export interface GradientStop {
   id: number;
-  color: string;
+  color: Rgb;
+  alpha: number;
   offset: number;
   isActive: boolean;
   pointX?: number;
@@ -14,22 +17,21 @@ export interface GradientLimits {
 
 export interface PalletteColor {
   id: number;
-  color: string;
+  color: Rgb;
+  alpha: number;
   offset: number;
-  alpha?: number;
 }
 
 export interface ColorStopProps {
   stop: GradientStop;
   limits: GradientLimits;
   onPosChange: (id: number, offset: number) => void;
-  onAddColor: (offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
+  onDragEnd: (id: number) => void;
 }
 
 export interface StopHoldersProps {
-  width: number;
   stops: GradientStop[];
   limits: GradientLimits;
   disabled?: boolean;
@@ -37,7 +39,7 @@ export interface StopHoldersProps {
   onAddColor: (offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
-  // onDragEnd: () => void;
+  onDragEnd: (id: number) => void;
 }
 
 export interface PalletteProps {
@@ -48,9 +50,10 @@ export interface PalletteProps {
 export interface GradientPickerProps {
   palette: PalletteColor[];
   degree: number;
-  onPaletteChange: (palette: PalletteColor[]) => void;
-  onColorStopSelect: (color: PalletteColor) => void;
+  activeStopId?: number;
   stopRemovalDrop?: number;
   maxStops?: number;
   minStops?: number;
+  onPaletteChange: (palette: PalletteColor[]) => void;
+  onColorStopSelect: (color: PalletteColor) => void;
 }

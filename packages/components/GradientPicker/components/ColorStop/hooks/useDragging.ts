@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { noop } from "../../../utils";
 import { EVENTS } from "./constants";
 
 const DRAG_HANDLERS = {
   MOUSE: {
-    stop: (e) => {
+    stop: (e: MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
     },
-    coordinates: ({ clientX, clientY }) => ({
+    coordinates: ({ clientX, clientY }: MouseEvent) => ({
       clientX,
       clientY,
     }),
@@ -18,7 +18,7 @@ const DRAG_HANDLERS = {
   },
   TOUCH: {
     stop: noop,
-    coordinates: (e) => {
+    coordinates: (e: TouchEvent) => {
       const [touch] = e.touches;
       return {
         clientX: touch.clientX,
@@ -26,7 +26,7 @@ const DRAG_HANDLERS = {
       };
     },
     dragEvent: {
-      name: "touchmove",
+      name: EVENTS.TOUCHMOVE,
       options: {
         cancelable: true,
         passive: true,
@@ -36,43 +36,49 @@ const DRAG_HANDLERS = {
   },
 };
 
-const isTouch = (e) => e.type === EVENTS.TOUCHSTART;
+const isTouch = (e: Event) => e.type === EVENTS.TOUCHSTART;
 
-const useDragging = ({ onDragStart = noop, onDrag, onDragEnd = noop }) => {
-  const [context, setContext] = useState({});
+const useDragging = ({ onDragStart, onDrag, onDragEnd }) => {
   const [dragging, setDragging] = useState(false);
 
-  const dragHandler = (e) => {
-    const handler = isTouch(e) ? DRAG_HANDLERS.TOUCH : DRAG_HANDLERS.MOUSE;
+  const dragContext = useRef<{ handler: typeof DRAG_HANDLERS }>({});
 
-    handler.stop(e);
+  // ------------------------------------------------------------------------------------------
 
-    if (!e.button) activate(e, handler);
-  };
-
-  const activate = (e, handler) => {
+  const activateEvent = (
+    e: MouseEvent,
+    handler: typeof DRAG_HANDLERS.MOUSE | typeof DRAG_HANDLERS.TOUCH,
+  ) => {
     setDragging(true);
-    context.handler = handler;
+    dragContext.current.handler = handler;
 
     onDragStart(handler.coordinates(e));
   };
 
-  const deactivate = () => {
+  const deactivateEvent = () => {
     setDragging(false);
 
-    onDragEnd(context.change);
-    setContext({});
+    onDragEnd(dragContext.current.change);
+    dragContext.current = {};
   };
 
-  const handleDrag = (e) => {
-    const { handler } = context;
+  const dragHandler = (e: MouseEvent) => {
+    const handler = isTouch(e) ? DRAG_HANDLERS.TOUCH : DRAG_HANDLERS.MOUSE;
+
+    handler.stop(e);
+
+    activateEvent(e, handler);
+  };
+
+  const handleDrag = (e: MouseEvent) => {
+    const { handler } = dragContext.current;
     if (!dragging) return;
 
-    context.change = onDrag(handler.coordinates(e));
+    dragContext.current.change = onDrag(handler.coordinates(e));
   };
 
   useEffect(() => {
-    const { handler } = context;
+    const { handler } = dragContext.current;
     if (!handler) return;
 
     const { dragEvent, dragEndEvent } = handler;
@@ -83,7 +89,7 @@ const useDragging = ({ onDragStart = noop, onDrag, onDragEnd = noop }) => {
         handleDrag,
         dragEndEvent.options,
       );
-      document.addEventListener(dragEndEvent.name, deactivate);
+      document.addEventListener(dragEndEvent.name, deactivateEvent);
     }
 
     return () => {
@@ -92,11 +98,11 @@ const useDragging = ({ onDragStart = noop, onDrag, onDragEnd = noop }) => {
         handleDrag,
         dragEndEvent.options,
       );
-      document.removeEventListener(dragEndEvent.name, deactivate);
+      document.removeEventListener(dragEndEvent.name, deactivateEvent);
     };
   }, [dragging]);
 
-  return [dragHandler, activate, deactivate];
+  return [dragHandler, activateEvent, deactivateEvent];
 };
 
 export default useDragging;

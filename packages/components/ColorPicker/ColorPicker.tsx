@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { VALUE_COLOR_TYPE } from "../../types";
 import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
@@ -29,11 +29,22 @@ const ColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
   const { hex, alpha, onSetColor, onAlphaChange } = props;
 
+  const [, setHexState] = useState<Hex>(hex);
+
+  // ------------------------------------------------------------------------------------------
   const hsvRef = useRef(hexToHsv(hex));
   const hexRef = useRef(hex);
 
   const { hue, saturation, value } = hsvRef.current;
   const rgb = hexToRgb(hexRef.current);
+
+  // ------------------------------------------------------------------------------------------
+
+  useEffect(() => {
+    hsvRef.current = hexToHsv(hex);
+    hexRef.current = hex;
+    setHexState(hex);
+  }, [hex])
 
   // ------------------------------------------------------------------------------------------
 
