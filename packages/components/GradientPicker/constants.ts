@@ -1,4 +1,4 @@
-const STOP_WIDTH = 10;
+const STOP_WIDTH = 14;
 
 export const HALF_STOP_WIDTH = STOP_WIDTH / 2;
 

@@ -1,9 +1,9 @@
-import "./index.css";
-
-import React, { useRef } from "react";
+import clsx from "clsx";
+import { useRef } from "react";
 
 import { ColorStopProps } from "../../types";
 import { noop } from "../../utils";
+import s from "./ColorStop.module.css";
 import useStopDragging from "./hooks/useStopDragging";
 
 const ColorStop = (props: ColorStopProps) => {
@@ -32,19 +32,16 @@ const ColorStop = (props: ColorStopProps) => {
 
   return (
     <div
-      className={isActive ? "cs active" : "cs"}
+      className={clsx(s.cs, isActive && s.active)}
       ref={colorStopRef}
-      style={{ left: offset }}
+      style={{
+        left: offset,
+        backgroundColor: `rgb(${color.red}, ${color.green}, ${color.blue})`,
+        opacity: alpha,
+      }}
       onMouseDown={drag}
       onTouchStart={drag}
-    >
-      <div
-        style={{
-          backgroundColor: `rgb(${color.red}, ${color.green}, ${color.blue})`,
-          opacity: alpha,
-        }}
-      />
-    </div>
+    />
   );
 };
 

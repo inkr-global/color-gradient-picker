@@ -43,7 +43,7 @@ const mapPaletteToStops = ({
   });
 
 const getPaletteColor = (_palette: PalletteColor[], _id: number) => {
-  const color = _palette.find((color) => color.id === _id) || _palette[0];
+  const color = _palette.find((_color) => _color.id === _id) || _palette[0];
   return {
     ...color,
     offset: Number(color.offset),
@@ -81,6 +81,19 @@ const GradientPicker = (props: GradientPickerProps) => {
       drop: stopRemovalDrop,
     };
   }, [stopRemovalDrop]);
+
+  const handlePaletteChange = (_palette: PalletteColor[]) => {
+    const sortedPalette = sortPalette(_palette).map(
+      ({ offset, id, ...rest }) => ({
+        ...rest,
+        id,
+        offset: offset,
+        active: id === activeColorId,
+      }),
+    );
+
+    onPaletteChange(sortedPalette);
+  };
 
   const handleColorAdd = (offset: number) => {
     if (palette.length >= maxStops) return;
@@ -122,18 +135,6 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-  const handlePaletteChange = (palette: PalletteColor[]) => {
-    const sortedPalette = sortPalette(palette).map(
-      ({ offset, id, ...rest }) => ({
-        ...rest,
-        id,
-        offset: offset,
-        active: id === activeColorId,
-      }),
-    );
-
-    onPaletteChange(sortedPalette);
-  };
 
   const handleStopPosChange = (id: number, offset: number) => {
     const updatedPalette = palette.map((_p) =>
@@ -152,7 +153,7 @@ const GradientPicker = (props: GradientPickerProps) => {
 
   return (
     <div className={s.gp_wrap}>
-      <div className={s.gp}>
+      <div>
         <Palette degree={degree} palette={palette} />
         <ColorStopsHolder
           disabled={stopsHolderDisabled}

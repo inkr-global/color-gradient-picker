@@ -18,7 +18,7 @@ const ColorStopsHolder = (props: StopHoldersProps) => {
     <div
       style={{
         width: DEFAULT_PALETTE_WIDTH,
-        height: 17,
+        height: 22,
         position: "relative",
         cursor: disabled ? "default" : "crosshair",
       }}
