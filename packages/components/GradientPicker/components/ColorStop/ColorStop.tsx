@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { ColorStopProps } from "../../types";
 import { noop } from "../../utils";
@@ -28,7 +28,26 @@ const ColorStop = (props: ColorStopProps) => {
     colorStopRef,
   });
 
-  const { offset, color, isActive, alpha } = stop;
+  const { offset, color, isActive, alpha, id } = stop;
+
+  useEffect(() => {
+    if (typeof document === "undefined") return () => undefined;
+
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Delete" && isActive) {
+        onDeleteColor(id);
+      }
+    };
+
+    document.addEventListener("keydown", handler);
+
+    return () => {
+      document.removeEventListener("keydown", handler);
+    };
+
+  // do not check onDelete
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActive, id]);
 
   return (
     <div
