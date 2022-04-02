@@ -1,7 +1,5 @@
 export const DEFAULT_CLASS_NAME = "cgp";
 
-export const DEFAULT_ALPHA = 100;
-
 export const DEFAULT_PALETTE = [
   {
     id: 1,

@@ -1,5 +1,9 @@
-import React, { CSSProperties, HTMLProps, ReactElement, ReactNode } from "react";
-
+import React, {
+  CSSProperties,
+  HTMLProps,
+  ReactElement,
+  ReactNode,
+} from "react";
 
 export interface InputProps {
   value?: string | number;
@@ -23,14 +27,4 @@ export interface InputProps {
 
   extraInput?: ReactElement;
   isExtraComponent?: boolean;
-}
-
-export interface InputColorPreviewProps {
-  value: string;
-  className?: string;
-}
-
-export interface InputTextInfoProps {
-  children: ReactNode;
-  className?: string;
 }

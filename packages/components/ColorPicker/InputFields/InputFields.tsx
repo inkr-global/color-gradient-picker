@@ -18,7 +18,7 @@ const InputFields = (props: InputFieldsProps) => {
 
   return (
     <div className={s.color_inputs_wrapper}>
-      <Input.ColorHex
+      <Input.Hex
         label="HEX"
         inputWidth={100}
         style={{ gridArea: "hex" }}

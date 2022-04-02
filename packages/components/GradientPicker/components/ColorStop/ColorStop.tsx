@@ -49,17 +49,20 @@ const ColorStop = (props: ColorStopProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, id]);
 
+  const rgba = `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
+
   return (
     <div
       className={clsx(s.cs, isActive && s.active)}
       ref={colorStopRef}
       style={{
         left: offset,
-        backgroundColor: `rgb(${color.red}, ${color.green}, ${color.blue})`,
+        backgroundColor: rgba,
         opacity: alpha,
       }}
       onMouseDown={drag}
       onTouchStart={drag}
+      title={rgba}
     />
   );
 };

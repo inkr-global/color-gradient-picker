@@ -193,7 +193,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       ref={containerRef}
       className={cn(s.wrapper, classNamePrefix, className)}
     >
-      <Input.ColorHex
+      <Input.Hex
         onInputFocus={onShowPanel}
         value={hex}
         onChange={handleSetColor}
