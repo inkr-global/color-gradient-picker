@@ -12,7 +12,5 @@
   border: none;
   color: var(--color-gradient-picker-text-color);
   font-size: var(--color-gradient-picker-base-font-size);
-  appearance: none;
   margin-left: 8px;
-  width: 40px;
 }

@@ -29,24 +29,11 @@ const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
         onChange={(e) => {
           onChange(e.target.value as VALUE_COLOR_TYPE);
         }}
-        style={{ width: value === VALUE_COLOR_TYPE.GRADIENT ? 60 : 40 }}
+        style={{ width: value === VALUE_COLOR_TYPE.GRADIENT ? 75 : 55 }}
       >
         <option value={VALUE_COLOR_TYPE.SOLID}>Solid</option>
         <option value={VALUE_COLOR_TYPE.GRADIENT}>Gradient</option>
       </select>
-
-      <svg
-        width="9"
-        height="6"
-        viewBox="0 0 9 6"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M8.23656 0.42865H7.48321C7.43199 0.42865 7.38377 0.453762 7.35364 0.494945L4.49995 4.42843L1.64627 0.494945C1.61614 0.453762 1.56792 0.42865 1.51669 0.42865H0.763346C0.698056 0.42865 0.659886 0.50298 0.698056 0.556217L4.2398 5.43892C4.36837 5.6157 4.63154 5.6157 4.75911 5.43892L8.30085 0.556217C8.34002 0.50298 8.30185 0.42865 8.23656 0.42865Z"
-          fill="#8C8C8C"
-        />
-      </svg>
     </div>
   );
 };
