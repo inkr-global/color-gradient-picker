@@ -8,6 +8,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
 
   extends: [
+
     "eslint:recommended",
 
     "plugin:@typescript-eslint/recommended",
@@ -24,11 +25,15 @@ module.exports = {
     // - eslint-vscode with auto-fix works but always changes result every save.
     //   This happens with conflicting rules like 'array-bracket-newline'.
 
+    "plugin:css-modules/recommended",
+
     "plugin:react-hooks/recommended",
   ],
 
   plugins: [
     "@typescript-eslint",
+
+    "css-modules",
 
     "prettier",
     // WHY DON'T? See "extends".
@@ -94,5 +99,12 @@ module.exports = {
     // Turned off: no auto-fix and duplicate @typescript-eslint/no-unused-vars
     "unused-imports/no-unused-vars": "off",
     "unused-imports/no-unused-vars-ts": "off",
+
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+
+    "no-use-before-define": "off", // Why? https://stackoverflow.com/a/64024916
+    "@typescript-eslint/no-use-before-define": "error",
+
   },
 };
