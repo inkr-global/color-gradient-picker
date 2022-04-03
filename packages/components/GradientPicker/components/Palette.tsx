@@ -1,21 +1,15 @@
 import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../constants";
 import { PalletteProps } from "../types";
-import { sortPalette } from "../utils";
+import { getLinearGradientBackgroundCss } from "../utils";
 
 const Palette = (props: PalletteProps) => {
   const { palette, degree, onAddColor, disabled } = props;
 
   // ------------------------------------------------------------------------------------------
-  const sortedPalette = sortPalette(palette);
-  const linearGradientColors = `linear-gradient(
-    ${degree}deg,
-    ${sortedPalette
-      .map(
-        ({ alpha, offset, color: { red, green, blue } }) =>
-          `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
-      )
-      .join(", ")}
-  )`;
+  const linearGradientColors = getLinearGradientBackgroundCss({
+    palette,
+    degree,
+  });
 
   // ------------------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ import { PalletteColor } from "./components/GradientPicker/types";
 import { InputProps } from "./components/Input/types";
 import { Hex } from "./utils/colorTypes";
 
-export enum VALUE_COLOR_TYPE {
+export enum COLOR_TYPE {
   SOLID = "SOLID",
   LINEAR = "LINEAR",
 }
@@ -16,15 +16,13 @@ export interface ColorValue {
   alpha?: number;
   solid?: Hex;
   gradient?: GradientColor;
-  type?: VALUE_COLOR_TYPE;
+  type?: COLOR_TYPE;
 }
 
-export interface ColorGradientPickerProps {
-  value?: ColorValue;
-  onChange: (value: ColorValue) => void;
+export interface ColorGradientPickerProps extends Omit<InputProps, "onChange"> {
+  color: ColorValue;
+  onChange: (color: ColorValue) => void;
+  hasAlphaInput?: boolean;
   classNamePrefix?: string;
   className?: string;
-  inputWidth?: InputProps["inputWidth"];
-  onInputBlur?: InputProps["onInputBlur"];
-  onKeyDown?: InputProps["onKeyDown"];
 }

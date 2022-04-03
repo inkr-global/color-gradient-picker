@@ -21,12 +21,6 @@
   position: relative;
 }
 
-.input_vertical_divider {
-  border-left: 1px solid #262626;
-  width: 1px;
-  height: 100%;
-}
-
 .picking_panel {
   width: 290px;
   border-radius: 4px;

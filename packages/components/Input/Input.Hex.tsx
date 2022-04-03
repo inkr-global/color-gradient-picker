@@ -6,7 +6,7 @@ import { Input } from "./Input";
 import s from "./Input.Hex.module.css";
 import { InputProps } from "./types";
 
-function InputColorPreview(props: { value: string }) {
+function ColorPreview(props: { value: string }) {
   const { value } = props;
 
   return (
@@ -65,7 +65,7 @@ export function Hex(
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
       value={valueState.toUpperCase()}
-      info={<InputColorPreview value={value as string} />}
+      info={<ColorPreview value={value as string} />}
     />
   );
 }

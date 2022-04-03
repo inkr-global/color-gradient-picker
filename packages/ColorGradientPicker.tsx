@@ -9,18 +9,13 @@ import {
   DEFAULT_DEGREE,
   DEFAULT_PALETTE,
 } from "./components/GradientPicker/constants";
-import {
-  LinearGradient,
-} from "./components/GradientPicker/types";
-import Input from "./components/Input";
-import { ALPHA_VALUE } from "./components/Input/constants";
+import { Gradient } from "./components/GradientPicker/types";
+import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
+import UserInput from "./components/UserInput";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
-import {
-  ColorGradientPickerProps,
-  VALUE_COLOR_TYPE,
-} from "./types";
+import { COLOR_TYPE, ColorGradientPickerProps } from "./types";
 import { Hex } from "./utils/colorTypes";
 import sanitizeHex from "./utils/sanitizeHex";
 
@@ -29,22 +24,21 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const {
     classNamePrefix = DEFAULT_CLASS_NAME,
     className,
-    value: valueProp,
+    color,
     onChange,
-    inputWidth,
-    onInputBlur,
-    onKeyDown,
+    onInputFocus,
+    ...rest
   } = props;
 
   // ------------------------------------------------------------------------------------------
 
-  const solidColor = sanitizeHex(valueProp?.solid || "#000");
-  const totalAlpha = valueProp?.alpha || ALPHA_VALUE.MAX;
-  const linearGradient = valueProp?.gradient || {
+  const solidColor = sanitizeHex(color?.solid || DEFAULT_HEX);
+  const totalAlpha = color?.alpha || ALPHA_VALUE.MAX;
+  const linearGradient = color?.gradient || {
     degree: DEFAULT_DEGREE,
     palette: DEFAULT_PALETTE,
   };
-  const propColorType = valueProp?.type || VALUE_COLOR_TYPE.SOLID;
+  const propColorType = color?.type || COLOR_TYPE.SOLID;
 
   // ------------------------------------------------------------------------------------------
 
@@ -54,9 +48,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   // ------------------------------------------------------------------------------------------
 
-  const onShowPanel = useCallback(() => {
+  const handleInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     setOpenPicker(true);
-  }, []);
+
+    if (typeof onInputFocus === "function") onInputFocus(e);
+  };
 
   const onHidePicker = useCallback(() => {
     setOpenPicker(false);
@@ -70,57 +66,45 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
   const handleSolidColorChange = (_updatedHex: Hex) => {
     onChange({
-      ...valueProp,
+      ...color,
       solid: _updatedHex,
     });
   };
 
   const handleTotalAlphaChange = (_alpha: number) => {
     onChange({
-      ...valueProp,
+      ...color,
       alpha: _alpha,
     });
   };
 
-  const handleSetColorType = (_type: VALUE_COLOR_TYPE) => {
+  const handleSetColorType = (_type: COLOR_TYPE) => {
     onChange({
-      ...valueProp,
+      ...color,
       type: _type,
     });
   };
 
-  const handleLinearGradientChange = (_gradient: LinearGradient) => {
+  const handleLinearGradientChange = (_gradient: Gradient) => {
     onChange({
-      ...valueProp,
+      ...color,
       gradient: _gradient,
     });
   };
+
+  // ------------------------------------------------------------------------------------------
 
   return (
     <div
       ref={containerRef}
       className={cn(s.wrapper, classNamePrefix, className)}
     >
-      <Input.Hex
-        onInputFocus={onShowPanel}
-        value={solidColor}
-        onChange={handleSolidColorChange}
-        inputWidth={inputWidth}
-        onInputBlur={onInputBlur}
-        onKeyDown={onKeyDown}
-        extraInput={
-          <>
-            <div className={s.input_vertical_divider} />
-            <Input.Alpha
-              isExtraComponent
-              value={totalAlpha}
-              onChange={handleTotalAlphaChange}
-              inputWidth={45}
-              onInputBlur={onInputBlur}
-              onKeyDown={onKeyDown}
-            />
-          </>
-        }
+      <UserInput
+        {...rest}
+        onSolidColorChange={handleSolidColorChange}
+        onAlphaChange={handleTotalAlphaChange}
+        color={color}
+        onInputFocus={handleInputFocus}
       />
 
       {isOpenPicker && (
@@ -130,14 +114,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             onChange={handleSetColorType}
           />
 
-          {propColorType === VALUE_COLOR_TYPE.LINEAR && (
+          {propColorType === COLOR_TYPE.LINEAR && (
             <GradientPicker
               gradient={linearGradient}
               onLinearGradientChange={handleLinearGradientChange}
             />
           )}
 
-          {propColorType === VALUE_COLOR_TYPE.SOLID && (
+          {propColorType === COLOR_TYPE.SOLID && (
             <ColorPicker
               hex={solidColor}
               alpha={totalAlpha}

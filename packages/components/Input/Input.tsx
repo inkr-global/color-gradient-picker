@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Alpha } from "./Input.Alpha";
 import { Degree } from "./Input.Degree";
+import { GradientInput } from "./Input.Gradient";
 import { Hex } from "./Input.Hex";
 import s from "./Input.module.css";
 import { Rgb } from "./Input.Rgb";
@@ -106,5 +107,6 @@ Input.Alpha = Alpha;
 Input.Rgb = Rgb;
 Input.Hex = Hex;
 Input.Degree = Degree;
+Input.Gradient = GradientInput;
 
 export default Input;

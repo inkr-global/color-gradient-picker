@@ -16,3 +16,5 @@ export const DEGREE_VALUE = {
   MAX: 360,
   MIN: 0,
 };
+
+export const DEFAULT_HEX = "#000";

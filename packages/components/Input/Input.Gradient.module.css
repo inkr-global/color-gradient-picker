@@ -1,0 +1,7 @@
+.gradient_preview {
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  text-align: center;
+}

@@ -1,9 +1,9 @@
-import { VALUE_COLOR_TYPE } from "../../types";
+import { COLOR_TYPE } from "../../types";
 import s from "./ColorTypeSelect.module.css";
 
 interface ColorTypeSelectProps {
-  value: VALUE_COLOR_TYPE;
-  onChange: (value: VALUE_COLOR_TYPE) => void;
+  value: COLOR_TYPE;
+  onChange: (value: COLOR_TYPE) => void;
 }
 
 const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
@@ -27,12 +27,12 @@ const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
         className={s.select}
         value={value}
         onChange={(e) => {
-          onChange(e.target.value as VALUE_COLOR_TYPE);
+          onChange(e.target.value as COLOR_TYPE);
         }}
-        style={{ width: value === VALUE_COLOR_TYPE.LINEAR ? 65 : 55 }}
+        style={{ width: value === COLOR_TYPE.LINEAR ? 65 : 55 }}
       >
-        <option value={VALUE_COLOR_TYPE.SOLID}>Solid</option>
-        <option value={VALUE_COLOR_TYPE.LINEAR}>Linear</option>
+        <option value={COLOR_TYPE.SOLID}>Solid</option>
+        <option value={COLOR_TYPE.LINEAR}>Linear</option>
       </select>
     </div>
   );
