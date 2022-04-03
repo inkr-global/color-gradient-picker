@@ -29,10 +29,10 @@ const ColorTypeSelect = ({ value, onChange }: ColorTypeSelectProps) => {
         onChange={(e) => {
           onChange(e.target.value as VALUE_COLOR_TYPE);
         }}
-        style={{ width: value === VALUE_COLOR_TYPE.GRADIENT ? 75 : 55 }}
+        style={{ width: value === VALUE_COLOR_TYPE.LINEAR ? 65 : 55 }}
       >
         <option value={VALUE_COLOR_TYPE.SOLID}>Solid</option>
-        <option value={VALUE_COLOR_TYPE.GRADIENT}>Gradient</option>
+        <option value={VALUE_COLOR_TYPE.LINEAR}>Linear</option>
       </select>
     </div>
   );

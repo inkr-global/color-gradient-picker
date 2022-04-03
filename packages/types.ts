@@ -4,7 +4,7 @@ import { Hex } from "./utils/colorTypes";
 
 export enum VALUE_COLOR_TYPE {
   SOLID = "SOLID",
-  GRADIENT = "GRADIENT",
+  LINEAR = "LINEAR",
 }
 
 export interface GradientColor {

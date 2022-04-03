@@ -130,7 +130,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             onChange={handleSetColorType}
           />
 
-          {propColorType === VALUE_COLOR_TYPE.GRADIENT && (
+          {propColorType === VALUE_COLOR_TYPE.LINEAR && (
             <GradientPicker
               gradient={linearGradient}
               onLinearGradientChange={handleLinearGradientChange}
