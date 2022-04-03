@@ -63,6 +63,7 @@ const ColorStop = (props: ColorStopProps) => {
       onMouseDown={drag}
       onTouchStart={drag}
       title={rgba}
+      tabIndex={0}
     />
   );
 };

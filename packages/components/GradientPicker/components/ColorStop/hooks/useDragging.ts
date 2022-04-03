@@ -6,7 +6,6 @@ import { EVENTS } from "./constants";
 const DRAG_HANDLERS = {
   MOUSE: {
     stop: (e: MouseEvent) => {
-      e.preventDefault();
       e.stopPropagation();
     },
     coordinates: ({ clientX, clientY }: MouseEvent) => ({

@@ -49,6 +49,7 @@ export function Rgb(
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    e.stopPropagation();
     if (e.key === KEYS.ENTER) _onOutsideChange();
   };
 
