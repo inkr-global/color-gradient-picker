@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import sanitizeHex from "../../utils/sanitizeHex";
-import { KEYS } from "./contstants";
+import { KEYS } from "./constants";
 import { Input } from "./Input";
 import s from "./Input.Hex.module.css";
 import { InputProps } from "./types";

@@ -11,7 +11,6 @@ function App() {
     type: VALUE_COLOR_TYPE.SOLID,
   });
 
-  console.log('color :>> ', color);
 
   return (
     <div className={s.app}>

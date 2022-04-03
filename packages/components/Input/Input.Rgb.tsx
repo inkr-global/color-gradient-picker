@@ -1,6 +1,6 @@
 import React, { HTMLProps, ReactNode, useEffect, useState } from "react";
 
-import { KEYS, RGB_VALUE } from "./contstants";
+import { KEYS, RGB_VALUE } from "./constants";
 import { Input } from "./Input";
 import s from "./Input.Rgb.module.css";
 import { InputProps } from "./types";

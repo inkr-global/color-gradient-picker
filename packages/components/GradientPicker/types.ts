@@ -44,6 +44,7 @@ export interface StopHoldersProps {
 
 export interface PalletteProps {
   palette: PalletteColor[];
+  degree: number;
 }
 
 export interface GradientPickerProps {

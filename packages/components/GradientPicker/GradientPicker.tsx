@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 
 import Input from "../Input";
-import { ALPHA_VALUE } from "../Input/contstants";
+import { ALPHA_VALUE } from "../Input/constants";
 import ColorStopsHolder from "./components/ColorStopsHolder";
 import Palette from "./components/Palette";
 import {
@@ -159,7 +159,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     <div className={s.gp_wrap}>
       <Input.Degree onChange={onDegreeChange} value={degree} />
       <div>
-        <Palette palette={palette} />
+        <Palette degree={degree} palette={palette} />
         <ColorStopsHolder
           disabled={stopsHolderDisabled}
           stops={mapPaletteToStops({

@@ -5,9 +5,11 @@ import s from "./ColorGradientPicker.module.css";
 import ColorPicker from "./components/ColorPicker";
 import ColorTypeSelect from "./components/ColorTypeSelect";
 import GradientPicker from "./components/GradientPicker";
+import { DEFAULT_DEGREE, DEFAULT_PALETTE } from "./components/GradientPicker/constants";
 import { PalletteColor } from "./components/GradientPicker/types";
 import Input from "./components/Input";
-import { DEFAULT_CLASS_NAME, DEFAULT_PALETTE } from "./constants";
+import { ALPHA_VALUE } from "./components/Input/constants";
+import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
 import {
@@ -35,9 +37,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
 
   const propColorHex = sanitizeHex(valueProp?.hex || "#000");
-  const propAlpha = valueProp?.alpha || 100;
+  const propAlpha = valueProp?.alpha || ALPHA_VALUE.MAX;
   const propGradient = valueProp?.gradient || {
-    degree: 90,
+    degree: DEFAULT_DEGREE,
     palette: DEFAULT_PALETTE,
   };
   const propColorType = valueProp?.type || VALUE_COLOR_TYPE.SOLID;

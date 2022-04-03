@@ -12,7 +12,7 @@ export interface GradientColor {
   palette: PalletteColor[];
 }
 
-interface ColorValue {
+export interface ColorValue {
   alpha?: number;
   hex?: Hex;
   gradient?: GradientColor;

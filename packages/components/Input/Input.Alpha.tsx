@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { ALPHA_VALUE, KEYS } from "./contstants";
+import { ALPHA_VALUE, KEYS } from "./constants";
 import { Input } from "./Input";
 import s from "./Input.Alpha.module.css";
 import { InputProps } from "./types";
