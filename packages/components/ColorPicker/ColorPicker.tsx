@@ -1,7 +1,6 @@
 import cn from "clsx";
 import { useEffect, useRef, useState } from "react";
 
-import { VALUE_COLOR_TYPE } from "../../types";
 import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
 import { openNativeEyeDropper } from "../../utils/common";
 import hexToHsv from "../../utils/hexToHsv";
@@ -19,15 +18,13 @@ import SaturationPicker from "./components/SaturationPicker";
 interface ColorPickerProps {
   hex: Hex;
   alpha: number;
-  type: VALUE_COLOR_TYPE;
-  onSetColor: (updatedHex: Hex) => void;
+  onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: number) => void;
-  onSetColorType: (type: VALUE_COLOR_TYPE) => void;
 }
 
 const ColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hex, alpha, onSetColor, onAlphaChange } = props;
+  const { hex, alpha, onColorChange, onAlphaChange } = props;
 
   const [, setHexState] = useState<Hex>(hex);
 
@@ -52,7 +49,7 @@ const ColorPicker = (props: ColorPickerProps) => {
     hexRef.current = _updatedHex;
     hsvRef.current = _updatedHsv;
 
-    onSetColor(_updatedHex);
+    onColorChange(_updatedHex);
   };
 
   const _onSetColorFromRgb = (updatedRgb: Rgb) => {

@@ -47,13 +47,14 @@ export interface PalletteProps {
   disabled?: boolean;
 }
 
-export interface GradientPickerProps {
-  palette: PalletteColor[];
+export interface LinearGradient {
   degree: number;
-  onDegreeChange: (value: number) => void;
-  onPaletteChange: (palette: PalletteColor[]) => void;
-  onColorStopSelect: (color: PalletteColor) => void;
-  activeStopId?: number;
+  palette: PalletteColor[];
+}
+
+export interface GradientPickerProps {
+  gradient : LinearGradient;
+  onLinearGradientChange: (gradient: LinearGradient) => void;
   stopRemovalDrop?: number;
   maxStops?: number;
   minStops?: number;

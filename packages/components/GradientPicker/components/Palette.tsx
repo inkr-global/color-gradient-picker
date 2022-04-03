@@ -23,7 +23,7 @@ const Palette = (props: PalletteProps) => {
     e.preventDefault();
     if (e.button) return;
 
-    const offset = e.clientX - e.target.getBoundingClientRect().left;
+    const offset = e.clientX - (e.target as HTMLElement).getBoundingClientRect().left;
     onAddColor(offset);
   };
 

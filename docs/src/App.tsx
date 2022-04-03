@@ -7,7 +7,7 @@ import s from "./app.module.css";
 function App() {
   const [color, setColor] = useState<ColorValue>({
     alpha: 100,
-    hex: "#000",
+    solid: "#000",
     type: VALUE_COLOR_TYPE.SOLID,
   });
 

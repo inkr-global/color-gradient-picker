@@ -14,7 +14,7 @@ export interface GradientColor {
 
 export interface ColorValue {
   alpha?: number;
-  hex?: Hex;
+  solid?: Hex;
   gradient?: GradientColor;
   type?: VALUE_COLOR_TYPE;
 }
