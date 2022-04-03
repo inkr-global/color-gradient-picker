@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import sanitizeHex from "../../utils/sanitizeHex";
-import { ENTER_KEY, Input } from "./Input";
+import { KEYS } from "./contstants";
+import { Input } from "./Input";
 import s from "./Input.Hex.module.css";
 import { InputProps } from "./types";
 
@@ -47,7 +48,7 @@ export function Hex(
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === ENTER_KEY) _onOutsideChange();
+    if (e.key === KEYS.ENTER) _onOutsideChange();
   };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {

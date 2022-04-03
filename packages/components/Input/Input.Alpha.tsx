@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { ENTER_KEY, Input } from "./Input";
+import { ALPHA_VALUE, KEYS } from "./contstants";
+import { Input } from "./Input";
 import s from "./Input.Alpha.module.css";
 import { InputProps } from "./types";
 
@@ -8,7 +9,9 @@ function InputAlphaInfo() {
   return <div className={s.alpha_info} />;
 }
 
-const getAlphaString = (alpha: number) => `${alpha}%`;
+const ALPHA_SYMBOL = "%";
+
+const getAlphaString = (alpha: number) => `${alpha}${ALPHA_SYMBOL}`;
 
 export function Alpha(
   props: Omit<InputProps, "onChange" | "info" | "value"> & {
@@ -18,9 +21,7 @@ export function Alpha(
 ) {
   const { value, onChange, onInputBlur, ...rest } = props;
 
-  const [valueState, setValueState] = useState<string | number | undefined>(
-    getAlphaString(value),
-  );
+  const [valueState, setValueState] = useState<string>(getAlphaString(value));
 
   // -----------------------------------------------------------------------
   useEffect(() => {
@@ -29,26 +30,26 @@ export function Alpha(
 
   // -----------------------------------------------------------------------
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    let _value = parseInt(e.currentTarget.value.replace("%", ""));
+    let _value = parseInt(e.currentTarget.value.replace(ALPHA_SYMBOL, ""));
     _value = Math.round(_value);
-    if (_value < 0) _value = 0;
-    if (_value > 100) _value = 100;
-    if (isNaN(_value)) _value = 0;
+    if (_value < ALPHA_VALUE.MIN) _value = ALPHA_VALUE.MIN;
+    if (_value > ALPHA_VALUE.MAX) _value = ALPHA_VALUE.MAX;
+    if (isNaN(_value)) _value = ALPHA_VALUE.MIN;
 
-    setValueState(_value);
+    setValueState(getAlphaString(_value));
   };
 
   const _onOutsideChange = () => {
     // remove % if the valueState has it
     const _valueState = parseInt(
-      (valueState?.toString() || "100")?.replace("%", ""),
+      (valueState?.toString() || ALPHA_VALUE.MAX.toString())?.replace(ALPHA_SYMBOL, ""),
     );
     onChange(_valueState);
     setValueState(getAlphaString(_valueState));
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === ENTER_KEY) _onOutsideChange();
+    if (e.key === KEYS.ENTER) _onOutsideChange();
   };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {

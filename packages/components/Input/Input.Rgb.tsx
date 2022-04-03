@@ -1,6 +1,7 @@
 import React, { HTMLProps, ReactNode, useEffect, useState } from "react";
 
-import { ENTER_KEY, Input } from "./Input";
+import { KEYS, RGB_VALUE } from "./contstants";
+import { Input } from "./Input";
 import s from "./Input.Rgb.module.css";
 import { InputProps } from "./types";
 
@@ -24,8 +25,8 @@ export function Rgb(
   const customInputProps: HTMLProps<HTMLInputElement> = {
     ...inputProps,
     type: "number",
-    min: 0,
-    max: 255,
+    min: RGB_VALUE.MIN,
+    max: RGB_VALUE.MAX,
   };
 
   // -----------------------------------------------------------------------
@@ -36,9 +37,9 @@ export function Rgb(
   // -----------------------------------------------------------------------
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value);
-    if (_value < 0) _value = 0;
-    if (_value > 255) _value = 255;
-    if (isNaN(_value)) _value = 0;
+    if (_value < RGB_VALUE.MIN) _value = RGB_VALUE.MIN;
+    if (_value > RGB_VALUE.MAX) _value = RGB_VALUE.MAX;
+    if (isNaN(_value)) _value = RGB_VALUE.MIN;
     setValueState(_value);
   };
 
@@ -48,7 +49,7 @@ export function Rgb(
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    if (e.key === ENTER_KEY) _onOutsideChange();
+    if (e.key === KEYS.ENTER) _onOutsideChange();
   };
 
   const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {

@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react";
 
+import Input from "../Input";
+import { ALPHA_VALUE } from "../Input/contstants";
 import ColorStopsHolder from "./components/ColorStopsHolder";
 import Palette from "./components/Palette";
 import {
@@ -56,11 +58,12 @@ const GradientPicker = (props: GradientPickerProps) => {
   const {
     palette: paletteProp,
     degree,
+    onDegreeChange,
+    onPaletteChange,
+    onColorStopSelect,
     stopRemovalDrop = DEFAULT_STOP_REMOVAL_DROP,
     minStops = DEFAULT_MIN_STOPS,
     maxStops = DEFAULT_MAX_STOPS,
-    onPaletteChange,
-    onColorStopSelect,
   } = props;
 
   const palette = mapIdToPalette(paletteProp);
@@ -103,7 +106,7 @@ const GradientPicker = (props: GradientPickerProps) => {
       id: nextColorId(palette),
       offset: offset / DEFAULT_PALETTE_WIDTH,
       color,
-      alpha: 100,
+      alpha: ALPHA_VALUE.MAX,
     };
 
     const updatedPalette = [...palette, entry];
@@ -123,6 +126,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     ).id;
 
     setActiveColorId(activeId);
+    onColorStopSelect(updatedPalette[0]);
     handlePaletteChange(updatedPalette);
   };
 
@@ -153,8 +157,9 @@ const GradientPicker = (props: GradientPickerProps) => {
 
   return (
     <div className={s.gp_wrap}>
+      <Input.Degree onChange={onDegreeChange} value={degree} />
       <div>
-        <Palette degree={degree} palette={palette} />
+        <Palette palette={palette} />
         <ColorStopsHolder
           disabled={stopsHolderDisabled}
           stops={mapPaletteToStops({

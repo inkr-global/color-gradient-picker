@@ -7,7 +7,7 @@ import { sortPalette } from "../utils";
 const generateGradientId = () => "" + Math.random().toString(36).slice(2, 9);
 
 const Palette = (props: PalletteProps) => {
-  const { palette, degree } = props;
+  const { palette } = props;
 
   const sortedPalette = sortPalette(palette);
   const gradientId = useMemo(generateGradientId, [palette.length]);
@@ -17,6 +17,7 @@ const Palette = (props: PalletteProps) => {
       style={{
         width: DEFAULT_PALETTE_WIDTH,
         height: DEFAULT_PALETTE_HEIGHT,
+        marginTop: 8,
       }}
     >
       <svg width="100%" height="100%">

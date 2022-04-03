@@ -2,12 +2,11 @@ import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
 import { Alpha } from "./Input.Alpha";
+import { Degree } from "./Input.Degree";
 import { Hex } from "./Input.Hex";
 import s from "./Input.module.css";
 import { Rgb } from "./Input.Rgb";
 import { InputProps } from "./types";
-
-export const ENTER_KEY = "Enter";
 
 export function Input(props: InputProps) {
   // ------------------------------------------------------------------------------------------
@@ -106,5 +105,6 @@ export function Input(props: InputProps) {
 Input.Alpha = Alpha;
 Input.Rgb = Rgb;
 Input.Hex = Hex;
+Input.Degree = Degree;
 
 export default Input;

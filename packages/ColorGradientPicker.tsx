@@ -85,7 +85,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   // ------------------------------------------------------------------------------------------
   const handleSetGradientPalette = (_pallette: PalletteColor[]) => {
-    const newGradient = {
+    const newGradient: GradientColor = {
       ...gradient,
       palette: _pallette,
     };
@@ -110,7 +110,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       const _palette = gradient.palette;
       _palette[activeIndex].color = hexToRgb(_updatedHex);
 
-      const newGradient = {
+      const newGradient: GradientColor = {
         ...gradient,
         palette: _palette,
       };
@@ -167,7 +167,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       const _palette = gradient.palette;
       _palette[activeIndex].alpha = _alpha;
 
-      const newGradient = {
+      const newGradient: GradientColor = {
         ...gradient,
         palette: _palette,
       };
@@ -179,6 +179,20 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         gradient: newGradient,
       });
     }
+  };
+
+  const _handleSetGradientDegree = (_degree: number) => {
+    const newGradient: GradientColor = {
+      ...gradient,
+      degree: _degree,
+    };
+
+    setGradient(newGradient);
+
+    onChange({
+      ...valueProp,
+      gradient: newGradient,
+    });
   };
 
   // ------------------------------------------------------------------------------------------
@@ -226,6 +240,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             <GradientPicker
               palette={gradient.palette}
               degree={gradient.degree}
+              onDegreeChange={_handleSetGradientDegree}
               onColorStopSelect={_handleColorStopSelect}
               onPaletteChange={handleSetGradientPalette}
             />

@@ -44,16 +44,16 @@ export interface StopHoldersProps {
 
 export interface PalletteProps {
   palette: PalletteColor[];
-  degree: number;
 }
 
 export interface GradientPickerProps {
   palette: PalletteColor[];
   degree: number;
+  onDegreeChange: (value: number) => void;
+  onPaletteChange: (palette: PalletteColor[]) => void;
+  onColorStopSelect: (color: PalletteColor) => void;
   activeStopId?: number;
   stopRemovalDrop?: number;
   maxStops?: number;
   minStops?: number;
-  onPaletteChange: (palette: PalletteColor[]) => void;
-  onColorStopSelect: (color: PalletteColor) => void;
 }
