@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import React, { useCallback, useRef, useState } from "react";
 
-import { getHueFromPosition } from "../../utils/common";
-import hsvToHex from "../../utils/hsvToHex";
+import { getHueFromPosition } from "../../../../utils/common";
+import hsvToHex from "../../../../utils/hsvToHex";
 import s from "./HueSlider.module.css";
 
 type HueSliderProps = {

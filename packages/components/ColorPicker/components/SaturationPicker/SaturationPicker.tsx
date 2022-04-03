@@ -4,8 +4,8 @@ import React, { useCallback, useRef, useState } from "react";
 import {
   getSaturationValueFromPosition,
   SaturationValue,
-} from "../../utils/common";
-import hsvToHex from "../../utils/hsvToHex";
+} from "../../../../utils/common";
+import hsvToHex from "../../../../utils/hsvToHex";
 import s from "./SaturationPicker.module.css";
 
 type SaturationPickerProps = {

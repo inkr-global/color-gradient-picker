@@ -9,12 +9,12 @@ import hexToRgb from "../../utils/hexToRgb";
 import hsvToHex from "../../utils/hsvToHex";
 import rgbToHex from "../../utils/rgbToHex";
 import rgbToHsv from "../../utils/rgbToHsv";
-import AlphaSlider from "../AlphaSlider";
-import EyeDropperBtn from "../EyeDropper";
-import HueSlider from "../HueSlider";
-import SaturationPicker from "../SaturationPicker";
 import s from "./ColorPicker.module.css";
-import InputFields from "./InputFields";
+import AlphaSlider from "./components/AlphaSlider";
+import EyeDropperBtn from "./components/EyeDropper";
+import HueSlider from "./components/HueSlider";
+import InputFields from "./components/InputFields";
+import SaturationPicker from "./components/SaturationPicker";
 
 interface ColorPickerProps {
   hex: Hex;

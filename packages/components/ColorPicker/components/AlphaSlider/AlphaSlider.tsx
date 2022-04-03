@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import React, { CSSProperties, useCallback, useRef, useState } from "react";
 
-import { getAlphaFromPosition } from "../../utils/common";
-import hexToRgb from "../../utils/hexToRgb";
+import { getAlphaFromPosition } from "../../../../utils/common";
+import hexToRgb from "../../../../utils/hexToRgb";
 import s from "./AlphaSlider.module.css";
 
 type AlphaSliderProps = {
