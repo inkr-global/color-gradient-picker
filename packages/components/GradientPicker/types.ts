@@ -34,9 +34,7 @@ export interface ColorStopProps {
 export interface StopHoldersProps {
   stops: GradientStop[];
   limits: GradientLimits;
-  disabled?: boolean;
   onPosChange: (id: number, offset: number) => void;
-  onAddColor: (offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
   onDragEnd: (id: number) => void;
@@ -45,6 +43,8 @@ export interface StopHoldersProps {
 export interface PalletteProps {
   palette: PalletteColor[];
   degree: number;
+  onAddColor: (offset: number) => void;
+  disabled?: boolean;
 }
 
 export interface GradientPickerProps {

@@ -113,7 +113,7 @@ const GradientPicker = (props: GradientPickerProps) => {
 
     setActiveColorId(entry.id);
     handlePaletteChange(updatedPalette);
-    onColorStopSelect(entry)
+    onColorStopSelect(entry);
   };
 
   const handleColorDelete = (id: number) => {
@@ -139,7 +139,6 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-
   const handleStopPosChange = (id: number, offset: number) => {
     const updatedPalette = palette.map((_p) =>
       id === _p.id
@@ -159,9 +158,13 @@ const GradientPicker = (props: GradientPickerProps) => {
     <div className={s.gp_wrap}>
       <Input.Degree onChange={onDegreeChange} value={degree} />
       <div>
-        <Palette degree={degree} palette={palette} />
-        <ColorStopsHolder
+        <Palette
+          onAddColor={handleColorAdd}
+          degree={degree}
+          palette={palette}
           disabled={stopsHolderDisabled}
+        />
+        <ColorStopsHolder
           stops={mapPaletteToStops({
             palette,
             width: DEFAULT_PALETTE_WIDTH,
@@ -169,10 +172,9 @@ const GradientPicker = (props: GradientPickerProps) => {
           })}
           limits={limits}
           onPosChange={handleStopPosChange}
-          onAddColor={handleColorAdd}
           onDeleteColor={handleColorDelete}
           onDragStart={onStopDragStart}
-          onDragEnd={noop} 
+          onDragEnd={noop}
         />
       </div>
     </div>
