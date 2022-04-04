@@ -1,3 +1,4 @@
+import { Gradient } from "../../types";
 import { Rgb } from "../../utils/colorTypes";
 
 export interface GradientStop {
@@ -45,11 +46,6 @@ export interface PalletteProps {
   degree: number;
   onAddColor: (offset: number) => void;
   disabled?: boolean;
-}
-
-export interface Gradient {
-  degree: number;
-  palette: PalletteColor[];
 }
 
 export interface GradientPickerProps {

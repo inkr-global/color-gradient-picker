@@ -4,15 +4,15 @@ import { Hex } from "./utils/colorTypes";
 
 export type ColorType = "linear" | "solid";
 
-export interface GradientColor {
+export interface Gradient {
   degree: number;
-  palette: PalletteColor[];
+  points: PalletteColor[];
 }
 
 export interface ColorValue {
   alpha?: number;
   solid?: Hex;
-  gradient?: GradientColor;
+  gradient?: Gradient;
   type?: ColorType;
 }
 

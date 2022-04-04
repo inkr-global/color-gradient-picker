@@ -9,13 +9,12 @@ import {
   DEFAULT_DEGREE,
   DEFAULT_PALETTE,
 } from "./components/GradientPicker/constants";
-import { Gradient } from "./components/GradientPicker/types";
 import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
 import UserInput from "./components/UserInput";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
-import { ColorGradientPickerProps,ColorType } from "./types";
+import { ColorGradientPickerProps,ColorType, Gradient } from "./types";
 import { Hex } from "./utils/colorTypes";
 import sanitizeHex from "./utils/sanitizeHex";
 
@@ -37,7 +36,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const totalAlpha = color?.alpha || ALPHA_VALUE.MAX;
   const linearGradient = color?.gradient || {
     degree: DEFAULT_DEGREE,
-    palette: DEFAULT_PALETTE,
+    points: DEFAULT_PALETTE,
   };
   const propColorType = color?.type || "solid";
 
