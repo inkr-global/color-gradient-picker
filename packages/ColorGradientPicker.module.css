@@ -11,6 +11,8 @@
 
   --cgp-input-focus-color: #a58d12;
   --cgp-input-hover-color: #262626;
+
+  --cgp-picking-panel-zindex: 1;
 }
 
 .wrapper,
@@ -32,4 +34,5 @@
   position: absolute;
   top: calc(26px + 10px); /* 26px: input height */
   padding-bottom: 16px;
+  z-index: var(--cgp-picking-panel-zindex);
 }

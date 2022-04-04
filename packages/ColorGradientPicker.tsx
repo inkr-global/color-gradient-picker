@@ -27,6 +27,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     color,
     onChange,
     onInputFocus,
+    colorPickingPanelClassName,
     ...rest
   } = props;
 
@@ -108,7 +109,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       />
 
       {isOpenPicker && (
-        <div className={s.picking_panel}>
+        <div className={cn(s.picking_panel, colorPickingPanelClassName)}>
           <ColorTypeSelect
             value={propColorType}
             onChange={handleSetColorType}

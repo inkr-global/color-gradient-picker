@@ -22,6 +22,7 @@ export interface ColorValue {
 export interface ColorGradientPickerProps extends Omit<InputProps, "onChange"> {
   color: ColorValue;
   onChange: (color: ColorValue) => void;
+  colorPickingPanelClassName?: string;
   hasAlphaInput?: boolean;
   classNamePrefix?: string;
   className?: string;
