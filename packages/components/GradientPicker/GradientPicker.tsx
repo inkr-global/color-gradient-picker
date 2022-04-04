@@ -17,7 +17,7 @@ import {
 } from "./constants";
 import s from "./GradientPicker.module.css";
 import { GradientPickerProps } from "./types";
-import { noop, sortPalette } from "./utils";
+import { noop, sortPoints } from "./utils";
 
 // ------------------------------------------------------------------------------------------
 
@@ -46,8 +46,8 @@ const mapPointsToStops = ({
     };
   });
 
-const getPointsColor = (_palette: Points[], _id: number) => {
-  const color = _palette.find((_color) => _color.id === _id) || _palette[0];
+const getPointsColor = (_points: Points[], _id: number) => {
+  const color = _points.find((_color) => _color.id === _id) || _points[0];
   return {
     ...color,
     offset: Number(color.offset),
@@ -94,8 +94,8 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-  const handleGradientChange = (_palette: Points[], _degree: number) => {
-    const sortedPalette = sortPalette(_palette).map(
+  const handleGradientChange = (_points: Points[], _degree: number) => {
+    const sortedPalette = sortPoints(_points).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
         id,
@@ -141,16 +141,16 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopPosChange = (id: number, offset: number) => {
-    const updatedPalette = points.map((_palette) =>
-      id === _palette.id
+    const updatedPoints = points.map((_points) =>
+      id === _points.id
         ? {
-            ..._palette,
+            ..._points,
             offset: (offset + HALF_STOP_WIDTH) / DEFAULT_PALETTE_WIDTH,
           }
-        : _palette,
+        : _points,
     );
 
-    handleGradientChange(updatedPalette, degree);
+    handleGradientChange(updatedPoints, degree);
   };
 
   const handleDegreeChange = (_degree: number) => {
@@ -158,26 +158,26 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopAlphaChange = (_alpha: Alpha) => {
-    const updatedPalette = points.map((_palette) =>
-      activeColorId === _palette.id
+    const updatedPoints = points.map((_points) =>
+      activeColorId === _points.id
         ? {
-            ..._palette,
+            ..._points,
             alpha: _alpha,
           }
-        : _palette,
+        : _points,
     );
 
-    handleGradientChange(updatedPalette, degree);
+    handleGradientChange(updatedPoints, degree);
   };
 
   const handleStopColorChange = (_updateHex: string) => {
-    const updatedPalette = points.map((_palette) =>
-      activeColorId === _palette.id
+    const updatedPalette = points.map((_points) =>
+      activeColorId === _points.id
         ? {
-            ..._palette,
+            ..._points,
             color: hexToRgb(_updateHex),
           }
-        : _palette,
+        : _points,
     );
 
     handleGradientChange(updatedPalette, degree);

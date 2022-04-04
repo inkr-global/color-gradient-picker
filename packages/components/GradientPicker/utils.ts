@@ -5,12 +5,12 @@ const compare = (
   { offset: offset2 }: Points,
 ) => offset1 - offset2;
 
-export const sortPalette = (palette: Points[]) => {
-  return palette.sort(compare);
+export const sortPoints = (points: Points[]) => {
+  return points.sort(compare);
 };
 
 export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
-  const sortedPalette = sortPalette(gradient.points);
+  const sortedPalette = sortPoints(gradient.points);
   const linearGradientColors = `linear-gradient(
     ${gradient.degree}deg,
     ${sortedPalette
