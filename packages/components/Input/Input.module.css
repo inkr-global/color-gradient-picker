@@ -5,7 +5,7 @@
 }
 
 .container:hover .wrapper {
-  border: 1px solid #262626;
+  border: 1px solid var(--cgp-input-hover-color);
 }
 
 .wrapper {
@@ -18,7 +18,7 @@
 }
 
 .container .wrapper.isFocus {
-  border: 1px solid var(--color-gradient-picker-input-focus-color);
+  border: 1px solid var(--cgp-input-focus-color);
 }
 
 .container .extra_component {
@@ -37,7 +37,7 @@
   border: none;
   line-height: 1.5;
   background-color: transparent;
-  color: var(--color-gradient-picker-text-color);
+  color: var(--cgp-text-color);
   border: none;
   outline: none;
 }

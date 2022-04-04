@@ -1,12 +1,16 @@
 :root {
-  --color-gradient-picker-font-family: -apple-system, blinkmacsystemfont,
-    "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --color-gradient-picker-base-font-size: 14px;
-  --color-gradient-picker-text-color: rgba(255, 255, 255, 0.65);
-  --color-gradient-picker-value-picker-width: 12px;
-  --color-gradient-picker-value-picker-border: 2px;
-  --color-gradient-picker-input-focus-color: #a58d12;
+  --cgp-font-family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto,
+    "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --cgp-base-font-size: 14px;
+  --cgp-text-color: rgba(255, 255, 255, 0.65);
+
+  /* slider picker */
+  --cgp-value-picker-width: 12px;
+  --cgp-value-picker-border: 2px;
+
+  --cgp-input-focus-color: #a58d12;
+  --cgp-input-hover-color: #262626;
 }
 
 .wrapper,
@@ -15,9 +19,9 @@
 }
 
 .wrapper {
-  font-family: var(--color-gradient-picker-font-family);
-  font-size: var(--color-gradient-picker-base-font-size);
-  color: var(--color-gradient-picker-text-color);
+  font-family: var(--cgp-font-family);
+  font-size: var(--cgp-base-font-size);
+  color: var(--cgp-text-color);
   position: relative;
 }
 

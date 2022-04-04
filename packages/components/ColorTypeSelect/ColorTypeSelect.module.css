@@ -10,7 +10,7 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: var(--color-gradient-picker-text-color);
-  font-size: var(--color-gradient-picker-base-font-size);
+  color: var(--cgp-text-color);
+  font-size: var(--cgp-base-font-size);
   margin-left: 8px;
 }

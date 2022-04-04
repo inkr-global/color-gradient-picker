@@ -17,8 +17,8 @@
   top: 0;
   left: 0;
 
-  width: var(--color-gradient-picker-value-picker-width);
-  height: var(--color-gradient-picker-value-picker-width);
+  width: var(--cgp-value-picker-width);
+  height: var(--cgp-value-picker-width);
   box-sizing: border-box;
 
   border: 2px solid #ffffff;
