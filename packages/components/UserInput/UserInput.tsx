@@ -1,4 +1,4 @@
-import { COLOR_TYPE, ColorValue } from "../../types";
+import { ColorValue } from "../../types";
 import { Hex } from "../../utils/colorTypes";
 import Input from "../Input";
 import { ALPHA_VALUE, DEFAULT_HEX } from "../Input/constants";
@@ -44,7 +44,7 @@ const UserInput = (props: UserInputProps) => {
 
   return (
     <>
-      {type === COLOR_TYPE.SOLID && (
+      {type === "solid" && (
         <Input.Hex
           {...rest}
           inputWidth={inputWidth}
@@ -54,7 +54,7 @@ const UserInput = (props: UserInputProps) => {
         />
       )}
 
-      {type === COLOR_TYPE.LINEAR && (
+      {type === "linear" && (
         <Input.Gradient {...rest} inputWidth={inputWidth} value={gradient} />
       )}
     </>

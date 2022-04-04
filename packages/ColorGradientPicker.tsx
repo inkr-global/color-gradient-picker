@@ -15,7 +15,7 @@ import UserInput from "./components/UserInput";
 import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
-import { COLOR_TYPE, ColorGradientPickerProps } from "./types";
+import { ColorGradientPickerProps,ColorType } from "./types";
 import { Hex } from "./utils/colorTypes";
 import sanitizeHex from "./utils/sanitizeHex";
 
@@ -39,7 +39,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     degree: DEFAULT_DEGREE,
     palette: DEFAULT_PALETTE,
   };
-  const propColorType = color?.type || COLOR_TYPE.SOLID;
+  const propColorType = color?.type || "solid";
 
   // ------------------------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     });
   };
 
-  const handleSetColorType = (_type: COLOR_TYPE) => {
+  const handleSetColorType = (_type: ColorType) => {
     onChange({
       ...color,
       type: _type,
@@ -115,14 +115,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             onChange={handleSetColorType}
           />
 
-          {propColorType === COLOR_TYPE.LINEAR && (
+          {propColorType === "linear" && (
             <GradientPicker
               gradient={linearGradient}
               onLinearGradientChange={handleLinearGradientChange}
             />
           )}
 
-          {propColorType === COLOR_TYPE.SOLID && (
+          {propColorType === "solid" && (
             <ColorPicker
               hex={solidColor}
               alpha={totalAlpha}
