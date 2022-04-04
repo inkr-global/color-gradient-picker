@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Gradient } from "../GradientPicker/types";
+import { Gradient } from "../../types";
 import { getLinearGradientBackgroundCss, noop } from "../GradientPicker/utils";
 import { DEFAULT_HEX } from "./constants";
 import { Input } from "./Input";

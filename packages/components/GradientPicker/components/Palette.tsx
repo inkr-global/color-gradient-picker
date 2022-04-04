@@ -3,11 +3,11 @@ import { PalletteProps } from "../types";
 import { getLinearGradientBackgroundCss } from "../utils";
 
 const Palette = (props: PalletteProps) => {
-  const { palette, degree, onAddColor, disabled } = props;
+  const { points, degree, onAddColor, disabled } = props;
 
   // ------------------------------------------------------------------------------------------
   const linearGradientColors = getLinearGradientBackgroundCss({
-    palette,
+    points,
     degree,
   });
 

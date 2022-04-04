@@ -42,7 +42,7 @@ export interface StopHoldersProps {
 }
 
 export interface PalletteProps {
-  palette: PointsColor[];
+  points: PointsColor[];
   degree: number;
   onAddColor: (offset: number) => void;
   disabled?: boolean;

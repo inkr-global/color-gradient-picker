@@ -204,7 +204,7 @@ const GradientPicker = (props: GradientPickerProps) => {
           <Palette
             onAddColor={handleColorAdd}
             degree={degree}
-            palette={points}
+            points={points}
             disabled={stopsHolderDisabled}
           />
           <ColorStopsHolder
