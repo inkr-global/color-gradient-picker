@@ -45,8 +45,8 @@ const ColorStop = (props: ColorStopProps) => {
       document.removeEventListener("keydown", handler);
     };
 
-  // do not check onDelete
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // do not check onDelete
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, id]);
 
   const rgba = `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
@@ -60,7 +60,12 @@ const ColorStop = (props: ColorStopProps) => {
         backgroundColor: rgba,
         opacity: alpha,
       }}
+      // TODO check tsc
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       onMouseDown={drag}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       onTouchStart={drag}
       title={rgba}
       tabIndex={0}

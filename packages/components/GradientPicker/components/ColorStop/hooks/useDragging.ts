@@ -1,4 +1,15 @@
-import { DragEventHandler, TouchEventHandler, useEffect, useRef, useState } from "react";
+// TODO check tsc
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
+import {
+  DragEventHandler,
+  TouchEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import { noop } from "../../../utils";
 import { EVENTS } from "./constants";
