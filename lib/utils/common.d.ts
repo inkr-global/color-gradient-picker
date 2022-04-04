@@ -22,6 +22,10 @@ export declare function getHueFromPosition(x: number, width: number): number;
  */
 export declare function getAlphaFromPosition(x: number, width: number): number;
 /**
+ * Get the alpha display value
+ */
+export declare function getAlphaDisplayValueFromAlpha(alpha: number): string;
+/**
  * Get the saturation and value from a given position on the SV slider
  * @param {number} x The x coordinate on the SV selector
  * @param {number} y The y coordinate on the SV selector

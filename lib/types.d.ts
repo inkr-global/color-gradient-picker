@@ -1,15 +1,15 @@
-import { PalletteColor } from "./components/GradientPicker/types";
+import { PointsColor } from "./components/GradientPicker/types";
 import { InputProps } from "./components/Input/types";
 import { Hex } from "./utils/colorTypes";
 export declare type ColorType = "linear" | "solid";
-export interface GradientColor {
+export interface Gradient {
     degree: number;
-    palette: PalletteColor[];
+    points: PointsColor[];
 }
 export interface ColorValue {
     alpha?: number;
     solid?: Hex;
-    gradient?: GradientColor;
+    gradient?: Gradient;
     type?: ColorType;
 }
 export interface ColorGradientPickerProps extends Omit<InputProps, "onChange"> {

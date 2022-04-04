@@ -1,6 +1,10 @@
 export declare const KEYS: {
     ENTER: string;
 };
+export declare const ALPHA_DISPLAY_VALUE: {
+    MAX: number;
+    MIN: number;
+};
 export declare const ALPHA_VALUE: {
     MAX: number;
     MIN: number;

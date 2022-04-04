@@ -1,3 +1,4 @@
+import { Gradient } from "../../types";
 import { Rgb } from "../../utils/colorTypes";
 export interface GradientStop {
     id: number;
@@ -12,7 +13,7 @@ export interface GradientLimits {
     max: number;
     drop?: number;
 }
-export interface PalletteColor {
+export interface PointsColor {
     id: number;
     color: Rgb;
     alpha: number;
@@ -35,14 +36,10 @@ export interface StopHoldersProps {
     onDragEnd: (id: number) => void;
 }
 export interface PalletteProps {
-    palette: PalletteColor[];
+    palette: PointsColor[];
     degree: number;
     onAddColor: (offset: number) => void;
     disabled?: boolean;
-}
-export interface Gradient {
-    degree: number;
-    palette: PalletteColor[];
 }
 export interface GradientPickerProps {
     gradient: Gradient;
