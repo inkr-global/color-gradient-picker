@@ -1,4 +1,4 @@
-import { PalletteColor } from "./components/GradientPicker/types";
+import { PointsColor } from "./components/GradientPicker/types";
 import { InputProps } from "./components/Input/types";
 import { Hex } from "./utils/colorTypes";
 
@@ -6,7 +6,7 @@ export type ColorType = "linear" | "solid";
 
 export interface Gradient {
   degree: number;
-  points: PalletteColor[];
+  points: PointsColor[];
 }
 
 export interface ColorValue {

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { CSSProperties, useCallback, useRef, useState } from "react";
 
-import { getAlphaFromPosition } from "../../../../utils/common";
+import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "../../../../utils/common";
 import hexToRgb from "../../../../utils/hexToRgb";
 import s from "./AlphaSlider.module.css";
 
@@ -95,7 +95,7 @@ const AlphaSlider = (props: AlphaSliderProps) => {
       };
 
   const sliderStyle: CSSProperties = {
-    left: `${alpha}%`,
+    left: getAlphaDisplayValueFromAlpha(alpha),
     backgroundColor: hex,
   };
 

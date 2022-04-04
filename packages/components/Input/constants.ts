@@ -2,8 +2,13 @@ export const KEYS = {
   ENTER: "Enter",
 };
 
-export const ALPHA_VALUE = {
+export const ALPHA_DISPLAY_VALUE = {
   MAX: 100,
+  MIN: 0,
+};
+
+export const ALPHA_VALUE = {
+  MAX: 1,
   MIN: 0,
 };
 

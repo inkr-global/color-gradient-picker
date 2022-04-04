@@ -4,7 +4,7 @@ import hexToRgb from "../../utils/hexToRgb";
 import rgbToHex from "../../utils/rgbToHex";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
-import { ALPHA_VALUE } from "../Input/constants";
+import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
 import ColorStopsHolder from "./components/ColorStopsHolder";
 import Palette from "./components/Palette";
 import {
@@ -15,25 +15,25 @@ import {
   HALF_STOP_WIDTH,
 } from "./constants";
 import s from "./GradientPicker.module.css";
-import { GradientPickerProps, PalletteColor } from "./types";
+import { GradientPickerProps, PointsColor } from "./types";
 import { noop, sortPalette } from "./utils";
 
 // ------------------------------------------------------------------------------------------
 
-const nextColorId = (palette: PalletteColor[]) =>
+const nextColorId = (palette: PointsColor[]) =>
   Math.max(...palette.map(({ id }) => id)) + 1;
 
-const mapIdToPalette = (palette: PalletteColor[]) =>
-  palette.map((color, index) => ({
+const mapIdToPoints = (points: PointsColor[]) =>
+  points.map((color, index) => ({
     ...color,
     id: color.id || index + 1,
   }));
 
-const mapPaletteToStops = ({
+const mapPointsToStops = ({
   palette,
   activeId,
 }: {
-  palette: PalletteColor[];
+  palette: PointsColor[];
   activeId: number;
 }) =>
   palette.map((color) => {
@@ -45,7 +45,7 @@ const mapPaletteToStops = ({
     };
   });
 
-const getPaletteColor = (_palette: PalletteColor[], _id: number) => {
+const getPointsColor = (_palette: PointsColor[], _id: number) => {
   const color = _palette.find((_color) => _color.id === _id) || _palette[0];
   return {
     ...color,
@@ -64,12 +64,12 @@ const GradientPicker = (props: GradientPickerProps) => {
     maxStops = DEFAULT_MAX_STOPS,
   } = props;
 
-  const { palette: paletteProp, degree } = gradient;
+  const { points: pointsProp, degree } = gradient;
 
-  const palette = mapIdToPalette(paletteProp);
+  const points = mapIdToPoints(pointsProp);
 
   // ------------------------------------------------------------------------------------------
-  const [defaultActiveColor] = palette;
+  const [defaultActiveColor] = points;
   const [activeColorId, setActiveColorId] = useState(defaultActiveColor.id);
 
   // ------------------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-  const handleGradientChange = (_palette: PalletteColor[], _degree: number) => {
+  const handleGradientChange = (_palette: PointsColor[], _degree: number) => {
     const sortedPalette = sortPalette(_palette).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
@@ -105,31 +105,31 @@ const GradientPicker = (props: GradientPickerProps) => {
 
     onLinearGradientChange({
       degree: _degree,
-      palette: sortedPalette,
+      points: sortedPalette,
     });
   };
 
   const handleColorAdd = (offset: number) => {
-    if (palette.length >= maxStops) return;
+    if (points.length >= maxStops) return;
 
-    const { color } = getPaletteColor(palette, activeColorId);
-    const newStop: PalletteColor = {
-      id: nextColorId(palette),
+    const { color } = getPointsColor(points, activeColorId);
+    const newStop: PointsColor = {
+      id: nextColorId(points),
       offset: offset / DEFAULT_PALETTE_WIDTH,
       color,
       alpha: ALPHA_VALUE.MAX,
     };
 
-    const updatedPalette = [...palette, newStop];
+    const updatedPalette = [...points, newStop];
 
     setActiveColorId(newStop.id);
     handleGradientChange(updatedPalette, degree);
   };
 
   const handleColorDelete = (id: number) => {
-    if (palette.length <= minStops) return;
+    if (points.length <= minStops) return;
 
-    const updatedPalette = palette.filter((c) => c.id !== id);
+    const updatedPalette = points.filter((c) => c.id !== id);
     const activeId = updatedPalette.reduce(
       (a, x) => (x.offset < a.offset ? x : a),
       updatedPalette[0],
@@ -140,7 +140,7 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopPosChange = (id: number, offset: number) => {
-    const updatedPalette = palette.map((_palette) =>
+    const updatedPalette = points.map((_palette) =>
       id === _palette.id
         ? {
             ..._palette,
@@ -153,11 +153,11 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleDegreeChange = (_degree: number) => {
-    handleGradientChange(paletteProp, _degree);
+    handleGradientChange(pointsProp, _degree);
   };
 
   const handleStopAlphaChange = (_alpha: number) => {
-    const updatedPalette = palette.map((_palette) =>
+    const updatedPalette = points.map((_palette) =>
       activeColorId === _palette.id
         ? {
             ..._palette,
@@ -170,7 +170,7 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopColorChange = (_updateHex: string) => {
-    const updatedPalette = palette.map((_palette) =>
+    const updatedPalette = points.map((_palette) =>
       activeColorId === _palette.id
         ? {
             ..._palette,
@@ -184,10 +184,10 @@ const GradientPicker = (props: GradientPickerProps) => {
 
   // ------------------------------------------------------------------------------------------
 
-  const stopsHolderDisabled = palette.length >= maxStops;
+  const stopsHolderDisabled = points.length >= maxStops;
 
-  const activeColor = palette.find((item) => item.id === activeColorId);
-  const alpha = activeColor?.alpha || ALPHA_VALUE.MAX;
+  const activeColor = points.find((item) => item.id === activeColorId);
+  const alpha = activeColor?.alpha || ALPHA_DISPLAY_VALUE.MAX;
   const { red, green, blue } = activeColor?.color || {
     red: 0,
     green: 0,
@@ -204,12 +204,12 @@ const GradientPicker = (props: GradientPickerProps) => {
           <Palette
             onAddColor={handleColorAdd}
             degree={degree}
-            palette={palette}
+            palette={points}
             disabled={stopsHolderDisabled}
           />
           <ColorStopsHolder
-            stops={mapPaletteToStops({
-              palette,
+            stops={mapPointsToStops({
+              palette: points,
               activeId: activeColorId,
             })}
             limits={limits}

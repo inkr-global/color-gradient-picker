@@ -37,9 +37,16 @@ export function getAlphaFromPosition(x: number, width: number): number {
   }
 
   const percentage = x / width;
-  const alpha = Math.max(Math.min(percentage, 1), 0) * 100;
+  const alpha = Math.max(Math.min(percentage, 1), 0);
 
-  return Math.round(alpha);
+  return alpha;
+}
+
+/**
+ * Get the alpha display value
+ */
+export function getAlphaDisplayValueFromAlpha(alpha: number): string {
+  return `${Math.round(alpha * 100)}%`;
 }
 
 /**

@@ -16,7 +16,7 @@ export interface GradientLimits {
   drop?: number;
 }
 
-export interface PalletteColor {
+export interface PointsColor {
   id: number;
   color: Rgb;
   alpha: number;
@@ -42,7 +42,7 @@ export interface StopHoldersProps {
 }
 
 export interface PalletteProps {
-  palette: PalletteColor[];
+  palette: PointsColor[];
   degree: number;
   onAddColor: (offset: number) => void;
   disabled?: boolean;

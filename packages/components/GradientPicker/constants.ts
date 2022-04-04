@@ -1,3 +1,5 @@
+import { ALPHA_VALUE } from "../Input/constants";
+
 const STOP_WIDTH = 14;
 
 export const HALF_STOP_WIDTH = STOP_WIDTH / 2;
@@ -21,7 +23,7 @@ export const DEFAULT_PALETTE = [
       green: 0,
       blue: 0,
     },
-    alpha: 100,
+    alpha: ALPHA_VALUE.MAX,
   },
   {
     id: 2,
@@ -31,7 +33,7 @@ export const DEFAULT_PALETTE = [
       green: 255,
       blue: 255,
     },
-    alpha: 100,
+    alpha: ALPHA_VALUE.MAX,
   },
 ];
 

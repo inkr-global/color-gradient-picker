@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { ALPHA_VALUE, KEYS } from "./constants";
+import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
+import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
 import { Input } from "./Input";
 import s from "./Input.Alpha.module.css";
 import { InputProps } from "./types";
@@ -21,31 +22,33 @@ export function Alpha(
 ) {
   const { value, onChange, onInputBlur, ...rest } = props;
 
-  const [valueState, setValueState] = useState<string>(getAlphaString(value));
+  const [displayAlpha, setDisplayAlpha] = useState<string>(
+    getAlphaDisplayValueFromAlpha(value),
+  );
 
   // -----------------------------------------------------------------------
   useEffect(() => {
-    setValueState(getAlphaString(value));
+    setDisplayAlpha(getAlphaDisplayValueFromAlpha(value));
   }, [value]);
 
   // -----------------------------------------------------------------------
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value.replace(ALPHA_SYMBOL, ""));
     _value = Math.round(_value);
-    if (_value < ALPHA_VALUE.MIN) _value = ALPHA_VALUE.MIN;
-    if (_value > ALPHA_VALUE.MAX) _value = ALPHA_VALUE.MAX;
-    if (isNaN(_value)) _value = ALPHA_VALUE.MIN;
+    if (_value < ALPHA_DISPLAY_VALUE.MIN) _value = ALPHA_DISPLAY_VALUE.MIN;
+    if (_value > ALPHA_DISPLAY_VALUE.MAX) _value = ALPHA_DISPLAY_VALUE.MAX;
+    if (isNaN(_value)) _value = ALPHA_DISPLAY_VALUE.MIN;
 
-    setValueState(getAlphaString(_value));
+    setDisplayAlpha(getAlphaString(_value));
   };
 
   const _onOutsideChange = () => {
     // remove % if the valueState has it
-    const _valueState = parseInt(
-      (valueState?.toString() || ALPHA_VALUE.MAX.toString())?.replace(ALPHA_SYMBOL, ""),
-    );
-    onChange(_valueState);
-    setValueState(getAlphaString(_valueState));
+    const _alphaDisplayNumber =
+      parseInt(displayAlpha.replace(ALPHA_SYMBOL, "")) / 100;
+
+    onChange(_alphaDisplayNumber);
+    setDisplayAlpha(getAlphaDisplayValueFromAlpha(_alphaDisplayNumber));
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -66,7 +69,7 @@ export function Alpha(
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
-      value={valueState}
+      value={displayAlpha}
       inputClassName={s.alpha_input}
     />
   );
