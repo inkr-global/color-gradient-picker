@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import typescript from "rollup-plugin-typescript2";
+import { uglify } from "rollup-plugin-uglify";
 
 const packageJson = require("./package.json");
 
@@ -24,9 +25,13 @@ export default {
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript({ useTsconfigDeclarationDir: true }),
+    typescript({
+      useTsconfigDeclarationDir: false,
+      tsconfigOverride: { compilerOptions: { declaration: true } },
+    }),
     postcss({
       extensions: [".css"],
     }),
+    process.env.NODE_ENV === "production" && uglify(),
   ],
 };
