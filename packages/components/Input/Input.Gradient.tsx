@@ -1,4 +1,4 @@
-import { Gradient } from "../../types";
+import { Gradient } from "../../colorTypes";
 import { getLinearGradientBackgroundCss, noop } from "../GradientPicker/utils";
 import { DEFAULT_HEX } from "./constants";
 import { Input } from "./Input";

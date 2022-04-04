@@ -1,16 +1,10 @@
-import { PointsColor } from "./components/GradientPicker/types";
+import { Alpha, Gradient, Hex } from "./colorTypes";
 import { InputProps } from "./components/Input/types";
-import { Hex } from "./utils/colorTypes";
 
 export type ColorType = "linear" | "solid";
 
-export interface Gradient {
-  degree: number;
-  points: PointsColor[];
-}
-
 export interface ColorValue {
-  alpha?: number;
+  alpha?: Alpha;
   solid?: Hex;
   gradient?: Gradient;
   type?: ColorType;

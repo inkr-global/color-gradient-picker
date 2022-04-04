@@ -1,14 +1,15 @@
 import clsx from "clsx";
 import React, { CSSProperties, useCallback, useRef, useState } from "react";
 
-import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "../../../../utils/common";
-import hexToRgb from "../../../../utils/hexToRgb";
+import hexToRgb from "../../../../color-utils/hexToRgb";
+import { Alpha } from "../../../../colorTypes";
 import s from "./AlphaSlider.module.css";
+import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "./utils";
 
 type AlphaSliderProps = {
-  alpha: number;
+  alpha: Alpha;
   hex: string;
-  onChange: (alpha: number) => void;
+  onChange: (alpha: Alpha) => void;
   className?: string;
 };
 

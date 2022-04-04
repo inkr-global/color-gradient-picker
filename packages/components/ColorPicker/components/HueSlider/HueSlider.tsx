@@ -1,9 +1,25 @@
 import clsx from "clsx";
 import React, { useCallback, useRef, useState } from "react";
 
-import { getHueFromPosition } from "../../../../utils/common";
-import hsvToHex from "../../../../utils/hsvToHex";
+import hsvToHex from "../../../../color-utils/hsvToHex";
 import s from "./HueSlider.module.css";
+
+/**
+ * Get the hue value from a given position on the hue slider
+ * @param {number} x The x coordinate on the hue slider
+ * @param {number} width The width of the hue slider
+ * @returns {number} The hue based on the x position
+ */
+function getHueFromPosition(x: number, width: number): number {
+  if (!width) {
+    return 0;
+  }
+
+  const percentage = x / width;
+  const hue = Math.max(Math.min(percentage, 1), 0) * 360;
+
+  return hue;
+}
 
 type HueSliderProps = {
   hue: number;

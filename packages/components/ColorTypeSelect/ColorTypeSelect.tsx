@@ -1,4 +1,4 @@
-import { ColorType } from "../../types";
+import { ColorType } from "../../ColorGradientPicker.types";
 import s from "./ColorTypeSelect.module.css";
 
 interface ColorTypeSelectProps {

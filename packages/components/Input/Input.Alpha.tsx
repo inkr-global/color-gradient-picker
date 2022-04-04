@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
+import { Alpha as AlphaValue } from "../../colorTypes";
+import { getAlphaDisplayValueFromAlpha } from "../ColorPicker/components/AlphaSlider/utils";
 import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
 import { Input } from "./Input";
 import s from "./Input.Alpha.module.css";
@@ -12,7 +13,7 @@ function InputAlphaInfo() {
 
 const ALPHA_SYMBOL = "%";
 
-const getAlphaString = (alpha: number) => `${alpha}${ALPHA_SYMBOL}`;
+const getAlphaString = (alpha: AlphaValue) => `${alpha}${ALPHA_SYMBOL}`;
 
 export function Alpha(
   props: Omit<InputProps, "onChange" | "info" | "value"> & {

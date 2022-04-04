@@ -1,4 +1,4 @@
-import { Hsv } from './colorTypes';
+import { Hsv } from '../colorTypes';
 
 /**
  * Takes given red, green, and blue values and returns the HSV representation

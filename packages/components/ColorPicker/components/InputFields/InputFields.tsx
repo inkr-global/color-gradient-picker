@@ -1,14 +1,14 @@
-import { Hex, Hsv, Rgb } from "../../../../utils/colorTypes";
-import hexToHsv from "../../../../utils/hexToHsv";
+import hexToHsv from "../../../../color-utils/hexToHsv";
+import { Alpha, Hex, Hsv, Rgb } from "../../../../colorTypes";
 import Input from "../../../Input";
 import s from "./InputFields.module.css";
 
 interface InputFieldsProps {
   hex: Hex;
-  alpha: number;
+  alpha: Alpha;
   rgb: Rgb;
   setColor: (hex: Hex, hsv: Hsv) => void;
-  setAlpha: (alpha: number) => void;
+  setAlpha: (alpha: Alpha) => void;
   setColorFromRgb: (rgb: Rgb) => void;
 }
 

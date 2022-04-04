@@ -1,12 +1,11 @@
-import { Gradient } from "../../types";
-import { PointsColor } from "./types";
+import { Gradient, Points } from "../../colorTypes";
 
 const compare = (
-  { offset: offset1 }: PointsColor,
-  { offset: offset2 }: PointsColor,
+  { offset: offset1 }: Points,
+  { offset: offset2 }: Points,
 ) => offset1 - offset2;
 
-export const sortPalette = (palette: PointsColor[]) => {
+export const sortPalette = (palette: Points[]) => {
   return palette.sort(compare);
 };
 

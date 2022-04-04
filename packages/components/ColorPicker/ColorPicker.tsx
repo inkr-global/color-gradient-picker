@@ -1,13 +1,12 @@
 import cn from "clsx";
 import { useEffect, useRef, useState } from "react";
 
-import { Hex, Hsv, Rgb } from "../../utils/colorTypes";
-import { openNativeEyeDropper } from "../../utils/common";
-import hexToHsv from "../../utils/hexToHsv";
-import hexToRgb from "../../utils/hexToRgb";
-import hsvToHex from "../../utils/hsvToHex";
-import rgbToHex from "../../utils/rgbToHex";
-import rgbToHsv from "../../utils/rgbToHsv";
+import hexToHsv from "../../color-utils/hexToHsv";
+import hexToRgb from "../../color-utils/hexToRgb";
+import hsvToHex from "../../color-utils/hsvToHex";
+import rgbToHex from "../../color-utils/rgbToHex";
+import rgbToHsv from "../../color-utils/rgbToHsv";
+import { Alpha, Hex, Hsv, Rgb } from "../../colorTypes";
 import s from "./ColorPicker.module.css";
 import AlphaSlider from "./components/AlphaSlider";
 import EyeDropperBtn from "./components/EyeDropper";
@@ -15,11 +14,31 @@ import HueSlider from "./components/HueSlider";
 import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 
+/**
+ * Get the color from EyeDropper API
+ * @returns {string} Hex color
+ */
+
+const openNativeEyeDropper = async () => {
+  const abortController = new AbortController();
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore this is new EyeDropper API
+  const eyeDropper = new EyeDropper();
+
+  try {
+    const result = await eyeDropper.open({ signal: abortController.signal });
+    return result.sRGBHex;
+  } catch (e) {
+    return null;
+  }
+};
+
 interface ColorPickerProps {
   hex: Hex;
-  alpha: number;
+  alpha: Alpha;
   onColorChange: (updatedHex: Hex) => void;
-  onAlphaChange: (alpha: number) => void;
+  onAlphaChange: (alpha: Alpha) => void;
 }
 
 const ColorPicker = (props: ColorPickerProps) => {
@@ -41,7 +60,7 @@ const ColorPicker = (props: ColorPickerProps) => {
     hsvRef.current = hexToHsv(hex);
     hexRef.current = hex;
     setHexState(hex);
-  }, [hex])
+  }, [hex]);
 
   // ------------------------------------------------------------------------------------------
 

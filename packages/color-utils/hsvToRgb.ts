@@ -1,4 +1,4 @@
-import { Rgb } from './colorTypes';
+import { Rgb } from '../colorTypes';
 
 /**
  * Takes given hue, saturation and value and returns the respective RGB values

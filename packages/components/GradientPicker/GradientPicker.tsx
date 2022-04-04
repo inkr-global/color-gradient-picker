@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 
-import hexToRgb from "../../utils/hexToRgb";
-import rgbToHex from "../../utils/rgbToHex";
+import hexToRgb from "../../color-utils/hexToRgb";
+import rgbToHex from "../../color-utils/rgbToHex";
+import { Alpha, Points } from "../../colorTypes";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
 import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
@@ -15,15 +16,15 @@ import {
   HALF_STOP_WIDTH,
 } from "./constants";
 import s from "./GradientPicker.module.css";
-import { GradientPickerProps, PointsColor } from "./types";
+import { GradientPickerProps } from "./types";
 import { noop, sortPalette } from "./utils";
 
 // ------------------------------------------------------------------------------------------
 
-const nextColorId = (palette: PointsColor[]) =>
+const nextColorId = (palette: Points[]) =>
   Math.max(...palette.map(({ id }) => id)) + 1;
 
-const mapIdToPoints = (points: PointsColor[]) =>
+const mapIdToPoints = (points: Points[]) =>
   points.map((color, index) => ({
     ...color,
     id: color.id || index + 1,
@@ -33,7 +34,7 @@ const mapPointsToStops = ({
   palette,
   activeId,
 }: {
-  palette: PointsColor[];
+  palette: Points[];
   activeId: number;
 }) =>
   palette.map((color) => {
@@ -45,7 +46,7 @@ const mapPointsToStops = ({
     };
   });
 
-const getPointsColor = (_palette: PointsColor[], _id: number) => {
+const getPointsColor = (_palette: Points[], _id: number) => {
   const color = _palette.find((_color) => _color.id === _id) || _palette[0];
   return {
     ...color,
@@ -93,7 +94,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-  const handleGradientChange = (_palette: PointsColor[], _degree: number) => {
+  const handleGradientChange = (_palette: Points[], _degree: number) => {
     const sortedPalette = sortPalette(_palette).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
@@ -113,7 +114,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     if (points.length >= maxStops) return;
 
     const { color } = getPointsColor(points, activeColorId);
-    const newStop: PointsColor = {
+    const newStop: Points = {
       id: nextColorId(points),
       offset: offset / DEFAULT_PALETTE_WIDTH,
       color,
@@ -156,7 +157,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     handleGradientChange(pointsProp, _degree);
   };
 
-  const handleStopAlphaChange = (_alpha: number) => {
+  const handleStopAlphaChange = (_alpha: Alpha) => {
     const updatedPalette = points.map((_palette) =>
       activeColorId === _palette.id
         ? {

@@ -1,12 +1,36 @@
 import clsx from "clsx";
 import React, { useCallback, useRef, useState } from "react";
 
-import {
-  getSaturationValueFromPosition,
-  SaturationValue,
-} from "../../../../utils/common";
-import hsvToHex from "../../../../utils/hsvToHex";
+import hsvToHex from "../../../../color-utils/hsvToHex";
+import { SaturationValue } from "../../../../colorTypes";
 import s from "./SaturationPicker.module.css";
+
+/**
+ * Get the saturation and value from a given position on the SV slider
+ * @param {number} x The x coordinate on the SV selector
+ * @param {number} y The y coordinate on the SV selector
+ * @param {number} width The width of the SV selector
+ * @param {number} height The height of the SV selector
+ * @returns {SaturationValue} The saturation and value based on the position
+ */
+ function getSaturationValueFromPosition(
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+): SaturationValue {
+  const percentageX = !width ? 0 : x / width;
+  const percentageY = !height ? 0 : 1 - y / height;
+
+  const saturation = Math.max(Math.min(percentageX, 1), 0);
+  const value = Math.max(Math.min(percentageY, 1), 0);
+
+  return {
+    saturation,
+    value,
+  };
+}
+
 
 type SaturationPickerProps = {
   hue: number;

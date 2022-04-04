@@ -1,7 +1,13 @@
 import cn from "clsx";
 import { useCallback, useRef, useState } from "react";
 
+import sanitizeHex from "./color-utils/sanitizeHex";
 import s from "./ColorGradientPicker.module.css";
+import {
+  ColorGradientPickerProps,
+  ColorType,
+} from "./ColorGradientPicker.types";
+import { Alpha, Gradient, Hex } from "./colorTypes";
 import ColorPicker from "./components/ColorPicker";
 import ColorTypeSelect from "./components/ColorTypeSelect";
 import GradientPicker from "./components/GradientPicker";
@@ -11,12 +17,10 @@ import {
 } from "./components/GradientPicker/constants";
 import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
 import UserInput from "./components/UserInput";
-import { DEFAULT_CLASS_NAME } from "./constants";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
-import { ColorGradientPickerProps,ColorType, Gradient } from "./types";
-import { Hex } from "./utils/colorTypes";
-import sanitizeHex from "./utils/sanitizeHex";
+
+const DEFAULT_CLASS_NAME = "cgp";
 
 function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
@@ -71,7 +75,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     });
   };
 
-  const handleTotalAlphaChange = (_alpha: number) => {
+  const handleTotalAlphaChange = (_alpha: Alpha) => {
     onChange({
       ...color,
       alpha: _alpha,

@@ -1,4 +1,4 @@
-import { Hsv } from "./colorTypes";
+import { Hsv } from "../colorTypes";
 import hexToRgb from "./hexToRgb";
 import rgbToHsv from "./rgbToHsv";
 

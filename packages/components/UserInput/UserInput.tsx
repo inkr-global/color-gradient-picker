@@ -1,5 +1,5 @@
-import { ColorValue } from "../../types";
-import { Hex } from "../../utils/colorTypes";
+import { ColorValue } from "../../ColorGradientPicker.types";
+import { Alpha, Hex } from "../../colorTypes";
 import Input from "../Input";
 import { ALPHA_VALUE, DEFAULT_HEX } from "../Input/constants";
 import { InputProps } from "../Input/types";
@@ -8,7 +8,7 @@ import s from "./UserInput.module.css";
 interface UserInputProps extends InputProps {
   color: ColorValue;
   onSolidColorChange: (hex: Hex) => void;
-  onAlphaChange: (alpha: number) => void;
+  onAlphaChange: (alpha: Alpha) => void;
   hasAlphaInput?: boolean;
 }
 
