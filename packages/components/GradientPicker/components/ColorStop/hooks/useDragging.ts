@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { DragEventHandler, TouchEventHandler, useEffect, useRef, useState } from "react";
 
 import { noop } from "../../../utils";
 import { EVENTS } from "./constants";
@@ -37,7 +37,13 @@ const DRAG_HANDLERS = {
 
 const isTouch = (e: Event) => e.type === EVENTS.TOUCHSTART;
 
-const useDragging = ({ onDragStart, onDrag, onDragEnd }) => {
+interface UseDraggingParams {
+  onDragStart: DragEventHandler;
+  onDrag: DragEventHandler;
+  onDragEnd: DragEventHandler;
+}
+
+const useDragging = ({ onDragStart, onDrag, onDragEnd }: UseDraggingParams) => {
   const [dragging, setDragging] = useState(false);
 
   const dragContext = useRef<{ handler: typeof DRAG_HANDLERS }>({});
@@ -61,7 +67,7 @@ const useDragging = ({ onDragStart, onDrag, onDragEnd }) => {
     dragContext.current = {};
   };
 
-  const dragHandler = (e: MouseEvent) => {
+  const dragHandler: DragEventHandler | TouchEventHandler = (e: Dra) => {
     const handler = isTouch(e) ? DRAG_HANDLERS.TOUCH : DRAG_HANDLERS.MOUSE;
 
     handler.stop(e);

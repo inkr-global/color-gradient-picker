@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { DragEventHandler, useState } from "react";
 
+import { DEFAULT_STOP_REMOVAL_DROP } from "../../../constants";
 import { GradientLimits, GradientStop } from "../../../types";
 import useDragging from "./useDragging";
 
@@ -27,24 +28,22 @@ interface Params {
 const useStopDragging = ({
   limits,
   stop,
-  // initialPos,
   colorStopRef,
   onPosChange,
   onDragStart,
   onDragEnd,
   onDeleteColor,
 }: Params) => {
-  // const [posStart, setPosStart] = useState(initialPos);
   const [posStart, setPosStart] = useState(0);
 
-  const handleDrag = ({ clientX, clientY }) => {
+  const handleDrag: DragEventHandler = ({ clientX, clientY }) => {
     const { id, offset } = stop;
     const { min, max } = limits;
 
     // Removing if out of drop limit on Y axis.
     const top = getColorStopRefTop(colorStopRef);
-    if (Math.abs(clientY - top) > limits.drop) {
-      //deactivate();
+    if (Math.abs(clientY - top) > (limits.drop || DEFAULT_STOP_REMOVAL_DROP)) {
+      // deactivateEvent();
       return onDeleteColor(id);
     }
 
