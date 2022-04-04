@@ -1,5 +1,4 @@
-import { Gradient } from "../../types";
-import { PointsColor } from "./types";
-export declare const sortPalette: (palette: PointsColor[]) => PointsColor[];
+import { Gradient, Points } from "../../colorTypes";
+export declare const sortPalette: (palette: Points[]) => Points[];
 export declare const getLinearGradientBackgroundCss: (gradient: Gradient) => string;
 export declare const noop: () => undefined;

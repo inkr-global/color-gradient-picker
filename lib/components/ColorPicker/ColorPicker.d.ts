@@ -1,10 +1,10 @@
 /// <reference types="react" />
-import { Hex } from "../../utils/colorTypes";
+import { Alpha, Hex } from "../../colorTypes";
 interface ColorPickerProps {
     hex: Hex;
-    alpha: number;
+    alpha: Alpha;
     onColorChange: (updatedHex: Hex) => void;
-    onAlphaChange: (alpha: number) => void;
+    onAlphaChange: (alpha: Alpha) => void;
 }
 declare const ColorPicker: (props: ColorPickerProps) => JSX.Element;
 export default ColorPicker;

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { SaturationValue } from "../../../../utils/common";
+import { SaturationValue } from "../../../../colorTypes";
 declare type SaturationPickerProps = {
     hue: number;
     saturation: number;

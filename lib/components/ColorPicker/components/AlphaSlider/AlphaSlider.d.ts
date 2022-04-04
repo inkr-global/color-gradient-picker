@@ -1,8 +1,9 @@
 /// <reference types="react" />
+import { Alpha } from "../../../../colorTypes";
 declare type AlphaSliderProps = {
-    alpha: number;
+    alpha: Alpha;
     hex: string;
-    onChange: (alpha: number) => void;
+    onChange: (alpha: Alpha) => void;
     className?: string;
 };
 declare const AlphaSlider: (props: AlphaSliderProps) => JSX.Element;

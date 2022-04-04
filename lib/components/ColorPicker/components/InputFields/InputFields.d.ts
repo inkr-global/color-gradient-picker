@@ -1,11 +1,11 @@
 /// <reference types="react" />
-import { Hex, Hsv, Rgb } from "../../../../utils/colorTypes";
+import { Alpha, Hex, Hsv, Rgb } from "../../../../colorTypes";
 interface InputFieldsProps {
     hex: Hex;
-    alpha: number;
+    alpha: Alpha;
     rgb: Rgb;
     setColor: (hex: Hex, hsv: Hsv) => void;
-    setAlpha: (alpha: number) => void;
+    setAlpha: (alpha: Alpha) => void;
     setColorFromRgb: (rgb: Rgb) => void;
 }
 declare const InputFields: (props: InputFieldsProps) => JSX.Element;

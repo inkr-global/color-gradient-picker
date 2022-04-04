@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { ColorType } from "../../types";
+import { ColorType } from "../../ColorGradientPicker.types";
 interface ColorTypeSelectProps {
     value: ColorType;
     onChange: (value: ColorType) => void;
