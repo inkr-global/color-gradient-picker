@@ -22,7 +22,7 @@ import { noop, sortPoints } from "./utils";
 // ------------------------------------------------------------------------------------------
 
 const nextColorId = (palette: Point[]) =>
-  Math.max(...palette.map(({ id }) => id)) + 1;
+  Math.max(...palette.map(({ id }, index) => id || index)) + 1;
 
 const mapIdToPoints = (points: Point[]) =>
   points.map((color, index) => ({
@@ -125,7 +125,7 @@ const GradientPicker = (props: GradientPickerProps) => {
 
     const updatedPalette = [...points, newStop];
 
-    setActiveColorId(newStop.id);
+    setActiveColorId(newStop.id!);
     handleGradientChange(updatedPalette, degree);
   };
 

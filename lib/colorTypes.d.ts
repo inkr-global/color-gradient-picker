@@ -38,7 +38,7 @@ export declare type Cmyk = {
     black: number;
 };
 export interface Point {
-    id: number;
+    id?: number;
     red: number;
     green: number;
     blue: number;

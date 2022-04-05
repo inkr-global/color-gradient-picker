@@ -42,7 +42,7 @@ export type Cmyk = {
 };
 
 export interface Point {
-  id: number;
+  id?: number;
   red: number;
   green: number;
   blue: number;

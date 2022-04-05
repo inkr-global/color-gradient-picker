@@ -44,24 +44,24 @@ const useStopDragging = ({
     const top = getColorStopRefTop(colorStopRef);
     if (Math.abs(clientY - top) > (limits.drop || DEFAULT_STOP_REMOVAL_DROP)) {
       // deactivateEvent();
-      return onDeleteColor(id);
+      return onDeleteColor(id!);
     }
 
     // Limit movements
     const dragOffset = offset - posStart;
     const limitedPos = limitPos(dragOffset + clientX, min, max);
 
-    onPosChange(id, limitedPos);
+    onPosChange(id!, limitedPos);
   };
 
   const [drag] = useDragging({
     onDragStart: ({ clientX }) => {
       setPosStart(clientX);
 
-      onDragStart(stop.id);
+      onDragStart(stop.id!);
     },
     onDrag: handleDrag,
-    onDragEnd: () => onDragEnd(stop.id),
+    onDragEnd: () => onDragEnd(stop.id!),
   });
 
   return [drag];

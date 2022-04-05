@@ -35,7 +35,7 @@ const ColorStop = (props: ColorStopProps) => {
 
     const handler = (e: KeyboardEvent) => {
       if ((e.key === "Delete" || e.key === "Backspace") && isActive) {
-        onDeleteColor(id);
+        onDeleteColor(id!);
       }
     };
 

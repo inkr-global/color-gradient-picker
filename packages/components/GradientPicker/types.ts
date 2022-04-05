@@ -1,7 +1,6 @@
 import { Gradient, Point } from "../../colorTypes";
 
 export interface GradientStop extends Point {
-  id: number;
   isActive: boolean;
   pointX?: number;
 }

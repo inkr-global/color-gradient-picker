@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import ColorGradientPicker from "../../packages";
-import { ColorValue } from "../../packages/types";
+import { ColorValue } from "../../packages/ColorGradientPicker.types";
 import s from "./app.module.css";
 
 function App() {
