@@ -173,16 +173,16 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopColorChange = (_updateHex: string) => {
-    const updatedPalette = points.map((_points) =>
+    const updatedPoints: Point[] = points.map((_points) =>
       activeColorId === _points.id
         ? {
             ..._points,
-            color: hexToRgb(_updateHex),
+            ...hexToRgb(_updateHex),
           }
         : _points,
     );
 
-    handleGradientChange(updatedPalette, degree);
+    handleGradientChange(updatedPoints, degree);
   };
 
   // ------------------------------------------------------------------------------------------
