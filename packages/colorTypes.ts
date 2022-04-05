@@ -41,9 +41,11 @@ export type Cmyk = {
   black: number;
 };
 
-export interface Points {
+export interface Point {
   id: number;
-  color: Rgb;
+  red: number;
+  green: number;
+  blue: number;
   alpha: Alpha;
   offset: number;
 }
@@ -55,7 +57,7 @@ export type SaturationValue = {
 
 export interface Gradient {
   degree: number;
-  points: Points[];
+  points: Point[];
 }
 
 // Hex color: #000 or #fff ...

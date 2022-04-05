@@ -28,7 +28,7 @@ const ColorStop = (props: ColorStopProps) => {
     colorStopRef,
   });
 
-  const { offset, color, isActive, alpha, id } = stop;
+  const { offset, red, green, blue, isActive, alpha, id } = stop;
 
   useEffect(() => {
     if (typeof document === "undefined") return () => undefined;
@@ -49,7 +49,7 @@ const ColorStop = (props: ColorStopProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive, id]);
 
-  const rgba = `rgba(${color.red}, ${color.green}, ${color.blue}, ${alpha})`;
+  const rgba = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 
   return (
     <div

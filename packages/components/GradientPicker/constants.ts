@@ -18,21 +18,17 @@ export const DEFAULT_PALETTE = [
   {
     id: 1,
     offset: 0,
-    color: {
-      red: 0,
-      green: 0,
-      blue: 0,
-    },
+    red: 0,
+    green: 0,
+    blue: 0,
     alpha: ALPHA_VALUE.MAX,
   },
   {
     id: 2,
     offset: 1.0,
-    color: {
-      red: 255,
-      green: 255,
-      blue: 255,
-    },
+    red: 255,
+    green: 255,
+    blue: 255,
     alpha: ALPHA_VALUE.MAX,
   },
 ];

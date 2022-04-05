@@ -1,11 +1,11 @@
-import { Gradient, Points } from "../../colorTypes";
+import { Gradient, Point } from "../../colorTypes";
 
 const compare = (
-  { offset: offset1 }: Points,
-  { offset: offset2 }: Points,
+  { offset: offset1 }: Point,
+  { offset: offset2 }: Point,
 ) => offset1 - offset2;
 
-export const sortPoints = (points: Points[]) => {
+export const sortPoints = (points: Point[]) => {
   return points.sort(compare);
 };
 
@@ -15,7 +15,7 @@ export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
     ${gradient.degree}deg,
     ${sortedPalette
       .map(
-        ({ alpha, offset, color: { red, green, blue } }) =>
+        ({ alpha, offset, red, green, blue }) =>
           `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
       )
       .join(", ")}

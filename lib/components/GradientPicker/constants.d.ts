@@ -7,11 +7,9 @@ export declare const DEFAULT_MIN_STOPS = 2;
 export declare const DEFAULT_PALETTE: {
     id: number;
     offset: number;
-    color: {
-        red: number;
-        green: number;
-        blue: number;
-    };
+    red: number;
+    green: number;
+    blue: number;
     alpha: number;
 }[];
 export declare const DEFAULT_DEGREE = 90;

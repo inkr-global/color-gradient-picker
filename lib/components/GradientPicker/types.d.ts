@@ -1,9 +1,6 @@
-import { Alpha, Gradient, Points, Rgb } from "../../colorTypes";
-export interface GradientStop {
+import { Gradient, Point } from "../../colorTypes";
+export interface GradientStop extends Point {
     id: number;
-    color: Rgb;
-    alpha: Alpha;
-    offset: number;
     isActive: boolean;
     pointX?: number;
 }
@@ -29,7 +26,7 @@ export interface StopHoldersProps {
     onDragEnd: (id: number) => void;
 }
 export interface PalletteProps {
-    points: Points[];
+    points: Point[];
     degree: number;
     onAddColor: (offset: number) => void;
     disabled?: boolean;

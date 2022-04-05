@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 
 import hexToRgb from "../../color-utils/hexToRgb";
 import rgbToHex from "../../color-utils/rgbToHex";
-import { Alpha, Points } from "../../colorTypes";
+import { Alpha, Point } from "../../colorTypes";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
 import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
@@ -21,10 +21,10 @@ import { noop, sortPoints } from "./utils";
 
 // ------------------------------------------------------------------------------------------
 
-const nextColorId = (palette: Points[]) =>
+const nextColorId = (palette: Point[]) =>
   Math.max(...palette.map(({ id }) => id)) + 1;
 
-const mapIdToPoints = (points: Points[]) =>
+const mapIdToPoints = (points: Point[]) =>
   points.map((color, index) => ({
     ...color,
     id: color.id || index + 1,
@@ -34,7 +34,7 @@ const mapPointsToStops = ({
   palette,
   activeId,
 }: {
-  palette: Points[];
+  palette: Point[];
   activeId: number;
 }) =>
   palette.map((color) => {
@@ -46,7 +46,7 @@ const mapPointsToStops = ({
     };
   });
 
-const getPointsColor = (_points: Points[], _id: number) => {
+const getPointsColor = (_points: Point[], _id: number) => {
   const color = _points.find((_color) => _color.id === _id) || _points[0];
   return {
     ...color,
@@ -94,7 +94,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     }
   };
 
-  const handleGradientChange = (_points: Points[], _degree: number) => {
+  const handleGradientChange = (_points: Point[], _degree: number) => {
     const sortedPalette = sortPoints(_points).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
@@ -113,11 +113,13 @@ const GradientPicker = (props: GradientPickerProps) => {
   const handleColorAdd = (offset: number) => {
     if (points.length >= maxStops) return;
 
-    const { color } = getPointsColor(points, activeColorId);
-    const newStop: Points = {
+    const { red, green, blue } = getPointsColor(points, activeColorId);
+    const newStop: Point = {
       id: nextColorId(points),
       offset: offset / DEFAULT_PALETTE_WIDTH,
-      color,
+      red,
+      green,
+      blue,
       alpha: ALPHA_VALUE.MAX,
     };
 
@@ -189,7 +191,7 @@ const GradientPicker = (props: GradientPickerProps) => {
 
   const activeColor = points.find((item) => item.id === activeColorId);
   const alpha = activeColor?.alpha || ALPHA_DISPLAY_VALUE.MAX;
-  const { red, green, blue } = activeColor?.color || {
+  const { red, green, blue } = activeColor || {
     red: 0,
     green: 0,
     blue: 0,
