@@ -19,7 +19,6 @@ function App() {
       <ColorGradientPicker
         color={color}
         onChange={(_color) => setColor(_color)}
-        panelPlacement="top-right"
       />
     </div>
   );
