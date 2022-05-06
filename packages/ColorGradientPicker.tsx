@@ -32,10 +32,11 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     onChange,
     onInputFocus,
     colorPickingPanelClassName,
+    colorSelectType = "all",
     ...rest
   } = props;
 
-  // ------------------------------------------------------------------------------------------
+  // ------------------------------------------------------------------------------------------3
 
   const solidColor = sanitizeHex(color?.solid || DEFAULT_HEX);
   const totalAlpha = color?.alpha || ALPHA_VALUE.MAX;
@@ -114,10 +115,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
       {isOpenPicker && (
         <div className={cn(s.picking_panel, colorPickingPanelClassName)}>
-          <ColorTypeSelect
-            value={propColorType}
-            onChange={handleSetColorType}
-          />
+          {colorSelectType === "all" && (
+            <ColorTypeSelect
+              value={propColorType}
+              onChange={handleSetColorType}
+            />
+          )}
 
           {propColorType === "linear-gradient" && (
             <GradientPicker
