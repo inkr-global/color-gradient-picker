@@ -15,7 +15,7 @@ export interface UserInputProps extends InputProps {
     onAlphaChange: (alpha: Alpha) => void;
     hasAlphaInput?: boolean;
 }
-export interface ColorGradientPickerProps extends Omit<UserInputProps, "onChange" | "color" | "hasAlphaInput" | "style" | "value"> {
+export interface ColorGradientPickerProps extends Omit<UserInputProps, "onChange" | "onAlphaChange" | "onSolidColorChange" | "color" | "hasAlphaInput" | "style" | "value"> {
     color: ColorValue;
     onChange: (color: ColorValue) => void;
     panelPlacement?: panelPlacement;
@@ -25,4 +25,5 @@ export interface ColorGradientPickerProps extends Omit<UserInputProps, "onChange
     classNamePrefix?: string;
     className?: string;
     style?: CSSProperties;
+    panelStyle?: CSSProperties;
 }
