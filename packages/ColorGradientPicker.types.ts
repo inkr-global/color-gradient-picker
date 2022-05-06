@@ -6,7 +6,7 @@ import { InputProps } from "./components/Input/types";
 
 export type ColorType = "linear-gradient" | "solid";
 
-export type panelPlacement =
+export type PanelPlacement =
   | "top-right"
   | "top-left"
   | "bottom-right"
@@ -39,7 +39,7 @@ export interface ColorGradientPickerProps
   > {
   color: ColorValue;
   onChange: (color: ColorValue) => void;
-  panelPlacement?: panelPlacement;
+  panelPlacement?: PanelPlacement;
   colorSelectType?: ColorType | "all";
   colorPickingPanelClassName?: string;
   hasAlphaInput?: boolean;
