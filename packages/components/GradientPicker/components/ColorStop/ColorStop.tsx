@@ -1,10 +1,11 @@
 import clsx from "clsx";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 import { ColorStopProps } from "../../types";
 import { noop } from "../../utils";
 import s from "./ColorStop.module.css";
 import useStopDragging from "./hooks/useStopDragging";
+
 
 const ColorStop = (props: ColorStopProps) => {
   const {
@@ -19,35 +20,16 @@ const ColorStop = (props: ColorStopProps) => {
   const colorStopRef = useRef<HTMLDivElement>(null);
 
   const [drag] = useStopDragging({
-    stop,
-    limits,
-    onPosChange,
-    onDragStart,
-    onDragEnd,
-    onDeleteColor,
-    colorStopRef,
+    stop: stop,
+    limits: limits,
+    onPosChange: onPosChange,
+    onDragStart: onDragStart,
+    onDragEnd: onDragEnd,
+    onDeleteColor: onDeleteColor,
+    colorStopRef: colorStopRef,
   });
 
-  const { offset, red, green, blue, isActive, alpha, id } = stop;
-
-  useEffect(() => {
-    if (typeof document === "undefined") return () => undefined;
-
-    const handler = (e: KeyboardEvent) => {
-      if ((e.key === "Delete" || e.key === "Backspace") && isActive) {
-        onDeleteColor(id!);
-      }
-    };
-
-    document.addEventListener("keydown", handler);
-
-    return () => {
-      document.removeEventListener("keydown", handler);
-    };
-
-    // do not check onDelete
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive, id]);
+  const { offset, red, green, blue, isActive, alpha } = stop;
 
   const rgba = `rgba(${red}, ${green}, ${blue}, ${alpha})`;
 
@@ -61,14 +43,11 @@ const ColorStop = (props: ColorStopProps) => {
         opacity: alpha,
       }}
       // TODO check tsc
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       onMouseDown={drag}
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       onTouchStart={drag}
       title={rgba}
-      tabIndex={0}
     />
   );
 };
