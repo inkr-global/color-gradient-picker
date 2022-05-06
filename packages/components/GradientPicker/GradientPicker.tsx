@@ -90,7 +90,7 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleGradientChange = (_points: Point[], _degree: number) => {
-    const sortedPalette = sortPoints(_points).map(
+    const sortedPalette = sortPoints([..._points]).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
         id: id,
