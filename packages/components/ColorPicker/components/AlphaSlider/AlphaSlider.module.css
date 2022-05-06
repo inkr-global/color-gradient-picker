@@ -1,7 +1,7 @@
 .alpha_slider {
   position: relative;
-  height: calc(var(--cgp-value-picker-width) - 4px);
-  border-radius: calc((var(--cgp-value-picker-width) - 4px) / 2);
+  height: calc(var(--cgp-value-picker-width, 12px) - 4px);
+  border-radius: calc((var(--cgp-value-picker-width, 12px) - 4px) / 2);
 
   background-color: #7e7e84;
   background-image: linear-gradient(
@@ -21,22 +21,22 @@
       #4c4c52
     );
   background-position: 0 0,
-    calc((var(--cgp-value-picker-width) - 4px) / 2)
-      calc((var(--cgp-value-picker-width) - 4px) / 2);
-  background-size: calc(var(--cgp-value-picker-width) - 4px)
-      calc(var(--cgp-value-picker-width) - 4px),
-    calc(var(--cgp-value-picker-width) - 4px)
-      calc(var(--cgp-value-picker-width) - 4px);
+    calc((var(--cgp-value-picker-width, 12px) - 4px) / 2)
+      calc((var(--cgp-value-picker-width, 12px) - 4px) / 2);
+  background-size: calc(var(--cgp-value-picker-width, 12px) - 4px)
+      calc(var(--cgp-value-picker-width, 12px) - 4px),
+    calc(var(--cgp-value-picker-width, 12px) - 4px)
+      calc(var(--cgp-value-picker-width, 12px) - 4px);
   background-repeat: repeat, repeat;
 }
 
 .alpha_slider_picker {
   position: absolute;
-  top: calc(0px - var(--cgp-value-picker-border));
+  top: calc(0px - var(--cgp-value-picker-border, 2px));
   left: 0;
-  width: var(--cgp-value-picker-width);
-  height: var(--cgp-value-picker-width);
-  border: var(--cgp-value-picker-border) solid #ffffff;
+  width: var(--cgp-value-picker-width, 12px);
+  height: var(--cgp-value-picker-width, 12px);
+  border: var(--cgp-value-picker-border, 2px) solid #ffffff;
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
   background-color: #ff0000;
   border-radius: 55%;
@@ -50,5 +50,5 @@
   left: 0;
   bottom: 0;
   right: 0;
-  border-radius: calc((var(--cgp-value-picker-width) - 4px) / 2);
+  border-radius: calc((var(--cgp-value-picker-width, 12px) - 4px) / 2);
 }
