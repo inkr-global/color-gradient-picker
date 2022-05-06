@@ -1,4 +1,3 @@
-/// <reference types="react" />
 declare type HueSliderProps = {
     hue: number;
     onChange: (hue: number) => void;

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Alpha } from "../../../../colorTypes";
 declare type AlphaSliderProps = {
     alpha: Alpha;

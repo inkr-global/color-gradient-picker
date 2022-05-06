@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { InputProps } from "./types";
 export declare function Alpha(props: Omit<InputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;

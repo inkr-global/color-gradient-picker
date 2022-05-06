@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { Alpha, Hex, Hsv, Rgb } from "../../../../colorTypes";
 interface InputFieldsProps {
     hex: Hex;

@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ColorValue } from "../../ColorGradientPicker.types";
 import { Alpha, Hex } from "../../colorTypes";
 import { InputProps } from "../Input/types";

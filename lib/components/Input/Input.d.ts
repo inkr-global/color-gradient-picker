@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { GradientInput } from "./Input.Gradient";
 import { InputProps } from "./types";
 export declare function Input(props: InputProps): JSX.Element;

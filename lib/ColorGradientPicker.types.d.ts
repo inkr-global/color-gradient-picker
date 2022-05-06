@@ -1,6 +1,6 @@
 import { Alpha, Gradient, Hex } from "./colorTypes";
 import { InputProps } from "./components/Input/types";
-export declare type ColorType = "linear" | "solid";
+export declare type ColorType = "linear-gradient" | "solid";
 export interface ColorValue {
     alpha?: Alpha;
     solid?: Hex;

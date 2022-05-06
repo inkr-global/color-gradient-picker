@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { ColorType } from "../../ColorGradientPicker.types";
 interface ColorTypeSelectProps {
     value: ColorType;
