@@ -1,10 +1,16 @@
+import { CSSProperties } from "react";
+
 import { Alpha, Gradient, Hex } from "./colorTypes";
 import { InputProps } from "./components/Input/types";
 
 
 export type ColorType = "linear-gradient" | "solid";
 
-export type PickerPlacement = "top-right" | "top-left" | "bottom-right" | "bottom-left";
+export type panelPlacement =
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left";
 
 export interface ColorValue {
   alpha?: Alpha;
@@ -13,13 +19,32 @@ export interface ColorValue {
   type?: ColorType;
 }
 
-export interface ColorGradientPickerProps extends Omit<InputProps, "onChange"> {
+export interface UserInputProps extends InputProps {
+  color: ColorValue;
+  onSolidColorChange: (hex: Hex) => void;
+  onAlphaChange: (alpha: Alpha) => void;
+  hasAlphaInput?: boolean;
+}
+
+export interface ColorGradientPickerProps
+  extends Omit<
+  UserInputProps,
+  | "onChange"
+  | "onAlphaChange"
+  | "onSolidColorChange"
+  | "color"
+  | "hasAlphaInput"
+  | "style"
+  | "value"
+  > {
   color: ColorValue;
   onChange: (color: ColorValue) => void;
-  pickerPlacement?: PickerPlacement;
+  panelPlacement?: panelPlacement;
   colorSelectType?: ColorType | "all";
   colorPickingPanelClassName?: string;
   hasAlphaInput?: boolean;
   classNamePrefix?: string;
   className?: string;
+  style?: CSSProperties;
+  panelStyle?: CSSProperties;
 }
