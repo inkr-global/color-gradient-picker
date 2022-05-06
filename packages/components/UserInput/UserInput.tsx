@@ -5,6 +5,7 @@ import { ALPHA_VALUE, DEFAULT_HEX } from "../Input/constants";
 import { InputProps } from "../Input/types";
 import s from "./UserInput.module.css";
 
+
 interface UserInputProps extends InputProps {
   color: ColorValue;
   onSolidColorChange: (hex: Hex) => void;
@@ -54,7 +55,7 @@ const UserInput = (props: UserInputProps) => {
         />
       )}
 
-      {type === "linear" && (
+      {type === "linear-gradient" && (
         <Input.Gradient {...rest} inputWidth={inputWidth} value={gradient} />
       )}
     </>

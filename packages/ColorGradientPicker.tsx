@@ -20,6 +20,7 @@ import UserInput from "./components/UserInput";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
 
+
 const DEFAULT_CLASS_NAME = "cgp";
 
 function ColorGradientPicker(props: ColorGradientPickerProps) {
@@ -118,7 +119,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             onChange={handleSetColorType}
           />
 
-          {propColorType === "linear" && (
+          {propColorType === "linear-gradient" && (
             <GradientPicker
               gradient={linearGradient}
               onLinearGradientChange={handleLinearGradientChange}
