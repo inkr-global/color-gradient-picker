@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
 import { Alpha, Gradient, Hex } from "./colorTypes";
-import { InputProps } from "./components/Input/types";
+import { BaseInputProps } from "./components/Input/types";
 
 
 export type ColorType = "linear-gradient" | "solid";
@@ -19,7 +19,7 @@ export interface ColorValue {
   type?: ColorType;
 }
 
-export interface UserInputProps extends InputProps {
+export interface UserInputProps extends BaseInputProps {
   color: ColorValue;
   onSolidColorChange: (hex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;

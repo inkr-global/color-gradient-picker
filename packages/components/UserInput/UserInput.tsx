@@ -1,6 +1,8 @@
 import { UserInputProps } from "../../ColorGradientPicker.types";
-import Input from "../Input";
 import { ALPHA_VALUE, DEFAULT_HEX } from "../Input/constants";
+import { InputAlpha } from "../Input/Input.Alpha";
+import { InputGradient } from "../Input/Input.Gradient";
+import { InputHex } from "../Input/Input.Hex";
 import s from "./UserInput.module.css";
 
 
@@ -24,7 +26,7 @@ const UserInput = (props: UserInputProps) => {
   const alphaInput = hasAlphaInput ? (
     <>
       <div className={s.input_vertical_divider} />
-      <Input.Alpha
+      <InputAlpha
         {...rest}
         isExtraComponent
         value={alpha}
@@ -37,7 +39,7 @@ const UserInput = (props: UserInputProps) => {
   return (
     <>
       {type === "solid" && (
-        <Input.Hex
+        <InputHex
           {...rest}
           inputWidth={inputWidth}
           value={solid}
@@ -47,7 +49,7 @@ const UserInput = (props: UserInputProps) => {
       )}
 
       {type === "linear-gradient" && (
-        <Input.Gradient {...rest} inputWidth={inputWidth} value={gradient} />
+        <InputGradient {...rest} inputWidth={inputWidth} value={gradient} />
       )}
     </>
   );

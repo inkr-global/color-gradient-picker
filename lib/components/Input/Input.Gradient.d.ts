@@ -1,5 +1,5 @@
 import { Gradient } from "../../colorTypes";
-import { InputProps } from "./types";
-export declare function GradientInput(props: Omit<InputProps, "onChange" | "info" | "value"> & {
+import { BaseInputProps } from "./types";
+export declare function InputGradient(props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
 }): JSX.Element;

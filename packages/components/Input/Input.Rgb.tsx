@@ -1,9 +1,10 @@
 import React, { HTMLProps, ReactNode, useEffect, useState } from "react";
 
 import { KEYS, RGB_VALUE } from "./constants";
-import { Input } from "./Input";
+import { BaseInput } from "./Input";
 import s from "./Input.Rgb.module.css";
-import { InputProps } from "./types";
+import { BaseInputProps } from "./types";
+
 
 function InputTextInfo(props: { children: ReactNode }) {
   const { children } = props;
@@ -12,8 +13,8 @@ function InputTextInfo(props: { children: ReactNode }) {
 }
 
 // ------------------------------------------------------------------------------------------
-export function Rgb(
-  props: Omit<InputProps, "onChange" | "value"> & {
+export function InputRgb(
+  props: Omit<BaseInputProps, "onChange" | "value"> & {
     onChange: (value: number) => void;
     value: number;
   },
@@ -39,7 +40,7 @@ export function Rgb(
     let _value = parseInt(e.currentTarget.value);
     if (_value < RGB_VALUE.MIN) _value = RGB_VALUE.MIN;
     if (_value > RGB_VALUE.MAX) _value = RGB_VALUE.MAX;
-    if (isNaN(_value)) _value = RGB_VALUE.MIN;
+    if (Number.isNaN(_value)) _value = RGB_VALUE.MIN;
     setValueState(_value);
   };
 
@@ -60,7 +61,7 @@ export function Rgb(
 
   // -----------------------------------------------------------------------
   return (
-    <Input
+    <BaseInput
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

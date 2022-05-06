@@ -4,8 +4,8 @@ import hexToRgb from "../../color-utils/hexToRgb";
 import rgbToHex from "../../color-utils/rgbToHex";
 import { Alpha, Point } from "../../colorTypes";
 import ColorPicker from "../ColorPicker";
-import Input from "../Input";
 import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
+import { InputDegree } from "../Input/Input.Degree";
 import ColorStopsHolder from "./components/ColorStopsHolder";
 import Palette from "./components/Palette";
 import {
@@ -191,7 +191,7 @@ const GradientPicker = (props: GradientPickerProps) => {
   return (
     <>
       <div className={s.gp_wrap}>
-        <Input.Degree onChange={handleDegreeChange} value={degree} />
+        <InputDegree onChange={handleDegreeChange} value={degree} />
         <div>
           <Palette
             onAddColor={handleColorAdd}

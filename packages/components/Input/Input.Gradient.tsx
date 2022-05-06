@@ -1,9 +1,10 @@
 import { Gradient } from "../../colorTypes";
 import { getLinearGradientBackgroundCss, noop } from "../GradientPicker/utils";
 import { DEFAULT_HEX } from "./constants";
-import { Input } from "./Input";
+import { BaseInput } from "./Input";
 import s from "./Input.Gradient.module.css";
-import { InputProps } from "./types";
+import { BaseInputProps } from "./types";
+
 
 function GradientPreview(props: { value?: Gradient }) {
   const { value } = props;
@@ -24,8 +25,8 @@ function GradientPreview(props: { value?: Gradient }) {
 }
 
 // ------------------------------------------------------------------------------------------
-export function GradientInput(
-  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+export function InputGradient(
+  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
   },
 ) {
@@ -33,7 +34,7 @@ export function GradientInput(
 
   // -----------------------------------------------------------------------
   return (
-    <Input
+    <BaseInput
       {...rest}
       value="Gradient"
       onChange={noop}

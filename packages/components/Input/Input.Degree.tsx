@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
 import { DEGREE_VALUE, KEYS } from "./constants";
-import Input from "./Input";
-import { InputProps } from "./types";
+import { BaseInput } from "./Input";
+import { BaseInputProps } from "./types";
+
 
 const DEGREE_SYMBOL = "°";
 
@@ -30,8 +31,8 @@ function DegreeInfo() {
 
 const getDegreeString = (degree: number) => `${degree}${DEGREE_SYMBOL}`;
 
-export function Degree(
-  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+export function InputDegree(
+  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
   },
@@ -50,7 +51,7 @@ export function Degree(
     _value = Math.round(_value);
     if (_value < DEGREE_VALUE.MIN) _value = DEGREE_VALUE.MIN;
     if (_value > DEGREE_VALUE.MAX) _value = DEGREE_VALUE.MAX;
-    if (isNaN(_value)) _value = DEGREE_VALUE.MIN;
+    if (Number.isNaN(_value)) _value = DEGREE_VALUE.MIN;
 
     setValueState(getDegreeString(_value));
   };
@@ -75,7 +76,7 @@ export function Degree(
 
   // -----------------------------------------------------------------------
   return (
-    <Input
+    <BaseInput
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

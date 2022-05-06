@@ -1,5 +1,5 @@
-import { InputProps } from "./types";
-export declare function Degree(props: Omit<InputProps, "onChange" | "info" | "value"> & {
+import { BaseInputProps } from "./types";
+export declare function InputDegree(props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
 }): JSX.Element;

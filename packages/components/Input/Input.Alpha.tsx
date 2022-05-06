@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Alpha as AlphaValue } from "../../colorTypes";
 import { getAlphaDisplayValueFromAlpha } from "../ColorPicker/components/AlphaSlider/utils";
 import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
-import { Input } from "./Input";
+import { BaseInput } from "./Input";
 import s from "./Input.Alpha.module.css";
-import { InputProps } from "./types";
+import { BaseInputProps } from "./types";
+
 
 function InputAlphaInfo() {
   return <div className={s.alpha_info} />;
@@ -15,8 +16,8 @@ const ALPHA_SYMBOL = "%";
 
 const getAlphaString = (alpha: AlphaValue) => `${alpha}${ALPHA_SYMBOL}`;
 
-export function Alpha(
-  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+export function InputAlpha(
+  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
   },
@@ -38,7 +39,7 @@ export function Alpha(
     _value = Math.round(_value);
     if (_value < ALPHA_DISPLAY_VALUE.MIN) _value = ALPHA_DISPLAY_VALUE.MIN;
     if (_value > ALPHA_DISPLAY_VALUE.MAX) _value = ALPHA_DISPLAY_VALUE.MAX;
-    if (isNaN(_value)) _value = ALPHA_DISPLAY_VALUE.MIN;
+    if (Number.isNaN(_value)) _value = ALPHA_DISPLAY_VALUE.MIN;
 
     setDisplayAlpha(getAlphaString(_value));
   };
@@ -64,7 +65,7 @@ export function Alpha(
 
   // -----------------------------------------------------------------------
   return (
-    <Input
+    <BaseInput
       {...rest}
       info={<InputAlphaInfo />}
       onChange={_onInternalChange}

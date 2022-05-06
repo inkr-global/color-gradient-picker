@@ -1,7 +1,10 @@
 import hexToHsv from "../../../../color-utils/hexToHsv";
 import { Alpha, Hex, Hsv, Rgb } from "../../../../colorTypes";
-import Input from "../../../Input";
+import { InputAlpha } from "../../../Input/Input.Alpha";
+import { InputHex } from "../../../Input/Input.Hex";
+import { InputRgb } from "../../../Input/Input.Rgb";
 import s from "./InputFields.module.css";
+
 
 interface InputFieldsProps {
   hex: Hex;
@@ -18,7 +21,7 @@ const InputFields = (props: InputFieldsProps) => {
 
   return (
     <div className={s.color_inputs_wrapper}>
-      <Input.Hex
+      <InputHex
         label="HEX"
         inputWidth={100}
         style={{ gridArea: "hex" }}
@@ -28,7 +31,7 @@ const InputFields = (props: InputFieldsProps) => {
         }}
       />
 
-      <Input.Alpha
+      <InputAlpha
         inputWidth={40}
         style={{ gridArea: "alpha" }}
         value={alpha}
@@ -37,7 +40,7 @@ const InputFields = (props: InputFieldsProps) => {
         }}
       />
 
-      <Input.Rgb
+      <InputRgb
         label="RGB"
         info="R"
         inputWidth={26}
@@ -49,35 +52,35 @@ const InputFields = (props: InputFieldsProps) => {
         onChange={(_red) => {
           setColorFromRgb({
             red: _red,
-            green,
-            blue,
+            green: green,
+            blue: blue,
           });
         }}
       />
 
-      <Input.Rgb
+      <InputRgb
         info="G"
         inputWidth={26}
         style={{ gridArea: "green" }}
         value={green}
         onChange={(_green) => {
           setColorFromRgb({
-            red,
+            red: red,
             green: _green,
-            blue,
+            blue: blue,
           });
         }}
       />
 
-      <Input.Rgb
+      <InputRgb
         info="B"
         inputWidth={26}
         style={{ gridArea: "blue" }}
         value={blue}
         onChange={(_blue) => {
           setColorFromRgb({
-            red,
-            green,
+            red: red,
+            green: green,
             blue: _blue,
           });
         }}

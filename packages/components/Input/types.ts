@@ -5,7 +5,8 @@ import React, {
   ReactNode,
 } from "react";
 
-export interface InputProps {
+
+export interface BaseInputProps {
   value?: string | number;
 
   onChange?: React.ChangeEventHandler<HTMLInputElement>;

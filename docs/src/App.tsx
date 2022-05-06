@@ -1,8 +1,10 @@
+/* eslint-disable import/no-relative-packages */
 import { useState } from "react";
 
 import ColorGradientPicker from "../../packages";
 import { ColorValue } from "../../packages/ColorGradientPicker.types";
 import s from "./app.module.css";
+
 
 function App() {
   const [color, setColor] = useState<ColorValue>({
@@ -17,6 +19,7 @@ function App() {
       <ColorGradientPicker
         color={color}
         onChange={(_color) => setColor(_color)}
+        panelPlacement="top-right"
       />
     </div>
   );

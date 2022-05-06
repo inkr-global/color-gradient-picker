@@ -1,15 +1,11 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
-import { Alpha } from "./Input.Alpha";
-import { Degree } from "./Input.Degree";
-import { GradientInput } from "./Input.Gradient";
-import { Hex } from "./Input.Hex";
 import s from "./Input.module.css";
-import { Rgb } from "./Input.Rgb";
-import { InputProps } from "./types";
+import { BaseInputProps } from "./types";
 
-export function Input(props: InputProps) {
+
+function BaseInput(props: BaseInputProps) {
   // ------------------------------------------------------------------------------------------
   const {
     className,
@@ -102,11 +98,5 @@ export function Input(props: InputProps) {
   );
 }
 
-// ------------------------------------------------------------------------------------------
-Input.Alpha = Alpha;
-Input.Rgb = Rgb;
-Input.Hex = Hex;
-Input.Degree = Degree;
-Input.Gradient = GradientInput;
 
-export default Input;
+export { BaseInput };

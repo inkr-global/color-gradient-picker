@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import sanitizeHex from "../../color-utils/sanitizeHex";
 import { KEYS } from "./constants";
-import { Input } from "./Input";
+import { BaseInput } from "./Input";
 import s from "./Input.Hex.module.css";
-import { InputProps } from "./types";
+import { BaseInputProps } from "./types";
+
 
 function ColorPreview(props: { value: string }) {
   const { value } = props;
@@ -20,8 +21,8 @@ function ColorPreview(props: { value: string }) {
 }
 
 // ------------------------------------------------------------------------------------------
-export function Hex(
-  props: Omit<InputProps, "onChange" | "info" | "value"> & {
+export function InputHex(
+  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;
     value: string;
   },
@@ -59,7 +60,7 @@ export function Hex(
 
   // -----------------------------------------------------------------------
   return (
-    <Input
+    <BaseInput
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

@@ -1,5 +1,5 @@
 import React, { CSSProperties, HTMLProps, ReactElement, ReactNode } from "react";
-export interface InputProps {
+export interface BaseInputProps {
     value?: string | number;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
