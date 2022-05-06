@@ -11,6 +11,7 @@
 
   --cgp-input-focus-color: #a58d12;
   --cgp-input-hover-color: #262626;
+  --cgp-input-height: 26px;
 
   --cgp-picking-panel-zindex: 1;
 }
@@ -22,9 +23,10 @@
 
 .wrapper {
   font-family: var(--cgp-font-family);
-  font-size: var(--cgp-base-font-size);
-  color: var(--cgp-text-color);
+  font-size: var(--cgp-base-font-size, 14px);
+  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
   position: relative;
+  display: inline-block;
 }
 
 .picking_panel {
@@ -32,7 +34,24 @@
   border-radius: 4px;
   background-color: #1f1f1f;
   position: absolute;
-  top: calc(26px + 10px); /* 26px: input height */
   padding-bottom: 16px;
-  z-index: var(--cgp-picking-panel-zindex);
+  z-index: var(--cgp-picking-panel-zindex, 1);
+}
+
+.bottom-left {
+  top: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+}
+
+.bottom-right {
+  top: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+  right: 0;
+}
+
+.top-left {
+  bottom: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+}
+
+.top-right {
+  bottom: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+  right: 0;
 }
