@@ -26,4 +26,5 @@ export interface ColorGradientPickerProps extends Omit<UserInputProps, "onChange
     className?: string;
     style?: CSSProperties;
     panelStyle?: CSSProperties;
+    isDraggable?: boolean;
 }

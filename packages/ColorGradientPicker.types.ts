@@ -47,4 +47,5 @@ export interface ColorGradientPickerProps
   className?: string;
   style?: CSSProperties;
   panelStyle?: CSSProperties;
+  isDraggable?: boolean;
 }

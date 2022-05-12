@@ -30,7 +30,7 @@ export function getAlphaDisplayValueFromAlpha(alpha: Alpha): string {
  * @param {number} width The width of the hue slider
  * @returns {number} The hue based on the x position
  */
- export function getHueFromPosition(x: number, width: number): number {
+export function getHueFromPosition(x: number, width: number): number {
   if (!width) {
     return 0;
   }
@@ -41,7 +41,6 @@ export function getAlphaDisplayValueFromAlpha(alpha: Alpha): string {
   return hue;
 }
 
-
 /**
  * Get the saturation and value from a given position on the SV slider
  * @param {number} x The x coordinate on the SV selector
@@ -50,7 +49,7 @@ export function getAlphaDisplayValueFromAlpha(alpha: Alpha): string {
  * @param {number} height The height of the SV selector
  * @returns {SaturationValue} The saturation and value based on the position
  */
- export function getSaturationValueFromPosition(
+export function getSaturationValueFromPosition(
   x: number,
   y: number,
   width: number,
@@ -88,28 +87,33 @@ export const openNativeEyeDropper = async () => {
   }
 };
 
-
-
-export const sortPalettePoints = (points: Point[]) => points.sort((
-  { offset: offset1 }: Point,
-  { offset: offset2 }: Point,
-) => offset1 - offset2);
-
-
+export const sortPalettePoints = (points: Point[]) =>
+  points.sort(
+    ({ offset: offset1 }: Point, { offset: offset2 }: Point) =>
+      offset1 - offset2,
+  );
 
 export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
   const _gradient = { ...gradient };
   const sortedPalette = sortPalettePoints([..._gradient.points]);
   const linearGradientColors = `linear-gradient(
     ${_gradient.degree}deg,
-    ${sortedPalette.map(
-    ({ alpha, offset, red, green, blue }) => `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
-  )
-    .join(", ")}
+    ${sortedPalette
+      .map(
+        ({ alpha, offset, red, green, blue }) =>
+          `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
+      )
+      .join(", ")}
   )`;
 
   return linearGradientColors;
 };
+
+/**
+ * Get random string
+ */
+
+export const getRandomString = () => Math.random().toString(36).substring(7);
 
 
 

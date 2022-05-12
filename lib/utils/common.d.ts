@@ -33,4 +33,8 @@ export declare function getSaturationValueFromPosition(x: number, y: number, wid
 export declare const openNativeEyeDropper: () => Promise<any>;
 export declare const sortPalettePoints: (points: Point[]) => Point[];
 export declare const getLinearGradientBackgroundCss: (gradient: Gradient) => string;
+/**
+ * Get random string
+ */
+export declare const getRandomString: () => string;
 export declare const noop: () => undefined;

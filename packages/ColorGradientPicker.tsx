@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import s from "./ColorGradientPicker.module.css";
 import {
@@ -16,10 +16,10 @@ import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
 import SolidColorPicker from "./components/SolidColorPicker/SolidColorPicker";
 import UserInput from "./components/UserInput/UserInput";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
-import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
+import { useDraggable } from "./hooks/useDraggable";
 import { Alpha, Gradient, Hex } from "./types/color";
 import sanitizeHex from "./utils/color/sanitizeHex";
-
+import { getRandomString } from "./utils/common";
 
 const DEFAULT_CLASS_NAME = "cgp";
 
@@ -37,6 +37,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     style,
     panelStyle,
     hasAlphaInput,
+    isDraggable,
     ...rest
   } = props;
 
@@ -64,14 +65,28 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     if (typeof onInputFocus === "function") onInputFocus(e);
   };
 
-  const onHidePicker = useCallback(() => {
+  const onHidePanel = useCallback(() => {
     setOpenPicker(false);
   }, []);
 
   // ------------------------------------------------------------------------------------------
 
-  useCloseWhenClickOutside(containerRef, onHidePicker);
-  useCloseWhenPressEcs(onHidePicker);
+  const [containerID, draggableID] = useMemo(() => {
+    if (!isDraggable) return [undefined, undefined];
+
+    const _containerID = getRandomString();
+    const _draggableID = getRandomString();
+
+    return [_containerID, _draggableID];
+  }, [isDraggable]);
+
+  useCloseWhenClickOutside(containerRef, onHidePanel);
+
+  useDraggable({
+    isDraggable: (isDraggable && isOpenPicker) || false,
+    containerID: containerID || "",
+    dragElementID: draggableID,
+  });
 
   // ------------------------------------------------------------------------------------------
   const handleSolidColorChange = (_updatedHex: Hex) => {
@@ -122,14 +137,19 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       {isOpenPicker && (
         <div
           className={cn(s.picking_panel, s[panelPlacement], panelClassName)}
-          style={panelStyle}
+          style={{
+            ...panelStyle,
+            position: isDraggable ? "fixed" : undefined,
+          }}
+          id={containerID}
         >
-          {colorSelectType === "all" && (
-            <ColorTypeSelect
-              value={propColorType}
-              onChange={handleSetColorType}
-            />
-          )}
+          <ColorTypeSelect
+            value={propColorType}
+            onChange={handleSetColorType}
+            colorSelectType={colorSelectType}
+            onClosePanel={onHidePanel}
+            id={draggableID}
+          />
 
           {propColorType === "linear-gradient" && (
             <GradientPicker
