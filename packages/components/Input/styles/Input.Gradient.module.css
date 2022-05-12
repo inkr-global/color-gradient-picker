@@ -4,4 +4,5 @@
   box-sizing: border-box;
   border-radius: 2px;
   text-align: center;
+  border: 1px solid var(--cgp-input-hover-color, #262626);
 }
