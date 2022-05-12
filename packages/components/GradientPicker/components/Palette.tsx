@@ -8,7 +8,7 @@ const Palette = (props: PalletteProps) => {
   // ------------------------------------------------------------------------------------------
   const linearGradientColors = getLinearGradientBackgroundCss({
     points,
-    degree: 90, // the palette color should not 
+    degree: 90, // the palette color should always show vertical gradient
   });
 
   // ------------------------------------------------------------------------------------------

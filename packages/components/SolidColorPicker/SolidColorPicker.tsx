@@ -41,7 +41,7 @@ interface ColorPickerProps {
   onAlphaChange: (alpha: Alpha) => void;
 }
 
-const ColorPicker = (props: ColorPickerProps) => {
+const SolidColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
   const { hex, alpha, onColorChange, onAlphaChange } = props;
 
@@ -138,4 +138,4 @@ const ColorPicker = (props: ColorPickerProps) => {
   );
 };
 
-export default ColorPicker;
+export default SolidColorPicker;

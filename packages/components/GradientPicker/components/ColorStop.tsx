@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import clsx from "clsx";
 import { useRef } from "react";
 
@@ -35,14 +37,13 @@ const ColorStop = (props: ColorStopProps) => {
 
   return (
     <div
-      className={clsx(s.cs, isActive && s.active)}
+      className={clsx(s.color_stop, isActive && s.active)}
       ref={colorStopRef}
       style={{
         left: offset,
         backgroundColor: rgba,
         opacity: alpha,
       }}
-      // TODO check tsc
       // @ts-ignore
       onMouseDown={drag}
       // @ts-ignore

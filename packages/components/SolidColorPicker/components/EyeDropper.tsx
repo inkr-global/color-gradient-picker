@@ -12,6 +12,7 @@ const EyeDropper = ({ onClick }: EyeDropperProps) => {
         cursor: "pointer",
         padding: "6px 12px 8px 6px",
         flexShrink: 0,
+        marginRight: 4,
       }}
       onClick={onClick}
     >

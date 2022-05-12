@@ -41,7 +41,7 @@ export interface ColorGradientPickerProps
   onChange: (color: ColorValue) => void;
   panelPlacement?: PanelPlacement;
   colorSelectType?: ColorType | "all";
-  colorPickingPanelClassName?: string;
+  panelClassName?: string;
   hasAlphaInput?: boolean;
   classNamePrefix?: string;
   className?: string;

@@ -6,7 +6,6 @@ import {
   ColorGradientPickerProps,
   ColorType,
 } from "./ColorGradientPicker.types";
-import ColorPicker from "./components/ColorPicker/ColorPicker";
 import ColorTypeSelect from "./components/ColorTypeSelect/ColorTypeSelect";
 import {
   DEFAULT_DEGREE,
@@ -14,6 +13,7 @@ import {
 } from "./components/GradientPicker/constants";
 import GradientPicker from "./components/GradientPicker/GradientPicker";
 import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
+import SolidColorPicker from "./components/SolidColorPicker/SolidColorPicker";
 import UserInput from "./components/UserInput/UserInput";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
@@ -31,7 +31,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     color,
     onChange,
     onInputFocus,
-    colorPickingPanelClassName,
+    panelClassName,
     colorSelectType = "all",
     panelPlacement = "bottom-left",
     style,
@@ -119,7 +119,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
       {isOpenPicker && (
         <div
-          className={cn(s.picking_panel, s[panelPlacement], colorPickingPanelClassName)}
+          className={cn(s.picking_panel, s[panelPlacement], panelClassName)}
           style={panelStyle}
         >
           {colorSelectType === "all" && (
@@ -137,7 +137,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           )}
 
           {propColorType === "solid" && (
-            <ColorPicker
+            <SolidColorPicker
               hex={solidColor}
               alpha={totalAlpha}
               onAlphaChange={handleTotalAlphaChange}

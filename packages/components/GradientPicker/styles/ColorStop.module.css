@@ -1,4 +1,4 @@
-.cs {
+.color_stop {
   position: absolute;
   cursor: pointer;
   height: 14px;
@@ -9,11 +9,11 @@
   box-shadow: 0 0 6px #000;
 }
 
-.cs:hover {
+.color_stop:hover {
   border-color: #434343;
 }
 
-.cs::before {
+.color_stop::before {
   content: "";
   width: 0;
   height: 0;
@@ -25,19 +25,19 @@
   box-sizing: border-box;
 }
 
-.cs:hover::before {
+.color_stop:hover::before {
   border-bottom-color: #434343;
 }
 
-.cs.active {
+.color_stop.active {
   border: 2px solid #fafafa;
 }
 
-.cs.active::before {
+.color_stop.active::before {
   border-bottom-color: #fafafa;
 }
 
-.cs::after {
+.color_stop::after {
   content: "";
   width: 2px;
   height: 26px;

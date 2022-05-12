@@ -1,7 +1,6 @@
-// TODO check tsc
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
+
 
 import {
   DragEventHandler,
@@ -10,6 +9,8 @@ import {
   useRef,
   useState,
 } from "react";
+
+import { Events } from "../constants";
 
 
 const DRAG_HANDLERS = {
@@ -21,8 +22,8 @@ const DRAG_HANDLERS = {
       clientX,
       clientY,
     }),
-    dragEvent: { name: EVENTS.MOUSEMOVE },
-    dragEndEvent: { name: EVENTS.MOUSEUP },
+    dragEvent: { name: Events.MOUSEMOVE },
+    dragEndEvent: { name: Events.MOUSEUP },
   },
   TOUCH: {
     stop: () => undefined,
@@ -34,17 +35,17 @@ const DRAG_HANDLERS = {
       };
     },
     dragEvent: {
-      name: EVENTS.TOUCHMOVE,
+      name: Events.TOUCHMOVE,
       options: {
         cancelable: true,
         passive: true,
       },
     },
-    dragEndEvent: { name: EVENTS.TOUCHEND },
+    dragEndEvent: { name: Events.TOUCHEND },
   },
 };
 
-const isTouch = (e: Event) => e.type === EVENTS.TOUCHSTART;
+const isTouch = (e: Event) => e.type === Events.TOUCHSTART;
 
 interface UseDraggingParams {
   onDragStart: DragEventHandler;
