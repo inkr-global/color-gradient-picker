@@ -53,7 +53,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   // ------------------------------------------------------------------------------------------
 
-  const [isOpenPicker, setOpenPicker] = useState<boolean>(false);
+  const [isPickerOpen, setOpenPicker] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -81,9 +81,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   }, [isDraggable]);
 
   const { isDragging } = useDraggable({
-    isDraggable: (isDraggable && isOpenPicker) || false,
+    isDraggable: (isDraggable && isPickerOpen) || false,
     containerID: containerID || "",
     dragElementID: draggableID,
+    isPickerOpen: isPickerOpen,
   });
 
   useCloseWhenClickOutside(containerRef, onHidePanel, isDragging);
@@ -134,7 +135,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         onInputFocus={handleInputFocus}
       />
 
-      {isOpenPicker && (
+      {isPickerOpen && (
         <div
           className={cn(s.picking_panel, s[panelPlacement], panelClassName)}
           style={{

@@ -37,6 +37,7 @@ const ColorTypeSelect = ({
         style={{
           flexGrow: 1,
           height: "100%",
+          cursor: "grab",
         }}
       />
     )}

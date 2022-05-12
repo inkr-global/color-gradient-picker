@@ -107,18 +107,21 @@ function dragElement(params: {
 interface Params {
   isDraggable: boolean;
   containerID: string;
+  isPickerOpen: boolean;
   dragElementID?: string;
 }
 
 export const useDraggable = (params: Params) => {
   // ------------------------------------------------------------------------------------------
-  const { isDraggable, containerID, dragElementID } = params;
+  const { isDraggable, containerID, isPickerOpen, dragElementID } = params;
 
   // ------------------------------------------------------------------------------------------
   const [position, setPosition] = useState<DraggablePosition>({
     top: undefined,
     left: undefined,
   });
+
+  console.log("position", position);
 
   const [isDragging, setDragging] = useState<boolean>(false);
 
@@ -235,6 +238,16 @@ export const useDraggable = (params: Params) => {
     setPosition,
     setDragging,
   ]);
+
+  // do not remember last position when close
+  useEffect(() => {
+    return () => {
+      setPosition({
+        top: undefined,
+        left: undefined,
+      });
+    };
+  }, [isPickerOpen]);
 
   return { isDragging };
 };
