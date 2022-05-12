@@ -24,14 +24,16 @@ const DEFAULT_BOUND: BOUND = {
 function dragElement(params: {
   containerEle: HTMLElement;
   draggableElement?: HTMLElement | null;
-  setLocation?: (value: DraggablePosition) => void;
+  setPosition: (value: DraggablePosition) => void;
+  setDragging: (isDragging: boolean) => void;
   onDragEnd?: (containerEle: HTMLElement) => void;
   bound?: BOUND;
 }) {
   const {
     containerEle,
     draggableElement,
-    setLocation,
+    setPosition,
+    setDragging,
     onDragEnd,
     bound = DEFAULT_BOUND,
   } = params;
@@ -67,16 +69,14 @@ function dragElement(params: {
   }
 
   function closeDragElement() {
-    if (typeof setLocation === "function") {
-      setLocation({
-        left: containerEle.style.left,
-        top: containerEle.style.top,
-      });
-    }
+    setPosition({
+      left: containerEle.style.left,
+      top: containerEle.style.top,
+    });
 
-    if (typeof onDragEnd === "function") {
-      onDragEnd(containerEle);
-    }
+    setDragging(false);
+
+    onDragEnd?.(containerEle);
 
     /* stop moving when mouse button is released: */
     document.onmouseup = null;
@@ -86,11 +86,14 @@ function dragElement(params: {
   function dragMouseDown(e: MouseEvent) {
     const _e = e || window.event;
     _e.preventDefault();
+
     // get the mouse cursor position at startup:
     pos3 = _e.clientX;
     pos4 = _e.clientY;
+
+    setDragging(true);
+
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
     document.onmousemove = elementDrag;
   }
 
@@ -116,6 +119,8 @@ export const useDraggable = (params: Params) => {
     top: undefined,
     left: undefined,
   });
+
+  const [isDragging, setDragging] = useState<boolean>(false);
 
   // ------------------------------------------------------------------------------------------
   const [draggableBound, setDraggableBound] = useState({
@@ -158,7 +163,10 @@ export const useDraggable = (params: Params) => {
 
       // ------------------------------------------------------------------------------------------
       // check if go off screen and move it into screen if it goes off screen
-      const newPosition = { ...position };
+      const newPosition = {
+        top: position.top,
+        left: position.left,
+      };
 
       if (replacePx(position.top) < draggableBound.top) {
         newPosition.top = `${draggableBound.top}px`;
@@ -185,15 +193,18 @@ export const useDraggable = (params: Params) => {
         newPosition.left = `${draggableBound.right - container.offsetWidth}px`;
         container.style.left = newPosition.left;
       }
+
+      setPosition(newPosition);
     }
   }, [
     isDraggable,
     containerID,
-    setPosition,
     position.left,
     position.top,
-    position,
-    draggableBound,
+    draggableBound.right,
+    draggableBound.left,
+    draggableBound.top,
+    draggableBound.bottom,
   ]);
 
   // set position for draggable container
@@ -211,6 +222,8 @@ export const useDraggable = (params: Params) => {
       containerEle: container,
       draggableElement: draggableElement,
       bound: draggableBound,
+      setPosition,
+      setDragging,
     });
   }, [
     isDraggable,
@@ -219,5 +232,9 @@ export const useDraggable = (params: Params) => {
     position.top,
     dragElementID,
     draggableBound,
+    setPosition,
+    setDragging,
   ]);
+
+  return { isDragging };
 };

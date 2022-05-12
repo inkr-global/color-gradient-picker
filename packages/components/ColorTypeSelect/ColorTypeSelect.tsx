@@ -8,7 +8,7 @@ interface ColorTypeSelectProps {
   onChange: (value: ColorType) => void;
   onClosePanel: () => void;
   colorSelectType?: ColorType | "all";
-  id?: string;
+  draggableID?: string;
 }
 
 const ColorTypeSelect = ({
@@ -16,9 +16,9 @@ const ColorTypeSelect = ({
   onChange,
   colorSelectType,
   onClosePanel,
-  id,
+  draggableID,
 }: ColorTypeSelectProps) => (
-  <div className={s.select_wrapper} id={id}>
+  <div className={s.select_wrapper}>
     <select
       className={clsx(s.select, colorSelectType !== "all" && s.no_arrow)}
       value={value}
@@ -31,7 +31,15 @@ const ColorTypeSelect = ({
       <option value="solid">Solid</option>
       <option value="linear-gradient">Linear Gradient</option>
     </select>
-
+    {draggableID && (
+      <div
+        id={draggableID}
+        style={{
+          flexGrow: 1,
+          height: "100%",
+        }}
+      />
+    )}
     <button className={s.close_btn} onClick={onClosePanel}>
       <svg
         width="12"

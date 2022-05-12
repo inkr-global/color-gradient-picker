@@ -80,13 +80,13 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     return [_containerID, _draggableID];
   }, [isDraggable]);
 
-  useCloseWhenClickOutside(containerRef, onHidePanel);
-
-  useDraggable({
+  const { isDragging } = useDraggable({
     isDraggable: (isDraggable && isOpenPicker) || false,
     containerID: containerID || "",
     dragElementID: draggableID,
   });
+
+  useCloseWhenClickOutside(containerRef, onHidePanel, isDragging);
 
   // ------------------------------------------------------------------------------------------
   const handleSolidColorChange = (_updatedHex: Hex) => {
@@ -148,7 +148,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             onChange={handleSetColorType}
             colorSelectType={colorSelectType}
             onClosePanel={onHidePanel}
-            id={draggableID}
+            draggableID={draggableID}
           />
 
           {propColorType === "linear-gradient" && (

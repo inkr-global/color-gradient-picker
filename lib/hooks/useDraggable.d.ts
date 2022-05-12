@@ -3,5 +3,7 @@ interface Params {
     containerID: string;
     dragElementID?: string;
 }
-export declare const useDraggable: (params: Params) => void;
+export declare const useDraggable: (params: Params) => {
+    isDragging: boolean;
+};
 export {};

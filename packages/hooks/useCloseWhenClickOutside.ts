@@ -3,9 +3,11 @@ import { useEffect } from "react";
 const useCloseWhenClickOutside = (
   containerRef: React.RefObject<HTMLDivElement>,
   callback: () => void,
+  isDragging: boolean,
 ) => {
   useEffect(() => {
     if (typeof document === "undefined") return () => undefined;
+    if (isDragging) return () => undefined;
 
     const handler = (e: Event) => {
       if (!containerRef.current?.contains(e.target as HTMLElement)) {
@@ -20,7 +22,7 @@ const useCloseWhenClickOutside = (
       document.removeEventListener("click", handler);
       document.removeEventListener("touchstart", handler);
     };
-  }, [callback, containerRef]);
+  }, [callback, containerRef, isDragging]);
 };
 
 export default useCloseWhenClickOutside;

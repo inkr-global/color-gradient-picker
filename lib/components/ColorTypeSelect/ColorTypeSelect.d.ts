@@ -5,7 +5,7 @@ interface ColorTypeSelectProps {
     onChange: (value: ColorType) => void;
     onClosePanel: () => void;
     colorSelectType?: ColorType | "all";
-    id?: string;
+    draggableID?: string;
 }
-declare const ColorTypeSelect: ({ value, onChange, colorSelectType, onClosePanel, id, }: ColorTypeSelectProps) => JSX.Element;
+declare const ColorTypeSelect: ({ value, onChange, colorSelectType, onClosePanel, draggableID, }: ColorTypeSelectProps) => JSX.Element;
 export default ColorTypeSelect;
