@@ -1,18 +1,18 @@
 import cn from "clsx";
 import { useEffect, useRef, useState } from "react";
 
-import hexToHsv from "../../color-utils/hexToHsv";
-import hexToRgb from "../../color-utils/hexToRgb";
-import hsvToHex from "../../color-utils/hsvToHex";
-import rgbToHex from "../../color-utils/rgbToHex";
-import rgbToHsv from "../../color-utils/rgbToHsv";
-import { Alpha, Hex, Hsv, Rgb } from "../../colorTypes";
-import s from "./ColorPicker.module.css";
+import { Alpha, Hex, Hsv, Rgb } from "../../types/color";
+import hexToHsv from "../../utils/color/hexToHsv";
+import hexToRgb from "../../utils/color/hexToRgb";
+import hsvToHex from "../../utils/color/hsvToHex";
+import rgbToHex from "../../utils/color/rgbToHex";
+import rgbToHsv from "../../utils/color/rgbToHsv";
 import AlphaSlider from "./components/AlphaSlider";
 import EyeDropperBtn from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider";
 import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
+import s from "./styles/ColorPicker.module.css";
 
 /**
  * Get the color from EyeDropper API

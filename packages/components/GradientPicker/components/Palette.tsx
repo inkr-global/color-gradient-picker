@@ -1,14 +1,14 @@
+import { getLinearGradientBackgroundCss } from "../../../utils/common";
 import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../constants";
 import { PalletteProps } from "../types";
-import { getLinearGradientBackgroundCss } from "../utils";
 
 const Palette = (props: PalletteProps) => {
-  const { points, degree, onAddColor, disabled } = props;
+  const { points, onAddColor, disabled } = props;
 
   // ------------------------------------------------------------------------------------------
   const linearGradientColors = getLinearGradientBackgroundCss({
     points,
-    degree,
+    degree: 90, // the palette color should not 
   });
 
   // ------------------------------------------------------------------------------------------

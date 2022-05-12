@@ -12,7 +12,6 @@ import {
 } from "react";
 
 import { noop } from "../../../utils";
-import { EVENTS } from "./constants";
 
 const DRAG_HANDLERS = {
   MOUSE: {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { Alpha as AlphaValue } from "../../colorTypes";
-import { getAlphaDisplayValueFromAlpha } from "../ColorPicker/components/AlphaSlider/utils";
+import { Alpha as AlphaValue } from "../../types/color";
+import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
 import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
-import { BaseInput } from "./Input";
-import s from "./Input.Alpha.module.css";
+import { InputBase } from "./Input.Base";
+import s from "./styles/Input.Alpha.module.css";
 import { BaseInputProps } from "./types";
 
 
@@ -65,7 +65,7 @@ export function InputAlpha(
 
   // -----------------------------------------------------------------------
   return (
-    <BaseInput
+    <InputBase
       {...rest}
       info={<InputAlphaInfo />}
       onChange={_onInternalChange}

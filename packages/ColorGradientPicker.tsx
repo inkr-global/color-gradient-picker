@@ -1,24 +1,24 @@
 import cn from "clsx";
 import { useCallback, useRef, useState } from "react";
 
-import sanitizeHex from "./color-utils/sanitizeHex";
 import s from "./ColorGradientPicker.module.css";
 import {
   ColorGradientPickerProps,
   ColorType,
 } from "./ColorGradientPicker.types";
-import { Alpha, Gradient, Hex } from "./colorTypes";
-import ColorPicker from "./components/ColorPicker";
-import ColorTypeSelect from "./components/ColorTypeSelect";
-import GradientPicker from "./components/GradientPicker";
+import ColorPicker from "./components/ColorPicker/ColorPicker";
+import ColorTypeSelect from "./components/ColorTypeSelect/ColorTypeSelect";
 import {
   DEFAULT_DEGREE,
   DEFAULT_PALETTE,
 } from "./components/GradientPicker/constants";
+import GradientPicker from "./components/GradientPicker/GradientPicker";
 import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
-import UserInput from "./components/UserInput";
+import UserInput from "./components/UserInput/UserInput";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import useCloseWhenPressEcs from "./hooks/useCloseWhenPressEcs";
+import { Alpha, Gradient, Hex } from "./types/color";
+import sanitizeHex from "./utils/color/sanitizeHex";
 
 
 const DEFAULT_CLASS_NAME = "cgp";

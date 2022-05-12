@@ -1,9 +1,9 @@
-import hexToHsv from "../../../../color-utils/hexToHsv";
-import { Alpha, Hex, Hsv, Rgb } from "../../../../colorTypes";
-import { InputAlpha } from "../../../Input/Input.Alpha";
-import { InputHex } from "../../../Input/Input.Hex";
-import { InputRgb } from "../../../Input/Input.Rgb";
-import s from "./InputFields.module.css";
+import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
+import hexToHsv from "../../../utils/color/hexToHsv";
+import { InputAlpha } from "../../Input/Input.Alpha";
+import { InputHex } from "../../Input/Input.Hex";
+import { InputRgb } from "../../Input/Input.Rgb";
+import s from "../styles/InputFields.module.css";
 
 
 interface InputFieldsProps {

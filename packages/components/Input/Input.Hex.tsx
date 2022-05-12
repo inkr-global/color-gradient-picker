@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import sanitizeHex from "../../color-utils/sanitizeHex";
+import sanitizeHex from "../../utils/color/sanitizeHex";
 import { KEYS } from "./constants";
-import { BaseInput } from "./Input";
-import s from "./Input.Hex.module.css";
+import { InputBase } from "./Input.Base";
+import s from "./styles/Input.Hex.module.css";
 import { BaseInputProps } from "./types";
 
 
@@ -60,7 +60,7 @@ export function InputHex(
 
   // -----------------------------------------------------------------------
   return (
-    <BaseInput
+    <InputBase
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

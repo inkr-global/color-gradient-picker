@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
-import s from "./Input.module.css";
+import s from "./styles/Input.Base.module.css";
 import { BaseInputProps } from "./types";
 
 
-function BaseInput(props: BaseInputProps) {
+function InputBase(props: BaseInputProps) {
   // ------------------------------------------------------------------------------------------
   const {
     className,
@@ -99,4 +99,4 @@ function BaseInput(props: BaseInputProps) {
 }
 
 
-export { BaseInput };
+export { InputBase };

@@ -1,8 +1,8 @@
-import { Gradient } from "../../colorTypes";
-import { getLinearGradientBackgroundCss, noop } from "../GradientPicker/utils";
+import { Gradient } from "../../types/color";
+import { getLinearGradientBackgroundCss, noop } from "../../utils/common";
 import { DEFAULT_HEX } from "./constants";
-import { BaseInput } from "./Input";
-import s from "./Input.Gradient.module.css";
+import { InputBase } from "./Input.Base";
+import s from "./styles/Input.Gradient.module.css";
 import { BaseInputProps } from "./types";
 
 
@@ -34,7 +34,7 @@ export function InputGradient(
 
   // -----------------------------------------------------------------------
   return (
-    <BaseInput
+    <InputBase
       {...rest}
       value="Gradient"
       onChange={noop}

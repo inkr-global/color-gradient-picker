@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { DEGREE_VALUE, KEYS } from "./constants";
-import { BaseInput } from "./Input";
+import { InputBase } from "./Input.Base";
 import { BaseInputProps } from "./types";
 
 
@@ -76,7 +76,7 @@ export function InputDegree(
 
   // -----------------------------------------------------------------------
   return (
-    <BaseInput
+    <InputBase
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

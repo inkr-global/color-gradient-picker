@@ -1,8 +1,8 @@
 import React, { HTMLProps, ReactNode, useEffect, useState } from "react";
 
 import { KEYS, RGB_VALUE } from "./constants";
-import { BaseInput } from "./Input";
-import s from "./Input.Rgb.module.css";
+import { InputBase } from "./Input.Base";
+import s from "./styles/Input.Rgb.module.css";
 import { BaseInputProps } from "./types";
 
 
@@ -61,7 +61,7 @@ export function InputRgb(
 
   // -----------------------------------------------------------------------
   return (
-    <BaseInput
+    <InputBase
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 
-import { Alpha, Gradient, Hex } from "./colorTypes";
 import { BaseInputProps } from "./components/Input/types";
+import { Alpha, Gradient, Hex } from "./types/color";
 
 
 export type ColorType = "linear-gradient" | "solid";

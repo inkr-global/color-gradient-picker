@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { useRef } from "react";
 
-import { ColorStopProps } from "../../types";
-import { noop } from "../../utils";
-import s from "./ColorStop.module.css";
-import useStopDragging from "./hooks/useStopDragging";
+import { noop } from "../../../utils/common";
+import useStopDragging from "../hooks/useStopDragging";
+import s from "../styles/ColorStop.module.css";
+import { ColorStopProps } from "../types";
 
 
 const ColorStop = (props: ColorStopProps) => {

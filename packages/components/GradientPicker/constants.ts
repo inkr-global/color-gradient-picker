@@ -34,3 +34,13 @@ export const DEFAULT_PALETTE = [
 ];
 
 export const DEFAULT_DEGREE = 90;
+
+
+export const Events = {
+	MOUSEDOWN: 'mousedown',
+	MOUSEMOVE: 'mousemove',
+	MOUSEUP: 'mouseup',
+	TOUCHSTART: 'touchstart',
+	TOUCHMOVE: 'touchmove',
+	TOUCHEND: 'touchend'
+};

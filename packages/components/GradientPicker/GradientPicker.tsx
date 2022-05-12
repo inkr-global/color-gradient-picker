@@ -1,9 +1,10 @@
 import { useMemo, useState } from "react";
 
-import hexToRgb from "../../color-utils/hexToRgb";
-import rgbToHex from "../../color-utils/rgbToHex";
-import { Alpha, Point } from "../../colorTypes";
-import ColorPicker from "../ColorPicker";
+import { Alpha, Point } from "../../types/color";
+import hexToRgb from "../../utils/color/hexToRgb";
+import rgbToHex from "../../utils/color/rgbToHex";
+import { noop, sortPalettePoints } from "../../utils/common";
+import ColorPicker from "../ColorPicker/ColorPicker";
 import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
 import { InputDegree } from "../Input/Input.Degree";
 import ColorStopsHolder from "./components/ColorStopsHolder";
@@ -17,7 +18,6 @@ import {
 } from "./constants";
 import s from "./GradientPicker.module.css";
 import { GradientPickerProps } from "./types";
-import { noop, sortPoints } from "./utils";
 
 // ------------------------------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleGradientChange = (_points: Point[], _degree: number) => {
-    const sortedPalette = sortPoints([..._points]).map(
+    const sortedPalette = sortPalettePoints([..._points]).map(
       ({ offset, id, ...rest }) => ({
         ...rest,
         id: id,
