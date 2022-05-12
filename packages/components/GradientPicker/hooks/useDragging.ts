@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 
-import { noop } from "../../../utils";
 
 const DRAG_HANDLERS = {
   MOUSE: {
@@ -26,7 +25,7 @@ const DRAG_HANDLERS = {
     dragEndEvent: { name: EVENTS.MOUSEUP },
   },
   TOUCH: {
-    stop: noop,
+    stop: () => undefined,
     coordinates: (e: TouchEvent) => {
       const [touch] = e.touches;
       return {

@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { BaseInputProps } from "./types";
 export declare function InputHex(props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;

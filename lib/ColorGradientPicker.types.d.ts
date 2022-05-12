@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
-import { Alpha, Gradient, Hex } from "./colorTypes";
 import { BaseInputProps } from "./components/Input/types";
+import { Alpha, Gradient, Hex } from "./types/color";
 export declare type ColorType = "linear-gradient" | "solid";
 export declare type PanelPlacement = "top-right" | "top-left" | "bottom-right" | "bottom-left";
 export interface ColorValue {

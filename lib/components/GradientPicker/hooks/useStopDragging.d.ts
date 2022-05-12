@@ -1,5 +1,5 @@
 import { DragEventHandler } from "react";
-import { GradientLimits, GradientStop } from "../../../types";
+import { GradientLimits, GradientStop } from "../types";
 interface Params {
     stop: GradientStop;
     limits: GradientLimits;
@@ -16,10 +16,10 @@ declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDra
         clientY: number;
     };
     dragEvent: {
-        name: string;
+        name: any;
     };
     dragEndEvent: {
-        name: string;
+        name: any;
     };
 } | {
     stop: () => undefined;
@@ -28,14 +28,14 @@ declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDra
         clientY: any;
     };
     dragEvent: {
-        name: string;
+        name: any;
         options: {
             cancelable: boolean;
             passive: boolean;
         };
     };
     dragEndEvent: {
-        name: string;
+        name: any;
     };
 }) => void))[];
 export default useStopDragging;

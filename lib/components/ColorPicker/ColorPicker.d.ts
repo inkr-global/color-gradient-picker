@@ -1,4 +1,5 @@
-import { Alpha, Hex } from "../../colorTypes";
+/// <reference types="react" />
+import { Alpha, Hex } from "../../types/color";
 interface ColorPickerProps {
     hex: Hex;
     alpha: Alpha;

@@ -16,7 +16,7 @@ import {
   DEFAULT_STOP_REMOVAL_DROP,
   HALF_STOP_WIDTH,
 } from "./constants";
-import s from "./GradientPicker.module.css";
+import s from "./styles/GradientPicker.module.css";
 import { GradientPickerProps } from "./types";
 
 // ------------------------------------------------------------------------------------------
