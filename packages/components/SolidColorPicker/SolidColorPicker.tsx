@@ -7,43 +7,26 @@ import hexToRgb from "../../utils/color/hexToRgb";
 import hsvToHex from "../../utils/color/hsvToHex";
 import rgbToHex from "../../utils/color/rgbToHex";
 import rgbToHsv from "../../utils/color/rgbToHsv";
+import { openNativeEyeDropper } from "../../utils/common";
 import AlphaSlider from "./components/AlphaSlider";
 import EyeDropperBtn from "./components/EyeDropper";
 import HueSlider from "./components/HueSlider";
 import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
-import s from "./styles/ColorPicker.module.css";
+import s from "./styles/SolidColorPicker.module.css";
 
-/**
- * Get the color from EyeDropper API
- * @returns {string} Hex color
- */
-
-const openNativeEyeDropper = async () => {
-  const abortController = new AbortController();
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore this is new EyeDropper API
-  const eyeDropper = new EyeDropper();
-
-  try {
-    const result = await eyeDropper.open({ signal: abortController.signal });
-    return result.sRGBHex;
-  } catch (e) {
-    return null;
-  }
-};
 
 interface ColorPickerProps {
   hex: Hex;
   alpha: Alpha;
   onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
+  hasAlphaInput?: boolean;
 }
 
 const SolidColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hex, alpha, onColorChange, onAlphaChange } = props;
+  const { hex, alpha, onColorChange, onAlphaChange, hasAlphaInput = true } = props;
 
   const [, setHexState] = useState<Hex>(hex);
 
@@ -107,7 +90,7 @@ const SolidColorPicker = (props: ColorPickerProps) => {
         }}
       />
 
-      <div className={cn(s.sliders_wrapper)}>
+      <div className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}>
         <EyeDropperBtn onClick={_onEyeDropperClick} />
 
         <div className={cn(s.sliders)}>
@@ -122,7 +105,10 @@ const SolidColorPicker = (props: ColorPickerProps) => {
             className={s.hue_slider}
           />
 
-          <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
+          {hasAlphaInput && (
+            <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
+          )}
+
         </div>
       </div>
 
@@ -133,6 +119,7 @@ const SolidColorPicker = (props: ColorPickerProps) => {
         setAlpha={onAlphaChange}
         setColor={_onSetColor}
         setColorFromRgb={_onSetColorFromRgb}
+        hasAlphaInput={hasAlphaInput}
       />
     </>
   );

@@ -36,6 +36,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     panelPlacement = "bottom-left",
     style,
     panelStyle,
+    hasAlphaInput,
     ...rest
   } = props;
 
@@ -111,6 +112,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     >
       <UserInput
         {...rest}
+        hasAlphaInput={hasAlphaInput}
         onSolidColorChange={handleSolidColorChange}
         onAlphaChange={handleTotalAlphaChange}
         color={color}
@@ -138,6 +140,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
           {propColorType === "solid" && (
             <SolidColorPicker
+              hasAlphaInput={hasAlphaInput}
               hex={solidColor}
               alpha={totalAlpha}
               onAlphaChange={handleTotalAlphaChange}

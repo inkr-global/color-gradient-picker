@@ -68,6 +68,26 @@ export function getAlphaDisplayValueFromAlpha(alpha: Alpha): string {
   };
 }
 
+/**
+ * Get the color from EyeDropper API
+ * @returns {string} Hex color
+ */
+
+export const openNativeEyeDropper = async () => {
+  const abortController = new AbortController();
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore this is new EyeDropper API
+  const eyeDropper = new EyeDropper();
+
+  try {
+    const result = await eyeDropper.open({ signal: abortController.signal });
+    return result.sRGBHex;
+  } catch (e) {
+    return null;
+  }
+};
+
 
 
 export const sortPalettePoints = (points: Point[]) => points.sort((

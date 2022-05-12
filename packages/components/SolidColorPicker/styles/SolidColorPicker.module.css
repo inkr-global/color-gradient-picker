@@ -4,6 +4,10 @@
   align-items: flex-start;
 }
 
+.sliders_wrapper.no_alpha_input {
+  padding: 10px 16px 0px 8px;
+}
+
 .sliders {
   flex-grow: 1;
   padding-top: 8px;

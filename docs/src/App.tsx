@@ -1,4 +1,3 @@
-/* eslint-disable import/no-relative-packages */
 import { useState } from "react";
 
 import ColorGradientPicker from "../../packages";
@@ -19,6 +18,7 @@ function App() {
       <ColorGradientPicker
         color={color}
         onChange={(_color) => setColor(_color)}
+        hasAlphaInput={false}
       />
     </div>
   );

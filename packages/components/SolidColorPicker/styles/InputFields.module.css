@@ -5,3 +5,28 @@
   grid-template-areas: "hex hex alpha" "red green blue";
   gap: 8px;
 }
+
+.no_alpha_input {
+  grid-template-areas: "hex hex hex" "red green blue";
+}
+
+.hex {
+  grid-area: hex;
+}
+
+.alpha {
+  grid-area: alpha;
+}
+
+.red {
+  grid-area: red;
+  margin-left: -2px;
+}
+
+.green {
+  grid-area: green;
+}
+
+.blue {
+  grid-area: blue;
+}

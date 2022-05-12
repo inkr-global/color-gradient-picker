@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
 import hexToHsv from "../../../utils/color/hexToHsv";
 import { InputAlpha } from "../../Input/Input.Alpha";
@@ -13,41 +15,42 @@ interface InputFieldsProps {
   setColor: (hex: Hex, hsv: Hsv) => void;
   setAlpha: (alpha: Alpha) => void;
   setColorFromRgb: (rgb: Rgb) => void;
+  hasAlphaInput?: boolean;
 }
 
 const InputFields = (props: InputFieldsProps) => {
-  const { hex, alpha, rgb, setColor, setAlpha, setColorFromRgb } = props;
+  const { hex, alpha, rgb, setColor, setAlpha, setColorFromRgb, hasAlphaInput = true } = props;
   const { red, green, blue } = rgb;
 
   return (
-    <div className={s.color_inputs_wrapper}>
+    <div className={clsx(s.color_inputs_wrapper, !hasAlphaInput && s.no_alpha_input)}>
       <InputHex
         label="HEX"
-        inputWidth={100}
-        style={{ gridArea: "hex" }}
+        inputWidth={hasAlphaInput ? 100 : 180}
+        className={s.hex}
         value={hex}
         onChange={(_hex) => {
           setColor(_hex, hexToHsv(_hex));
         }}
       />
 
-      <InputAlpha
-        inputWidth={40}
-        style={{ gridArea: "alpha" }}
-        value={alpha}
-        onChange={(_alpha) => {
-          setAlpha(_alpha);
-        }}
-      />
+      {hasAlphaInput && (
+        <InputAlpha
+          inputWidth={40}
+          className={s.alpha}
+          value={alpha}
+          onChange={(_alpha) => {
+            setAlpha(_alpha);
+          }}
+        />
+      )}
+
 
       <InputRgb
         label="RGB"
         info="R"
         inputWidth={26}
-        style={{
-          gridArea: "red",
-          marginLeft: -2,
-        }}
+        className={s.red}
         value={red}
         onChange={(_red) => {
           setColorFromRgb({
@@ -61,7 +64,7 @@ const InputFields = (props: InputFieldsProps) => {
       <InputRgb
         info="G"
         inputWidth={26}
-        style={{ gridArea: "green" }}
+        className={s.green}
         value={green}
         onChange={(_green) => {
           setColorFromRgb({
@@ -75,7 +78,7 @@ const InputFields = (props: InputFieldsProps) => {
       <InputRgb
         info="B"
         inputWidth={26}
-        style={{ gridArea: "blue" }}
+        className={s.blue}
         value={blue}
         onChange={(_blue) => {
           setColorFromRgb({
