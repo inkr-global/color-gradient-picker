@@ -9,7 +9,7 @@ export declare function getAlphaFromPosition(x: number, width: number): number;
 /**
  * Get the alpha display value
  */
-export declare function getAlphaDisplayValueFromAlpha(alpha: Alpha): string;
+export declare function getAlphaDisplayValueFromAlpha(alpha: Alpha, alphaSymbol: string): string;
 /**
  * Get the hue value from a given position on the hue slider
  * @param {number} x The x coordinate on the hue slider

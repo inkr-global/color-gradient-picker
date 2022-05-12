@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { Alpha as AlphaValue } from "../../types/color";
 import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
 import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
 import { InputBase } from "./Input.Base";
@@ -14,8 +13,6 @@ function InputAlphaInfo() {
 
 const ALPHA_SYMBOL = "%";
 
-const getAlphaString = (alpha: AlphaValue) => `${alpha}${ALPHA_SYMBOL}`;
-
 export function InputAlpha(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
@@ -25,12 +22,12 @@ export function InputAlpha(
   const { value, onChange, onInputBlur, ...rest } = props;
 
   const [displayAlpha, setDisplayAlpha] = useState<string>(
-    getAlphaDisplayValueFromAlpha(value),
+    getAlphaDisplayValueFromAlpha(value, ALPHA_SYMBOL),
   );
 
   // -----------------------------------------------------------------------
   useEffect(() => {
-    setDisplayAlpha(getAlphaDisplayValueFromAlpha(value));
+    setDisplayAlpha(getAlphaDisplayValueFromAlpha(value, ALPHA_SYMBOL));
   }, [value]);
 
   // -----------------------------------------------------------------------
@@ -41,7 +38,7 @@ export function InputAlpha(
     if (_value > ALPHA_DISPLAY_VALUE.MAX) _value = ALPHA_DISPLAY_VALUE.MAX;
     if (Number.isNaN(_value)) _value = ALPHA_DISPLAY_VALUE.MIN;
 
-    setDisplayAlpha(getAlphaString(_value));
+    setDisplayAlpha(_value + "");
   };
 
   const _onOutsideChange = () => {
@@ -50,7 +47,7 @@ export function InputAlpha(
       parseInt(displayAlpha.replace(ALPHA_SYMBOL, "")) / 100;
 
     onChange(_alphaDisplayNumber);
-    setDisplayAlpha(getAlphaDisplayValueFromAlpha(_alphaDisplayNumber));
+    setDisplayAlpha(getAlphaDisplayValueFromAlpha(_alphaDisplayNumber, ALPHA_SYMBOL));
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -63,6 +60,10 @@ export function InputAlpha(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
+  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    setDisplayAlpha(displayAlpha.replace(ALPHA_SYMBOL, ""));
+  };
+
   // -----------------------------------------------------------------------
   return (
     <InputBase
@@ -71,6 +72,7 @@ export function InputAlpha(
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
+      onInputFocus={_onInputFocus}
       value={displayAlpha}
       inputClassName={s.alpha_input}
     />

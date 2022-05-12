@@ -25,7 +25,7 @@ const ColorTypeSelect = ({
       onChange={(e) => {
         onChange(e.target.value as ColorType);
       }}
-      style={{ width: value === "linear-gradient" ? 120 : 55 }}
+      style={{ width: value === "linear-gradient" ? 110 : 50 }}
       disabled={colorSelectType !== "all"}
     >
       <option value="solid">Solid</option>

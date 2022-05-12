@@ -121,8 +121,6 @@ export const useDraggable = (params: Params) => {
     left: undefined,
   });
 
-  console.log("position", position);
-
   const [isDragging, setDragging] = useState<boolean>(false);
 
   // ------------------------------------------------------------------------------------------

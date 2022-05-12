@@ -20,8 +20,8 @@ export function getAlphaFromPosition(x: number, width: number): number {
 /**
  * Get the alpha display value
  */
-export function getAlphaDisplayValueFromAlpha(alpha: Alpha): string {
-  return `${Math.round(alpha * 100)}%`;
+export function getAlphaDisplayValueFromAlpha(alpha: Alpha, alphaSymbol: string): string {
+  return `${Math.round(alpha * 100)}${alphaSymbol}`;
 }
 
 /**

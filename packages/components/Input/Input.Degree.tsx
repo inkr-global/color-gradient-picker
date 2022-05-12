@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { DEGREE_VALUE, KEYS } from "./constants";
 import { InputBase } from "./Input.Base";
 import { BaseInputProps } from "./types";
-
 
 const DEGREE_SYMBOL = "°";
 
@@ -53,7 +52,7 @@ export function InputDegree(
     if (_value > DEGREE_VALUE.MAX) _value = DEGREE_VALUE.MAX;
     if (Number.isNaN(_value)) _value = DEGREE_VALUE.MIN;
 
-    setValueState(getDegreeString(_value));
+    setValueState(_value + "");
   };
 
   const _onOutsideChange = () => {
@@ -74,6 +73,10 @@ export function InputDegree(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
+  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    setValueState(valueState.replace(DEGREE_SYMBOL, ""));
+  };
+
   // -----------------------------------------------------------------------
   return (
     <InputBase
@@ -82,6 +85,7 @@ export function InputDegree(
       onKeyDown={_onKeyDown}
       value={valueState}
       onInputBlur={_onBlur}
+      onInputFocus={_onInputFocus}
       info={<DegreeInfo />}
       inputWidth={35}
     />
