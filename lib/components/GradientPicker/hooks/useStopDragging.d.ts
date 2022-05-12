@@ -16,10 +16,10 @@ declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDra
         clientY: number;
     };
     dragEvent: {
-        name: any;
+        name: string;
     };
     dragEndEvent: {
-        name: any;
+        name: string;
     };
 } | {
     stop: () => undefined;
@@ -28,14 +28,14 @@ declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDra
         clientY: any;
     };
     dragEvent: {
-        name: any;
+        name: string;
         options: {
             cancelable: boolean;
             passive: boolean;
         };
     };
     dragEndEvent: {
-        name: any;
+        name: string;
     };
 }) => void))[];
 export default useStopDragging;

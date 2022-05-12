@@ -7,10 +7,10 @@ declare const DRAG_HANDLERS: {
             clientY: number;
         };
         dragEvent: {
-            name: any;
+            name: string;
         };
         dragEndEvent: {
-            name: any;
+            name: string;
         };
     };
     TOUCH: {
@@ -20,14 +20,14 @@ declare const DRAG_HANDLERS: {
             clientY: any;
         };
         dragEvent: {
-            name: any;
+            name: string;
             options: {
                 cancelable: boolean;
                 passive: boolean;
             };
         };
         dragEndEvent: {
-            name: any;
+            name: string;
         };
     };
 };

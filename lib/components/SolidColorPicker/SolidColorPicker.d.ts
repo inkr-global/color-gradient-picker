@@ -5,6 +5,7 @@ interface ColorPickerProps {
     alpha: Alpha;
     onColorChange: (updatedHex: Hex) => void;
     onAlphaChange: (alpha: Alpha) => void;
+    hasAlphaInput?: boolean;
 }
-declare const ColorPicker: (props: ColorPickerProps) => JSX.Element;
-export default ColorPicker;
+declare const SolidColorPicker: (props: ColorPickerProps) => JSX.Element;
+export default SolidColorPicker;

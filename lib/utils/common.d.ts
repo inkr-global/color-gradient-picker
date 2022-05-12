@@ -26,6 +26,11 @@ export declare function getHueFromPosition(x: number, width: number): number;
  * @returns {SaturationValue} The saturation and value based on the position
  */
 export declare function getSaturationValueFromPosition(x: number, y: number, width: number, height: number): SaturationValue;
+/**
+ * Get the color from EyeDropper API
+ * @returns {string} Hex color
+ */
+export declare const openNativeEyeDropper: () => Promise<any>;
 export declare const sortPalettePoints: (points: Point[]) => Point[];
 export declare const getLinearGradientBackgroundCss: (gradient: Gradient) => string;
 export declare const noop: () => undefined;
