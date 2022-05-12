@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build:dev": "rollup -c",
-    "build": "NODE_ENV=production rollup -c",
+    "build": "rimraf lib && NODE_ENV=production rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:eslint": "eslint --ignore-pattern \"submodules/**\" \"./**/*.{js,jsx,ts,tsx}\"",
     "lint:tsc": "tsc --project ./tsconfig.json --noEmit",
@@ -47,11 +47,13 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.0",
+    "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
     "rollup-plugin-uglify": "^6.0.4",
+    "tslib": "^2.4.0",
     "typescript": "^4.6.2"
   },
   "dependencies": {
