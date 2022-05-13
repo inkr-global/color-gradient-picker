@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import { DEGREE_VALUE, KEYS } from "./constants";
+import { DEGREE_SYMBOL, DEGREE_VALUE, KEYS } from "./constants";
 import { InputBase } from "./Input.Base";
 import { BaseInputProps } from "./types";
 
-const DEGREE_SYMBOL = "°";
 
 function DegreeInfo() {
   return (

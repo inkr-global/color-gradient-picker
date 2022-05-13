@@ -18,3 +18,5 @@ export declare const DEGREE_VALUE: {
     MIN: number;
 };
 export declare const DEFAULT_HEX = "#000";
+export declare const ALPHA_SYMBOL = "%";
+export declare const DEGREE_SYMBOL = "\u00B0";

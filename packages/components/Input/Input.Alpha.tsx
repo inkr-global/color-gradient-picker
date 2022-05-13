@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
-import { ALPHA_DISPLAY_VALUE, KEYS } from "./constants";
+import { ALPHA_DISPLAY_VALUE, ALPHA_SYMBOL, KEYS } from "./constants";
 import { InputBase } from "./Input.Base";
 import s from "./styles/Input.Alpha.module.css";
 import { BaseInputProps } from "./types";
@@ -11,7 +11,6 @@ function InputAlphaInfo() {
   return <div className={s.alpha_info} />;
 }
 
-const ALPHA_SYMBOL = "%";
 
 export function InputAlpha(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {

@@ -4,6 +4,7 @@ import React, { CSSProperties, useCallback, useRef, useState } from "react";
 import { Alpha } from "../../../types/color";
 import hexToRgb from "../../../utils/color/hexToRgb";
 import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "../../../utils/common";
+import { ALPHA_SYMBOL } from "../../Input/constants";
 import s from "../styles/AlphaSlider.module.css";
 
 type AlphaSliderProps = {
@@ -96,7 +97,7 @@ const AlphaSlider = (props: AlphaSliderProps) => {
       };
 
   const sliderStyle: CSSProperties = {
-    left: getAlphaDisplayValueFromAlpha(alpha),
+    left: getAlphaDisplayValueFromAlpha(alpha, ALPHA_SYMBOL),
     backgroundColor: hex,
   };
 
