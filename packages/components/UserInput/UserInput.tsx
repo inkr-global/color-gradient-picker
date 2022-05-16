@@ -13,6 +13,7 @@ const UserInput = (props: UserInputProps) => {
     onAlphaChange,
     hasAlphaInput,
     inputWidth = 80,
+    onColorPreviewClick,
     ...rest
   } = props;
 
@@ -45,6 +46,7 @@ const UserInput = (props: UserInputProps) => {
           value={solid}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
+          onColorPreviewClick={onColorPreviewClick}
         />
       )}
 

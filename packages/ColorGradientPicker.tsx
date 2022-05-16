@@ -65,6 +65,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     if (typeof onInputFocus === "function") onInputFocus(e);
   };
 
+  const onShowPanel = useCallback(() => {
+    setOpenPicker(true);
+  }, [])
+
   const onHidePanel = useCallback(() => {
     setOpenPicker(false);
   }, []);
@@ -133,6 +137,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         onAlphaChange={handleTotalAlphaChange}
         color={color}
         onInputFocus={handleInputFocus}
+        onColorPreviewClick={onShowPanel}
       />
 
       {isPickerOpen && (

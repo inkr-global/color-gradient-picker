@@ -6,9 +6,11 @@ import { InputBase } from "./Input.Base";
 import s from "./styles/Input.Hex.module.css";
 import { BaseInputProps } from "./types";
 
-
-function ColorPreview(props: { value: string }) {
-  const { value } = props;
+function ColorPreview(props: {
+  value: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}) {
+  const { value, onClick } = props;
 
   return (
     <div
@@ -16,6 +18,7 @@ function ColorPreview(props: { value: string }) {
         background: value,
       }}
       className={s.color_preview}
+      onClick={onClick}
     />
   );
 }
@@ -25,9 +28,10 @@ export function InputHex(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;
     value: string;
+    onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   },
 ) {
-  const { value, onChange, onInputBlur, ...rest } = props;
+  const { value, onChange, onInputBlur, onColorPreviewClick, ...rest } = props;
 
   const [valueState, setValueState] = useState<string>(value);
 
@@ -66,7 +70,9 @@ export function InputHex(
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
       value={valueState.toUpperCase()}
-      info={<ColorPreview value={value as string} />}
+      info={
+        <ColorPreview onClick={onColorPreviewClick} value={value as string} />
+      }
     />
   );
 }

@@ -23,6 +23,7 @@ export interface UserInputProps extends BaseInputProps {
   color: ColorValue;
   onSolidColorChange: (hex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
+  onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   hasAlphaInput?: boolean;
 }
 
