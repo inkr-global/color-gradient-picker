@@ -5,9 +5,11 @@ import { InputBase } from "./Input.Base";
 import s from "./styles/Input.Gradient.module.css";
 import { BaseInputProps } from "./types";
 
-
-function GradientPreview(props: { value?: Gradient }) {
-  const { value } = props;
+function GradientPreview(props: {
+  value?: Gradient;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
+}) {
+  const { value, onClick } = props;
 
   let color = DEFAULT_HEX;
   if (typeof value !== "undefined") {
@@ -20,6 +22,7 @@ function GradientPreview(props: { value?: Gradient }) {
         background: color,
       }}
       className={s.gradient_preview}
+      onClick={onClick}
     />
   );
 }
@@ -28,9 +31,10 @@ function GradientPreview(props: { value?: Gradient }) {
 export function InputGradient(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
+    onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   },
 ) {
-  const { value, ...rest } = props;
+  const { value, onColorPreviewClick, ...rest } = props;
 
   // -----------------------------------------------------------------------
   return (
@@ -38,7 +42,7 @@ export function InputGradient(
       {...rest}
       value="Gradient"
       onChange={noop}
-      info={<GradientPreview value={value} />}
+      info={<GradientPreview onClick={onColorPreviewClick} value={value} />}
     />
   );
 }

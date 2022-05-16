@@ -5,7 +5,6 @@ import { InputGradient } from "../Input/Input.Gradient";
 import { InputHex } from "../Input/Input.Hex";
 import s from "./UserInput.module.css";
 
-
 const UserInput = (props: UserInputProps) => {
   const {
     color,
@@ -13,7 +12,6 @@ const UserInput = (props: UserInputProps) => {
     onAlphaChange,
     hasAlphaInput,
     inputWidth = 80,
-    onColorPreviewClick,
     ...rest
   } = props;
 
@@ -46,7 +44,6 @@ const UserInput = (props: UserInputProps) => {
           value={solid}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
-          onColorPreviewClick={onColorPreviewClick}
         />
       )}
 
