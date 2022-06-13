@@ -10,7 +10,7 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
+  color: "var(--gray-8)";
   font-size: var(--cgp-base-font-size, 14px);
 }
 
