@@ -15,6 +15,7 @@ export interface ColorStopProps {
     onDeleteColor: (id: number) => void;
     onDragStart: (id: number) => void;
     onDragEnd: (id: number) => void;
+    theme?: "light" | "dark";
 }
 export interface StopHoldersProps {
     stops: GradientStop[];
@@ -23,12 +24,14 @@ export interface StopHoldersProps {
     onDeleteColor: (id: number) => void;
     onDragStart: (id: number) => void;
     onDragEnd: (id: number) => void;
+    theme?: "light" | "dark";
 }
 export interface PalletteProps {
     points: Point[];
     degree: number;
     onAddColor: (offset: number) => void;
     disabled?: boolean;
+    theme?: "light" | "dark";
 }
 export interface GradientPickerProps {
     gradient: Gradient;
@@ -36,4 +39,5 @@ export interface GradientPickerProps {
     stopRemovalDrop?: number;
     maxStops?: number;
     minStops?: number;
+    theme?: "light" | "dark";
 }

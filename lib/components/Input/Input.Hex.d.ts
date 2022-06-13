@@ -4,4 +4,5 @@ export declare function InputHex(props: Omit<BaseInputProps, "onChange" | "info"
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+    theme?: "light" | "dark";
 }): JSX.Element;

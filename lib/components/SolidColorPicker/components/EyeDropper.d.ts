@@ -1,6 +1,7 @@
 /// <reference types="react" />
 interface EyeDropperProps {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
+    theme?: "light" | "dark";
 }
-declare const EyeDropper: ({ onClick }: EyeDropperProps) => JSX.Element;
+declare const EyeDropper: ({ onClick, theme }: EyeDropperProps) => JSX.Element;
 export default EyeDropper;
