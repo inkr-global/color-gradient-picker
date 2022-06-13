@@ -29,9 +29,10 @@ export function InputHex(
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+    theme?: "light" | "dark";
   },
 ) {
-  const { value, onChange, onInputBlur, onColorPreviewClick, ...rest } = props;
+  const { value, onChange, onInputBlur, onColorPreviewClick, theme,...rest } = props;
 
   const [valueState, setValueState] = useState<string>(value);
 
@@ -73,6 +74,7 @@ export function InputHex(
       info={
         <ColorPreview onClick={onColorPreviewClick} value={value as string} />
       }
+      theme={theme}
     />
   );
 }

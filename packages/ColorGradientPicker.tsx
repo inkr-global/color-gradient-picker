@@ -38,6 +38,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     panelStyle,
     hasAlphaInput,
     isDraggable,
+    theme = "light",
     ...rest
   } = props;
 
@@ -127,7 +128,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   return (
     <div
       ref={containerRef}
-      className={cn(s.wrapper, classNamePrefix, className)}
+      className={cn(s.wrapper, theme === "light" ? s.wrapper_light : s.wrapper_dark, classNamePrefix, className)}
       style={style}
     >
       <UserInput
@@ -138,11 +139,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         color={color}
         onInputFocus={handleInputFocus}
         onColorPreviewClick={onShowPanel}
+        theme={theme}
       />
 
       {isPickerOpen && (
         <div
-          className={cn(s.picking_panel, s[panelPlacement], panelClassName)}
+          className={cn(s.picking_panel, theme === "light" ? s.color_light : s.color_dark, s[panelPlacement], panelClassName)}
           style={{
             ...panelStyle,
             position: isDraggable ? "fixed" : undefined,
@@ -155,12 +157,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             colorSelectType={colorSelectType}
             onClosePanel={onHidePanel}
             draggableID={draggableID}
+            theme={theme}
           />
 
           {propColorType === "linear-gradient" && (
             <GradientPicker
               gradient={linearGradient}
               onLinearGradientChange={handleLinearGradientChange}
+              theme={theme}
             />
           )}
 
@@ -171,6 +175,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               alpha={totalAlpha}
               onAlphaChange={handleTotalAlphaChange}
               onColorChange={handleSolidColorChange}
+              theme={theme}
             />
           )}
         </div>

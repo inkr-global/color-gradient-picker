@@ -28,4 +28,5 @@ export interface BaseInputProps {
 
   extraInput?: ReactElement;
   isExtraComponent?: boolean;
+  theme?: "light" | "dark";
 }

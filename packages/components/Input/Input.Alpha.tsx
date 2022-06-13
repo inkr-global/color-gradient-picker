@@ -16,9 +16,10 @@ export function InputAlpha(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
+    theme?: "light" | "dark";
   },
 ) {
-  const { value, onChange, onInputBlur, ...rest } = props;
+  const { value, onChange, onInputBlur, theme, ...rest } = props;
 
   const [displayAlpha, setDisplayAlpha] = useState<string>(
     getAlphaDisplayValueFromAlpha(value, ALPHA_SYMBOL),
@@ -74,6 +75,7 @@ export function InputAlpha(
       onInputFocus={_onInputFocus}
       value={displayAlpha}
       inputClassName={s.alpha_input}
+      theme={theme}
     />
   );
 }

@@ -25,6 +25,7 @@ export interface UserInputProps extends BaseInputProps {
   onAlphaChange: (alpha: Alpha) => void;
   onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   hasAlphaInput?: boolean;
+  theme?: "light" | "dark";
 }
 
 export interface ColorGradientPickerProps
@@ -49,4 +50,6 @@ export interface ColorGradientPickerProps
   style?: CSSProperties;
   panelStyle?: CSSProperties;
   isDraggable?: boolean;
+  theme?:  "light" | "dark";
+
 }

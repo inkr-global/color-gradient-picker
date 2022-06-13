@@ -16,10 +16,11 @@ interface InputFieldsProps {
   setAlpha: (alpha: Alpha) => void;
   setColorFromRgb: (rgb: Rgb) => void;
   hasAlphaInput?: boolean;
+  theme?: "light" | "dark";
 }
 
 const InputFields = (props: InputFieldsProps) => {
-  const { hex, alpha, rgb, setColor, setAlpha, setColorFromRgb, hasAlphaInput = true } = props;
+  const { hex, alpha, rgb, setColor, setAlpha, setColorFromRgb, hasAlphaInput = true, theme } = props;
   const { red, green, blue } = rgb;
 
   return (
@@ -32,6 +33,7 @@ const InputFields = (props: InputFieldsProps) => {
         onChange={(_hex) => {
           setColor(_hex, hexToHsv(_hex));
         }}
+        theme={theme}
       />
 
       {hasAlphaInput && (
@@ -42,6 +44,7 @@ const InputFields = (props: InputFieldsProps) => {
           onChange={(_alpha) => {
             setAlpha(_alpha);
           }}
+          theme={theme}
         />
       )}
 
@@ -59,6 +62,7 @@ const InputFields = (props: InputFieldsProps) => {
             blue: blue,
           });
         }}
+        theme={theme}
       />
 
       <InputRgb
@@ -73,6 +77,7 @@ const InputFields = (props: InputFieldsProps) => {
             blue: blue,
           });
         }}
+        theme={theme}
       />
 
       <InputRgb
@@ -87,6 +92,7 @@ const InputFields = (props: InputFieldsProps) => {
             blue: _blue,
           });
         }}
+        theme={theme}
       />
     </div>
   );

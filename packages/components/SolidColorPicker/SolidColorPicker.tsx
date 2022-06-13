@@ -22,11 +22,12 @@ interface ColorPickerProps {
   onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
   hasAlphaInput?: boolean;
+  theme?: "light" | "dark";
 }
 
 const SolidColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hex, alpha, onColorChange, onAlphaChange, hasAlphaInput = true } = props;
+  const { hex, alpha, onColorChange, onAlphaChange, hasAlphaInput = true, theme } = props;
 
   const [, setHexState] = useState<Hex>(hex);
 
@@ -91,7 +92,7 @@ const SolidColorPicker = (props: ColorPickerProps) => {
       />
 
       <div className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}>
-        <EyeDropperBtn onClick={_onEyeDropperClick} />
+        <EyeDropperBtn onClick={_onEyeDropperClick} theme={theme}/>
 
         <div className={cn(s.sliders)}>
           <HueSlider
@@ -120,6 +121,7 @@ const SolidColorPicker = (props: ColorPickerProps) => {
         setColor={_onSetColor}
         setColorFromRgb={_onSetColorFromRgb}
         hasAlphaInput={hasAlphaInput}
+        theme={theme}
       />
     </>
   );

@@ -10,8 +10,16 @@
   background-color: transparent;
   outline: none;
   border: none;
-  color: #515151;
+  /* color: #515151; */
   font-size: var(--cgp-base-font-size, 14px);
+}
+
+.selectLight {
+  color: #515151;
+}
+
+.selectDark {
+  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
 }
 
 .no_arrow {

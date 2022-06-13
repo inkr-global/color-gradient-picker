@@ -32,9 +32,10 @@ export function InputGradient(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+    theme?: "light" | "dark";
   },
 ) {
-  const { value, onColorPreviewClick, ...rest } = props;
+  const { value, onColorPreviewClick, theme, ...rest } = props;
 
   // -----------------------------------------------------------------------
   return (
@@ -43,6 +44,7 @@ export function InputGradient(
       value="Gradient"
       onChange={noop}
       info={<GradientPreview onClick={onColorPreviewClick} value={value} />}
+      theme={theme}
     />
   );
 }

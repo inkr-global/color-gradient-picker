@@ -12,6 +12,7 @@ const UserInput = (props: UserInputProps) => {
     onAlphaChange,
     hasAlphaInput,
     inputWidth = 80,
+    theme,
     ...rest
   } = props;
 
@@ -31,6 +32,7 @@ const UserInput = (props: UserInputProps) => {
         value={alpha}
         onChange={onAlphaChange}
         inputWidth={45}
+        theme={theme}
       />
     </>
   ) : undefined;
@@ -44,11 +46,12 @@ const UserInput = (props: UserInputProps) => {
           value={solid}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
+          theme={theme}
         />
       )}
 
       {type === "linear-gradient" && (
-        <InputGradient {...rest} inputWidth={inputWidth} value={gradient} />
+        <InputGradient {...rest} inputWidth={inputWidth} value={gradient} theme={theme}/>
       )}
     </>
   );

@@ -4,8 +4,11 @@
   height: 26px;
 }
 
-.container:hover .wrapper {
-  border: 1px solid var(--cgp-input-hover-color, #262626);
+.container:hover .wrapper_light {
+  border: 1px solid var(--cgp-input-hover-color-light, #d9d9d9);
+}
+.container:hover .wrapper_dark {
+  border: 1px solid var(--cgp-input-hover-color-dark, #262626);
 }
 
 .wrapper {
@@ -17,8 +20,16 @@
   transition: border-color 0.25s ease;
 }
 
-.container .wrapper.isFocus {
+/* .container .wrapper.isFocus {
   border: 1px solid var(--cgp-input-focus-color, #a58d12);
+} */
+
+.container .wrapper_light.isFocus {
+  border: 1px solid var(--cgp-input-focus-color-light, #40a9ff);
+}
+
+.container .wrapper_dark.isFocus {
+  border: 1px solid var(--cgp-input-focus-color-dark, #a58d12);
 }
 
 .container .extra_component {

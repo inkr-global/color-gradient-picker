@@ -17,9 +17,10 @@ export function InputRgb(
   props: Omit<BaseInputProps, "onChange" | "value"> & {
     onChange: (value: number) => void;
     value: number;
+    theme?: "light" | "dark";
   },
 ) {
-  const { inputProps, info, onChange, value, onInputBlur, ...rest } = props;
+  const { inputProps, info, onChange, value, onInputBlur, theme, ...rest } = props;
 
   const [valueState, setValueState] = useState<number>(value);
 
@@ -69,6 +70,7 @@ export function InputRgb(
       onInputBlur={_onBlur}
       info={<InputTextInfo>{info}</InputTextInfo>}
       inputProps={customInputProps}
+      theme={theme}
     />
   );
 }

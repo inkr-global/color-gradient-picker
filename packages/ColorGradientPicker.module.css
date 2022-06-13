@@ -7,8 +7,12 @@
   --cgp-value-picker-width: 12px;
   --cgp-value-picker-border: 2px;
 
-  --cgp-input-focus-color: #40a9ff;
-  --cgp-input-hover-color: #d9d9d9;
+  --cgp-input-focus-color-light: #40a9ff;
+  --cgp-input-hover-color-light: #d9d9d9;
+
+  --cgp-input-focus-color-dark: #a58d12;
+  --cgp-input-hover-color-dark: #262626;
+
   --cgp-input-height: 26px;
 
   --cgp-picking-panel-zindex: 1;
@@ -22,19 +26,34 @@
 .wrapper {
   font-family: var(--cgp-font-family);
   font-size: var(--cgp-base-font-size, 12px);
-  /* color: var(--cgp-text-color, rgba(255, 255, 255, 0.65)); */
-  color: #515151;
+  /* color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
+  color: #515151; */
   position: relative;
   display: inline-block;
+}
+
+.wrapper_light {
+  color: #515151;
+}
+
+.wrapper_dark {
+  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
 }
 
 .picking_panel {
   width: 290px;
   border-radius: 4px;
-  background-color: #fff;
   position: absolute;
   padding-bottom: 16px;
   z-index: var(--cgp-picking-panel-zindex, 1);
+}
+
+.color_dark {
+  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
+}
+
+.color_light {
+  background-color: #fff;
 }
 
 .bottom-left {
