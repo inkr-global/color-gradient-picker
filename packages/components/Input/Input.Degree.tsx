@@ -6,7 +6,7 @@ import { BaseInputProps } from "./types";
 
 
 function DegreeInfo({theme} : { theme?: "light"| "dark"}) {
-  const titleColor = theme === "light" ? "black" : "white";
+  const titleColor = theme === "light" ? "#bbb" : "white";
   const  fillOpacity = theme === "light" ? "0.8" : "0.3";
   return (
     <svg
