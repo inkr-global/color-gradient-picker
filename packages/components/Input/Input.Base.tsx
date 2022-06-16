@@ -63,7 +63,7 @@ function InputBase(props: BaseInputProps) {
       <div
         className={clsx(
           s.wrapper,
-          theme === "light"? s.wrapper_light : s.wrapper_dark,
+          theme === "light" ? s.wrapper_light : s.wrapper_dark,
           isFocus && s.isFocus,
           isExtraComponent && s.extra_component,
           inputWrapperClassName,

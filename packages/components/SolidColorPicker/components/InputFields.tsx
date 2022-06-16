@@ -52,7 +52,7 @@ const InputFields = (props: InputFieldsProps) => {
       <InputRgb
         label="RGB"
         info="R"
-        inputWidth={26}
+        inputWidth={31}
         className={s.red}
         value={red}
         onChange={(_red) => {
@@ -67,7 +67,7 @@ const InputFields = (props: InputFieldsProps) => {
 
       <InputRgb
         info="G"
-        inputWidth={26}
+        inputWidth={31}
         className={s.green}
         value={green}
         onChange={(_green) => {
@@ -82,7 +82,7 @@ const InputFields = (props: InputFieldsProps) => {
 
       <InputRgb
         info="B"
-        inputWidth={26}
+        inputWidth={31}
         className={s.blue}
         value={blue}
         onChange={(_blue) => {

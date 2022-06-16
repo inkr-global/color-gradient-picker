@@ -7,6 +7,7 @@
 .container:hover .wrapper_light {
   border: 1px solid var(--cgp-input-hover-color-light, #d9d9d9);
 }
+
 .container:hover .wrapper_dark {
   border: 1px solid var(--cgp-input-hover-color-dark, #262626);
 }
@@ -48,14 +49,11 @@
   border: none;
   line-height: 1.5;
   background-color: transparent;
+
   /* color: var(--cgp-text-color, rgba(255, 255, 255, 0.65)); */
   color: #515151;
-  border: none;
   outline: none;
   font-size: 14px;
-}
-
-.input {
   margin-right: 8px;
 }
 
