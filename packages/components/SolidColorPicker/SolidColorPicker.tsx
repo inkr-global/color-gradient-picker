@@ -15,7 +15,6 @@ import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 import s from "./styles/SolidColorPicker.module.css";
 
-
 interface ColorPickerProps {
   hex: Hex;
   alpha: Alpha;
@@ -27,7 +26,14 @@ interface ColorPickerProps {
 
 const SolidColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
-  const { hex, alpha, onColorChange, onAlphaChange, hasAlphaInput = true, theme } = props;
+  const {
+    hex,
+    alpha,
+    onColorChange,
+    onAlphaChange,
+    hasAlphaInput = true,
+    theme,
+  } = props;
 
   const [, setHexState] = useState<Hex>(hex);
 
@@ -62,10 +68,12 @@ const SolidColorPicker = (props: ColorPickerProps) => {
   };
 
   const _onEyeDropperClick = async () => {
-    const _hex = await openNativeEyeDropper();
+    const _rgbString = await openNativeEyeDropper(); // this will be rgb(r, g, b)
+    const numberRegex = /\d+/g;
+    const [red, green, blue] = _rgbString.match(numberRegex).map(Number);
 
-    if (_hex !== null) {
-      _onSetColor(_hex, hexToHsv(_hex));
+    if (_rgbString !== null) {
+      _onSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
     }
   };
 
@@ -91,8 +99,10 @@ const SolidColorPicker = (props: ColorPickerProps) => {
         }}
       />
 
-      <div className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}>
-        <EyeDropperBtn onClick={_onEyeDropperClick} theme={theme}/>
+      <div
+        className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}
+      >
+        <EyeDropperBtn onClick={_onEyeDropperClick} theme={theme} />
 
         <div className={cn(s.sliders)}>
           <HueSlider
@@ -109,7 +119,6 @@ const SolidColorPicker = (props: ColorPickerProps) => {
           {hasAlphaInput && (
             <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
           )}
-
         </div>
       </div>
 
