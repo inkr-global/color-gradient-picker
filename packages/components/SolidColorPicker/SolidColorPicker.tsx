@@ -68,12 +68,20 @@ const SolidColorPicker = (props: ColorPickerProps) => {
   };
 
   const _onEyeDropperClick = async () => {
-    const _rgbString = await openNativeEyeDropper(); // this will be rgb(r, g, b)
+    const _colorString = await openNativeEyeDropper(); // this will be rgb(r, g, b) in browser or #hex in electron
     const numberRegex = /\d+/g;
-    const [red, green, blue] = _rgbString.match(numberRegex).map(Number);
 
-    if (_rgbString !== null) {
-      _onSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
+    const isRgbString = _colorString?.startsWith("rgb");
+    const isHex = _colorString?.startsWith("#");
+
+    if (isRgbString) {
+      const [red, green, blue] = _colorString.match(numberRegex).map(Number);
+
+      if (_colorString !== null) {
+        _onSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
+      }
+    } else if (isHex) {
+      _onSetColor(_colorString, hexToHsv(_colorString));
     }
   };
 
