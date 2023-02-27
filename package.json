@@ -2,11 +2,11 @@
   "name": "@inkr/color-gradient-picker",
   "version": "0.0.1",
   "description": "beautiful ReactJs color gradient picker",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "main": "packages/index.js",
+  "module": "packages/index.esm.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "packages"
   ],
   "scripts": {
     "build:dev": "rollup -c",
