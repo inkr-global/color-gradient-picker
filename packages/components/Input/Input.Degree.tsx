@@ -75,7 +75,7 @@ export function InputDegree(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
-  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setValueState(valueState.replace(DEGREE_SYMBOL, ""));
   };
 

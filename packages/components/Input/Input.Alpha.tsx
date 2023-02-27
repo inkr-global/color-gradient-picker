@@ -60,7 +60,7 @@ export function InputAlpha(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
-  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setDisplayAlpha(displayAlpha.replace(ALPHA_SYMBOL, ""));
   };
 
