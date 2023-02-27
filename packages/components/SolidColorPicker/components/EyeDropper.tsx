@@ -5,7 +5,7 @@ interface EyeDropperProps {
 
 const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
   const titleColor = theme === "light" ? "black" : "white";
-  const  fillOpacity = theme === "light" ? "0.8" : "0.3";
+  const fillOpacity = theme === "light" ? "0.8" : "0.3";
 
   return (
     <button
@@ -14,9 +14,11 @@ const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
         border: "none",
         backgroundColor: "transparent",
         cursor: "pointer",
-        padding: "6px 12px 8px 6px",
+        padding: 0,
         flexShrink: 0,
         marginRight: 4,
+        height: "32px",
+        width: "32px",
       }}
       onClick={onClick}
     >

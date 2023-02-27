@@ -58,7 +58,7 @@ const GradientPicker = (props: GradientPickerProps) => {
     stopRemovalDrop = DEFAULT_STOP_REMOVAL_DROP,
     minStops = DEFAULT_MIN_STOPS,
     maxStops = DEFAULT_MAX_STOPS,
-    theme
+    theme,
   } = props;
 
   const { points: pointsProp, degree } = gradient;
@@ -192,7 +192,6 @@ const GradientPicker = (props: GradientPickerProps) => {
   return (
     <>
       <div className={s.gradient_picker}>
-        <InputDegree onChange={handleDegreeChange} value={degree} theme={theme} />
         <div>
           <Palette
             onAddColor={handleColorAdd}
@@ -212,6 +211,12 @@ const GradientPicker = (props: GradientPickerProps) => {
             onDragEnd={noop}
           />
         </div>
+        <InputDegree
+          onChange={handleDegreeChange}
+          value={degree}
+          theme={theme}
+        />
+
       </div>
 
       <SolidColorPicker

@@ -5,9 +5,9 @@ import { InputBase } from "./Input.Base";
 import { BaseInputProps } from "./types";
 
 
-function DegreeInfo({theme} : { theme?: "light"| "dark"}) {
+function DegreeInfo({ theme } : { theme?: "light"| "dark"}) {
   const titleColor = theme === "light" ? "#bbb" : "white";
-  const  fillOpacity = theme === "light" ? "0.8" : "0.3";
+  const fillOpacity = theme === "light" ? "0.8" : "0.3";
   return (
     <svg
       width="14"
@@ -54,7 +54,7 @@ export function InputDegree(
     if (_value > DEGREE_VALUE.MAX) _value = DEGREE_VALUE.MAX;
     if (Number.isNaN(_value)) _value = DEGREE_VALUE.MIN;
 
-    setValueState(_value + "");
+    setValueState(`${_value}`);
   };
 
   const _onOutsideChange = () => {
@@ -88,7 +88,7 @@ export function InputDegree(
       value={valueState}
       onInputBlur={_onBlur}
       onInputFocus={_onInputFocus}
-      info={<DegreeInfo theme={theme}/>}
+      info={<DegreeInfo theme={theme} />}
       inputWidth={35}
       theme={theme}
     />

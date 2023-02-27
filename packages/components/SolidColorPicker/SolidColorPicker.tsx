@@ -15,6 +15,7 @@ import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 import s from "./styles/SolidColorPicker.module.css";
 
+
 interface ColorPickerProps {
   hex: Hex;
   alpha: Alpha;
@@ -110,22 +111,28 @@ const SolidColorPicker = (props: ColorPickerProps) => {
       <div
         className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}
       >
-        <EyeDropperBtn onClick={_onEyeDropperClick} theme={theme} />
-
+        <div className={s.btnEye}>
+          <EyeDropperBtn
+            onClick={_onEyeDropperClick}
+            theme={theme}
+          />
+        </div>
         <div className={cn(s.sliders)}>
           <HueSlider
             hue={hue}
-            onChange={(updatedHue) =>
-              _onSetColorFromHsv({
-                ...hsvRef.current,
-                hue: updatedHue,
-              })
-            }
+            onChange={(updatedHue) => _onSetColorFromHsv({
+              ...hsvRef.current,
+              hue: updatedHue,
+            })}
             className={s.hue_slider}
           />
 
           {hasAlphaInput && (
-            <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
+            <AlphaSlider
+              alpha={alpha}
+              hex={hex}
+              onChange={onAlphaChange}
+            />
           )}
         </div>
       </div>

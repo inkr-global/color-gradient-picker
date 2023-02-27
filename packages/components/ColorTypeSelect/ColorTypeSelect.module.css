@@ -1,16 +1,25 @@
 .select_wrapper {
-  height: 42px;
+  height: 32px;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 8px;
+  padding: 0 4px 0 12px;
+  gap: 12px;
+  width: 300px;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .select {
   background-color: transparent;
   outline: none;
   border: none;
-  /* color: #515151; */
+  font-weight: 400;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.88);
   font-size: var(--cgp-base-font-size, 14px);
 }
 
@@ -32,4 +41,7 @@
   background: transparent;
   margin-left: auto;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

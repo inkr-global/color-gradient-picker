@@ -1,16 +1,16 @@
 .color_stop {
   position: absolute;
   cursor: pointer;
-  height: 14px;
-  width: 14px;
-  top: 8px;
+  height: 15px;
+  width: 15px;
+  top: 6px;
   border-radius: 2px;
-  border: 2px solid #262626;
-  box-shadow: 0 0 6px #000;
+  border: 2px solid #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 }
 
 .color_stop:hover {
-  border-color: #434343;
+  border-color: #1677ff;
 }
 
 .color_stop::before {
@@ -18,33 +18,35 @@
   width: 0;
   height: 0;
   position: absolute;
-  top: -8px;
-  left: 2px;
+  top: -7px;
+  left: 3.5px;
   border: 3px solid transparent;
-  border-bottom: 3px solid #262626;
+  border-bottom: 3px solid #fff;
   box-sizing: border-box;
 }
 
 .color_stop:hover::before {
-  border-bottom-color: #434343;
+  border-bottom-color: #1677ff;
 }
 
 .color_stop.active {
-  border: 2px solid #fafafa;
+  border: 2px solid #1677ff;
 }
 
 .color_stop.active::before {
-  border-bottom-color: #fafafa;
+  border-bottom-color: #1677ff;
 }
 
 .color_stop::after {
   content: "";
   width: 2px;
-  height: 26px;
+  height: 28px;
   position: absolute;
   border-radius: 2px;
-  background-color: #fafafa;
-  top: -34px;
-  left: 4px;
-  box-shadow: 0 0 6px #000;
+  background-color: #fff;
+  top: -33px;
+  left: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+
+  /* box-shadow: 0 0 6px #; */
 }
