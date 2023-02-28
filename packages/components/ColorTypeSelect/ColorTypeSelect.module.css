@@ -12,7 +12,6 @@
 }
 
 .select {
-  background-color: transparent;
   outline: none;
   border: none;
   font-weight: 400;
@@ -20,11 +19,15 @@
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.88);
-  font-size: var(--cgp-base-font-size, 14px);
+  font-size: 14px;
+  overflow: hidden;
+  background: url(../../image/dropdown.svg) no-repeat right white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .selectLight {
-  color: #515151;
+  color: rgba(0, 0, 0, 0.88);
 }
 
 .selectDark {

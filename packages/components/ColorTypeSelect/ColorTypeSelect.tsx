@@ -28,11 +28,11 @@ const ColorTypeSelect = ({
       onChange={(e) => {
         onChange(e.target.value as ColorType);
       }}
-      style={{ width: value === "linear-gradient" ? 110 : 50 }}
+      style={{ width: value === "linear-gradient" ? 71 : 48 }}
       disabled={colorSelectType !== "all"}
     >
       <option value="solid">Solid</option>
-      <option value="linear-gradient">Linear Gradient</option>
+      <option value="linear-gradient">Gradient</option>
     </select>
     {draggableID && (
       <div

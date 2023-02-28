@@ -5,7 +5,9 @@
   border-radius: 2px;
   text-align: center;
   position: relative;
-  top: -1px;
-  font-size: var(--cgp-base-font-size, 14px);
-  line-height: 18px;
+  top: -3px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: rgba(0, 0, 0, 0.45);
 }
