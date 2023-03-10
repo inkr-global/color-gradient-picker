@@ -17,7 +17,7 @@
   align-items: center;
   border-radius: 4px;
   height: 100%;
-  border: 1px solid transparent;
+  border: 1px solid #fff;
   transition: border-color 0.25s ease;
 }
 
