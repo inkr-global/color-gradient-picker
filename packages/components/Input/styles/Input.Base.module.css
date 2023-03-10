@@ -5,11 +5,11 @@
 }
 
 .container:hover .wrapper_light {
-  border: 1px solid #d9d9d9;
+  border: 1px solid #d9d9d9 !important;
 }
 
 .container:hover .wrapper_dark {
-  border: 1px solid #262626;
+  border: 1px solid #262626 !important;
 }
 
 .wrapper {
@@ -26,11 +26,11 @@
 } */
 
 .container .wrapper_light.isFocus {
-  border: 1px solid #40a9ff;
+  border: 1px solid #40a9ff !important;
 }
 
 .container .wrapper_dark.isFocus {
-  border: 1px solid #a58d12;
+  border: 1px solid #a58d12 !important;
 }
 
 .container .extra_component {
