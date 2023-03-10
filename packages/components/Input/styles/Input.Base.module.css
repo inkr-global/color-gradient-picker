@@ -12,14 +12,6 @@
   border: 1px solid var(--cgp-input-hover-color-dark, #262626);
 }
 
-.container .wrapper_light {
-  border: 1px solid var(--cgp-input-hover-color-light, #fff);
-}
-
-.container .wrapper_dark {
-  border: 1px solid var(--cgp-input-hover-color-dark, #000);
-}
-
 .wrapper {
   display: inline-flex;
   align-items: center;
