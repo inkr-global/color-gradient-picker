@@ -57,7 +57,10 @@ function InputBase(props: BaseInputProps) {
   // -----------------------------------------------------------------------
 
   return (
-    <div className={clsx(s.container, className)} style={style}>
+    <div
+      className={clsx(s.container, "input-base", className)}
+      style={style}
+    >
       {label && <div className={clsx(s.label)}>{label}</div>}
 
       <div
