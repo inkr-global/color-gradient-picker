@@ -62,8 +62,8 @@ export function getSaturationValueFromPosition(
   const value = Math.max(Math.min(percentageY, 1), 0);
 
   return {
-    saturation,
-    value,
+    saturation: saturation,
+    value: value,
   };
 }
 
@@ -76,7 +76,7 @@ export const openNativeEyeDropper = async () => {
   const abortController = new AbortController();
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore this is new EyeDropper API
+  // @ts-expect-error this is new EyeDropper API
   const eyeDropper = new EyeDropper();
 
   try {
@@ -87,11 +87,9 @@ export const openNativeEyeDropper = async () => {
   }
 };
 
-export const sortPalettePoints = (points: Point[]) =>
-  points.sort(
-    ({ offset: offset1 }: Point, { offset: offset2 }: Point) =>
-      offset1 - offset2,
-  );
+export const sortPalettePoints = (points: Point[]) => points.sort(
+  ({ offset: offset1 }: Point, { offset: offset2 }: Point) => offset1 - offset2,
+);
 
 export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
   const _gradient = { ...gradient };
@@ -99,11 +97,10 @@ export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
   const linearGradientColors = `linear-gradient(
     ${_gradient.degree}deg,
     ${sortedPalette
-      .map(
-        ({ alpha, offset, red, green, blue }) =>
-          `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
-      )
-      .join(", ")}
+    .map(
+      ({ alpha, offset, red, green, blue }) => `rgb(${red}, ${green}, ${blue}, ${alpha}) ${offset * 100}%`,
+    )
+    .join(", ")}
   )`;
 
   return linearGradientColors;
@@ -114,7 +111,6 @@ export const getLinearGradientBackgroundCss = (gradient: Gradient) => {
  */
 
 export const getRandomString = () => Math.random().toString(36).substring(7);
-
 
 
 export const noop = () => undefined;

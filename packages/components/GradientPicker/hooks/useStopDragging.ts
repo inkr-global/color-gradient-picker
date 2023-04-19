@@ -7,8 +7,7 @@ import useDragging from "./useDragging";
 /**
  * Limits a client drag movement within given min / max
  */
-const limitPos = (offset: number, min: number, max: number) =>
-  Math.max(Math.min(offset, max), min);
+const limitPos = (offset: number, min: number, max: number) => Math.max(Math.min(offset, max), min);
 
 const getColorStopRefTop = (ref: React.RefObject<HTMLDivElement>) => {
   if (!ref.current) return 0;
@@ -40,28 +39,34 @@ const useStopDragging = ({
     const { id, offset } = stop;
     const { min, max } = limits;
 
+    if (typeof id === "undefined") return;
+
     // Removing if out of drop limit on Y axis.
     const top = getColorStopRefTop(colorStopRef);
     if (Math.abs(clientY - top) > (limits.drop || DEFAULT_STOP_REMOVAL_DROP)) {
       // deactivateEvent();
-      return onDeleteColor(id!);
+      onDeleteColor(id);
+      return;
     }
 
     // Limit movements
     const dragOffset = offset - posStart;
     const limitedPos = limitPos(dragOffset + clientX, min, max);
 
-    onPosChange(id!, limitedPos);
+    onPosChange(id, limitedPos);
   };
 
   const [drag] = useDragging({
     onDragStart: ({ clientX }) => {
+      if (typeof stop.id === "undefined") return;
       setPosStart(clientX);
-
-      onDragStart(stop.id!);
+      onDragStart(stop.id);
     },
     onDrag: handleDrag,
-    onDragEnd: () => onDragEnd(stop.id!),
+    onDragEnd: () => {
+      if (typeof stop.id === "undefined") return;
+      onDragEnd(stop.id);
+    },
   });
 
   return [drag];

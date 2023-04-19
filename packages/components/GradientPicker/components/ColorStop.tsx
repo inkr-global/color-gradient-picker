@@ -39,14 +39,15 @@ const ColorStop = (props: ColorStopProps) => {
     <div
       className={clsx(s.color_stop, isActive && s.active)}
       ref={colorStopRef}
+      role="presentation"
       style={{
         left: offset,
         backgroundColor: rgba,
         opacity: alpha,
       }}
-      // @ts-ignore
+      // @ts-expect-error
       onMouseDown={drag}
-      // @ts-ignore
+      // @ts-expect-error
       onTouchStart={drag}
       title={rgba}
     />
