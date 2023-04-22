@@ -1,8 +1,7 @@
 import { CSSProperties } from "react";
 
-import { BaseInputProps } from "./components/Input/types";
+import { BaseInputProps } from "./components/ColorInput/misc/types";
 import { Alpha, Gradient, Hex } from "./types/color";
-
 
 export type ColorType = "linear-gradient" | "solid";
 
@@ -30,14 +29,14 @@ export interface UserInputProps extends BaseInputProps {
 
 export interface ColorGradientPickerProps
   extends Omit<
-  UserInputProps,
-  | "onChange"
-  | "onAlphaChange"
-  | "onSolidColorChange"
-  | "color"
-  | "hasAlphaInput"
-  | "style"
-  | "value"
+    UserInputProps,
+    | "onChange"
+    | "onAlphaChange"
+    | "onSolidColorChange"
+    | "color"
+    | "hasAlphaInput"
+    | "style"
+    | "value"
   > {
   color: ColorValue;
   onChange: (color: ColorValue) => void;
@@ -50,6 +49,5 @@ export interface ColorGradientPickerProps
   style?: CSSProperties;
   panelStyle?: CSSProperties;
   isDraggable?: boolean;
-  theme?:  "light" | "dark";
-
+  theme?: "light" | "dark";
 }

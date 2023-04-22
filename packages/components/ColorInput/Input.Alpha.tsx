@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
-import { ALPHA_DISPLAY_VALUE, ALPHA_SYMBOL, KEYS } from "./constants";
 import { InputBase } from "./Input.Base";
+import { ALPHA_DISPLAY_VALUE, ALPHA_SYMBOL, KEYS } from "./misc/constants";
+import { BaseInputProps } from "./misc/types";
 import s from "./styles/Input.Alpha.module.css";
-import { BaseInputProps } from "./types";
-
-
-function InputAlphaInfo() {
-  return <div className={s.alpha_info} />;
-}
-
 
 export function InputAlpha(
   props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
@@ -47,7 +41,9 @@ export function InputAlpha(
       parseInt(displayAlpha.replace(ALPHA_SYMBOL, "")) / 100;
 
     onChange(_alphaDisplayNumber);
-    setDisplayAlpha(getAlphaDisplayValueFromAlpha(_alphaDisplayNumber, ALPHA_SYMBOL));
+    setDisplayAlpha(
+      getAlphaDisplayValueFromAlpha(_alphaDisplayNumber, ALPHA_SYMBOL),
+    );
   };
 
   const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -78,4 +74,10 @@ export function InputAlpha(
       theme={theme}
     />
   );
+}
+
+// ---------------------------------------------------------------------------
+
+function InputAlphaInfo() {
+  return <div className={s.alpha_info} />;
 }

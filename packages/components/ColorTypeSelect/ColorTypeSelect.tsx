@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { ColorType } from "../../ColorGradientPicker.types";
 import s from "./ColorTypeSelect.module.css";
 
-
 interface ColorTypeSelectProps {
   value: ColorType;
   onChange: (value: ColorType) => void;
@@ -13,7 +12,7 @@ interface ColorTypeSelectProps {
   theme?: "light" | "dark";
 }
 
-const ColorTypeSelect = ({
+export const ColorTypeSelect = ({
   value,
   onChange,
   colorSelectType,
@@ -23,7 +22,11 @@ const ColorTypeSelect = ({
 }: ColorTypeSelectProps) => (
   <div className={s.select_wrapper}>
     <select
-      className={clsx(s.select, theme === "light" ? s.selectLight : s.selectDark, colorSelectType !== "all" && s.no_arrow)}
+      className={clsx(
+        s.select,
+        theme === "light" ? s.selectLight : s.selectDark,
+        colorSelectType !== "all" && s.no_arrow,
+      )}
       value={value}
       onChange={(e) => {
         onChange(e.target.value as ColorType);
@@ -44,10 +47,7 @@ const ColorTypeSelect = ({
         }}
       />
     )}
-    <button
-      className={s.close_btn}
-      onClick={onClosePanel}
-    >
+    <button className={s.close_btn} onClick={onClosePanel}>
       <svg
         width="16"
         height="16"
@@ -61,9 +61,7 @@ const ColorTypeSelect = ({
           fillOpacity="0.75"
         />
       </svg>
-
     </button>
   </div>
 );
 
-export default ColorTypeSelect;

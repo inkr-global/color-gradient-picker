@@ -4,7 +4,7 @@ import React, { CSSProperties, useCallback, useRef, useState } from "react";
 import { Alpha } from "../../../types/color";
 import hexToRgb from "../../../utils/color/hexToRgb";
 import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "../../../utils/common";
-import { ALPHA_SYMBOL } from "../../Input/constants";
+import { ALPHA_SYMBOL } from "../../ColorInput/misc/constants";
 import s from "../styles/AlphaSlider.module.css";
 
 type AlphaSliderProps = {
@@ -15,10 +15,7 @@ type AlphaSliderProps = {
 };
 
 const AlphaSlider = (props: AlphaSliderProps) => {
-  // ------------------------------------------------------------------------------------------
   const { alpha, onChange, hex, className } = props;
-
-  // ------------------------------------------------------------------------------------------
   const [isInteracting, setIsInteracting] = useState(false);
   const sliderDivRef = useRef<HTMLDivElement>(null);
 

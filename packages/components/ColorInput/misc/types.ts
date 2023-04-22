@@ -5,7 +5,6 @@ import React, {
   ReactNode,
 } from "react";
 
-
 export interface BaseInputProps {
   value?: string | number;
 

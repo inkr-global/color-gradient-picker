@@ -23,7 +23,5 @@ export const DEGREE_VALUE = {
 };
 
 export const DEFAULT_HEX = "#000";
-
 export const ALPHA_SYMBOL = "%";
-
 export const DEGREE_SYMBOL = "°";

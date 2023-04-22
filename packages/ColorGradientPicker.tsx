@@ -1,32 +1,33 @@
 import cn from "clsx";
 import { useCallback, useMemo, useRef, useState } from "react";
 
-import s from "./ColorGradientPicker.module.css";
 import {
   ColorGradientPickerProps,
   ColorType,
 } from "./ColorGradientPicker.types";
-import ColorTypeSelect from "./components/ColorTypeSelect/ColorTypeSelect";
+import {
+  ALPHA_VALUE,
+  DEFAULT_HEX,
+} from "./components/ColorInput/misc/constants";
+import { ColorTypeSelect } from "./components/ColorTypeSelect/ColorTypeSelect";
+import GradientPicker from "./components/GradientPicker/GradientPicker";
 import {
   DEFAULT_DEGREE,
   DEFAULT_PALETTE,
-} from "./components/GradientPicker/constants";
-import GradientPicker from "./components/GradientPicker/GradientPicker";
-import { ALPHA_VALUE, DEFAULT_HEX } from "./components/Input/constants";
+} from "./components/GradientPicker/misc/constants";
 import SolidColorPicker from "./components/SolidColorPicker/SolidColorPicker";
 import UserInput from "./components/UserInput/UserInput";
 import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
 import { useDraggable } from "./hooks/useDraggable";
+import s from "./styles/global.module.css";
+import placementStyle from "./styles/placement.module.css";
 import { Alpha, Gradient, Hex } from "./types/color";
 import sanitizeHex from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
 
-const DEFAULT_CLASS_NAME = "cgp";
-
 function ColorGradientPicker(props: ColorGradientPickerProps) {
-  // ------------------------------------------------------------------------------------------
   const {
-    classNamePrefix = DEFAULT_CLASS_NAME,
+    classNamePrefix = "cgp",
     className,
     color,
     onChange,
@@ -55,7 +56,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------
 
   const [isPickerOpen, setOpenPicker] = useState<boolean>(false);
-
   const containerRef = useRef<HTMLDivElement>(null);
 
   // ------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
   const onShowPanel = useCallback(() => {
     setOpenPicker(true);
-  }, [])
+  }, []);
 
   const onHidePanel = useCallback(() => {
     setOpenPicker(false);
@@ -128,7 +128,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   return (
     <div
       ref={containerRef}
-      className={cn(s.wrapper, theme === "light" ? s.wrapper_light : s.wrapper_dark, classNamePrefix, className)}
+      className={cn(
+        s.wrapper,
+        theme === "light" ? s.wrapper_light : s.wrapper_dark,
+        classNamePrefix,
+        className,
+      )}
       style={style}
     >
       <UserInput
@@ -144,7 +149,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
 
       {isPickerOpen && (
         <div
-          className={cn(s.picking_panel, theme === "light" ? s.color_light : s.color_dark, s[panelPlacement], panelClassName)}
+          className={cn(
+            s.picking_panel,
+            theme === "light" ? s.color_light : s.color_dark,
+            placementStyle[panelPlacement],
+            panelClassName,
+          )}
           style={{
             ...panelStyle,
             position: isDraggable ? "fixed" : undefined,

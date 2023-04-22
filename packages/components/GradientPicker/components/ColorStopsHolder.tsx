@@ -1,5 +1,5 @@
-import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../constants";
-import { StopHoldersProps } from "../types";
+import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../misc/constants";
+import { StopHoldersProps } from "../misc/types";
 import ColorStop from "./ColorStop";
 
 const ColorStopsHolder = (props: StopHoldersProps) => {

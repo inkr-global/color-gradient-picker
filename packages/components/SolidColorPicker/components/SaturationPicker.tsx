@@ -6,8 +6,6 @@ import hsvToHex from "../../../utils/color/hsvToHex";
 import { getSaturationValueFromPosition } from "../../../utils/common";
 import s from "../styles/SaturationPicker.module.css";
 
-
-
 type SaturationPickerProps = {
   hue: number;
   saturation: number;

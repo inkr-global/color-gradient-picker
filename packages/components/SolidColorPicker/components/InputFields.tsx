@@ -2,9 +2,9 @@ import clsx from "clsx";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
 import hexToHsv from "../../../utils/color/hexToHsv";
-import { InputAlpha } from "../../Input/Input.Alpha";
-import { InputHex } from "../../Input/Input.Hex";
-import { InputRgb } from "../../Input/Input.Rgb";
+import { InputAlpha } from "../../ColorInput/Input.Alpha";
+import { InputHex } from "../../ColorInput/Input.Hex";
+import { InputRgb } from "../../ColorInput/Input.Rgb";
 import s from "../styles/InputFields.module.css";
 
 

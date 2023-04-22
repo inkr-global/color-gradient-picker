@@ -8,7 +8,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
 
   extends: [
-
     "eslint:recommended",
 
     "plugin:@typescript-eslint/recommended",
@@ -104,7 +103,14 @@ module.exports = {
     "@typescript-eslint/no-shadow": "error",
 
     "no-use-before-define": "off", // Why? https://stackoverflow.com/a/64024916
-    "@typescript-eslint/no-use-before-define": "error",
-
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        // Allow functions to be defined before they are used; because function is hoisted, so this is safe
+        functions: false,
+        typedefs: false, // Allow typedefs to be defined before they are used
+        variables: false, // false check when upper scope only, because variables are hoisted
+      },
+    ],
   },
 };

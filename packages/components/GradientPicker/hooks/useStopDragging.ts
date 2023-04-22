@@ -1,7 +1,7 @@
 import { DragEventHandler, useState } from "react";
 
-import { DEFAULT_STOP_REMOVAL_DROP } from "../constants";
-import { GradientLimits, GradientStop } from "../types";
+import { DEFAULT_STOP_REMOVAL_DROP } from "../misc/constants";
+import { GradientLimits, GradientStop } from "../misc/types";
 import useDragging from "./useDragging";
 
 /**

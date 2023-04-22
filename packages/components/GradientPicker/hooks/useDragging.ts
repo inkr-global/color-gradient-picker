@@ -10,7 +10,7 @@ import {
   useState,
 } from "react";
 
-import { Events } from "../constants";
+import { Events } from "../misc/constants";
 
 
 const DRAG_HANDLERS = {

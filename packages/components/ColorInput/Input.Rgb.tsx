@@ -1,18 +1,10 @@
 import React, { HTMLProps, ReactNode, useEffect, useState } from "react";
 
-import { KEYS, RGB_VALUE } from "./constants";
 import { InputBase } from "./Input.Base";
+import { KEYS, RGB_VALUE } from "./misc/constants";
+import { BaseInputProps } from "./misc/types";
 import s from "./styles/Input.Rgb.module.css";
-import { BaseInputProps } from "./types";
 
-
-function InputTextInfo(props: { children: ReactNode }) {
-  const { children } = props;
-
-  return <div className={s.input_text}>{children}</div>;
-}
-
-// ------------------------------------------------------------------------------------------
 export function InputRgb(
   props: Omit<BaseInputProps, "onChange" | "value"> & {
     onChange: (value: number) => void;
@@ -31,12 +23,14 @@ export function InputRgb(
     max: RGB_VALUE.MAX,
   };
 
-  // -----------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
   useEffect(() => {
     setValueState(value);
   }, [value]);
 
-  // -----------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value);
     if (_value < RGB_VALUE.MIN) _value = RGB_VALUE.MIN;
@@ -60,7 +54,6 @@ export function InputRgb(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
-  // -----------------------------------------------------------------------
   return (
     <InputBase
       {...rest}
@@ -73,4 +66,12 @@ export function InputRgb(
       theme={theme}
     />
   );
+}
+
+// ---------------------------------------------------------------------------
+
+function InputTextInfo(props: { children: ReactNode }) {
+  const { children } = props;
+
+  return <div className={s.input_text}>{children}</div>;
 }

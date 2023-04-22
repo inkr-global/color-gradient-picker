@@ -5,8 +5,6 @@ import hsvToHex from "../../../utils/color/hsvToHex";
 import { getHueFromPosition } from "../../../utils/common";
 import s from "../styles/HueSlider.module.css";
 
-
-
 type HueSliderProps = {
   hue: number;
   onChange: (hue: number) => void;

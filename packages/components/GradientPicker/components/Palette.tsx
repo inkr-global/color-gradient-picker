@@ -1,6 +1,6 @@
 import { getLinearGradientBackgroundCss } from "../../../utils/common";
-import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../constants";
-import { PalletteProps } from "../types";
+import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../misc/constants";
+import { PalletteProps } from "../misc/types";
 
 const Palette = (props: PalletteProps) => {
   const { points, onAddColor, disabled } = props;

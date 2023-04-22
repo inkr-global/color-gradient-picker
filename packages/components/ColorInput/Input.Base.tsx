@@ -1,11 +1,10 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
+import { BaseInputProps } from "./misc/types";
 import s from "./styles/Input.Base.module.css";
-import { BaseInputProps } from "./types";
 
-
-function InputBase(props: BaseInputProps) {
+export function InputBase(props: BaseInputProps) {
   // ------------------------------------------------------------------------------------------
   const {
     className,
@@ -57,10 +56,7 @@ function InputBase(props: BaseInputProps) {
   // -----------------------------------------------------------------------
 
   return (
-    <div
-      className={clsx(s.container, "input-base", className)}
-      style={style}
-    >
+    <div className={clsx(s.container, "input-base", className)} style={style}>
       {label && <div className={clsx(s.label)}>{label}</div>}
 
       <div
@@ -102,6 +98,3 @@ function InputBase(props: BaseInputProps) {
     </div>
   );
 }
-
-
-export { InputBase };

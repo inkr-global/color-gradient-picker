@@ -4,8 +4,8 @@ import { Alpha, Point } from "../../types/color";
 import hexToRgb from "../../utils/color/hexToRgb";
 import rgbToHex from "../../utils/color/rgbToHex";
 import { noop, sortPalettePoints } from "../../utils/common";
-import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../Input/constants";
-import { InputDegree } from "../Input/Input.Degree";
+import { InputDegree } from "../ColorInput/Input.Degree";
+import { ALPHA_DISPLAY_VALUE, ALPHA_VALUE } from "../ColorInput/misc/constants";
 import SolidColorPicker from "../SolidColorPicker/SolidColorPicker";
 import ColorStopsHolder from "./components/ColorStopsHolder";
 import Palette from "./components/Palette";
@@ -15,9 +15,9 @@ import {
   DEFAULT_PALETTE_WIDTH,
   DEFAULT_STOP_REMOVAL_DROP,
   HALF_STOP_WIDTH,
-} from "./constants";
+} from "./misc/constants";
+import { GradientPickerProps } from "./misc/types";
 import s from "./styles/GradientPicker.module.css";
-import { GradientPickerProps } from "./types";
 
 // ------------------------------------------------------------------------------------------
 

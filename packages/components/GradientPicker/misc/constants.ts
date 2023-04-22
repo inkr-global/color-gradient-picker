@@ -1,4 +1,4 @@
-import { ALPHA_VALUE } from "../Input/constants";
+import { ALPHA_VALUE } from "../../ColorInput/misc/constants";
 
 const STOP_WIDTH = 14;
 

@@ -5,9 +5,8 @@ import { useRef } from "react";
 
 import { noop } from "../../../utils/common";
 import useStopDragging from "../hooks/useStopDragging";
+import { ColorStopProps } from "../misc/types";
 import s from "../styles/ColorStop.module.css";
-import { ColorStopProps } from "../types";
-
 
 const ColorStop = (props: ColorStopProps) => {
   const {

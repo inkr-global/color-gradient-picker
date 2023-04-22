@@ -1,8 +1,8 @@
 import { UserInputProps } from "../../ColorGradientPicker.types";
-import { ALPHA_VALUE, DEFAULT_HEX } from "../Input/constants";
-import { InputAlpha } from "../Input/Input.Alpha";
-import { InputGradient } from "../Input/Input.Gradient";
-import { InputHex } from "../Input/Input.Hex";
+import { InputAlpha } from "../ColorInput/Input.Alpha";
+import { InputGradient } from "../ColorInput/Input.Gradient";
+import { InputHex } from "../ColorInput/Input.Hex";
+import { ALPHA_VALUE, DEFAULT_HEX } from "../ColorInput/misc/constants";
 import s from "./UserInput.module.css";
 
 const UserInput = (props: UserInputProps) => {
@@ -51,7 +51,12 @@ const UserInput = (props: UserInputProps) => {
       )}
 
       {type === "linear-gradient" && (
-        <InputGradient {...rest} inputWidth={inputWidth} value={gradient} theme={theme}/>
+        <InputGradient
+          {...rest}
+          inputWidth={inputWidth}
+          value={gradient}
+          theme={theme}
+        />
       )}
     </>
   );

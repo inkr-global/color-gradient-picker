@@ -1,0 +1,17 @@
+.bottom-left {
+  top: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+}
+
+.bottom-right {
+  top: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+  right: 0;
+}
+
+.top-left {
+  bottom: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+}
+
+.top-right {
+  bottom: calc(var(--cgp-input-height, 26px) + 10px); /* 26px: input height */
+  right: 0;
+}
