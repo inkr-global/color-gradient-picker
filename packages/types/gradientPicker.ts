@@ -1,4 +1,4 @@
-import { Gradient, Point } from "../../../types/color";
+import { Gradient, Point } from "./color";
 
 export interface GradientStop extends Point {
   isActive: boolean;

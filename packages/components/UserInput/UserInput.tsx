@@ -1,11 +1,11 @@
-import { UserInputProps } from "../../ColorGradientPicker.types";
-import { InputAlpha } from "../ColorInput/Input.Alpha";
-import { InputGradient } from "../ColorInput/Input.Gradient";
-import { InputHex } from "../ColorInput/Input.Hex";
-import { ALPHA_VALUE, DEFAULT_HEX } from "../ColorInput/misc/constants";
+import { ALPHA_VALUE_RANGE, DEFAULT_HEX } from "../../constants/colorInput";
+import { UserInputProps } from "../../types/userInput";
+import { ColorInputAlpha } from "../ColorInput/ColorInput.Alpha";
+import { ColorInputGradient } from "../ColorInput/ColorInput.Gradient";
+import { ColorInputHex } from "../ColorInput/ColorInput.Hex";
 import s from "./UserInput.module.css";
 
-const UserInput = (props: UserInputProps) => {
+export const UserInput = (props: UserInputProps) => {
   const {
     color,
     onSolidColorChange,
@@ -19,14 +19,14 @@ const UserInput = (props: UserInputProps) => {
   const {
     type,
     solid = DEFAULT_HEX,
-    alpha = ALPHA_VALUE.MAX,
+    alpha = ALPHA_VALUE_RANGE.MAX,
     gradient,
   } = color;
 
   const alphaInput = hasAlphaInput ? (
     <>
       <div className={s.input_vertical_divider} />
-      <InputAlpha
+      <ColorInputAlpha
         {...rest}
         isExtraComponent
         value={alpha}
@@ -40,7 +40,7 @@ const UserInput = (props: UserInputProps) => {
   return (
     <>
       {type === "solid" && (
-        <InputHex
+        <ColorInputHex
           {...rest}
           inputWidth={inputWidth}
           value={solid}
@@ -51,7 +51,7 @@ const UserInput = (props: UserInputProps) => {
       )}
 
       {type === "linear-gradient" && (
-        <InputGradient
+        <ColorInputGradient
           {...rest}
           inputWidth={inputWidth}
           value={gradient}
@@ -61,5 +61,3 @@ const UserInput = (props: UserInputProps) => {
     </>
   );
 };
-
-export default UserInput;

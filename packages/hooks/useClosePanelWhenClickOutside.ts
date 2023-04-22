@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useCloseWhenClickOutside = (
+export const useClosePanelWhenClickOutside = (
   containerRef: React.RefObject<HTMLDivElement>,
   callback: () => void,
   isDragging: boolean,
@@ -25,4 +25,3 @@ const useCloseWhenClickOutside = (
   }, [callback, containerRef, isDragging]);
 };
 
-export default useCloseWhenClickOutside;

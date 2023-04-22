@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-
 import {
   DragEventHandler,
   TouchEventHandler,
@@ -10,8 +9,14 @@ import {
   useState,
 } from "react";
 
-import { Events } from "../misc/constants";
-
+const Events = {
+  MOUSEDOWN: "mousedown",
+  MOUSEMOVE: "mousemove",
+  MOUSEUP: "mouseup",
+  TOUCHSTART: "touchstart",
+  TOUCHMOVE: "touchmove",
+  TOUCHEND: "touchend",
+};
 
 const DRAG_HANDLERS = {
   MOUSE: {
@@ -47,13 +52,17 @@ const DRAG_HANDLERS = {
 
 const isTouch = (e: Event) => e.type === Events.TOUCHSTART;
 
-interface UseDraggingParams {
+interface UseColorStopDraggingParams {
   onDragStart: DragEventHandler;
   onDrag: DragEventHandler;
   onDragEnd: DragEventHandler;
 }
 
-const useDragging = ({ onDragStart, onDrag, onDragEnd }: UseDraggingParams) => {
+export const useHandleColorStopDraggingEvent = ({
+  onDragStart,
+  onDrag,
+  onDragEnd,
+}: UseColorStopDraggingParams) => {
   const [dragging, setDragging] = useState(false);
 
   const dragContext = useRef<{ handler: typeof DRAG_HANDLERS }>({});
@@ -120,4 +129,3 @@ const useDragging = ({ onDragStart, onDrag, onDragEnd }: UseDraggingParams) => {
   return [dragHandler, activateEvent, deactivateEvent];
 };
 
-export default useDragging;

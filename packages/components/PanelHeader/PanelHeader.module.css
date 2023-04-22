@@ -21,7 +21,7 @@
   color: rgba(0, 0, 0, 0.88);
   font-size: 14px;
   overflow: hidden;
-  background: url(../../image/dropdown.svg) no-repeat right white;
+  background: url(../../resources/dropdown.svg) no-repeat right white;
   -webkit-appearance: none;
   -moz-appearance: none;
 }

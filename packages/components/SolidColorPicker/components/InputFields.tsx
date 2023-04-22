@@ -2,9 +2,9 @@ import clsx from "clsx";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
 import hexToHsv from "../../../utils/color/hexToHsv";
-import { InputAlpha } from "../../ColorInput/Input.Alpha";
-import { InputHex } from "../../ColorInput/Input.Hex";
-import { InputRgb } from "../../ColorInput/Input.Rgb";
+import { ColorInputAlpha } from "../../ColorInput/ColorInput.Alpha";
+import { ColorInputHex } from "../../ColorInput/ColorInput.Hex";
+import { ColorInputRgb } from "../../ColorInput/ColorInput.Rgb";
 import s from "../styles/InputFields.module.css";
 
 
@@ -25,7 +25,7 @@ const InputFields = (props: InputFieldsProps) => {
 
   return (
     <div className={clsx(s.color_inputs_wrapper, !hasAlphaInput && s.no_alpha_input)}>
-      <InputHex
+      <ColorInputHex
         label="HEX"
         inputWidth={hasAlphaInput ? 100 : 180}
         className={s.hex}
@@ -37,7 +37,7 @@ const InputFields = (props: InputFieldsProps) => {
       />
 
       {hasAlphaInput && (
-        <InputAlpha
+        <ColorInputAlpha
           inputWidth={40}
           className={s.alpha}
           value={alpha}
@@ -49,7 +49,7 @@ const InputFields = (props: InputFieldsProps) => {
       )}
 
 
-      <InputRgb
+      <ColorInputRgb
         label="RGB"
         info="R"
         inputWidth={31}
@@ -65,7 +65,7 @@ const InputFields = (props: InputFieldsProps) => {
         theme={theme}
       />
 
-      <InputRgb
+      <ColorInputRgb
         info="G"
         inputWidth={31}
         className={s.green}
@@ -80,7 +80,7 @@ const InputFields = (props: InputFieldsProps) => {
         theme={theme}
       />
 
-      <InputRgb
+      <ColorInputRgb
         info="B"
         inputWidth={31}
         className={s.blue}

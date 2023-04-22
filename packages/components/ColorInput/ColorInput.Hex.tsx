@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import { KEYS } from "../../constants/colorInput";
+import { ColorInputCoreProps } from "../../types/colorInput";
 import sanitizeHex from "../../utils/color/sanitizeHex";
-import { InputBase } from "./Input.Base";
-import { KEYS } from "./misc/constants";
-import { BaseInputProps } from "./misc/types";
+import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Hex.module.css";
 
-export function InputHex(
-  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+export function ColorInputHex(
+  props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
@@ -46,7 +46,7 @@ export function InputHex(
   };
 
   return (
-    <InputBase
+    <ColorInputBase
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}

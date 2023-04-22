@@ -1,12 +1,12 @@
+import { DEFAULT_HEX } from "../../constants/colorInput";
 import { Gradient } from "../../types/color";
+import { ColorInputCoreProps } from "../../types/colorInput";
 import { getLinearGradientBackgroundCss, noop } from "../../utils/common";
-import { InputBase } from "./Input.Base";
-import { DEFAULT_HEX } from "./misc/constants";
-import { BaseInputProps } from "./misc/types";
+import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Gradient.module.css";
 
-export function InputGradient(
-  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+export function ColorInputGradient(
+  props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
     theme?: "light" | "dark";
@@ -15,7 +15,7 @@ export function InputGradient(
   const { value, onColorPreviewClick, theme, ...rest } = props;
 
   return (
-    <InputBase
+    <ColorInputBase
       {...rest}
       value="Gradient"
       onChange={noop}

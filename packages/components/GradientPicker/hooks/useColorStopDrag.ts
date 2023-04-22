@@ -1,13 +1,14 @@
 import { DragEventHandler, useState } from "react";
 
-import { DEFAULT_STOP_REMOVAL_DROP } from "../misc/constants";
-import { GradientLimits, GradientStop } from "../misc/types";
-import useDragging from "./useDragging";
+import { DEFAULT_STOP_REMOVAL_DROP } from "../../../constants/gradientPicker";
+import { GradientLimits, GradientStop } from "../../../types/gradientPicker";
+import { useHandleColorStopDraggingEvent } from "./useHandleColorStopDraggingEvent";
 
 /**
  * Limits a client drag movement within given min / max
  */
-const limitPos = (offset: number, min: number, max: number) => Math.max(Math.min(offset, max), min);
+const limitPos = (offset: number, min: number, max: number) =>
+  Math.max(Math.min(offset, max), min);
 
 const getColorStopRefTop = (ref: React.RefObject<HTMLDivElement>) => {
   if (!ref.current) return 0;
@@ -24,7 +25,7 @@ interface Params {
   onDragEnd: (id: number) => void;
 }
 
-const useStopDragging = ({
+export const useColorStopDrag = ({
   limits,
   stop,
   colorStopRef,
@@ -34,6 +35,12 @@ const useStopDragging = ({
   onDeleteColor,
 }: Params) => {
   const [posStart, setPosStart] = useState(0);
+
+  const handleDragStart: DragEventHandler = ({ clientX }) => {
+    if (typeof stop.id === "undefined") return;
+    setPosStart(clientX);
+    onDragStart(stop.id);
+  };
 
   const handleDrag: DragEventHandler = ({ clientX, clientY }) => {
     const { id, offset } = stop;
@@ -56,20 +63,16 @@ const useStopDragging = ({
     onPosChange(id, limitedPos);
   };
 
-  const [drag] = useDragging({
-    onDragStart: ({ clientX }) => {
-      if (typeof stop.id === "undefined") return;
-      setPosStart(clientX);
-      onDragStart(stop.id);
-    },
+  const handleDragEnd = () => {
+    if (typeof stop.id === "undefined") return;
+    onDragEnd(stop.id);
+  };
+
+  const [drag] = useHandleColorStopDraggingEvent({
+    onDragStart: handleDragStart,
     onDrag: handleDrag,
-    onDragEnd: () => {
-      if (typeof stop.id === "undefined") return;
-      onDragEnd(stop.id);
-    },
+    onDragEnd: handleDragEnd,
   });
 
   return [drag];
 };
-
-export default useStopDragging;

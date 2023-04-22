@@ -24,7 +24,7 @@ interface ColorPickerProps {
   theme?: "light" | "dark";
 }
 
-const SolidColorPicker = (props: ColorPickerProps) => {
+export const SolidColorPicker = (props: ColorPickerProps) => {
   // ------------------------------------------------------------------------------------------
   const {
     hex,
@@ -144,5 +144,3 @@ const SolidColorPicker = (props: ColorPickerProps) => {
     </>
   );
 };
-
-export default SolidColorPicker;

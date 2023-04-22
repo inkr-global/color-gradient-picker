@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+import { ALPHA_DISPLAY_VALUE_RANGE, ALPHA_SYMBOL, KEYS } from "../../constants/colorInput";
+import { ColorInputCoreProps } from "../../types/colorInput";
 import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
-import { InputBase } from "./Input.Base";
-import { ALPHA_DISPLAY_VALUE, ALPHA_SYMBOL, KEYS } from "./misc/constants";
-import { BaseInputProps } from "./misc/types";
+import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Alpha.module.css";
 
-export function InputAlpha(
-  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+export function ColorInputAlpha(
+  props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
     theme?: "light" | "dark";
@@ -28,9 +28,9 @@ export function InputAlpha(
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value.replace(ALPHA_SYMBOL, ""));
     _value = Math.round(_value);
-    if (_value < ALPHA_DISPLAY_VALUE.MIN) _value = ALPHA_DISPLAY_VALUE.MIN;
-    if (_value > ALPHA_DISPLAY_VALUE.MAX) _value = ALPHA_DISPLAY_VALUE.MAX;
-    if (Number.isNaN(_value)) _value = ALPHA_DISPLAY_VALUE.MIN;
+    if (_value < ALPHA_DISPLAY_VALUE_RANGE.MIN) _value = ALPHA_DISPLAY_VALUE_RANGE.MIN;
+    if (_value > ALPHA_DISPLAY_VALUE_RANGE.MAX) _value = ALPHA_DISPLAY_VALUE_RANGE.MAX;
+    if (Number.isNaN(_value)) _value = ALPHA_DISPLAY_VALUE_RANGE.MIN;
 
     setDisplayAlpha(_value + "");
   };
@@ -62,7 +62,7 @@ export function InputAlpha(
 
   // -----------------------------------------------------------------------
   return (
-    <InputBase
+    <ColorInputBase
       {...rest}
       info={<InputAlphaInfo />}
       onChange={_onInternalChange}

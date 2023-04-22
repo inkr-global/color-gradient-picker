@@ -1,26 +1,27 @@
 import clsx from "clsx";
 
-import { ColorType } from "../../ColorGradientPicker.types";
-import s from "./ColorTypeSelect.module.css";
+import { ComponentColorType } from "../../types/colorGradientPicker";
+import s from "./PanelHeader.module.css";
 
-interface ColorTypeSelectProps {
-  value: ColorType;
-  onChange: (value: ColorType) => void;
+interface PanelHeaderProps {
+  value: ComponentColorType;
+  onChange: (value: ComponentColorType) => void;
   onClosePanel: () => void;
-  colorSelectType?: ColorType | "all";
+  colorSelectType?: ComponentColorType | "all";
   draggableID?: string;
   theme?: "light" | "dark";
 }
 
-export const ColorTypeSelect = ({
+export const PanelHeader = ({
   value,
   onChange,
   colorSelectType,
   onClosePanel,
   draggableID,
   theme,
-}: ColorTypeSelectProps) => (
+}: PanelHeaderProps) => (
   <div className={s.select_wrapper}>
+    {/* component color type select */}
     <select
       className={clsx(
         s.select,
@@ -29,7 +30,7 @@ export const ColorTypeSelect = ({
       )}
       value={value}
       onChange={(e) => {
-        onChange(e.target.value as ColorType);
+        onChange(e.target.value as ComponentColorType);
       }}
       style={{ width: value === "linear-gradient" ? 71 : 48 }}
       disabled={colorSelectType !== "all"}
@@ -37,6 +38,7 @@ export const ColorTypeSelect = ({
       <option value="solid">Solid</option>
       <option value="linear-gradient">Gradient</option>
     </select>
+
     {draggableID && (
       <div
         id={draggableID}
@@ -47,6 +49,7 @@ export const ColorTypeSelect = ({
         }}
       />
     )}
+
     <button className={s.close_btn} onClick={onClosePanel}>
       <svg
         width="16"
@@ -64,4 +67,3 @@ export const ColorTypeSelect = ({
     </button>
   </div>
 );
-

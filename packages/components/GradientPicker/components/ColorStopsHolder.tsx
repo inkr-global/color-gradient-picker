@@ -1,8 +1,11 @@
-import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../misc/constants";
-import { StopHoldersProps } from "../misc/types";
-import ColorStop from "./ColorStop";
+import {
+  DEFAULT_PALETTE_HEIGHT,
+  DEFAULT_PALETTE_WIDTH,
+} from "../../../constants/gradientPicker";
+import { StopHoldersProps } from "../../../types/gradientPicker";
+import { ColorStop } from "./ColorStop";
 
-const ColorStopsHolder = (props: StopHoldersProps) => {
+export const ColorStopsHolder = (props: StopHoldersProps) => {
   const { stops, ...rest } = props;
 
   return (
@@ -19,5 +22,3 @@ const ColorStopsHolder = (props: StopHoldersProps) => {
     </div>
   );
 };
-
-export default ColorStopsHolder;

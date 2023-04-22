@@ -1,27 +1,21 @@
 import cn from "clsx";
 import { useCallback, useMemo, useRef, useState } from "react";
 
-import {
-  ColorGradientPickerProps,
-  ColorType,
-} from "./ColorGradientPicker.types";
-import {
-  ALPHA_VALUE,
-  DEFAULT_HEX,
-} from "./components/ColorInput/misc/constants";
-import { ColorTypeSelect } from "./components/ColorTypeSelect/ColorTypeSelect";
-import GradientPicker from "./components/GradientPicker/GradientPicker";
-import {
-  DEFAULT_DEGREE,
-  DEFAULT_PALETTE,
-} from "./components/GradientPicker/misc/constants";
-import SolidColorPicker from "./components/SolidColorPicker/SolidColorPicker";
-import UserInput from "./components/UserInput/UserInput";
-import useCloseWhenClickOutside from "./hooks/useCloseWhenClickOutside";
-import { useDraggable } from "./hooks/useDraggable";
+import { GradientPicker } from "./components/GradientPicker/GradientPicker";
+import { PanelHeader } from "./components/PanelHeader/PanelHeader";
+import { SolidColorPicker } from "./components/SolidColorPicker/SolidColorPicker";
+import { UserInput } from "./components/UserInput/UserInput";
+import { ALPHA_VALUE_RANGE, DEFAULT_HEX } from "./constants/colorInput";
+import { DEFAULT_DEGREE, DEFAULT_PALETTE } from "./constants/gradientPicker";
+import { useClosePanelWhenClickOutside } from "./hooks/useClosePanelWhenClickOutside";
+import { useColorPickerPanelDraggable } from "./hooks/useColorPickerPanelDraggable";
 import s from "./styles/global.module.css";
 import placementStyle from "./styles/placement.module.css";
 import { Alpha, Gradient, Hex } from "./types/color";
+import {
+  ColorGradientPickerProps,
+  ComponentColorType,
+} from "./types/colorGradientPicker";
 import sanitizeHex from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
 
@@ -46,7 +40,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   // ------------------------------------------------------------------------------------------3
 
   const solidColor = sanitizeHex(color?.solid || DEFAULT_HEX);
-  const totalAlpha = color?.alpha || ALPHA_VALUE.MAX;
+  const totalAlpha = color?.alpha || ALPHA_VALUE_RANGE.MAX;
   const linearGradient = color?.gradient || {
     degree: DEFAULT_DEGREE,
     points: DEFAULT_PALETTE,
@@ -85,14 +79,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     return [_containerID, _draggableID];
   }, [isDraggable]);
 
-  const { isDragging } = useDraggable({
+  const { isDragging } = useColorPickerPanelDraggable({
     isDraggable: (isDraggable && isPickerOpen) || false,
     containerID: containerID || "",
     dragElementID: draggableID,
     isPickerOpen: isPickerOpen,
   });
 
-  useCloseWhenClickOutside(containerRef, onHidePanel, isDragging);
+  useClosePanelWhenClickOutside(containerRef, onHidePanel, isDragging);
 
   // ------------------------------------------------------------------------------------------
   const handleSolidColorChange = (_updatedHex: Hex) => {
@@ -109,7 +103,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     });
   };
 
-  const handleSetColorType = (_type: ColorType) => {
+  const handleSetColorType = (_type: ComponentColorType) => {
     onChange({
       ...color,
       type: _type,
@@ -161,7 +155,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
           }}
           id={containerID}
         >
-          <ColorTypeSelect
+          <PanelHeader
             value={propColorType}
             onChange={handleSetColorType}
             colorSelectType={colorSelectType}

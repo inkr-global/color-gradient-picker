@@ -1,4 +1,4 @@
-import { ALPHA_VALUE } from "../../ColorInput/misc/constants";
+import { ALPHA_VALUE_RANGE } from "./colorInput";
 
 const STOP_WIDTH = 14;
 
@@ -21,7 +21,7 @@ export const DEFAULT_PALETTE = [
     red: 0,
     green: 0,
     blue: 0,
-    alpha: ALPHA_VALUE.MAX,
+    alpha: ALPHA_VALUE_RANGE.MAX,
   },
   {
     id: 2,
@@ -29,18 +29,10 @@ export const DEFAULT_PALETTE = [
     red: 255,
     green: 255,
     blue: 255,
-    alpha: ALPHA_VALUE.MAX,
+    alpha: ALPHA_VALUE_RANGE.MAX,
   },
 ];
 
 export const DEFAULT_DEGREE = 90;
 
 
-export const Events = {
-	MOUSEDOWN: 'mousedown',
-	MOUSEMOVE: 'mousemove',
-	MOUSEUP: 'mouseup',
-	TOUCHSTART: 'touchstart',
-	TOUCHMOVE: 'touchmove',
-	TOUCHEND: 'touchend'
-};

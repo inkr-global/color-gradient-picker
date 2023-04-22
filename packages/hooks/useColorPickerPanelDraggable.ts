@@ -111,7 +111,7 @@ interface Params {
   dragElementID?: string;
 }
 
-export const useDraggable = (params: Params) => {
+export const useColorPickerPanelDraggable = (params: Params) => {
   // ------------------------------------------------------------------------------------------
   const { isDraggable, containerID, isPickerOpen, dragElementID } = params;
 

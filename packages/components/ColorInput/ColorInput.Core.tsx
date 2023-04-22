@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
-import { BaseInputProps } from "./misc/types";
+import { ColorInputCoreProps } from "../../types/colorInput";
 import s from "./styles/Input.Base.module.css";
 
-export function InputBase(props: BaseInputProps) {
+export function ColorInputBase(props: ColorInputCoreProps) {
   // ------------------------------------------------------------------------------------------
   const {
     className,

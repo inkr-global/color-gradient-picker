@@ -1,8 +1,11 @@
+import {
+  DEFAULT_PALETTE_HEIGHT,
+  DEFAULT_PALETTE_WIDTH,
+} from "../../../constants/gradientPicker";
+import { PalletteProps } from "../../../types/gradientPicker";
 import { getLinearGradientBackgroundCss } from "../../../utils/common";
-import { DEFAULT_PALETTE_HEIGHT, DEFAULT_PALETTE_WIDTH } from "../misc/constants";
-import { PalletteProps } from "../misc/types";
 
-const Palette = (props: PalletteProps) => {
+export const Palette = (props: PalletteProps) => {
   const { points, onAddColor, disabled } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -17,7 +20,8 @@ const Palette = (props: PalletteProps) => {
     e.preventDefault();
     if (e.button) return;
 
-    const offset = e.clientX - (e.target as HTMLElement).getBoundingClientRect().left;
+    const offset =
+      e.clientX - (e.target as HTMLElement).getBoundingClientRect().left;
     onAddColor(offset);
   };
 
@@ -34,5 +38,3 @@ const Palette = (props: PalletteProps) => {
     />
   );
 };
-
-export default Palette;

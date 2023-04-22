@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import { InputBase } from "./Input.Base";
-import { DEGREE_SYMBOL, DEGREE_VALUE, KEYS } from "./misc/constants";
-import { BaseInputProps } from "./misc/types";
+import { DEGREE_SYMBOL, DEGREE_VALUE_RANGE, KEYS } from "../../constants/colorInput";
+import { ColorInputCoreProps } from "../../types/colorInput";
+import { ColorInputBase } from "./ColorInput.Core";
 
 const getDegreeString = (degree: number) => `${degree}${DEGREE_SYMBOL}`;
 
-export function InputDegree(
-  props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+export function ColorInputDegree(
+  props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
     theme?: "light" | "dark";
@@ -25,9 +25,9 @@ export function InputDegree(
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value.replace(DEGREE_SYMBOL, ""));
     _value = Math.round(_value);
-    if (_value < DEGREE_VALUE.MIN) _value = DEGREE_VALUE.MIN;
-    if (_value > DEGREE_VALUE.MAX) _value = DEGREE_VALUE.MAX;
-    if (Number.isNaN(_value)) _value = DEGREE_VALUE.MIN;
+    if (_value < DEGREE_VALUE_RANGE.MIN) _value = DEGREE_VALUE_RANGE.MIN;
+    if (_value > DEGREE_VALUE_RANGE.MAX) _value = DEGREE_VALUE_RANGE.MAX;
+    if (Number.isNaN(_value)) _value = DEGREE_VALUE_RANGE.MIN;
 
     setValueState(`${_value}`);
   };
@@ -56,7 +56,7 @@ export function InputDegree(
 
   // -----------------------------------------------------------------------
   return (
-    <InputBase
+    <ColorInputBase
       {...rest}
       onChange={_onInternalChange}
       onKeyDown={_onKeyDown}
