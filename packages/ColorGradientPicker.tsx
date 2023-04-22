@@ -10,6 +10,7 @@ import { DEFAULT_DEGREE, DEFAULT_PALETTE } from "./constants/gradientPicker";
 import { useClosePanelWhenClickOutside } from "./hooks/useClosePanelWhenClickOutside";
 import { useColorPickerPanelDraggable } from "./hooks/useColorPickerPanelDraggable";
 import s from "./styles/global.module.css";
+// eslint-disable-next-line css-modules/no-unused-class
 import placementStyle from "./styles/placement.module.css";
 import { Alpha, Gradient, Hex } from "./types/color";
 import {
