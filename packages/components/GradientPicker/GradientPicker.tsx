@@ -15,7 +15,7 @@ import { Alpha, Point } from "../../types/color";
 import { GradientPickerProps } from "../../types/gradientPicker";
 import hexToRgb from "../../utils/color/hexToRgb";
 import rgbToHex from "../../utils/color/rgbToHex";
-import { noop, sortPalettePoints } from "../../utils/common";
+import { sortPalettePoints } from "../../utils/common";
 import { ColorInputDegree } from "../ColorInput/ColorInput.Degree";
 import { SolidColorPicker } from "../SolidColorPicker/SolidColorPicker";
 import { ColorStopsHolder } from "./components/ColorStopsHolder";
@@ -220,7 +220,6 @@ export const GradientPicker = (props: GradientPickerProps) => {
             onPosChange={handleStopPosChange}
             onDeleteColor={handleColorDelete}
             onDragStart={onStopDragStart}
-            onDragEnd={noop}
           />
         </div>
         <ColorInputDegree

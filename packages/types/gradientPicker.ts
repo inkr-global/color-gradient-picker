@@ -1,4 +1,5 @@
 import { Gradient, Point } from "./color";
+import { Theme } from "./colorGradientPicker";
 
 export interface GradientStop extends Point {
   isActive: boolean;
@@ -17,8 +18,7 @@ export interface ColorStopProps {
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
-  onDragEnd: (id: number) => void;
-  theme?: "light" | "dark";
+  onDragEnd?: (id: number) => void;
 }
 
 export interface StopHoldersProps {
@@ -27,8 +27,7 @@ export interface StopHoldersProps {
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
-  onDragEnd: (id: number) => void;
-  theme?: "light" | "dark";
+  onDragEnd?: (id: number) => void;
 }
 
 export interface PalletteProps {
@@ -36,14 +35,13 @@ export interface PalletteProps {
   degree: number;
   onAddColor: (offset: number) => void;
   disabled?: boolean;
-  theme?: "light" | "dark";
 }
 
 export interface GradientPickerProps {
-  gradient : Gradient;
+  gradient: Gradient;
   onLinearGradientChange: (gradient: Gradient) => void;
   stopRemovalDrop?: number;
   maxStops?: number;
   minStops?: number;
-  theme?: "light" | "dark";
+  theme: Theme;
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { ALPHA_DISPLAY_VALUE_RANGE, ALPHA_SYMBOL, KEYS } from "../../constants/colorInput";
+import {
+  ALPHA_DISPLAY_VALUE_RANGE,
+  ALPHA_SYMBOL,
+  KEYS,
+} from "../../constants/colorInput";
 import { ColorInputCoreProps } from "../../types/colorInput";
 import { getAlphaDisplayValueFromAlpha } from "../../utils/common";
 import { ColorInputBase } from "./ColorInput.Core";
@@ -10,10 +14,9 @@ export function ColorInputAlpha(
   props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
-    theme?: "light" | "dark";
   },
 ) {
-  const { value, onChange, onInputBlur, theme, ...rest } = props;
+  const { value, onChange, onInputBlur, ...rest } = props;
 
   const [displayAlpha, setDisplayAlpha] = useState<string>(
     getAlphaDisplayValueFromAlpha(value, ALPHA_SYMBOL),
@@ -71,7 +74,6 @@ export function ColorInputAlpha(
       onInputFocus={_onInputFocus}
       value={displayAlpha}
       inputClassName={s.alpha_input}
-      theme={theme}
     />
   );
 }

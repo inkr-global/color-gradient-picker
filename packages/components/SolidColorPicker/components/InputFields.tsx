@@ -7,7 +7,6 @@ import { ColorInputHex } from "../../ColorInput/ColorInput.Hex";
 import { ColorInputRgb } from "../../ColorInput/ColorInput.Rgb";
 import s from "../styles/InputFields.module.css";
 
-
 interface InputFieldsProps {
   hex: Hex;
   alpha: Alpha;
@@ -16,15 +15,27 @@ interface InputFieldsProps {
   setAlpha: (alpha: Alpha) => void;
   setColorFromRgb: (rgb: Rgb) => void;
   hasAlphaInput?: boolean;
-  theme?: "light" | "dark";
 }
 
 const InputFields = (props: InputFieldsProps) => {
-  const { hex, alpha, rgb, setColor, setAlpha, setColorFromRgb, hasAlphaInput = true, theme } = props;
+  const {
+    hex,
+    alpha,
+    rgb,
+    setColor,
+    setAlpha,
+    setColorFromRgb,
+    hasAlphaInput = true,
+  } = props;
   const { red, green, blue } = rgb;
 
   return (
-    <div className={clsx(s.color_inputs_wrapper, !hasAlphaInput && s.no_alpha_input)}>
+    <div
+      className={clsx(
+        s.color_inputs_wrapper,
+        !hasAlphaInput && s.no_alpha_input,
+      )}
+    >
       <ColorInputHex
         label="HEX"
         inputWidth={hasAlphaInput ? 100 : 180}
@@ -33,7 +44,6 @@ const InputFields = (props: InputFieldsProps) => {
         onChange={(_hex) => {
           setColor(_hex, hexToHsv(_hex));
         }}
-        theme={theme}
       />
 
       {hasAlphaInput && (
@@ -44,10 +54,8 @@ const InputFields = (props: InputFieldsProps) => {
           onChange={(_alpha) => {
             setAlpha(_alpha);
           }}
-          theme={theme}
         />
       )}
-
 
       <ColorInputRgb
         label="RGB"
@@ -62,7 +70,6 @@ const InputFields = (props: InputFieldsProps) => {
             blue: blue,
           });
         }}
-        theme={theme}
       />
 
       <ColorInputRgb
@@ -77,7 +84,6 @@ const InputFields = (props: InputFieldsProps) => {
             blue: blue,
           });
         }}
-        theme={theme}
       />
 
       <ColorInputRgb
@@ -92,7 +98,6 @@ const InputFields = (props: InputFieldsProps) => {
             blue: _blue,
           });
         }}
-        theme={theme}
       />
     </div>
   );

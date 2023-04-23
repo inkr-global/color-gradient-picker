@@ -3,9 +3,7 @@
   height: 16px;
   border-radius: 1px;
   border: 2px solid #7e7e84;
-
-  /* background-color: #1f1f1f; */
-  background-color: #fff;
+  background-color: var(--cgp-background-color);
   background-image: linear-gradient(
       45deg,
       #7e7e84 25%,

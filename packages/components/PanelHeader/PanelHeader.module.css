@@ -7,8 +7,8 @@
   padding: 0 4px 0 12px;
   gap: 12px;
   width: 300px;
-  background: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: var(--cgp-background-color);
 }
 
 .select {
@@ -18,20 +18,10 @@
   line-height: 22px;
   display: flex;
   align-items: center;
-  color: rgba(0, 0, 0, 0.88);
   font-size: 14px;
   overflow: hidden;
-  background: url(../../resources/dropdown.svg) no-repeat right white;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.selectLight {
-  color: rgba(0, 0, 0, 0.88);
-}
-
-.selectDark {
-  color: var(--cgp-text-color, rgba(255, 255, 255, 0.65));
+  color: var(--cgp-text-color, #515151);
+  background: transparent;
 }
 
 .no_arrow {

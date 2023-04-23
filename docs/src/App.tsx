@@ -1,17 +1,15 @@
 import { useState } from "react";
 
 import ColorGradientPicker from "../../packages";
-import { ColorValue } from "../../packages/ColorGradientPicker.types";
+import { ComponentColorValue } from "../../packages/types/colorGradientPicker";
 import s from "./app.module.css";
 
-
 function App() {
-  const [color, setColor] = useState<ColorValue>({
+  const [color, setColor] = useState<ComponentColorValue>({
     alpha: 1,
     solid: "#000",
     type: "solid",
   });
-
 
   return (
     <div className={s.app}>
@@ -19,6 +17,7 @@ function App() {
         color={color}
         onChange={(_color) => setColor(_color)}
         hasAlphaInput={false}
+        // theme="dark"
       />
     </div>
   );

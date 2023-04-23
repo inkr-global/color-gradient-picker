@@ -12,7 +12,6 @@ export const UserInput = (props: UserInputProps) => {
     onAlphaChange,
     hasAlphaInput,
     inputWidth = 80,
-    theme,
     ...rest
   } = props;
 
@@ -32,7 +31,6 @@ export const UserInput = (props: UserInputProps) => {
         value={alpha}
         onChange={onAlphaChange}
         inputWidth={45}
-        theme={theme}
       />
     </>
   ) : undefined;
@@ -46,7 +44,6 @@ export const UserInput = (props: UserInputProps) => {
           value={solid}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
-          theme={theme}
         />
       )}
 
@@ -55,7 +52,6 @@ export const UserInput = (props: UserInputProps) => {
           {...rest}
           inputWidth={inputWidth}
           value={gradient}
-          theme={theme}
         />
       )}
     </>

@@ -9,10 +9,9 @@ export function ColorInputRgb(
   props: Omit<ColorInputCoreProps, "onChange" | "value"> & {
     onChange: (value: number) => void;
     value: number;
-    theme?: "light" | "dark";
   },
 ) {
-  const { inputProps, info, onChange, value, onInputBlur, theme, ...rest } = props;
+  const { inputProps, info, onChange, value, onInputBlur, ...rest } = props;
 
   const [valueState, setValueState] = useState<number>(value);
 
@@ -63,7 +62,6 @@ export function ColorInputRgb(
       onInputBlur={_onBlur}
       info={<InputTextInfo>{info}</InputTextInfo>}
       inputProps={customInputProps}
-      theme={theme}
     />
   );
 }

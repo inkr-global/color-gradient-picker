@@ -23,7 +23,6 @@ export function ColorInputBase(props: ColorInputCoreProps) {
     inputWidth,
     extraInput: extra,
     isExtraComponent,
-    theme,
   } = props;
 
   const { style: inputStyle, ...restInputProps } = inputProps || {};
@@ -62,7 +61,6 @@ export function ColorInputBase(props: ColorInputCoreProps) {
       <div
         className={clsx(
           s.wrapper,
-          theme === "light" ? s.wrapper_light : s.wrapper_dark,
           isFocus && s.isFocus,
           isExtraComponent && s.extra_component,
           inputWrapperClassName,

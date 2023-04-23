@@ -22,7 +22,6 @@ import { getRandomString } from "./utils/common";
 
 function ColorGradientPicker(props: ColorGradientPickerProps) {
   const {
-    classNamePrefix = "cgp",
     className,
     color,
     onChange,
@@ -125,8 +124,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       ref={containerRef}
       className={cn(
         s.wrapper,
-        theme === "light" ? s.wrapper_light : s.wrapper_dark,
-        classNamePrefix,
+        theme === "dark" && s.wrapper_dark, // apply dark/light theme here
         className,
       )}
       style={style}
@@ -139,14 +137,12 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         color={color}
         onInputFocus={handleInputFocus}
         onColorPreviewClick={onShowPanel}
-        theme={theme}
       />
 
       {isPickerOpen && (
         <div
           className={cn(
             s.picking_panel,
-            theme === "light" ? s.color_light : s.color_dark,
             placementStyle[panelPlacement],
             panelClassName,
           )}

@@ -22,7 +22,7 @@ interface Params {
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
-  onDragEnd: (id: number) => void;
+  onDragEnd?: (id: number) => void;
 }
 
 export const useColorStopDrag = ({
@@ -65,7 +65,7 @@ export const useColorStopDrag = ({
 
   const handleDragEnd = () => {
     if (typeof stop.id === "undefined") return;
-    onDragEnd(stop.id);
+    onDragEnd?.(stop.id);
   };
 
   const [drag] = useHandleColorStopDraggingEvent({

@@ -4,7 +4,6 @@ import clsx from "clsx";
 import { useRef } from "react";
 
 import { ColorStopProps } from "../../../types/gradientPicker";
-import { noop } from "../../../utils/common";
 import { useColorStopDrag } from "../hooks/useColorStopDrag";
 import s from "../styles/ColorStop.module.css";
 
@@ -14,8 +13,8 @@ export const ColorStop = (props: ColorStopProps) => {
     limits,
     onPosChange,
     onDeleteColor,
-    onDragStart = noop,
-    onDragEnd = noop,
+    onDragStart,
+    onDragEnd,
   } = props;
 
   const colorStopRef = useRef<HTMLDivElement>(null);

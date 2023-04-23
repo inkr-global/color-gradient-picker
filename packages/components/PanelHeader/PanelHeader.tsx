@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { ComponentColorType } from "../../types/colorGradientPicker";
+import { ComponentColorType, Theme } from "../../types/colorGradientPicker";
 import s from "./PanelHeader.module.css";
 
 interface PanelHeaderProps {
@@ -9,7 +9,7 @@ interface PanelHeaderProps {
   onClosePanel: () => void;
   colorSelectType?: ComponentColorType | "all";
   draggableID?: string;
-  theme?: "light" | "dark";
+  theme?: Theme;
 }
 
 export const PanelHeader = ({
@@ -23,16 +23,12 @@ export const PanelHeader = ({
   <div className={s.select_wrapper}>
     {/* component color type select */}
     <select
-      className={clsx(
-        s.select,
-        theme === "light" ? s.selectLight : s.selectDark,
-        colorSelectType !== "all" && s.no_arrow,
-      )}
+      className={clsx(s.select, colorSelectType !== "all" && s.no_arrow)}
       value={value}
       onChange={(e) => {
         onChange(e.target.value as ComponentColorType);
       }}
-      style={{ width: value === "linear-gradient" ? 71 : 48 }}
+      style={{ width: value === "linear-gradient" ? 75 : 52 }}
       disabled={colorSelectType !== "all"}
     >
       <option value="solid">Solid</option>

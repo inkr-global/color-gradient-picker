@@ -1,6 +1,8 @@
+import { Theme } from "../../../types/colorGradientPicker";
+
 interface EyeDropperProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  theme?: "light" | "dark";
+  theme?: Theme;
 }
 
 const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {

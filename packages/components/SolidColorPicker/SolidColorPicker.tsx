@@ -2,6 +2,7 @@ import cn from "clsx";
 import { useEffect, useRef, useState } from "react";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../types/color";
+import { Theme } from "../../types/colorGradientPicker";
 import hexToHsv from "../../utils/color/hexToHsv";
 import hexToRgb from "../../utils/color/hexToRgb";
 import hsvToHex from "../../utils/color/hsvToHex";
@@ -21,7 +22,7 @@ interface ColorPickerProps {
   onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
   hasAlphaInput?: boolean;
-  theme?: "light" | "dark";
+  theme: Theme;
 }
 
 export const SolidColorPicker = (props: ColorPickerProps) => {
@@ -139,7 +140,6 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         setColor={_onSetColor}
         setColorFromRgb={_onSetColorFromRgb}
         hasAlphaInput={hasAlphaInput}
-        theme={theme}
       />
     </>
   );

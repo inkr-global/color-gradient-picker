@@ -8,5 +8,4 @@ export interface UserInputProps extends ColorInputCoreProps {
   onAlphaChange: (alpha: Alpha) => void;
   onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   hasAlphaInput?: boolean;
-  theme?: "light" | "dark";
 }

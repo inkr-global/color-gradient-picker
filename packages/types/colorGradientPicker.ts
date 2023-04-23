@@ -5,6 +5,8 @@ import { UserInputProps } from "./userInput";
 
 export type ComponentColorType = "linear-gradient" | "solid";
 
+export type Theme = "light" | "dark";
+
 export type ComponentPanelPlacement =
   | "top-right"
   | "top-left"
@@ -40,5 +42,5 @@ export interface ColorGradientPickerProps
   style?: CSSProperties;
   panelStyle?: CSSProperties;
   isDraggable?: boolean;
-  theme?: "light" | "dark";
+  theme?: Theme;
 }

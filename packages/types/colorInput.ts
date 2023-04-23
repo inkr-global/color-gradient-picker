@@ -27,5 +27,4 @@ export interface ColorInputCoreProps {
 
   extraInput?: ReactElement;
   isExtraComponent?: boolean;
-  theme?: "light" | "dark";
 }

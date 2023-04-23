@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { DEGREE_SYMBOL, DEGREE_VALUE_RANGE, KEYS } from "../../constants/colorInput";
+import {
+  DEGREE_SYMBOL,
+  DEGREE_VALUE_RANGE,
+  KEYS,
+} from "../../constants/colorInput";
+import { Theme } from "../../types/colorGradientPicker";
 import { ColorInputCoreProps } from "../../types/colorInput";
 import { ColorInputBase } from "./ColorInput.Core";
 
@@ -10,7 +15,7 @@ export function ColorInputDegree(
   props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: number) => void;
     value: number;
-    theme?: "light" | "dark";
+    theme?: Theme;
   },
 ) {
   const { value, onChange, onInputBlur, theme, ...rest } = props;
@@ -65,14 +70,13 @@ export function ColorInputDegree(
       onInputFocus={_onInputFocus}
       info={<DegreeInfo theme={theme} />}
       inputWidth={35}
-      theme={theme}
     />
   );
 }
 
 // ---------------------------------------------------------------------------
 
-function DegreeInfo({ theme }: { theme?: "light" | "dark" }) {
+function DegreeInfo({ theme }: { theme?: Theme }) {
   const titleColor = theme === "light" ? "#bbb" : "white";
   const fillOpacity = theme === "light" ? "0.8" : "0.3";
 
