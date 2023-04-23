@@ -6,8 +6,9 @@
   --cgp-value-picker-border: 2px;
   --cgp-input-height: 26px;
   --cgp-picking-panel-zindex: 1;
+}
 
-  /* light theme */
+.wrapper_light {
   --cgp-text-color: #515151;
   --cgp-background-color: #fff;
   --cgp-input-focus-color: #40a9ff;

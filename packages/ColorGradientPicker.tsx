@@ -25,7 +25,6 @@ import {
 import sanitizeHex from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
 
-
 function ColorGradientPicker(props: ColorGradientPickerProps) {
   const {
     className,
@@ -128,7 +127,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       ref={containerRef}
       className={cn(
         s.wrapper,
-        theme === "dark" && s.wrapper_dark, // apply dark/light theme here
+        theme === "dark" ? s.wrapper_dark : s.wrapper_light, // apply dark/light theme here
         className,
       )}
       style={style}
