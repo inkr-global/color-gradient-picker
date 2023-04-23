@@ -6,14 +6,16 @@ import sanitizeHex from "../../utils/color/sanitizeHex";
 import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Hex.module.css";
 
+
 export function ColorInputHex(
   props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+    shouldUpdateColorValue?: boolean;
   },
 ) {
-  const { value, onChange, onInputBlur, onColorPreviewClick, ...rest } = props;
+  const { value, onChange, onInputBlur, onColorPreviewClick, shouldUpdateColorValue = true, ...rest } = props;
 
   const [valueState, setValueState] = useState<string>(value);
 
@@ -23,12 +25,13 @@ export function ColorInputHex(
   }, [value]);
 
   const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (!shouldUpdateColorValue) return;
     const _value = e.currentTarget.value;
-
     setValueState(_value);
   };
 
   const _onOutsideChange = () => {
+    if (!shouldUpdateColorValue) return;
     const _valueState = sanitizeHex(valueState);
     onChange(_valueState);
     setValueState(_valueState);
@@ -51,9 +54,12 @@ export function ColorInputHex(
       onKeyDown={_onKeyDown}
       onInputBlur={_onBlur}
       value={valueState.toUpperCase()}
-      info={
-        <ColorPreview onClick={onColorPreviewClick} value={value as string} />
-      }
+      info={(
+        <ColorPreview
+          onClick={onColorPreviewClick}
+          value={value as string}
+        />
+      )}
     />
   );
 }
@@ -73,6 +79,7 @@ function ColorPreview(props: {
       }}
       className={s.color_preview}
       onClick={onClick}
+      role="presentation"
     />
   );
 }

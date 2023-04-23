@@ -6,12 +6,13 @@ import {
   DEFAULT_COLOR_TYPE,
   DEFAULT_HEX_DARK,
 } from "../../packages/constants/colorInput";
-import { ComponentColorValue } from "../../packages/types/colorGradientPicker";
+import { ColorGradientPickerValue } from "../../packages/types/colorGradientPicker";
 import s from "./app.module.css";
+
 
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [color, setColor] = useState<ComponentColorValue>({
+  const [color, setColor] = useState<ColorGradientPickerValue>({
     alpha: ALPHA_VALUE_RANGE.MAX,
     solid: DEFAULT_HEX_DARK,
     type: DEFAULT_COLOR_TYPE,

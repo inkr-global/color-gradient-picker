@@ -2,7 +2,7 @@ import cn from "clsx";
 import { useEffect, useRef, useState } from "react";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../types/color";
-import { Theme } from "../../types/colorGradientPicker";
+import { ColorGradientPickerTheme } from "../../types/colorGradientPicker";
 import hexToHsv from "../../utils/color/hexToHsv";
 import hexToRgb from "../../utils/color/hexToRgb";
 import hsvToHex from "../../utils/color/hsvToHex";
@@ -16,13 +16,14 @@ import InputFields from "./components/InputFields";
 import SaturationPicker from "./components/SaturationPicker";
 import s from "./styles/SolidColorPicker.module.css";
 
+
 interface ColorPickerProps {
   hex: Hex;
   alpha: Alpha;
   onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
   hasAlphaInput?: boolean;
-  theme: Theme;
+  theme: ColorGradientPickerTheme;
 }
 
 export const SolidColorPicker = (props: ColorPickerProps) => {
@@ -112,22 +113,27 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}
       >
         <div className={s.btnEye}>
-          <EyeDropperBtn onClick={_onEyeDropperClick} theme={theme} />
+          <EyeDropperBtn
+            onClick={_onEyeDropperClick}
+            theme={theme}
+          />
         </div>
         <div className={cn(s.sliders)}>
           <HueSlider
             hue={hue}
-            onChange={(updatedHue) =>
-              _onSetColorFromHsv({
-                ...hsvRef.current,
-                hue: updatedHue,
-              })
-            }
+            onChange={(updatedHue) => _onSetColorFromHsv({
+              ...hsvRef.current,
+              hue: updatedHue,
+            })}
             className={s.hue_slider}
           />
 
           {hasAlphaInput && (
-            <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
+            <AlphaSlider
+              alpha={alpha}
+              hex={hex}
+              onChange={onAlphaChange}
+            />
           )}
         </div>
       </div>

@@ -1,15 +1,19 @@
 import clsx from "clsx";
 
-import { ComponentColorType, Theme } from "../../types/colorGradientPicker";
+import {
+  ColorGradientPickerColorType,
+  ColorGradientPickerTheme,
+} from "../../types/colorGradientPicker";
 import s from "./PanelHeader.module.css";
 
+
 interface PanelHeaderProps {
-  value: ComponentColorType;
-  onChange: (value: ComponentColorType) => void;
+  value: ColorGradientPickerColorType;
+  onChange: (value: ColorGradientPickerColorType) => void;
   onClosePanel: () => void;
-  colorSelectType?: ComponentColorType | "all";
+  colorSelectType?: ColorGradientPickerColorType | "all";
   draggableID?: string;
-  theme?: Theme;
+  theme?: ColorGradientPickerTheme;
 }
 
 export const PanelHeader = ({
@@ -26,7 +30,7 @@ export const PanelHeader = ({
       className={clsx(s.select, colorSelectType !== "all" && s.no_arrow)}
       value={value}
       onChange={(e) => {
-        onChange(e.target.value as ComponentColorType);
+        onChange(e.target.value as ColorGradientPickerColorType);
       }}
       style={{ width: value === "linear-gradient" ? 75 : 52 }}
       disabled={colorSelectType !== "all"}
@@ -46,7 +50,11 @@ export const PanelHeader = ({
       />
     )}
 
-    <button className={s.close_btn} onClick={onClosePanel}>
+    <button
+      className={s.close_btn}
+      onClick={onClosePanel}
+      type="button"
+    >
       <svg
         width="16"
         height="16"

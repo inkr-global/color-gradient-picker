@@ -19,11 +19,12 @@ import s from "./styles/global.module.css";
 import placementStyle from "./styles/placement.module.css";
 import { Alpha, Gradient, Hex } from "./types/color";
 import {
+  ColorGradientPickerColorType,
   ColorGradientPickerProps,
-  ComponentColorType,
 } from "./types/colorGradientPicker";
 import sanitizeHex from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
+
 
 function ColorGradientPicker(props: ColorGradientPickerProps) {
   const {
@@ -106,7 +107,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     });
   };
 
-  const handleSetColorType = (_type: ComponentColorType) => {
+  const handleSetColorType = (_type: ColorGradientPickerColorType) => {
     onChange({
       ...color,
       type: _type,

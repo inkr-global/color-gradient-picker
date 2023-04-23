@@ -1,8 +1,9 @@
-import { Theme } from "../../../types/colorGradientPicker";
+import { ColorGradientPickerTheme } from "../../../types/colorGradientPicker";
+
 
 interface EyeDropperProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  theme?: Theme;
+  theme?: ColorGradientPickerTheme;
 }
 
 const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
@@ -23,6 +24,7 @@ const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
         width: "32px",
       }}
       onClick={onClick}
+      type="button"
     >
       <svg
         width="12"

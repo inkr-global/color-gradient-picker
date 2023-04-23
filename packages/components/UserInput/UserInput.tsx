@@ -5,11 +5,12 @@ import {
   DEFAULT_HEX_LIGHT,
 } from "../../constants/colorInput";
 import { DEFAULT_GRADIENT } from "../../constants/gradientPicker";
-import { UserInputProps } from "../../types/userInput";
+import { UserInputProps } from "../../types/colorGradientPicker";
 import { ColorInputAlpha } from "../ColorInput/ColorInput.Alpha";
 import { ColorInputGradient } from "../ColorInput/ColorInput.Gradient";
 import { ColorInputHex } from "../ColorInput/ColorInput.Hex";
 import s from "./UserInput.module.css";
+
 
 export const UserInput = (props: UserInputProps) => {
   const {
@@ -42,13 +43,16 @@ export const UserInput = (props: UserInputProps) => {
     </>
   ) : undefined;
 
+  const shouldShowAndUpdateColorValue = !!color?.solid;
+
   return (
     <>
       {type === "solid" && (
         <ColorInputHex
           {...rest}
           inputWidth={inputWidth}
-          value={color ? solid : ""}
+          value={shouldShowAndUpdateColorValue ? solid : ""} // Dont show hex value if color is undefined, fix bug in LS
+          shouldUpdateColorValue={shouldShowAndUpdateColorValue}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
         />

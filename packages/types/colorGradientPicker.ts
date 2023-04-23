@@ -1,40 +1,50 @@
 import { CSSProperties } from "react";
 
 import { Alpha, Gradient, Hex } from "./color";
-import { UserInputProps } from "./userInput";
+import { ColorInputCoreProps } from "./colorInput";
 
-export type ComponentColorType = "linear-gradient" | "solid";
 
-export type Theme = "light" | "dark";
+export type ColorGradientPickerColorType = "linear-gradient" | "solid";
 
-export type ComponentPanelPlacement =
+export type ColorGradientPickerTheme = "light" | "dark";
+
+export type ColorGradientPickerPanelPlacement =
   | "top-right"
   | "top-left"
   | "bottom-right"
   | "bottom-left";
 
-export interface ComponentColorValue {
+export interface ColorGradientPickerValue {
   alpha?: Alpha;
   solid?: Hex;
   gradient?: Gradient;
-  type?: ComponentColorType;
+  type?: ColorGradientPickerColorType;
+}
+
+export interface UserInputProps extends ColorInputCoreProps {
+  color: ColorGradientPickerValue | undefined;
+  onSolidColorChange: (hex: Hex) => void;
+  onAlphaChange: (alpha: Alpha) => void;
+  onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+  hasAlphaInput?: boolean;
+  theme?: ColorGradientPickerTheme;
 }
 
 export interface ColorGradientPickerProps
   extends Omit<
-    UserInputProps,
-    | "onChange"
-    | "onAlphaChange"
-    | "onSolidColorChange"
-    | "color"
-    | "hasAlphaInput"
-    | "style"
-    | "value"
+  UserInputProps,
+  | "onChange"
+  | "onAlphaChange"
+  | "onSolidColorChange"
+  | "color"
+  | "hasAlphaInput"
+  | "style"
+  | "value"
   > {
-  color: ComponentColorValue | undefined;
-  onChange: (color: ComponentColorValue) => void;
-  panelPlacement?: ComponentPanelPlacement;
-  colorSelectType?: ComponentColorType | "all";
+  color: ColorGradientPickerValue | undefined;
+  onChange: (color: ColorGradientPickerValue) => void;
+  panelPlacement?: ColorGradientPickerPanelPlacement;
+  colorSelectType?: ColorGradientPickerColorType | "all";
   panelClassName?: string;
   hasAlphaInput?: boolean;
   classNamePrefix?: string;
@@ -42,5 +52,5 @@ export interface ColorGradientPickerProps
   style?: CSSProperties;
   panelStyle?: CSSProperties;
   isDraggable?: boolean;
-  theme?: Theme;
+  theme?: ColorGradientPickerTheme;
 }
