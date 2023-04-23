@@ -1,4 +1,3 @@
 /// <reference types="react" />
-import { GradientPickerProps } from "./types";
-declare const GradientPicker: (props: GradientPickerProps) => JSX.Element;
-export default GradientPicker;
+import { GradientPickerProps } from "../../types/gradientPicker";
+export declare const GradientPicker: (props: GradientPickerProps) => JSX.Element;

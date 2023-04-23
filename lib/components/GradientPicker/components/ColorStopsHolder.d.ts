@@ -1,4 +1,3 @@
 /// <reference types="react" />
-import { StopHoldersProps } from "../types";
-declare const ColorStopsHolder: (props: StopHoldersProps) => JSX.Element;
-export default ColorStopsHolder;
+import { StopHoldersProps } from "../../../types/gradientPicker";
+export declare const ColorStopsHolder: (props: StopHoldersProps) => JSX.Element;

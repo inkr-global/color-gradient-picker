@@ -1,8 +1,7 @@
 /// <reference types="react" />
 import { Gradient } from "../../types/color";
-import { BaseInputProps } from "./types";
-export declare function InputGradient(props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+import { ColorInputCoreProps } from "../../types/colorInput";
+export declare function ColorInputGradient(props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
-    theme?: "light" | "dark";
 }): JSX.Element;

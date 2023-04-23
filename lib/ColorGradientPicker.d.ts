@@ -1,4 +1,4 @@
 /// <reference types="react" />
-import { ColorGradientPickerProps } from "./ColorGradientPicker.types";
+import { ColorGradientPickerProps } from "./types/colorGradientPicker";
 declare function ColorGradientPicker(props: ColorGradientPickerProps): JSX.Element;
 export default ColorGradientPicker;

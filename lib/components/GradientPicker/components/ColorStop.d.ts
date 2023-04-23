@@ -1,4 +1,3 @@
 /// <reference types="react" />
-import { ColorStopProps } from "../types";
-declare const ColorStop: (props: ColorStopProps) => JSX.Element;
-export default ColorStop;
+import { ColorStopProps } from "../../../types/gradientPicker";
+export declare const ColorStop: (props: ColorStopProps) => JSX.Element;

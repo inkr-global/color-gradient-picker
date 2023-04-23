@@ -13,11 +13,14 @@ export declare const DEFAULT_PALETTE: {
     alpha: number;
 }[];
 export declare const DEFAULT_DEGREE = 90;
-export declare const Events: {
-    MOUSEDOWN: string;
-    MOUSEMOVE: string;
-    MOUSEUP: string;
-    TOUCHSTART: string;
-    TOUCHMOVE: string;
-    TOUCHEND: string;
+export declare const DEFAULT_GRADIENT: {
+    degree: number;
+    points: {
+        id: number;
+        offset: number;
+        red: number;
+        green: number;
+        blue: number;
+        alpha: number;
+    }[];
 };

@@ -31,10 +31,10 @@ declare const DRAG_HANDLERS: {
         };
     };
 };
-interface UseDraggingParams {
+interface UseColorStopDraggingParams {
     onDragStart: DragEventHandler;
     onDrag: DragEventHandler;
     onDragEnd: DragEventHandler;
 }
-declare const useDragging: ({ onDragStart, onDrag, onDragEnd }: UseDraggingParams) => (DragEventHandler<Element> | TouchEventHandler<Element> | ((e: MouseEvent, handler: typeof DRAG_HANDLERS.MOUSE | typeof DRAG_HANDLERS.TOUCH) => void))[];
-export default useDragging;
+export declare const useHandleColorStopDraggingEvent: ({ onDragStart, onDrag, onDragEnd, }: UseColorStopDraggingParams) => (DragEventHandler<Element> | TouchEventHandler<Element> | ((e: MouseEvent, handler: typeof DRAG_HANDLERS.MOUSE | typeof DRAG_HANDLERS.TOUCH) => void))[];
+export {};

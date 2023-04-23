@@ -1,5 +1,5 @@
 import { DragEventHandler } from "react";
-import { GradientLimits, GradientStop } from "../types";
+import { GradientLimits, GradientStop } from "../../../types/gradientPicker";
 interface Params {
     stop: GradientStop;
     limits: GradientLimits;
@@ -7,9 +7,9 @@ interface Params {
     onPosChange: (id: number, offset: number) => void;
     onDeleteColor: (id: number) => void;
     onDragStart: (id: number) => void;
-    onDragEnd: (id: number) => void;
+    onDragEnd?: (id: number) => void;
 }
-declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDragStart, onDragEnd, onDeleteColor, }: Params) => (DragEventHandler<Element> | import("react").TouchEventHandler<Element> | ((e: MouseEvent, handler: {
+export declare const useColorStopDrag: ({ limits, stop, colorStopRef, onPosChange, onDragStart, onDragEnd, onDeleteColor, }: Params) => (DragEventHandler<Element> | import("react").TouchEventHandler<Element> | ((e: MouseEvent, handler: {
     stop: (e: MouseEvent) => void;
     coordinates: ({ clientX, clientY }: MouseEvent) => {
         clientX: number;
@@ -38,4 +38,4 @@ declare const useStopDragging: ({ limits, stop, colorStopRef, onPosChange, onDra
         name: string;
     };
 }) => void))[];
-export default useStopDragging;
+export {};

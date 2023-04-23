@@ -1,8 +1,7 @@
 import React from "react";
-import { BaseInputProps } from "./types";
-export declare function InputHex(props: Omit<BaseInputProps, "onChange" | "info" | "value"> & {
+import { ColorInputCoreProps } from "../../types/colorInput";
+export declare function ColorInputHex(props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
-    theme?: "light" | "dark";
 }): JSX.Element;

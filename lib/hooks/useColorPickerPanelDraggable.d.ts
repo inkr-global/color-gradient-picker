@@ -4,7 +4,7 @@ interface Params {
     isPickerOpen: boolean;
     dragElementID?: string;
 }
-export declare const useDraggable: (params: Params) => {
+export declare const useColorPickerPanelDraggable: (params: Params) => {
     isDragging: boolean;
 };
 export {};

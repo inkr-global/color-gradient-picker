@@ -37,4 +37,3 @@ export declare const getLinearGradientBackgroundCss: (gradient: Gradient) => str
  * Get random string
  */
 export declare const getRandomString: () => string;
-export declare const noop: () => undefined;

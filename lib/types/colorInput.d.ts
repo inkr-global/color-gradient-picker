@@ -1,5 +1,5 @@
 import React, { CSSProperties, HTMLProps, ReactElement, ReactNode } from "react";
-export interface BaseInputProps {
+export interface ColorInputCoreProps {
     value?: string | number;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
@@ -16,5 +16,4 @@ export interface BaseInputProps {
     inputClassName?: string;
     extraInput?: ReactElement;
     isExtraComponent?: boolean;
-    theme?: "light" | "dark";
 }
