@@ -1,4 +1,4 @@
-import { ComponentColorType } from "../types/colorGradientPicker";
+import { ColorGradientPickerColorType } from "../types/colorGradientPicker";
 export declare const KEYS: {
     ENTER: string;
 };
@@ -22,4 +22,4 @@ export declare const DEFAULT_HEX_DARK = "#000";
 export declare const DEFAULT_HEX_LIGHT = "#fff";
 export declare const ALPHA_SYMBOL = "%";
 export declare const DEGREE_SYMBOL = "\u00B0";
-export declare const DEFAULT_COLOR_TYPE: ComponentColorType;
+export declare const DEFAULT_COLOR_TYPE: ColorGradientPickerColorType;

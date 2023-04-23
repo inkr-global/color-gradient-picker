@@ -1,5 +1,5 @@
 import { Gradient, Point } from "./color";
-import { Theme } from "./colorGradientPicker";
+import { ColorGradientPickerTheme } from "./colorGradientPicker";
 export interface GradientStop extends Point {
     isActive: boolean;
     pointX?: number;
@@ -37,5 +37,5 @@ export interface GradientPickerProps {
     stopRemovalDrop?: number;
     maxStops?: number;
     minStops?: number;
-    theme: Theme;
+    theme: ColorGradientPickerTheme;
 }

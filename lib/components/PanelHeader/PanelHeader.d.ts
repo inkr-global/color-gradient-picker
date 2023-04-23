@@ -1,12 +1,12 @@
 /// <reference types="react" />
-import { ComponentColorType, Theme } from "../../types/colorGradientPicker";
+import { ColorGradientPickerColorType, ColorGradientPickerTheme } from "../../types/colorGradientPicker";
 interface PanelHeaderProps {
-    value: ComponentColorType;
-    onChange: (value: ComponentColorType) => void;
+    value: ColorGradientPickerColorType;
+    onChange: (value: ColorGradientPickerColorType) => void;
     onClosePanel: () => void;
-    colorSelectType?: ComponentColorType | "all";
+    colorSelectType?: ColorGradientPickerColorType | "all";
     draggableID?: string;
-    theme?: Theme;
+    theme?: ColorGradientPickerTheme;
 }
 export declare const PanelHeader: ({ value, onChange, colorSelectType, onClosePanel, draggableID, theme, }: PanelHeaderProps) => JSX.Element;
 export {};

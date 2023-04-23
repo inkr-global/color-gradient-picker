@@ -4,4 +4,5 @@ export declare function ColorInputHex(props: Omit<ColorInputCoreProps, "onChange
     onChange: (value: string) => void;
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
+    shouldUpdateColorValue?: boolean;
 }): JSX.Element;
