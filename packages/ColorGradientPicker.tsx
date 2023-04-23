@@ -5,8 +5,13 @@ import { GradientPicker } from "./components/GradientPicker/GradientPicker";
 import { PanelHeader } from "./components/PanelHeader/PanelHeader";
 import { SolidColorPicker } from "./components/SolidColorPicker/SolidColorPicker";
 import { UserInput } from "./components/UserInput/UserInput";
-import { ALPHA_VALUE_RANGE, DEFAULT_HEX } from "./constants/colorInput";
-import { DEFAULT_DEGREE, DEFAULT_PALETTE } from "./constants/gradientPicker";
+import {
+  ALPHA_VALUE_RANGE,
+  DEFAULT_COLOR_TYPE,
+  DEFAULT_HEX_DARK,
+  DEFAULT_HEX_LIGHT,
+} from "./constants/colorInput";
+import { DEFAULT_GRADIENT } from "./constants/gradientPicker";
 import { useClosePanelWhenClickOutside } from "./hooks/useClosePanelWhenClickOutside";
 import { useColorPickerPanelDraggable } from "./hooks/useColorPickerPanelDraggable";
 import s from "./styles/global.module.css";
@@ -37,15 +42,13 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     ...rest
   } = props;
 
-  // ------------------------------------------------------------------------------------------3
-
-  const solidColor = sanitizeHex(color?.solid || DEFAULT_HEX);
+  // ------------------------------------------------------------------------------------------
+  const solidColor = sanitizeHex(
+    color?.solid || (theme === "dark" ? DEFAULT_HEX_DARK : DEFAULT_HEX_LIGHT),
+  );
   const totalAlpha = color?.alpha || ALPHA_VALUE_RANGE.MAX;
-  const linearGradient = color?.gradient || {
-    degree: DEFAULT_DEGREE,
-    points: DEFAULT_PALETTE,
-  };
-  const propColorType = color?.type || "solid";
+  const linearGradient = color?.gradient || DEFAULT_GRADIENT;
+  const propColorType = color?.type || DEFAULT_COLOR_TYPE;
 
   // ------------------------------------------------------------------------------------------
 
@@ -137,6 +140,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         color={color}
         onInputFocus={handleInputFocus}
         onColorPreviewClick={onShowPanel}
+        theme={theme}
       />
 
       {isPickerOpen && (

@@ -1,4 +1,4 @@
-import { DEFAULT_HEX } from "../../constants/colorInput";
+import { DEFAULT_HEX_DARK } from "../../constants/colorInput";
 import { Gradient } from "../../types/color";
 import { ColorInputCoreProps } from "../../types/colorInput";
 import { getLinearGradientBackgroundCss } from "../../utils/common";
@@ -30,7 +30,7 @@ function GradientPreview(props: {
 }) {
   const { value, onClick } = props;
 
-  let color = DEFAULT_HEX;
+  let color = DEFAULT_HEX_DARK; // TODO: add theme support
   if (typeof value !== "undefined") {
     color = getLinearGradientBackgroundCss(value);
   }

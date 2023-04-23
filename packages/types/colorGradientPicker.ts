@@ -31,7 +31,7 @@ export interface ColorGradientPickerProps
     | "style"
     | "value"
   > {
-  color: ComponentColorValue;
+  color: ComponentColorValue | undefined;
   onChange: (color: ComponentColorValue) => void;
   panelPlacement?: ComponentPanelPlacement;
   colorSelectType?: ComponentColorType | "all";

@@ -1,11 +1,12 @@
 import { Alpha, Hex } from "./color";
-import { ComponentColorValue } from "./colorGradientPicker";
+import { ComponentColorValue, Theme } from "./colorGradientPicker";
 import { ColorInputCoreProps } from "./colorInput";
 
 export interface UserInputProps extends ColorInputCoreProps {
-  color: ComponentColorValue;
+  color: ComponentColorValue | undefined;
   onSolidColorChange: (hex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
   onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   hasAlphaInput?: boolean;
+  theme?: Theme;
 }

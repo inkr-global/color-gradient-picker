@@ -35,4 +35,7 @@ export const DEFAULT_PALETTE = [
 
 export const DEFAULT_DEGREE = 90;
 
-
+export const DEFAULT_GRADIENT = {
+  degree: DEFAULT_DEGREE,
+  points: DEFAULT_PALETTE,
+};

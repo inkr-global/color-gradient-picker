@@ -1,3 +1,5 @@
+import { ComponentColorType } from "../types/colorGradientPicker";
+
 export const KEYS = {
   ENTER: "Enter",
 };
@@ -22,8 +24,11 @@ export const DEGREE_VALUE_RANGE = {
   MIN: 0,
 };
 
-export const DEFAULT_HEX = "#000";
+export const DEFAULT_HEX_DARK = "#000";
+export const DEFAULT_HEX_LIGHT = "#fff";
 
 export const ALPHA_SYMBOL = "%";
 
 export const DEGREE_SYMBOL = "°";
+
+export const DEFAULT_COLOR_TYPE: ComponentColorType = "solid";

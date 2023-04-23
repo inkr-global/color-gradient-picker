@@ -1,4 +1,10 @@
-import { ALPHA_VALUE_RANGE, DEFAULT_HEX } from "../../constants/colorInput";
+import {
+  ALPHA_VALUE_RANGE,
+  DEFAULT_COLOR_TYPE,
+  DEFAULT_HEX_DARK,
+  DEFAULT_HEX_LIGHT,
+} from "../../constants/colorInput";
+import { DEFAULT_GRADIENT } from "../../constants/gradientPicker";
 import { UserInputProps } from "../../types/userInput";
 import { ColorInputAlpha } from "../ColorInput/ColorInput.Alpha";
 import { ColorInputGradient } from "../ColorInput/ColorInput.Gradient";
@@ -12,15 +18,16 @@ export const UserInput = (props: UserInputProps) => {
     onAlphaChange,
     hasAlphaInput,
     inputWidth = 80,
+    theme,
     ...rest
   } = props;
 
   const {
-    type,
-    solid = DEFAULT_HEX,
+    type = DEFAULT_COLOR_TYPE,
+    solid = theme === "dark" ? DEFAULT_HEX_DARK : DEFAULT_HEX_LIGHT,
     alpha = ALPHA_VALUE_RANGE.MAX,
-    gradient,
-  } = color;
+    gradient = DEFAULT_GRADIENT,
+  } = color || {};
 
   const alphaInput = hasAlphaInput ? (
     <>
@@ -41,7 +48,7 @@ export const UserInput = (props: UserInputProps) => {
         <ColorInputHex
           {...rest}
           inputWidth={inputWidth}
-          value={solid}
+          value={color ? solid : ""}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
         />
