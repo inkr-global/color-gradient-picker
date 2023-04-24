@@ -30,7 +30,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     className,
     color,
     onChange,
-    onInputFocus,
     panelClassName,
     colorSelectType = "all",
     panelPlacement = "bottom-left",
@@ -56,12 +55,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // ------------------------------------------------------------------------------------------
-
-  const handleInputFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    setOpenPicker(true);
-
-    if (typeof onInputFocus === "function") onInputFocus(e);
-  };
 
   const onShowPanel = useCallback(() => {
     setOpenPicker(true);
@@ -138,7 +131,6 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         onSolidColorChange={handleSolidColorChange}
         onAlphaChange={handleTotalAlphaChange}
         color={color}
-        onInputFocus={handleInputFocus}
         onColorPreviewClick={onShowPanel}
         theme={theme}
       />
