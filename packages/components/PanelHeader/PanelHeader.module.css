@@ -7,7 +7,7 @@
   padding: 0 4px 0 12px;
   gap: 12px;
   width: 300px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 6%);
   background-color: var(--cgp-background-color);
 }
 
@@ -22,11 +22,24 @@
   overflow: hidden;
   color: var(--cgp-text-color, #515151);
   background: transparent;
+
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .no_arrow {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
+}
+
+.arrow_icon {
+  position: absolute;
+  left: -26px;
+  top: 8px;
 }
 
 .close_btn {
