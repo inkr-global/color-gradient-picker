@@ -28,7 +28,7 @@ export function ColorInputDegree(
     setValueState(getDegreeString(value));
   }, [value]);
 
-  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value.replace(DEGREE_SYMBOL, ""));
     _value = Math.round(_value);
     if (_value < DEGREE_VALUE_RANGE.MIN) _value = DEGREE_VALUE_RANGE.MIN;
@@ -38,7 +38,7 @@ export function ColorInputDegree(
     setValueState(`${_value}`);
   };
 
-  const _onOutsideChange = () => {
+  const handleOutsideChange = () => {
     const _valueState = parseInt(
       valueState?.toString()?.replace(DEGREE_SYMBOL, ""),
     );
@@ -46,17 +46,17 @@ export function ColorInputDegree(
     setValueState(getDegreeString(_valueState));
   };
 
-  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.stopPropagation();
-    if (e.key === KEYS.ENTER) _onOutsideChange();
+    if (e.key === KEYS.ENTER) handleOutsideChange();
   };
 
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    _onOutsideChange();
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    handleOutsideChange();
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
-  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
+  const handleInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setValueState(valueState.replace(DEGREE_SYMBOL, ""));
   };
 
@@ -64,11 +64,11 @@ export function ColorInputDegree(
   return (
     <ColorInputBase
       {...rest}
-      onChange={_onInternalChange}
-      onKeyDown={_onKeyDown}
+      onChange={handleInternalChange}
+      onKeyDown={handleKeyDown}
       value={valueState}
-      onInputBlur={_onBlur}
-      onInputFocus={_onInputFocus}
+      onInputBlur={handleBlur}
+      onInputFocus={handleInputFocus}
       info={<DegreeInfo theme={theme} />}
       inputWidth={35}
     />

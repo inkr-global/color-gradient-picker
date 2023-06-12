@@ -11,8 +11,8 @@ type HueSliderProps = {
   className?: string;
 };
 
-const HueSlider = (props: HueSliderProps) => {
-  // ------------------------------------------------------------------------------------------
+export const HueSlider = (props: HueSliderProps) => {
+  
   const { hue, onChange, className } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -112,4 +112,3 @@ const HueSlider = (props: HueSliderProps) => {
   );
 };
 
-export default HueSlider;

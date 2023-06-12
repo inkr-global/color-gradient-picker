@@ -14,7 +14,7 @@ type AlphaSliderProps = {
   className?: string;
 };
 
-const AlphaSlider = (props: AlphaSliderProps) => {
+export const AlphaSlider = (props: AlphaSliderProps) => {
   const { alpha, onChange, hex, className } = props;
   const [isInteracting, setIsInteracting] = useState(false);
   const sliderDivRef = useRef<HTMLDivElement>(null);
@@ -117,4 +117,3 @@ const AlphaSlider = (props: AlphaSliderProps) => {
   );
 };
 
-export default AlphaSlider;

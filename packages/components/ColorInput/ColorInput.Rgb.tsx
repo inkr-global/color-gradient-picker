@@ -30,7 +30,7 @@ export function ColorInputRgb(
 
   // ---------------------------------------------------------------------------
 
-  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     let _value = parseInt(e.currentTarget.value);
     if (_value < RGB_VALUE_RANGE.MIN) _value = RGB_VALUE_RANGE.MIN;
     if (_value > RGB_VALUE_RANGE.MAX) _value = RGB_VALUE_RANGE.MAX;
@@ -38,28 +38,28 @@ export function ColorInputRgb(
     setValueState(_value);
   };
 
-  const _onOutsideChange = () => {
+  const handleOutsideChange = () => {
     onChange(valueState as number);
     setValueState(valueState);
   };
 
-  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.stopPropagation();
-    if (e.key === KEYS.ENTER) _onOutsideChange();
+    if (e.key === KEYS.ENTER) handleOutsideChange();
   };
 
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    _onOutsideChange();
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    handleOutsideChange();
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
   return (
     <ColorInputBase
       {...rest}
-      onChange={_onInternalChange}
-      onKeyDown={_onKeyDown}
+      onChange={handleInternalChange}
+      onKeyDown={handleKeyDown}
       value={valueState}
-      onInputBlur={_onBlur}
+      onInputBlur={handleBlur}
       info={<InputTextInfo>{info}</InputTextInfo>}
       inputProps={customInputProps}
     />

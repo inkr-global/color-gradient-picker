@@ -28,17 +28,21 @@ export function ColorInputAlpha(
   }, [value]);
 
   // -----------------------------------------------------------------------
-  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInternalChange: React.ChangeEventHandler<HTMLInputElement> = (
+    e,
+  ) => {
     let _value = parseInt(e.currentTarget.value.replace(ALPHA_SYMBOL, ""));
     _value = Math.round(_value);
-    if (_value < ALPHA_DISPLAY_VALUE_RANGE.MIN) _value = ALPHA_DISPLAY_VALUE_RANGE.MIN;
-    if (_value > ALPHA_DISPLAY_VALUE_RANGE.MAX) _value = ALPHA_DISPLAY_VALUE_RANGE.MAX;
+    if (_value < ALPHA_DISPLAY_VALUE_RANGE.MIN)
+      _value = ALPHA_DISPLAY_VALUE_RANGE.MIN;
+    if (_value > ALPHA_DISPLAY_VALUE_RANGE.MAX)
+      _value = ALPHA_DISPLAY_VALUE_RANGE.MAX;
     if (Number.isNaN(_value)) _value = ALPHA_DISPLAY_VALUE_RANGE.MIN;
 
     setDisplayAlpha(_value + "");
   };
 
-  const _onOutsideChange = () => {
+  const handleOutsideChange = () => {
     // remove % if the valueState has it
     const _alphaDisplayNumber =
       parseInt(displayAlpha.replace(ALPHA_SYMBOL, "")) / 100;
@@ -49,17 +53,17 @@ export function ColorInputAlpha(
     );
   };
 
-  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.stopPropagation();
-    if (e.key === KEYS.ENTER) _onOutsideChange();
+    if (e.key === KEYS.ENTER) handleOutsideChange();
   };
 
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    _onOutsideChange();
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    handleOutsideChange();
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
-  const _onInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
+  const handleInputFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setDisplayAlpha(displayAlpha.replace(ALPHA_SYMBOL, ""));
   };
 
@@ -68,10 +72,10 @@ export function ColorInputAlpha(
     <ColorInputBase
       {...rest}
       info={<InputAlphaInfo />}
-      onChange={_onInternalChange}
-      onKeyDown={_onKeyDown}
-      onInputBlur={_onBlur}
-      onInputFocus={_onInputFocus}
+      onChange={handleInternalChange}
+      onKeyDown={handleKeyDown}
+      onInputBlur={handleBlur}
+      onInputFocus={handleInputFocus}
       value={displayAlpha}
       inputClassName={s.alpha_input}
     />

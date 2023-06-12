@@ -87,7 +87,7 @@ export const GradientPicker = (props: GradientPickerProps) => {
 
   // ------------------------------------------------------------------------------------------
 
-  const onStopDragStart = (id: number) => {
+  const handleStopDragStart = (id: number) => {
     if (id !== activeColorId) {
       setActiveColorId(id);
     }
@@ -210,7 +210,7 @@ export const GradientPicker = (props: GradientPickerProps) => {
             limits={limits}
             onPosChange={handleStopPosChange}
             onDeleteColor={handleColorDelete}
-            onDragStart={onStopDragStart}
+            onDragStart={handleStopDragStart}
           />
         </div>
         <ColorInputDegree

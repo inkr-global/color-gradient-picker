@@ -1,10 +1,11 @@
+import { useCallback } from "react";
+
 import { DEFAULT_HEX_DARK } from "../../constants/colorInput";
 import { Gradient } from "../../types/color";
 import { ColorInputCoreProps } from "../../types/colorInput";
 import { getLinearGradientBackgroundCss } from "../../utils/common";
 import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Gradient.module.css";
-
 
 export function ColorInputGradient(
   props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
@@ -18,12 +19,8 @@ export function ColorInputGradient(
     <ColorInputBase
       {...rest}
       value="Gradient"
-      info={(
-        <GradientPreview
-          onClick={onColorPreviewClick}
-          value={value}
-        />
-      )}
+      onChange={useCallback(() => undefined, [])}
+      info={<GradientPreview onClick={onColorPreviewClick} value={value} />}
     />
   );
 }

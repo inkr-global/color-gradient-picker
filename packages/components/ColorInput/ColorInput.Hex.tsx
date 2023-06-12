@@ -24,35 +24,35 @@ export function ColorInputHex(
     setValueState(value);
   }, [value]);
 
-  const _onInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleInternalChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!shouldUpdateColorValue) return;
     const _value = e.currentTarget.value;
     setValueState(_value);
   };
 
-  const _onOutsideChange = () => {
+  const handleOutsideChange = () => {
     if (!shouldUpdateColorValue) return;
     const _valueState = sanitizeHex(valueState);
     onChange(_valueState);
     setValueState(_valueState);
   };
 
-  const _onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.stopPropagation();
-    if (e.key === KEYS.ENTER) _onOutsideChange();
+    if (e.key === KEYS.ENTER) handleOutsideChange();
   };
 
-  const _onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    _onOutsideChange();
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    handleOutsideChange();
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
   return (
     <ColorInputBase
       {...rest}
-      onChange={_onInternalChange}
-      onKeyDown={_onKeyDown}
-      onInputBlur={_onBlur}
+      onChange={handleInternalChange}
+      onKeyDown={handleKeyDown}
+      onInputBlur={handleBlur}
       value={valueState.toUpperCase()}
       info={(
         <ColorPreview

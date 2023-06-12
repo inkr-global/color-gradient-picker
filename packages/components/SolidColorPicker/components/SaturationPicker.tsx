@@ -14,8 +14,7 @@ type SaturationPickerProps = {
   onChange: (saturationValue: SaturationValue) => void;
 };
 
-const SaturationPicker = (props: SaturationPickerProps) => {
-  // ------------------------------------------------------------------------------------------
+export const SaturationPicker = (props: SaturationPickerProps) => {
   const { hue, saturation, value, onChange } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -124,4 +123,3 @@ const SaturationPicker = (props: SaturationPickerProps) => {
   );
 };
 
-export default SaturationPicker;

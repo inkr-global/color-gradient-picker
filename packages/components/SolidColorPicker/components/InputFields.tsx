@@ -17,7 +17,7 @@ interface InputFieldsProps {
   hasAlphaInput?: boolean;
 }
 
-const InputFields = (props: InputFieldsProps) => {
+export const InputFields = (props: InputFieldsProps) => {
   const {
     hex,
     alpha,
@@ -103,4 +103,3 @@ const InputFields = (props: InputFieldsProps) => {
   );
 };
 
-export default InputFields;

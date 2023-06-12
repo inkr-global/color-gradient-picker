@@ -1,12 +1,13 @@
-import { ColorGradientPickerTheme } from "../../../types/colorGradientPicker";
+import { memo } from "react";
 
+import { ColorGradientPickerTheme } from "../../../types/colorGradientPicker";
 
 interface EyeDropperProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   theme?: ColorGradientPickerTheme;
 }
 
-const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
+export const EyeDropper = memo(({ onClick, theme }: EyeDropperProps) => {
   const titleColor = theme === "light" ? "black" : "white";
   const fillOpacity = theme === "light" ? "0.8" : "0.3";
 
@@ -41,6 +42,4 @@ const EyeDropper = ({ onClick, theme }: EyeDropperProps) => {
       </svg>
     </button>
   );
-};
-
-export default EyeDropper;
+});
