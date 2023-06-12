@@ -8,5 +8,5 @@ interface PanelHeaderProps {
     draggableID?: string;
     theme?: ColorGradientPickerTheme;
 }
-export declare const PanelHeader: ({ value, onChange, colorSelectType, onClosePanel, draggableID, theme, }: PanelHeaderProps) => JSX.Element;
+export declare function PanelHeader({ value, onChange, colorSelectType, onClosePanel, draggableID, theme, }: PanelHeaderProps): JSX.Element;
 export {};

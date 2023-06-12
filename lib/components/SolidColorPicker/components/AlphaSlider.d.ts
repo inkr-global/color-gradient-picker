@@ -6,5 +6,5 @@ declare type AlphaSliderProps = {
     onChange: (alpha: Alpha) => void;
     className?: string;
 };
-declare const AlphaSlider: (props: AlphaSliderProps) => JSX.Element;
-export default AlphaSlider;
+export declare const AlphaSlider: (props: AlphaSliderProps) => JSX.Element;
+export {};

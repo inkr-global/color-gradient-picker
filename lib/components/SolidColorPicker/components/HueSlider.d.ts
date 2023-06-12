@@ -4,5 +4,5 @@ declare type HueSliderProps = {
     onChange: (hue: number) => void;
     className?: string;
 };
-declare const HueSlider: (props: HueSliderProps) => JSX.Element;
-export default HueSlider;
+export declare const HueSlider: (props: HueSliderProps) => JSX.Element;
+export {};

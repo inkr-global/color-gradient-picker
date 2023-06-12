@@ -9,5 +9,5 @@ interface InputFieldsProps {
     setColorFromRgb: (rgb: Rgb) => void;
     hasAlphaInput?: boolean;
 }
-declare const InputFields: (props: InputFieldsProps) => JSX.Element;
-export default InputFields;
+export declare const InputFields: (props: InputFieldsProps) => JSX.Element;
+export {};
