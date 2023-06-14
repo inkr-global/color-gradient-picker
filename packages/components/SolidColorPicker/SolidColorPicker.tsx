@@ -10,7 +10,7 @@ import rgbToHex from "../../utils/color/rgbToHex";
 import rgbToHsv from "../../utils/color/rgbToHsv";
 import { openNativeEyeDropper } from "../../utils/common";
 import { AlphaSlider } from "./components/AlphaSlider";
-import { EyeDropper } from "./components/EyeDropper";
+import { EyeDropperButton } from "./components/EyeDropperButton";
 import { HueSlider } from "./components/HueSlider";
 import { InputFields } from "./components/InputFields";
 import { SaturationPicker } from "./components/SaturationPicker";
@@ -103,7 +103,10 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         className={cn(s.sliders_wrapper, !hasAlphaInput && s.no_alpha_input)}
       >
         <div className={s.btnEye}>
-          <EyeDropper onClick={handleEyeDropperClick} theme={theme} />
+          {/* @ts-expect-error check EyeDropper in window */}
+          {typeof EyeDropper !== "undefined" && (
+            <EyeDropperButton onClick={handleEyeDropperClick} theme={theme} />
+          )}
         </div>
         <div className={cn(s.sliders)}>
           <HueSlider

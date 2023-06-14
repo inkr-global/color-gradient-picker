@@ -7,7 +7,7 @@ interface EyeDropperProps {
   theme?: ColorGradientPickerTheme;
 }
 
-export const EyeDropper = memo(({ onClick, theme }: EyeDropperProps) => {
+export const EyeDropperButton = memo(({ onClick, theme }: EyeDropperProps) => {
   const titleColor = theme === "light" ? "black" : "white";
   const fillOpacity = theme === "light" ? "0.8" : "0.3";
 

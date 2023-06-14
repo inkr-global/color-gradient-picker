@@ -4,5 +4,5 @@ interface EyeDropperProps {
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     theme?: ColorGradientPickerTheme;
 }
-export declare const EyeDropper: import("react").MemoExoticComponent<({ onClick, theme }: EyeDropperProps) => JSX.Element>;
+export declare const EyeDropperButton: import("react").MemoExoticComponent<({ onClick, theme }: EyeDropperProps) => JSX.Element>;
 export {};
