@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { useCallback, useRef, useState } from "react";
 
-import hsvToHex from "../../../utils/color/hsvToHex";
+import { hsvToHex } from "../../../utils/color/utils";
 import { getHueFromPosition } from "../../../utils/common";
 import s from "../styles/HueSlider.module.css";
 
@@ -12,14 +12,11 @@ type HueSliderProps = {
 };
 
 export const HueSlider = (props: HueSliderProps) => {
-  
   const { hue, onChange, className } = props;
 
   // ------------------------------------------------------------------------------------------
   const [isInteracting, setIsInteracting] = useState(false);
   const sliderDivRef = useRef<HTMLDivElement>(null);
-
-  const hueColor = hsvToHex(hue, 1, 1);
 
   // ------------------------------------------------------------------------------------------
   const updateHue = useCallback(
@@ -31,7 +28,6 @@ export const HueSlider = (props: HueSliderProps) => {
       }
 
       const huePosition = sliderDivRef.current.getBoundingClientRect();
-
       const x = evt.clientX - huePosition.left;
       const updatedHue = getHueFromPosition(
         x,
@@ -97,7 +93,11 @@ export const HueSlider = (props: HueSliderProps) => {
 
   const sliderStyle = {
     left: `${(hue / 360) * 100}%`,
-    backgroundColor: hueColor,
+    backgroundColor: hsvToHex({
+      hue,
+      saturation: 1,
+      value: 1,
+    }),
   };
 
   return (
@@ -111,4 +111,3 @@ export const HueSlider = (props: HueSliderProps) => {
     </div>
   );
 };
-

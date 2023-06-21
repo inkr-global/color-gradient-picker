@@ -1,13 +1,14 @@
 import cn from "clsx";
-import { useRef } from "react";
+import { useState } from "react";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../types/color";
 import { ColorGradientPickerTheme } from "../../types/colorGradientPicker";
-import hexToHsv from "../../utils/color/hexToHsv";
-import hexToRgb from "../../utils/color/hexToRgb";
-import hsvToHex from "../../utils/color/hsvToHex";
-import rgbToHex from "../../utils/color/rgbToHex";
-import rgbToHsv from "../../utils/color/rgbToHsv";
+import {
+  hexToHsv,
+  hexToRgb,
+  hsvToHex,
+  rgbToHex,
+} from "../../utils/color/utils";
 import { openNativeEyeDropper } from "../../utils/common";
 import { AlphaSlider } from "./components/AlphaSlider";
 import { EyeDropperButton } from "./components/EyeDropperButton";
@@ -35,66 +36,70 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
     theme,
   } = props;
 
-  // ------------------------------------------------------------------------------------------
-  const hsvRef = useRef(hexToHsv(hex));
-  const hexRef = useRef(hex);
-  hsvRef.current = hexToHsv(hex);
-  hexRef.current = hex;
-
-  const { hue, saturation, value } = hsvRef.current;
-  const rgb = hexToRgb(hexRef.current);
+  const [hsvState, setHsvState] = useState(hexToHsv(hex));
+  const rgb = hexToRgb(hex);
 
   // ------------------------------------------------------------------------------------------
 
-  const handleSetColor = (_updatedHex: Hex, _updatedHsv: Hsv) => {
-    hexRef.current = _updatedHex;
-    hsvRef.current = _updatedHsv;
-
+  const handleSetHexColor = (_updatedHex: Hex, _updatedHsv?: Hsv) => {
     onColorChange(_updatedHex);
+    if (_updatedHsv) {
+      setHsvState(_updatedHsv);
+    } else {
+      setHsvState(hexToHsv(_updatedHex));
+    }
   };
 
-  const handleSetColorFromRgb = (updatedRgb: Rgb) => {
-    const { red, green, blue } = updatedRgb;
-
-    handleSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
+  const handleSetColorFromRgb = (_updatedRgb: Rgb) => {
+    const { red, green, blue } = _updatedRgb;
+    handleSetHexColor(
+      rgbToHex({
+        red,
+        green,
+        blue,
+      }),
+    );
   };
 
   const handleEyeDropperClick = async () => {
     const _colorString = await openNativeEyeDropper(); // this will be rgb(r, g, b) in browser or #hex in electron
-    const numberRegex = /\d+/g;
 
     const isRgbString = _colorString?.startsWith("rgb");
     const isHex = _colorString?.startsWith("#");
 
     if (isRgbString) {
+      const numberRegex = /\d+/g;
       const [red, green, blue] = _colorString.match(numberRegex).map(Number);
 
       if (_colorString !== null) {
-        handleSetColor(rgbToHex(red, green, blue), rgbToHsv(red, green, blue));
+        handleSetHexColor(
+          rgbToHex({
+            red,
+            green,
+            blue,
+          }),
+        );
       }
     } else if (isHex) {
-      handleSetColor(_colorString, hexToHsv(_colorString));
+      handleSetHexColor(_colorString);
     }
   };
 
   // Helper to set the color when HSV change
   const handleSetColorFromHsv = (_updatedHsv: Hsv) => {
-    handleSetColor(
-      hsvToHex(_updatedHsv.hue, _updatedHsv.saturation, _updatedHsv.value),
-      _updatedHsv,
-    );
+    handleSetHexColor(hsvToHex(_updatedHsv), _updatedHsv);
   };
 
   return (
     <>
       <SaturationPicker
-        hue={hue}
-        saturation={saturation}
-        value={value}
-        onChange={(_saturationValue) => {
+        hue={hsvState.hue}
+        saturation={hsvState.saturation}
+        value={hsvState.value}
+        onChange={(_updatedSaturation) => {
           handleSetColorFromHsv({
-            ...hsvRef.current,
-            ..._saturationValue,
+            ...hsvState,
+            ..._updatedSaturation,
           });
         }}
       />
@@ -110,13 +115,13 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         </div>
         <div className={cn(s.sliders)}>
           <HueSlider
-            hue={hue}
-            onChange={(updatedHue) =>
+            hue={hsvState.hue}
+            onChange={(_updatedHue) => {
               handleSetColorFromHsv({
-                ...hsvRef.current,
-                hue: updatedHue,
-              })
-            }
+                ...hsvState,
+                hue: _updatedHue,
+              });
+            }}
             className={s.hue_slider}
           />
 
@@ -131,7 +136,7 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         rgb={rgb}
         alpha={alpha}
         setAlpha={onAlphaChange}
-        setColor={handleSetColor}
+        setHexColor={handleSetHexColor}
         setColorFromRgb={handleSetColorFromRgb}
         hasAlphaInput={hasAlphaInput}
       />

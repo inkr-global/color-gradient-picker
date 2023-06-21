@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { useCallback, useRef, useState } from "react";
 
 import { SaturationValue } from "../../../types/color";
-import hsvToHex from "../../../utils/color/hsvToHex";
+import { hsvToHex } from "../../../utils/color/utils";
 import { getSaturationValueFromPosition } from "../../../utils/common";
 import s from "../styles/SaturationPicker.module.css";
 
@@ -21,65 +21,50 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
   const [isInteracting, setIsInteracting] = useState(false);
   const selectorDivRef = useRef<HTMLDivElement>(null);
 
-  const hueColor = hsvToHex(hue, 1, 1);
-  const hex = hsvToHex(hue, saturation, value);
+  const updateSaturationValue = (
+    evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
+  ) => {
+    if (!selectorDivRef.current) {
+      return;
+    }
 
-  const updateSaturationValue = useCallback(
-    (
-      evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
-    ) => {
-      if (!selectorDivRef.current) {
-        return;
-      }
+    const svPosition = selectorDivRef.current.getBoundingClientRect();
+    const x = evt.clientX - svPosition.left;
+    const y = evt.clientY - svPosition.top;
 
-      const svPosition = selectorDivRef.current.getBoundingClientRect();
-      const x = evt.clientX - svPosition.left;
-      const y = evt.clientY - svPosition.top;
+    const updatedSaturationValue = getSaturationValueFromPosition(
+      x,
+      y,
+      selectorDivRef.current.clientWidth,
+      selectorDivRef.current.clientHeight,
+    );
 
-      const updatedSaturationValue = getSaturationValueFromPosition(
-        x,
-        y,
-        selectorDivRef.current.clientWidth,
-        selectorDivRef.current.clientHeight,
-      );
+    onChange(updatedSaturationValue);
+  };
 
-      onChange(updatedSaturationValue);
-    },
-    [onChange],
-  );
-
-  const onPointerDown = useCallback(
-    (evt: React.PointerEvent<Element>): void => {
-      (evt.target as HTMLElement).setPointerCapture(evt.pointerId);
-      setIsInteracting(true);
-      updateSaturationValue(evt);
-    },
-    [updateSaturationValue],
-  );
+  const onPointerDown = (evt: React.PointerEvent<Element>): void => {
+    (evt.target as HTMLElement).setPointerCapture(evt.pointerId);
+    setIsInteracting(true);
+    updateSaturationValue(evt);
+  };
 
   const onPointerUp = useCallback((evt: React.PointerEvent<Element>): void => {
     (evt.target as HTMLElement).releasePointerCapture(evt.pointerId);
     setIsInteracting(false);
   }, []);
 
-  const onMouseDown = useCallback(
-    (evt: React.MouseEvent<Element, MouseEvent>): void => {
-      setIsInteracting(true);
-      updateSaturationValue(evt);
-    },
-    [updateSaturationValue],
-  );
+  const onMouseDown = (evt: React.MouseEvent<Element, MouseEvent>): void => {
+    setIsInteracting(true);
+    updateSaturationValue(evt);
+  };
 
-  const onMove = useCallback(
-    (
-      evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
-    ): void => {
-      if (isInteracting) {
-        updateSaturationValue(evt);
-      }
-    },
-    [isInteracting, updateSaturationValue],
-  );
+  const onMove = (
+    evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
+  ): void => {
+    if (isInteracting) {
+      updateSaturationValue(evt);
+    }
+  };
 
   const onMouseUp = useCallback((): void => {
     setIsInteracting(false);
@@ -105,7 +90,11 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
     <div
       className={clsx(s.saturation_value_selector)}
       style={{
-        backgroundColor: hueColor,
+        backgroundColor: hsvToHex({
+          hue,
+          saturation: 1,
+          value: 1,
+        }),
       }}
       ref={selectorDivRef}
       title="Saturation and Value"
@@ -116,10 +105,9 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
         style={{
           left: `${saturation * 100}%`,
           top: `${(1 - value) * 100}%`,
-          backgroundColor: hex,
+          backgroundColor: "transparent",
         }}
       />
     </div>
   );
 };
-
