@@ -4,8 +4,8 @@ interface InputFieldsProps {
     hex: Hex;
     alpha: Alpha;
     rgb: Rgb;
-    setColor: (hex: Hex, hsv: Hsv) => void;
     setAlpha: (alpha: Alpha) => void;
+    setHexColor: (hex: Hex, hsv: Hsv) => void;
     setColorFromRgb: (rgb: Rgb) => void;
     hasAlphaInput?: boolean;
 }
