@@ -13,8 +13,7 @@ import {
 } from "../../constants/gradientPicker";
 import { Alpha, Point } from "../../types/color";
 import { GradientPickerProps } from "../../types/gradientPicker";
-import hexToRgb from "../../utils/color/hexToRgb";
-import rgbToHex from "../../utils/color/rgbToHex";
+import { hexToRgb, rgbToHex } from "../../utils/color/utils";
 import { sortPalettePoints } from "../../utils/common";
 import { ColorInputDegree } from "../ColorInput/ColorInput.Degree";
 import { SolidColorPicker } from "../SolidColorPicker/SolidColorPicker";
@@ -24,12 +23,14 @@ import s from "./styles/GradientPicker.module.css";
 
 // ------------------------------------------------------------------------------------------
 
-const nextColorId = (palette: Point[]) => Math.max(...palette.map(({ id }, index) => id || index)) + 1;
+const nextColorId = (palette: Point[]) =>
+  Math.max(...palette.map(({ id }, index) => id || index)) + 1;
 
-const mapIdToPoints = (points: Point[]) => [...points].map((color, index) => ({
-  ...color,
-  id: color.id || index + 1,
-}));
+const mapIdToPoints = (points: Point[]) =>
+  [...points].map((color, index) => ({
+    ...color,
+    id: color.id || index + 1,
+  }));
 
 const mapPointsToStops = ({
   palette,
@@ -37,12 +38,13 @@ const mapPointsToStops = ({
 }: {
   palette: Point[];
   activeId: number;
-}) => palette.map((color) => ({
-  ...color,
-  id: color.id,
-  offset: DEFAULT_PALETTE_WIDTH * Number(color.offset) - HALF_STOP_WIDTH,
-  isActive: color.id === activeId,
-}));
+}) =>
+  palette.map((color) => ({
+    ...color,
+    id: color.id,
+    offset: DEFAULT_PALETTE_WIDTH * Number(color.offset) - HALF_STOP_WIDTH,
+    isActive: color.id === activeId,
+  }));
 
 const getPointsColor = (_points: Point[], _id: number) => {
   const color = _points.find((_color) => _color.id === _id) || _points[0];
@@ -142,12 +144,14 @@ export const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopPosChange = (id: number, offset: number) => {
-    const updatedPoints = points.map((_points) => (id === _points.id ?
-      {
-        ..._points,
-        offset: (offset + HALF_STOP_WIDTH) / DEFAULT_PALETTE_WIDTH,
-      } :
-      _points));
+    const updatedPoints = points.map((_points) =>
+      id === _points.id
+        ? {
+            ..._points,
+            offset: (offset + HALF_STOP_WIDTH) / DEFAULT_PALETTE_WIDTH,
+          }
+        : _points,
+    );
 
     handleGradientChange(updatedPoints, degree);
   };
@@ -157,23 +161,27 @@ export const GradientPicker = (props: GradientPickerProps) => {
   };
 
   const handleStopAlphaChange = (_alpha: Alpha) => {
-    const updatedPoints = points.map((_points) => (activeColorId === _points.id ?
-      {
-        ..._points,
-        alpha: _alpha,
-      } :
-      _points));
+    const updatedPoints = points.map((_points) =>
+      activeColorId === _points.id
+        ? {
+            ..._points,
+            alpha: _alpha,
+          }
+        : _points,
+    );
 
     handleGradientChange(updatedPoints, degree);
   };
 
   const handleStopColorChange = (_updateHex: string) => {
-    const updatedPoints: Point[] = points.map((_points) => (activeColorId === _points.id ?
-      {
-        ..._points,
-        ...hexToRgb(_updateHex),
-      } :
-      _points));
+    const updatedPoints: Point[] = points.map((_points) =>
+      activeColorId === _points.id
+        ? {
+            ..._points,
+            ...hexToRgb(_updateHex),
+          }
+        : _points,
+    );
 
     handleGradientChange(updatedPoints, degree);
   };
@@ -221,7 +229,11 @@ export const GradientPicker = (props: GradientPickerProps) => {
       </div>
 
       <SolidColorPicker
-        hex={rgbToHex(red, green, blue)}
+        hex={rgbToHex({
+          red,
+          green,
+          blue,
+        })}
         alpha={alpha}
         onAlphaChange={handleStopAlphaChange}
         onColorChange={handleStopColorChange}

@@ -3,8 +3,11 @@ import React, { CSSProperties, useCallback, useRef, useState } from "react";
 
 import { ALPHA_SYMBOL } from "../../../constants/colorInput";
 import { Alpha } from "../../../types/color";
-import hexToRgb from "../../../utils/color/hexToRgb";
-import { getAlphaDisplayValueFromAlpha, getAlphaFromPosition } from "../../../utils/common";
+import { hexToRgb } from "../../../utils/color/utils";
+import {
+  getAlphaDisplayValueFromAlpha,
+  getAlphaFromPosition,
+} from "../../../utils/common";
 import s from "../styles/AlphaSlider.module.css";
 
 type AlphaSliderProps = {
@@ -102,7 +105,7 @@ export const AlphaSlider = (props: AlphaSliderProps) => {
 
   const alphaStyle: CSSProperties = {
     background: `linear-gradient(to right, rgba(${red}, ${green}, ${blue}, 0) 0%, ${hex} 100%)`,
-  }
+  };
 
   return (
     <div
@@ -116,4 +119,3 @@ export const AlphaSlider = (props: AlphaSliderProps) => {
     </div>
   );
 };
-

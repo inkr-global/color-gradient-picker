@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
-import hexToHsv from "../../../utils/color/hexToHsv";
+import { hexToHsv } from "../../../utils/color/utils";
 import { ColorInputAlpha } from "../../ColorInput/ColorInput.Alpha";
 import { ColorInputHex } from "../../ColorInput/ColorInput.Hex";
 import { ColorInputRgb } from "../../ColorInput/ColorInput.Rgb";
@@ -11,8 +11,8 @@ interface InputFieldsProps {
   hex: Hex;
   alpha: Alpha;
   rgb: Rgb;
-  setColor: (hex: Hex, hsv: Hsv) => void;
   setAlpha: (alpha: Alpha) => void;
+  setHexColor: (hex: Hex, hsv: Hsv) => void;
   setColorFromRgb: (rgb: Rgb) => void;
   hasAlphaInput?: boolean;
 }
@@ -22,7 +22,7 @@ export const InputFields = (props: InputFieldsProps) => {
     hex,
     alpha,
     rgb,
-    setColor,
+    setHexColor,
     setAlpha,
     setColorFromRgb,
     hasAlphaInput = true,
@@ -42,7 +42,7 @@ export const InputFields = (props: InputFieldsProps) => {
         className={s.hex}
         value={hex}
         onChange={(_hex) => {
-          setColor(_hex, hexToHsv(_hex));
+          setHexColor(_hex, hexToHsv(_hex));
         }}
       />
 
@@ -102,4 +102,3 @@ export const InputFields = (props: InputFieldsProps) => {
     </div>
   );
 };
-
