@@ -36,6 +36,9 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
     theme,
   } = props;
 
+  // TODO: hex and hsvState are not in sync, need to fix this
+  // this is a workaround to fix a bug when dragging the saturation picker, it is very laggy
+
   const [hsvState, setHsvState] = useState(hexToHsv(hex));
   const rgb = hexToRgb(hex);
 
