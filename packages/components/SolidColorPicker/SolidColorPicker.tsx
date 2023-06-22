@@ -26,7 +26,8 @@ interface ColorPickerProps {
   theme: ColorGradientPickerTheme;
 }
 
-let SYNC_TIMEOUT: typeof setTimeout | number | null = null;
+// @ts-expect-error ignore can not find NodeJS Timeout type
+let SYNC_TIMEOUT: NodeJS.Timeout | null = null;
 
 export const SolidColorPicker = (props: ColorPickerProps) => {
   const {
