@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../types/color";
 import { ColorGradientPickerTheme } from "../../types/colorGradientPicker";
@@ -26,6 +26,8 @@ interface ColorPickerProps {
   theme: ColorGradientPickerTheme;
 }
 
+let SYNC_TIMEOUT: typeof setTimeout | number | null = null;
+
 export const SolidColorPicker = (props: ColorPickerProps) => {
   const {
     hex,
@@ -36,11 +38,23 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
     theme,
   } = props;
 
-  // TODO: hex and hsvState are not in sync, need to fix this
-  // this is a workaround to fix a bug when dragging the saturation picker, it is very laggy
-
   const [hsvState, setHsvState] = useState(hexToHsv(hex));
   const rgb = hexToRgb(hex);
+
+  useEffect(() => {
+    if (typeof SYNC_TIMEOUT === "number") clearTimeout(SYNC_TIMEOUT);
+
+    // this is a workaround to fix a bug when dragging the saturation picker, it is very laggy
+    // this bug happen because the hex and hsvToHex(hex) is slightly different
+    // To fix this, we create a inner state hsvState to store the hsv value
+    // and sync the hex and hsvState when the hex and hsvState is different
+
+    SYNC_TIMEOUT = setTimeout(() => {
+      if (hex === hsvToHex(hsvState)) return;
+      console.log("syncing hex and hsvState");
+      setHsvState(hexToHsv(hex));
+    }, 100);
+  }, [hex, hsvState]);
 
   // ------------------------------------------------------------------------------------------
 
