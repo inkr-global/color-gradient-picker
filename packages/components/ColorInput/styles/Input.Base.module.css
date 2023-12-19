@@ -6,6 +6,7 @@
 
 .wrapper {
   display: inline-flex;
+  flex-direction: row;
   align-items: center;
   border-radius: 4px;
   height: 100%;

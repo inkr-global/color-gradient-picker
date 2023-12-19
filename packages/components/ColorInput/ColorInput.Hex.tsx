@@ -13,9 +13,11 @@ export function ColorInputHex(
     value: string;
     onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
     shouldUpdateColorValue?: boolean;
+    showEyeDropperOnFocus?: boolean;
+    onEyeDropperClick?: () => void;
   },
 ) {
-  const { value, onChange, onInputBlur, onColorPreviewClick, shouldUpdateColorValue = true, ...rest } = props;
+  const { value, onChange, onInputBlur, onColorPreviewClick, shouldUpdateColorValue = true, showEyeDropperOnHover: showEyeDropperOnFocus = false, onEyeDropperClick, ...rest } = props;
 
   const [valueState, setValueState] = useState<string>(value);
 
@@ -47,6 +49,7 @@ export function ColorInputHex(
     if (typeof onInputBlur === "function") onInputBlur(e);
   };
 
+
   return (
     <ColorInputBase
       {...rest}
@@ -60,11 +63,14 @@ export function ColorInputHex(
           value={value as string}
         />
       )}
+      showEyeDropperOnHover={showEyeDropperOnFocus}
+      onEyeDropperClick={onEyeDropperClick}
     />
   );
 }
 
 // ---------------------------------------------------------------------------
+
 
 function ColorPreview(props: {
   value: string;

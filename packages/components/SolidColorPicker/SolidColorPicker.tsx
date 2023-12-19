@@ -17,9 +17,11 @@ import { InputFields } from "./components/InputFields";
 import { SaturationPicker } from "./components/SaturationPicker";
 import s from "./styles/SolidColorPicker.module.css";
 
+
 interface ColorPickerProps {
   hex: Hex;
   alpha: Alpha;
+  onEyeDropperOpenChanged?: (open: boolean) => void;
   onColorChange: (updatedHex: Hex) => void;
   onAlphaChange: (alpha: Alpha) => void;
   hasAlphaInput?: boolean;
@@ -29,10 +31,11 @@ interface ColorPickerProps {
 // no need to fix this type error because this is a workaround to fix linting error
 let SYNC_TIMEOUT: NodeJS.Timeout | null = null;
 
-export const SolidColorPicker = (props: ColorPickerProps) => {
+export function SolidColorPicker(props: ColorPickerProps) {
   const {
     hex,
     alpha,
+    onEyeDropperOpenChanged,
     onColorChange,
     onAlphaChange,
     hasAlphaInput = true,
@@ -72,15 +75,17 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
     const { red, green, blue } = _updatedRgb;
     handleSetHexColor(
       rgbToHex({
-        red,
-        green,
-        blue,
+        red: red,
+        green: green,
+        blue: blue,
       }),
     );
   };
 
   const handleEyeDropperClick = async () => {
+    onEyeDropperOpenChanged?.(true);
     const _colorString = await openNativeEyeDropper(); // this will be rgb(r, g, b) in browser or #hex in electron
+    onEyeDropperOpenChanged?.(false);
 
     const isRgbString = _colorString?.startsWith("rgb");
     const isHex = _colorString?.startsWith("#");
@@ -92,9 +97,9 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
       if (_colorString !== null) {
         handleSetHexColor(
           rgbToHex({
-            red,
-            green,
-            blue,
+            red: red,
+            green: green,
+            blue: blue,
           }),
         );
       }
@@ -128,7 +133,10 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         <div className={s.btnEye}>
           {/* @ts-expect-error check EyeDropper in window */}
           {typeof EyeDropper !== "undefined" && (
-            <EyeDropperButton onClick={handleEyeDropperClick} theme={theme} />
+            <EyeDropperButton
+              onClick={handleEyeDropperClick}
+              theme={theme}
+            />
           )}
         </div>
         <div className={cn(s.sliders)}>
@@ -144,7 +152,11 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
           />
 
           {hasAlphaInput && (
-            <AlphaSlider alpha={alpha} hex={hex} onChange={onAlphaChange} />
+            <AlphaSlider
+              alpha={alpha}
+              hex={hex}
+              onChange={onAlphaChange}
+            />
           )}
         </div>
       </div>
@@ -157,7 +169,9 @@ export const SolidColorPicker = (props: ColorPickerProps) => {
         setHexColor={handleSetHexColor}
         setColorFromRgb={handleSetColorFromRgb}
         hasAlphaInput={hasAlphaInput}
+        showEyeDropperOnHover
+        onEyeDropperClick={handleEyeDropperClick}
       />
     </>
   );
-};
+}

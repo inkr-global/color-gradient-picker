@@ -7,6 +7,7 @@ import { getLinearGradientBackgroundCss } from "../../utils/common";
 import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Gradient.module.css";
 
+
 export function ColorInputGradient(
   props: Omit<ColorInputCoreProps, "onChange" | "info" | "value"> & {
     value?: Gradient;
@@ -20,7 +21,12 @@ export function ColorInputGradient(
       {...rest}
       value="Gradient"
       onChange={useCallback(() => undefined, [])}
-      info={<GradientPreview onClick={onColorPreviewClick} value={value} />}
+      info={(
+        <GradientPreview
+          onClick={onColorPreviewClick}
+          value={value}
+        />
+      )}
     />
   );
 }

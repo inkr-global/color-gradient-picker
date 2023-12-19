@@ -7,6 +7,7 @@ import { ColorInputHex } from "../../ColorInput/ColorInput.Hex";
 import { ColorInputRgb } from "../../ColorInput/ColorInput.Rgb";
 import s from "../styles/InputFields.module.css";
 
+
 interface InputFieldsProps {
   hex: Hex;
   alpha: Alpha;
@@ -15,9 +16,11 @@ interface InputFieldsProps {
   setHexColor: (hex: Hex, hsv: Hsv) => void;
   setColorFromRgb: (rgb: Rgb) => void;
   hasAlphaInput?: boolean;
+  showEyeDropperOnHover?: boolean;
+  onEyeDropperClick?: () => void;
 }
 
-export const InputFields = (props: InputFieldsProps) => {
+export function InputFields(props: InputFieldsProps) {
   const {
     hex,
     alpha,
@@ -26,6 +29,8 @@ export const InputFields = (props: InputFieldsProps) => {
     setAlpha,
     setColorFromRgb,
     hasAlphaInput = true,
+    showEyeDropperOnHover = false,
+    onEyeDropperClick,
   } = props;
   const { red, green, blue } = rgb;
 
@@ -44,6 +49,8 @@ export const InputFields = (props: InputFieldsProps) => {
         onChange={(_hex) => {
           setHexColor(_hex, hexToHsv(_hex));
         }}
+        showEyeDropperOnFocus={showEyeDropperOnHover}
+        onEyeDropperClick={onEyeDropperClick}
       />
 
       {hasAlphaInput && (
@@ -101,4 +108,4 @@ export const InputFields = (props: InputFieldsProps) => {
       />
     </div>
   );
-};
+}

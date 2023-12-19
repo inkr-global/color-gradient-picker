@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { ColorInputCoreProps } from "../../types/colorInput";
 import s from "./styles/Input.Base.module.css";
 
+
 export function ColorInputBase(props: ColorInputCoreProps) {
   // ------------------------------------------------------------------------------------------
   const {
@@ -23,12 +24,15 @@ export function ColorInputBase(props: ColorInputCoreProps) {
     inputWidth,
     extraInput: extra,
     isExtraComponent,
+    showEyeDropperOnHover,
+    onEyeDropperClick,
   } = props;
 
   const { style: inputStyle, ...restInputProps } = inputProps || {};
 
   // -----------------------------------------------------------------------
   const [isFocus, setFocus] = useState<boolean>();
+  const [isHover, setHover] = useState<boolean>();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -55,7 +59,12 @@ export function ColorInputBase(props: ColorInputCoreProps) {
   // -----------------------------------------------------------------------
 
   return (
-    <div className={clsx(s.container, "input-base", className)} style={style}>
+    <div
+      className={clsx(s.container, "input-base", className)}
+      style={style}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       {label && <div className={clsx(s.label)}>{label}</div>}
 
       <div
@@ -91,8 +100,45 @@ export function ColorInputBase(props: ColorInputCoreProps) {
           onKeyDown={onKeyDown}
         />
 
+        {(showEyeDropperOnHover && isHover) && (
+          <EyeDropper onClick={onEyeDropperClick} />
+        )}
+
         {extra}
+
       </div>
+    </div>
+  );
+}
+
+
+function EyeDropper(props: { onClick?: React.MouseEventHandler<HTMLDivElement> }) {
+
+  const { onClick } = props;
+
+  return (
+    <div
+      style={{
+        paddingRight: 6,
+        marginLeft: -18,
+        cursor: "pointer",
+      }}
+      role="presentation"
+      onClick={onClick}
+    >
+      <svg
+        width="12"
+        height="13"
+        viewBox="0 0 12 13"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.61333 11.6667L1.33333 10.3867L6.70667 5.00002L8 6.29335L2.61333 11.6667ZM11.8067 2.75335L10.2467 1.19335C10 0.933352 9.56667 0.933352 9.30667 1.19335L7.22667 3.27335L5.94 2.00002L5 2.94002L5.94667 3.88669L0 9.83335V13H3.16667L9.11333 7.05335L10.06 8.00002L11 7.06002L9.72 5.78002L11.8 3.70002C12.0667 3.43335 12.0667 3.00002 11.8067 2.75335Z"
+          fill="black"
+          fillOpacity="0.8"
+        />
+      </svg>
     </div>
   );
 }

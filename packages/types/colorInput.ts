@@ -28,4 +28,7 @@ export interface ColorInputCoreProps {
 
   extraInput?: ReactElement;
   isExtraComponent?: boolean;
+
+  showEyeDropperOnHover?: boolean;
+  onEyeDropperClick?: () => void;
 }

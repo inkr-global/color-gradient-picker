@@ -28,6 +28,7 @@ export interface UserInputProps extends ColorInputCoreProps {
   onColorPreviewClick?: React.MouseEventHandler<HTMLDivElement>;
   hasAlphaInput?: boolean;
   theme?: ColorGradientPickerTheme;
+  onEyeDropperOpenChanged?: (open: boolean) => void;
 }
 
 export interface ColorGradientPickerProps
@@ -42,6 +43,7 @@ export interface ColorGradientPickerProps
   | "value"
   > {
   color: ColorGradientPickerValue | undefined;
+  onEyeDropperOpenChanged?: (open: boolean) => void;
   onChange: (color: ColorGradientPickerValue) => void;
   panelPlacement?: ColorGradientPickerPanelPlacement;
   colorSelectType?: ColorGradientPickerColorType | "all";

@@ -25,6 +25,7 @@ import {
 import sanitizeHex from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
 
+
 function ColorGradientPicker(props: ColorGradientPickerProps) {
   const {
     className,
@@ -38,6 +39,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     hasAlphaInput,
     isDraggable,
     theme = "light",
+    onEyeDropperOpenChanged,
     ...rest
   } = props;
 
@@ -133,6 +135,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
         color={color}
         onColorPreviewClick={onShowPanel}
         theme={theme}
+        onEyeDropperOpenChanged={onEyeDropperOpenChanged}
       />
 
       {isPickerOpen && (
@@ -170,6 +173,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               hasAlphaInput={hasAlphaInput}
               hex={solidColor}
               alpha={totalAlpha}
+              onEyeDropperOpenChanged={onEyeDropperOpenChanged}
               onAlphaChange={handleTotalAlphaChange}
               onColorChange={handleSolidColorChange}
               theme={theme}

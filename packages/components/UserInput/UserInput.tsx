@@ -6,13 +6,15 @@ import {
 } from "../../constants/colorInput";
 import { DEFAULT_GRADIENT } from "../../constants/gradientPicker";
 import { UserInputProps } from "../../types/colorGradientPicker";
+import { rgbToHex } from "../../utils/color/utils";
+import { openNativeEyeDropper } from "../../utils/common";
 import { ColorInputAlpha } from "../ColorInput/ColorInput.Alpha";
 import { ColorInputGradient } from "../ColorInput/ColorInput.Gradient";
 import { ColorInputHex } from "../ColorInput/ColorInput.Hex";
 import s from "./UserInput.module.css";
 
 
-export const UserInput = (props: UserInputProps) => {
+export function UserInput(props: UserInputProps) {
   const {
     color,
     onSolidColorChange,
@@ -20,6 +22,7 @@ export const UserInput = (props: UserInputProps) => {
     hasAlphaInput,
     inputWidth = 80,
     theme,
+    onEyeDropperOpenChanged,
     ...rest
   } = props;
 
@@ -43,7 +46,35 @@ export const UserInput = (props: UserInputProps) => {
     </>
   ) : undefined;
 
+
   const shouldShowAndUpdateColorValue = !!color?.solid;
+
+  const handleEyeDropperClick = async () => {
+    onEyeDropperOpenChanged?.(true);
+    const _colorString = await openNativeEyeDropper(); // this will be rgb(r, g, b) in browser or #hex in electron
+    onEyeDropperOpenChanged?.(false);
+
+    const isRgbString = _colorString?.startsWith("rgb");
+    const isHex = _colorString?.startsWith("#");
+
+    if (isRgbString) {
+      const numberRegex = /\d+/g;
+      const [red, green, blue] = _colorString.match(numberRegex).map(Number);
+
+      if (_colorString !== null) {
+        onSolidColorChange(
+          rgbToHex({
+            red: red,
+            green: green,
+            blue: blue,
+          }),
+        );
+      }
+    } else if (isHex) {
+      onSolidColorChange(_colorString);
+    }
+  };
+
 
   return (
     <>
@@ -55,6 +86,8 @@ export const UserInput = (props: UserInputProps) => {
           shouldUpdateColorValue={shouldShowAndUpdateColorValue}
           onChange={onSolidColorChange}
           extraInput={alphaInput}
+          showEyeDropperOnHover
+          onEyeDropperClick={handleEyeDropperClick}
         />
       )}
 
@@ -67,4 +100,4 @@ export const UserInput = (props: UserInputProps) => {
       )}
     </>
   );
-};
+}
