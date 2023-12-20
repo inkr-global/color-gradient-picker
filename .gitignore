@@ -1,4 +1,3 @@
-
 # Editor directories and files
 !.vscode/extensions.json
 .idea
@@ -80,6 +79,7 @@ typings/
 # Yarn Integrity file
 .yarn
 .yarn-integrity
+yarn.lock
 
 # dotenv environment variables file
 .env
@@ -95,7 +95,6 @@ typings/
 .nuxt
 dist
 dist-ssr
-
 
 # Gatsby files
 .cache/
