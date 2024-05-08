@@ -3,11 +3,12 @@
  * @param {string} colorHex The color value in hex format to sanitize
  * @returns {string} The sanitized hex color
  */
- export default function sanitizeHex(colorHex: string): string {
-  let sanitizedHex = colorHex.replace(/[^a-fA-F0-9]/g, '');
+export function sanitizeHex(colorHex: string): string {
+
+  let sanitizedHex = colorHex.replace(/[^a-fA-F0-9]/g, "");
 
   if (sanitizedHex.length === 0) {
-    sanitizedHex = '000000';
+    sanitizedHex = "000000";
   } else if (sanitizedHex.length === 1) {
     sanitizedHex = sanitizedHex[0].repeat(6);
   } else if (sanitizedHex.length === 2) {

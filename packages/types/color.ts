@@ -4,11 +4,12 @@
  * @property {number} green - The green component of the color (0 - 255)
  * @property {number} blue - The blue component of the color (0 - 255)
  */
-export type Rgb = {
+export interface Rgb {
   red: number;
   green: number;
   blue: number;
-};
+}
+
 
 /**
  * @typedef {Object} Hsl
@@ -16,11 +17,12 @@ export type Rgb = {
  * @property {number} saturation - The saturation the color (0.0 - 1.0)
  * @property {number} lightness - The lightness of the color (0.0 - 1.0)
  */
-export type Hsl = {
+export interface Hsl {
   hue: number;
   saturation: number;
   lightness: number;
-};
+}
+
 
 /**
  * @typedef {Object} Hsv
@@ -28,18 +30,20 @@ export type Hsl = {
  * @property {number} saturation - The saturation the color (0.0 - 1.0)
  * @property {number} value - The value of the color (0.0 - 1.0)
  */
-export type Hsv = {
+export interface Hsv {
   hue: number;
   saturation: number;
   value: number;
-};
+}
 
-export type Cmyk = {
+
+export interface Cmyk {
   cyan: number;
   magenta: number;
   yellow: number;
   black: number;
-};
+}
+
 
 export interface Point {
   id?: number;
@@ -50,18 +54,22 @@ export interface Point {
   offset: number;
 }
 
-export type SaturationValue = {
+
+export interface SaturationValue {
   saturation: number;
   value: number;
-};
+}
+
 
 export interface Gradient {
   degree: number;
   points: Point[];
 }
 
+
 // Hex color: #000 or #fff ...
 export type Hex = string;
+
 
 // Alpha of the color (from 0.0 to 1.0)
 export type Alpha = number;

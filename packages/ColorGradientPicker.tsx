@@ -1,6 +1,7 @@
 import cn from "clsx";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { CSSProperties, ForwardedRef, forwardRef, memo, useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 
+import { ClosePanelWhenClickOutside } from "./components/ClosePanelWhenClickOutside/ClosePanelWhenClickOutside";
 import { GradientPicker } from "./components/GradientPicker/GradientPicker";
 import { PanelHeader } from "./components/PanelHeader/PanelHeader";
 import { SolidColorPicker } from "./components/SolidColorPicker/SolidColorPicker";
@@ -12,7 +13,6 @@ import {
   DEFAULT_HEX_LIGHT,
 } from "./constants/colorInput";
 import { DEFAULT_GRADIENT } from "./constants/gradientPicker";
-import { useClosePanelWhenClickOutside } from "./hooks/useClosePanelWhenClickOutside";
 import { useColorPickerPanelDraggable } from "./hooks/useColorPickerPanelDraggable";
 import s from "./styles/global.module.css";
 // eslint-disable-next-line css-modules/no-unused-class
@@ -22,39 +22,54 @@ import {
   ColorGradientPickerColorType,
   ColorGradientPickerProps,
 } from "./types/colorGradientPicker";
-import sanitizeHex from "./utils/color/sanitizeHex";
+import { sanitizeHex } from "./utils/color/sanitizeHex";
 import { getRandomString } from "./utils/common";
 
 
-function ColorGradientPicker(props: ColorGradientPickerProps) {
-  const {
-    className,
-    color,
-    onChange,
-    panelClassName,
-    colorSelectType = "all",
-    panelPlacement = "bottom-left",
-    style,
-    panelStyle,
-    hasAlphaInput,
-    isDraggable,
-    theme = "light",
-    onEyeDropperOpenChanged,
-    ...rest
-  } = props;
+export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker({
+
+  // ColorGradientPickerProps
+  onChange,
+  colorSelectType = "all",
+  isDraggable,
+  panelPlacement = "bottom-left",
+  panelClassName,
+  panelStyle,
+
+  // UserInputProps
+  color,
+  hasAlphaInput,
+  theme = "light",
+  onEyeDropperOpenChanged,
+
+  // ColorInputCoreProps
+  className,
+  style,
+
+  ...rest
+
+}: ColorGradientPickerProps, forwardedRef: ForwardedRef<HTMLDivElement>) {
+
 
   // ------------------------------------------------------------------------------------------
+
   const solidColor = sanitizeHex(
-    color?.solid || (theme === "dark" ? DEFAULT_HEX_DARK : DEFAULT_HEX_LIGHT),
+    color?.solid ||
+    (theme === "dark" ? DEFAULT_HEX_DARK : DEFAULT_HEX_LIGHT),
   );
+
   const totalAlpha = color?.alpha || ALPHA_VALUE_RANGE.MAX;
   const linearGradient = color?.gradient || DEFAULT_GRADIENT;
   const propColorType = color?.type || DEFAULT_COLOR_TYPE;
 
+
   // ------------------------------------------------------------------------------------------
 
   const [isPickerOpen, setOpenPicker] = useState<boolean>(false);
+
   const containerRef = useRef<HTMLDivElement>(null);
+  useImperativeHandle(forwardedRef, useCallback(() => containerRef.current as HTMLDivElement, []));
+
 
   // ------------------------------------------------------------------------------------------
 
@@ -66,14 +81,13 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     setOpenPicker(false);
   }, []);
 
+
   // ------------------------------------------------------------------------------------------
 
   const [containerID, draggableID] = useMemo(() => {
     if (!isDraggable) return [undefined, undefined];
-
     const _containerID = getRandomString();
     const _draggableID = getRandomString();
-
     return [_containerID, _draggableID];
   }, [isDraggable]);
 
@@ -84,9 +98,9 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     isPickerOpen: isPickerOpen,
   });
 
-  useClosePanelWhenClickOutside(containerRef, onHidePanel, isDragging);
 
   // ------------------------------------------------------------------------------------------
+
   const handleSolidColorChange = (_updatedHex: Hex) => {
     onChange({
       ...color,
@@ -115,7 +129,14 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
     });
   };
 
+
   // ------------------------------------------------------------------------------------------
+
+  const pickerStyle = useMemo((): CSSProperties => ({
+    ...panelStyle,
+    position: isDraggable ? "fixed" : undefined,
+  }), [isDraggable, panelStyle]);
+
 
   return (
     <div
@@ -127,6 +148,7 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
       )}
       style={style}
     >
+
       <UserInput
         {...rest}
         hasAlphaInput={hasAlphaInput}
@@ -145,12 +167,10 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
             placementStyle[panelPlacement],
             panelClassName,
           )}
-          style={{
-            ...panelStyle,
-            position: isDraggable ? "fixed" : undefined,
-          }}
+          style={pickerStyle}
           id={containerID}
         >
+
           <PanelHeader
             value={propColorType}
             onChange={handleSetColorType}
@@ -179,10 +199,17 @@ function ColorGradientPicker(props: ColorGradientPickerProps) {
               theme={theme}
             />
           )}
+
         </div>
       )}
+
+      <ClosePanelWhenClickOutside
+        containerRef={containerRef}
+        callback={onHidePanel}
+        isDragging={isDragging}
+      />
+
     </div>
   );
-}
 
-export default ColorGradientPicker;
+}));

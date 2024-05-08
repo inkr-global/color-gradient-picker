@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { KEYS } from "../../constants/colorInput";
 import { ColorInputCoreProps } from "../../types/colorInput";
-import sanitizeHex from "../../utils/color/sanitizeHex";
+import { sanitizeHex } from "../../utils/color/sanitizeHex";
 import { ColorInputBase } from "./ColorInput.Core";
 import s from "./styles/Input.Hex.module.css";
 

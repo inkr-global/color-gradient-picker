@@ -1,17 +1,17 @@
 import { Hex, Hsv, Rgb } from "../../types/color";
 
+
 export function hexToRgb(hex: Hex): Rgb {
   const red = parseInt(hex.slice(1, 3), 16);
   const green = parseInt(hex.slice(3, 5), 16);
   const blue = parseInt(hex.slice(5, 7), 16);
   return {
-    red,
-    green,
-    blue,
+    red: red,
+    green: green,
+    blue: blue,
   };
 }
 
-// ---------------------------------------------------------------------------
 
 export function rgbToHex(rgb: Rgb): Hex {
   const { red, green, blue } = rgb;
@@ -21,7 +21,6 @@ export function rgbToHex(rgb: Rgb): Hex {
   return hex;
 }
 
-// ---------------------------------------------------------------------------
 
 export function hsvToRgb(hsv: Hsv): Rgb {
   const { hue, saturation, value } = hsv;
@@ -82,7 +81,6 @@ export function hsvToRgb(hsv: Hsv): Rgb {
   return rgb;
 }
 
-// ---------------------------------------------------------------------------
 
 export function rgbToHsv(rgb: Rgb): Hsv {
   const { red, green, blue } = rgb;
@@ -109,20 +107,18 @@ export function rgbToHsv(rgb: Rgb): Hsv {
   const saturation = cMax === 0 ? 0 : delta / cMax;
   const value = cMax;
   return {
-    hue,
-    saturation,
-    value,
+    hue: hue,
+    saturation: saturation,
+    value: value,
   };
 }
 
-// ---------------------------------------------------------------------------
 
 export function hexToHsv(hex: Hex): Hsv {
   const rgb = hexToRgb(hex);
   return rgbToHsv(rgb);
 }
 
-// ---------------------------------------------------------------------------
 
 export function hsvToHex(hsv: Hsv): Hex {
   const rgb = hsvToRgb(hsv);

@@ -7,9 +7,10 @@ import React, {
 
 
 export interface ColorInputCoreProps {
-  value?: string | number;
 
+  value?: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   onInputFocus?: React.FocusEventHandler<HTMLInputElement>;
   onInputBlur?: React.FocusEventHandler<HTMLInputElement>;

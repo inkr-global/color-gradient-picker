@@ -1,4 +1,1 @@
-import ColorGradientPicker from "./ColorGradientPicker";
-
-
-export default ColorGradientPicker;
+export { ColorGradientPicker } from "./ColorGradientPicker";

@@ -1,49 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
 
 const replacePx = (value: string) => +value.replace("px", "");
+
 
 interface DraggablePosition {
   left?: string;
   top?: string;
 }
 
-interface BOUND {
+
+interface Bound {
   top: number;
   bottom: number;
   left: number;
   right: number;
 }
 
-const DEFAULT_BOUND: BOUND = {
+
+const DEFAULT_BOUND: Bound = {
   top: 0,
   left: 0,
   right: typeof window !== "undefined" ? window.innerWidth : 1000,
   bottom: typeof window !== "undefined" ? window.innerHeight : 1000,
 };
 
-function dragElement(params: {
+
+function dragElement({
+  containerEle,
+  draggableElement,
+  setPosition,
+  setDragging,
+  onDragEnd,
+  bound = DEFAULT_BOUND,
+}: {
   containerEle: HTMLElement;
   draggableElement?: HTMLElement | null;
   setPosition: (value: DraggablePosition) => void;
   setDragging: (isDragging: boolean) => void;
   onDragEnd?: (containerEle: HTMLElement) => void;
-  bound?: BOUND;
+  bound?: Bound;
 }) {
-  const {
-    containerEle,
-    draggableElement,
-    setPosition,
-    setDragging,
-    onDragEnd,
-    bound = DEFAULT_BOUND,
-  } = params;
 
   let pos1 = 0;
   let pos2 = 0;
   let pos3 = 0;
   let pos4 = 0;
 
+
   function elementDrag(e: MouseEvent) {
+
+    // eslint-disable-next-line deprecation/deprecation
     const _e = e || window.event;
     _e.preventDefault();
 
@@ -55,20 +62,20 @@ function dragElement(params: {
 
     let newTop = containerEle.offsetTop - pos2;
     if (newTop < bound.top) newTop = bound.top;
-    if (newTop + containerEle.offsetHeight > bound.bottom)
-      newTop = bound.bottom - containerEle.offsetHeight;
+    if (newTop + containerEle.offsetHeight > bound.bottom) newTop = bound.bottom - containerEle.offsetHeight;
 
     let newLeft = containerEle.offsetLeft - pos1;
     if (newLeft < bound.left) newLeft = bound.left;
-    if (newLeft + containerEle.offsetWidth > bound.right)
-      newLeft = bound.right - containerEle.offsetWidth;
+    if (newLeft + containerEle.offsetWidth > bound.right) newLeft = bound.right - containerEle.offsetWidth;
 
     // set the element's new position:
     containerEle.style.top = `${newTop}px`;
     containerEle.style.left = `${newLeft}px`;
   }
 
+
   function closeDragElement() {
+
     setPosition({
       left: containerEle.style.left,
       top: containerEle.style.top,
@@ -83,7 +90,10 @@ function dragElement(params: {
     document.onmousemove = null;
   }
 
+
   function dragMouseDown(e: MouseEvent) {
+
+    // eslint-disable-next-line deprecation/deprecation
     const _e = e || window.event;
     _e.preventDefault();
 
@@ -97,25 +107,31 @@ function dragElement(params: {
     document.onmousemove = elementDrag;
   }
 
+
   if (draggableElement) {
     draggableElement.onmousedown = dragMouseDown;
   } else {
     containerEle.onmousedown = dragMouseDown;
   }
+
 }
 
-interface Params {
+
+export const useColorPickerPanelDraggable = ({
+  isDraggable,
+  containerID,
+  isPickerOpen,
+  dragElementID,
+}: {
   isDraggable: boolean;
   containerID: string;
   isPickerOpen: boolean;
   dragElementID?: string;
-}
+}) => {
 
-export const useColorPickerPanelDraggable = (params: Params) => {
-  // ------------------------------------------------------------------------------------------
-  const { isDraggable, containerID, isPickerOpen, dragElementID } = params;
 
   // ------------------------------------------------------------------------------------------
+
   const [position, setPosition] = useState<DraggablePosition>({
     top: undefined,
     left: undefined,
@@ -123,7 +139,9 @@ export const useColorPickerPanelDraggable = (params: Params) => {
 
   const [isDragging, setDragging] = useState<boolean>(false);
 
+
   // ------------------------------------------------------------------------------------------
+
   const [draggableBound, setDraggableBound] = useState({
     top: 0,
     left: 0,
@@ -131,8 +149,11 @@ export const useColorPickerPanelDraggable = (params: Params) => {
     bottom: typeof window !== "undefined" ? window.innerHeight : 1000,
   });
 
+
   // ------------------------------------------------------------------------------------------
+
   useEffect(() => {
+
     if (!isDraggable) return () => undefined;
 
     const handler = () => {
@@ -149,16 +170,21 @@ export const useColorPickerPanelDraggable = (params: Params) => {
     return () => {
       window.removeEventListener("resize", handler);
     };
+
   }, [isDraggable]);
 
+
   // ------------------------------------------------------------------------------------------
+
   useEffect(() => {
+
     if (!isDraggable || !containerID) return;
 
     const container = document.getElementById(containerID);
     if (!container) return;
 
     if (position.left && position.top) {
+
       container.style.left = position.left;
       container.style.top = position.top;
 
@@ -197,6 +223,7 @@ export const useColorPickerPanelDraggable = (params: Params) => {
 
       setPosition(newPosition);
     }
+
   }, [
     isDraggable,
     containerID,
@@ -208,24 +235,27 @@ export const useColorPickerPanelDraggable = (params: Params) => {
     draggableBound.bottom,
   ]);
 
+
   // set position for draggable container
   useEffect(() => {
+
     if (!isDraggable || !containerID) return;
 
     const container = document.getElementById(containerID);
     if (!container) return;
 
-    const draggableElement = dragElementID
-      ? document.getElementById(dragElementID)
-      : undefined;
+    const draggableElement = dragElementID ?
+      document.getElementById(dragElementID) :
+      undefined;
 
     dragElement({
       containerEle: container,
       draggableElement: draggableElement,
       bound: draggableBound,
-      setPosition,
-      setDragging,
+      setPosition: setPosition,
+      setDragging: setDragging,
     });
+
   }, [
     isDraggable,
     containerID,
@@ -237,15 +267,18 @@ export const useColorPickerPanelDraggable = (params: Params) => {
     setDragging,
   ]);
 
+
   // do not remember last position when close
-  useEffect(() => {
-    return () => {
-      setPosition({
-        top: undefined,
-        left: undefined,
-      });
-    };
+  useEffect(() => () => {
+    setPosition({
+      top: undefined,
+      left: undefined,
+    });
   }, [isPickerOpen]);
 
-  return { isDragging };
+
+  return useMemo(() => ({
+    isDragging: isDragging,
+  }), [isDragging]);
+
 };

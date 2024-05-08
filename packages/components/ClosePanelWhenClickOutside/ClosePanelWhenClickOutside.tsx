@@ -1,12 +1,20 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 
-export const useClosePanelWhenClickOutside = (
+
+export const ClosePanelWhenClickOutside = memo(function ClosePanelWhenClickOutside({
+  containerRef,
+  callback,
+  isDragging,
+}: {
   containerRef: React.RefObject<HTMLDivElement>,
   callback: () => void,
   isDragging: boolean,
-) => {
+}) {
+
   useEffect(() => {
+
     if (typeof document === "undefined") return () => undefined;
+
     if (isDragging) return () => undefined;
 
     const handler = (e: Event) => {
@@ -22,6 +30,9 @@ export const useClosePanelWhenClickOutside = (
       document.removeEventListener("click", handler);
       document.removeEventListener("touchstart", handler);
     };
-  }, [callback, containerRef, isDragging]);
-};
 
+  }, [callback, containerRef, isDragging]);
+
+
+  return null;
+});

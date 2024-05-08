@@ -7,11 +7,13 @@ export interface GradientStop extends Point {
   pointX?: number;
 }
 
+
 export interface GradientLimits {
   min: number;
   max: number;
   drop?: number;
 }
+
 
 export interface ColorStopProps {
   stop: GradientStop;
@@ -22,6 +24,7 @@ export interface ColorStopProps {
   onDragEnd?: (id: number) => void;
 }
 
+
 export interface StopHoldersProps {
   stops: GradientStop[];
   limits: GradientLimits;
@@ -31,12 +34,14 @@ export interface StopHoldersProps {
   onDragEnd?: (id: number) => void;
 }
 
+
 export interface PalletteProps {
   points: Point[];
   degree: number;
   onAddColor: (offset: number) => void;
   disabled?: boolean;
 }
+
 
 export interface GradientPickerProps {
   gradient: Gradient;
