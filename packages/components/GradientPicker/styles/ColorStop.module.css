@@ -63,3 +63,7 @@
 .color_stop.active::after {
   box-shadow: 0 0 4px rgba(0, 0, 0, 80%);
 }
+
+.color_stop.delete_disabled::after {
+  cursor: default;
+}

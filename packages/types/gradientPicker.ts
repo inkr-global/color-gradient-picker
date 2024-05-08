@@ -18,6 +18,7 @@ export interface GradientLimits {
 export interface ColorStopProps {
   stop: GradientStop;
   limits: GradientLimits;
+  deleteDisabled: boolean;
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
@@ -27,6 +28,7 @@ export interface ColorStopProps {
 
 export interface StopHoldersProps {
   stops: GradientStop[];
+  minStops: number;
   limits: GradientLimits;
   onPosChange: (id: number, offset: number) => void;
   onDeleteColor: (id: number) => void;

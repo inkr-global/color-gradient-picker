@@ -1,7 +1,7 @@
 import cn from "clsx";
 import { CSSProperties, ForwardedRef, forwardRef, memo, useCallback, useImperativeHandle, useMemo, useRef, useState } from "react";
 
-import { ClosePanelWhenClickOutside } from "./components/ClosePanelWhenClickOutside/ClosePanelWhenClickOutside";
+import { ClickOutsideDetector } from "./components/ClickOutsideDetector/ClickOutsideDetector";
 import { GradientPicker } from "./components/GradientPicker/GradientPicker";
 import { PanelHeader } from "./components/PanelHeader/PanelHeader";
 import { SolidColorPicker } from "./components/SolidColorPicker/SolidColorPicker";
@@ -65,19 +65,20 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
 
   // ------------------------------------------------------------------------------------------
 
-  const [isPickerOpen, setOpenPicker] = useState<boolean>(false);
-
   const containerRef = useRef<HTMLDivElement>(null);
   useImperativeHandle(forwardedRef, useCallback(() => containerRef.current as HTMLDivElement, []));
+
+  const [isPickerOpen, setOpenPicker] = useState<boolean>(false);
+  const panelRef = useRef<HTMLDivElement>(null);
 
 
   // ------------------------------------------------------------------------------------------
 
-  const onShowPanel = useCallback(() => {
+  const showPanel = useCallback(() => {
     setOpenPicker(true);
   }, []);
 
-  const onHidePanel = useCallback(() => {
+  const hidePanel = useCallback(() => {
     setOpenPicker(false);
   }, []);
 
@@ -155,13 +156,14 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
         onSolidColorChange={handleSolidColorChange}
         onAlphaChange={handleTotalAlphaChange}
         color={color}
-        onColorPreviewClick={onShowPanel}
+        onColorPreviewClick={showPanel}
         theme={theme}
         onEyeDropperOpenChanged={onEyeDropperOpenChanged}
       />
 
       {isPickerOpen && (
         <div
+          ref={panelRef}
           className={cn(
             s.picking_panel,
             placementStyle[panelPlacement],
@@ -175,7 +177,7 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
             value={propColorType}
             onChange={handleSetColorType}
             colorSelectType={colorSelectType}
-            onClosePanel={onHidePanel}
+            onClosePanel={hidePanel}
             draggableID={draggableID}
             theme={theme}
           />
@@ -204,9 +206,10 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
       )}
 
       {(isPickerOpen && !isDragging) && (
-        <ClosePanelWhenClickOutside
+        <ClickOutsideDetector
           containerRef={containerRef}
-          callback={onHidePanel}
+          panelRef={panelRef}
+          onClickOutside={hidePanel}
         />
       )}
 

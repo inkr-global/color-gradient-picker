@@ -10,8 +10,11 @@ import { ColorStop } from "./ColorStop";
 
 export const ColorStopsHolder = memo(function ColorStopsHolder({
   stops,
+  minStops,
   ...rest
 }: StopHoldersProps) {
+
+  const deleteDisabled = stops.length <= minStops;
 
   return (
     <div
@@ -26,6 +29,7 @@ export const ColorStopsHolder = memo(function ColorStopsHolder({
         <ColorStop
           key={stop.id}
           stop={stop}
+          deleteDisabled={deleteDisabled}
           {...rest}
         />
       ))}

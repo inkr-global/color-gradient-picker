@@ -162,12 +162,14 @@ export const GradientPicker = memo(function GradientPicker({
     if (points.length <= minStops) return;
 
     const updatedPalette = points.filter((c) => c.id !== id);
+
     const activeId = updatedPalette.reduce(
       (a, x) => (x.offset < a.offset ? x : a),
       updatedPalette[0],
     ).id;
 
     setActiveColorId(activeId);
+
     handleGradientChange(updatedPalette, degree);
 
   }, [degree, handleGradientChange, minStops, points]);
@@ -269,6 +271,7 @@ export const GradientPicker = memo(function GradientPicker({
                 activeId: activeColorId,
               })
             ), [activeColorId, points])}
+            minStops={minStops}
             limits={limits}
             onPosChange={handleStopPosChange}
             onDeleteColor={handleColorDelete}

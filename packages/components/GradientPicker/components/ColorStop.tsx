@@ -11,6 +11,7 @@ import s from "../styles/ColorStop.module.css";
 export const ColorStop = memo(function ColorStop({
   stop,
   limits,
+  deleteDisabled,
   onPosChange,
   onDeleteColor,
   onDragStart,
@@ -47,6 +48,24 @@ export const ColorStop = memo(function ColorStop({
   });
 
 
+  const handleClick = useCallback((event: React.MouseEvent) => {
+
+    if (typeof stop.id === "undefined") return;
+
+    const boundingClientRect = colorStopRef.current?.getBoundingClientRect();
+    if (!boundingClientRect) return;
+
+    const {
+      clientY,
+    } = event;
+
+    if (clientY >= boundingClientRect.top) return;
+
+    onDeleteColor(stop.id);
+
+  }, [onDeleteColor, stop.id]);
+
+
   const {
     offset,
     red,
@@ -65,6 +84,7 @@ export const ColorStop = memo(function ColorStop({
         s.color_stop,
         isActive && s.active,
         isDragging && s.dragging,
+        deleteDisabled && s.delete_disabled,
       )}
       ref={colorStopRef}
       role="presentation"
@@ -77,6 +97,7 @@ export const ColorStop = memo(function ColorStop({
       onMouseDown={dragHandler}
       // @ts-expect-error
       onTouchStart={dragHandler}
+      onClick={handleClick}
       title={rgba}
     />
   );
