@@ -18,6 +18,8 @@ export const ColorInputBase = memo(function ColorInputBase({
   onInputBlur,
   onChange,
   onKeyDown,
+  onMouseEnter,
+  onMouseLeave,
   value,
   inputWidth,
   extraInput: extra,
@@ -72,8 +74,14 @@ export const ColorInputBase = memo(function ColorInputBase({
         className,
       )}
       style={style}
-      onMouseEnter={useCallback(() => setHover(true), [])}
-      onMouseLeave={useCallback(() => setHover(false), [])}
+      onMouseEnter={useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+        setHover(true);
+        onMouseEnter?.(event);
+      }, [onMouseEnter])}
+      onMouseLeave={useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+        setHover(false);
+        onMouseLeave?.(event);
+      }, [onMouseLeave])}
     >
 
       {label && (

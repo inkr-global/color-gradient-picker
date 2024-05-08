@@ -1,0 +1,9 @@
+/* stylelint-disable selector-class-pattern */
+
+.degreeInfo {
+  position: relative;
+}
+
+.rotationControl {
+  margin-left: -6px;
+}

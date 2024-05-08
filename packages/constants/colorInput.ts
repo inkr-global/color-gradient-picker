@@ -25,7 +25,7 @@ export const RGB_VALUE_RANGE = {
 
 
 export const DEGREE_VALUE_RANGE = {
-  MAX: 360,
+  MAX: 359,
   MIN: 0,
 };
 

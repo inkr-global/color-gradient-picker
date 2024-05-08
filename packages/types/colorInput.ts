@@ -6,7 +6,10 @@ import React, {
 } from "react";
 
 
-export interface ColorInputCoreProps {
+export interface ColorInputCoreProps extends Pick<HTMLProps<HTMLDivElement>, (
+  "onMouseEnter" |
+  "onMouseLeave"
+)> {
 
   value?: string | number;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
