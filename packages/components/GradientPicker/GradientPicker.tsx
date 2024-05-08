@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 
 import {
   ALPHA_DISPLAY_VALUE_RANGE,
@@ -21,62 +21,78 @@ import { ColorStopsHolder } from "./components/ColorStopsHolder";
 import { Palette } from "./components/Palette";
 import s from "./styles/GradientPicker.module.css";
 
+
 // ------------------------------------------------------------------------------------------
 
-const nextColorId = (palette: Point[]) =>
-  Math.max(...palette.map(({ id }, index) => id || index)) + 1;
+function nextColorId(palette: Point[]) {
+  return Math.max(...palette.map(({ id }, index) => id || index)) + 1;
+}
 
-const mapIdToPoints = (points: Point[]) =>
-  [...points].map((color, index) => ({
-    ...color,
-    id: color.id || index + 1,
-  }));
+function mapIdToPoints(points: Point[]) {
+  return [...points]
+    .map((color, index) => ({
+      ...color,
+      id: color.id || index + 1,
+    }));
+}
 
-const mapPointsToStops = ({
+function mapPointsToStops({
   palette,
   activeId,
 }: {
   palette: Point[];
   activeId: number;
-}) =>
-  palette.map((color) => ({
+}) {
+  return palette.map((color) => ({
     ...color,
     id: color.id,
     offset: DEFAULT_PALETTE_WIDTH * Number(color.offset) - HALF_STOP_WIDTH,
     isActive: color.id === activeId,
   }));
+}
 
-const getPointsColor = (_points: Point[], _id: number) => {
+function getPointsColor(_points: Point[], _id: number) {
   const color = _points.find((_color) => _color.id === _id) || _points[0];
   return {
     ...color,
     offset: Number(color.offset),
   };
-};
+}
+
 
 // ------------------------------------------------------------------------------------------
 
-export const GradientPicker = (props: GradientPickerProps) => {
+export const GradientPicker = memo(function GradientPicker({
+  gradient,
+  onLinearGradientChange,
+  stopRemovalDrop = DEFAULT_STOP_REMOVAL_DROP,
+  minStops = DEFAULT_MIN_STOPS,
+  maxStops = DEFAULT_MAX_STOPS,
+  theme,
+}: GradientPickerProps) {
+
+
   const {
-    gradient,
-    onLinearGradientChange,
-    stopRemovalDrop = DEFAULT_STOP_REMOVAL_DROP,
-    minStops = DEFAULT_MIN_STOPS,
-    maxStops = DEFAULT_MAX_STOPS,
-    theme,
-  } = props;
+    points: pointsProp,
+    degree,
+  } = gradient;
 
-  const { points: pointsProp, degree } = gradient;
+  const points = useMemo(() => (
+    mapIdToPoints(pointsProp)
+  ), [pointsProp]);
 
-  const points = mapIdToPoints(pointsProp);
 
   // ------------------------------------------------------------------------------------------
+
   const [defaultActiveColor] = points;
+
   const [activeColorId, setActiveColorId] = useState(defaultActiveColor.id);
+
 
   // ------------------------------------------------------------------------------------------
 
   const limits = useMemo(() => {
+
     const min = -HALF_STOP_WIDTH;
     const max = DEFAULT_PALETTE_WIDTH - HALF_STOP_WIDTH;
 
@@ -85,33 +101,39 @@ export const GradientPicker = (props: GradientPickerProps) => {
       max: max,
       drop: stopRemovalDrop,
     };
+
   }, [stopRemovalDrop]);
+
 
   // ------------------------------------------------------------------------------------------
 
-  const handleStopDragStart = (id: number) => {
+  const handleStopDragStart = useCallback((id: number) => {
     if (id !== activeColorId) {
       setActiveColorId(id);
     }
-  };
+  }, [activeColorId]);
 
-  const handleGradientChange = (_points: Point[], _degree: number) => {
-    const sortedPalette = sortPalettePoints([..._points]).map(
-      ({ offset, id, ...rest }) => ({
+
+  const handleGradientChange = useCallback((_points: Point[], _degree: number) => {
+
+    const sortedPalette = sortPalettePoints([..._points])
+      .map(({ offset, id, ...rest }) => ({
         ...rest,
         id: id,
         offset: offset,
         active: id === activeColorId,
-      }),
-    );
+      }));
 
     onLinearGradientChange({
       degree: _degree,
       points: sortedPalette,
     });
-  };
 
-  const handleColorAdd = (offset: number) => {
+  }, [activeColorId, onLinearGradientChange]);
+
+
+  const handleColorAdd = useCallback((offset: number) => {
+
     if (points.length >= maxStops) return;
 
     const { red, green, blue } = getPointsColor(points, activeColorId);
@@ -126,11 +148,17 @@ export const GradientPicker = (props: GradientPickerProps) => {
 
     const updatedPalette = [...points, newStop];
 
-    setActiveColorId(newStop.id!);
-    handleGradientChange(updatedPalette, degree);
-  };
+    if (typeof newStop.id === "number") {
+      setActiveColorId(newStop.id);
+    }
 
-  const handleColorDelete = (id: number) => {
+    handleGradientChange(updatedPalette, degree);
+
+  }, [activeColorId, degree, handleGradientChange, maxStops, points]);
+
+
+  const handleColorDelete = useCallback((id: number) => {
+
     if (points.length <= minStops) return;
 
     const updatedPalette = points.filter((c) => c.id !== id);
@@ -141,104 +169,137 @@ export const GradientPicker = (props: GradientPickerProps) => {
 
     setActiveColorId(activeId);
     handleGradientChange(updatedPalette, degree);
-  };
 
-  const handleStopPosChange = (id: number, offset: number) => {
-    const updatedPoints = points.map((_points) =>
-      id === _points.id
-        ? {
-            ..._points,
-            offset: (offset + HALF_STOP_WIDTH) / DEFAULT_PALETTE_WIDTH,
-          }
-        : _points,
-    );
+  }, [degree, handleGradientChange, minStops, points]);
+
+
+  const handleStopPosChange = useCallback((id: number, offset: number) => {
+
+    const updatedPoints = points.map((_points) => (
+      id === _points.id ?
+        {
+          ..._points,
+          offset: (offset + HALF_STOP_WIDTH) / DEFAULT_PALETTE_WIDTH,
+        } :
+        _points
+    ));
 
     handleGradientChange(updatedPoints, degree);
-  };
 
-  const handleDegreeChange = (_degree: number) => {
+  }, [degree, handleGradientChange, points]);
+
+
+  const handleDegreeChange = useCallback((_degree: number) => {
     handleGradientChange(pointsProp, _degree);
-  };
+  }, [handleGradientChange, pointsProp]);
 
-  const handleStopAlphaChange = (_alpha: Alpha) => {
-    const updatedPoints = points.map((_points) =>
-      activeColorId === _points.id
-        ? {
-            ..._points,
-            alpha: _alpha,
-          }
-        : _points,
-    );
 
-    handleGradientChange(updatedPoints, degree);
-  };
+  const handleStopAlphaChange = useCallback((_alpha: Alpha) => {
 
-  const handleStopColorChange = (_updateHex: string) => {
-    const updatedPoints: Point[] = points.map((_points) =>
-      activeColorId === _points.id
-        ? {
-            ..._points,
-            ...hexToRgb(_updateHex),
-          }
-        : _points,
-    );
+    const updatedPoints = points.map((_points) => (
+      activeColorId === _points.id ?
+        {
+          ..._points,
+          alpha: _alpha,
+        } :
+        _points
+    ));
 
     handleGradientChange(updatedPoints, degree);
-  };
+
+  }, [activeColorId, degree, handleGradientChange, points]);
+
+
+  const handleStopColorChange = useCallback((_updateHex: string) => {
+
+    const updatedPoints: Point[] = points.map((_points) => (
+      activeColorId === _points.id ?
+        {
+          ..._points,
+          ...hexToRgb(_updateHex),
+        } :
+        _points
+    ));
+
+    handleGradientChange(updatedPoints, degree);
+
+  }, [activeColorId, degree, handleGradientChange, points]);
+
 
   // ------------------------------------------------------------------------------------------
 
   const stopsHolderDisabled = points.length >= maxStops;
 
-  const activeColor = points.find((item) => item.id === activeColorId);
-  const alpha = activeColor?.alpha || ALPHA_DISPLAY_VALUE_RANGE.MAX;
-  const { red, green, blue } = activeColor || {
+  const activeColor = useMemo(() => (
+    points.find((item) => item.id === activeColorId)
+  ), [activeColorId, points]);
+
+  const alpha = activeColor?.alpha ?? ALPHA_DISPLAY_VALUE_RANGE.MAX;
+
+  const {
+    red,
+    green,
+    blue,
+  } = activeColor || {
     red: 0,
     green: 0,
     blue: 0,
   };
+
 
   // ------------------------------------------------------------------------------------------
 
   return (
     <>
       <div className={s.gradient_picker}>
+
         <div>
+
           <Palette
             onAddColor={handleColorAdd}
             degree={degree}
             points={points}
             disabled={stopsHolderDisabled}
           />
+
           <ColorStopsHolder
-            stops={mapPointsToStops({
-              palette: points,
-              activeId: activeColorId,
-            })}
+            stops={useMemo(() => (
+              mapPointsToStops({
+                palette: points,
+                activeId: activeColorId,
+              })
+            ), [activeColorId, points])}
             limits={limits}
             onPosChange={handleStopPosChange}
             onDeleteColor={handleColorDelete}
             onDragStart={handleStopDragStart}
           />
+
         </div>
+
         <ColorInputDegree
           onChange={handleDegreeChange}
           value={degree}
           theme={theme}
         />
+
       </div>
 
       <SolidColorPicker
-        hex={rgbToHex({
-          red,
-          green,
-          blue,
-        })}
+        hex={useMemo(() => (
+          rgbToHex({
+            red: red,
+            green: green,
+            blue: blue,
+          })
+        ), [blue, green, red])}
         alpha={alpha}
         onAlphaChange={handleStopAlphaChange}
         onColorChange={handleStopColorChange}
         theme={theme}
       />
+
     </>
   );
-};
+
+});

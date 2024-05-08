@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { CSSProperties, useCallback, useRef, useState } from "react";
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from "react";
 
 import { ALPHA_SYMBOL } from "../../../constants/colorInput";
 import { Alpha } from "../../../types/color";
@@ -10,6 +10,7 @@ import {
 } from "../../../utils/common";
 import s from "../styles/AlphaSlider.module.css";
 
+
 type AlphaSliderProps = {
   alpha: Alpha;
   hex: string;
@@ -17,12 +18,17 @@ type AlphaSliderProps = {
   className?: string;
 };
 
-export const AlphaSlider = (props: AlphaSliderProps) => {
+
+export function AlphaSlider(props: AlphaSliderProps) {
+
   const { alpha, onChange, hex, className } = props;
+
   const [isInteracting, setIsInteracting] = useState(false);
   const sliderDivRef = useRef<HTMLDivElement>(null);
 
+
   // ------------------------------------------------------------------------------------------
+
   const updateAlpha = useCallback(
     (
       evt: React.MouseEvent<Element, MouseEvent> | React.PointerEvent<Element>,
@@ -34,10 +40,12 @@ export const AlphaSlider = (props: AlphaSliderProps) => {
       const alphaPosition = sliderDivRef.current.getBoundingClientRect();
 
       const x = evt.clientX - alphaPosition.left;
+
       const updatedAlpha = getAlphaFromPosition(
         x,
         sliderDivRef.current.clientWidth,
       );
+
       onChange(updatedAlpha);
     },
     [onChange],
@@ -84,22 +92,22 @@ export const AlphaSlider = (props: AlphaSliderProps) => {
   //   1. It allows for pointer capture which allows for continued
   //      interaction even when the cursor/pointer outside of picker
   //   2. It allows for unified code across devices (mobile and desktop)
-  const interactionCallbacks = window.PointerEvent
-    ? {
-        onPointerDown,
-        onPointerMove: onMove,
-        onPointerUp,
-      }
-    : {
-        onMouseDown,
-        onMouseMove: onMove,
-        onMouseUp,
-      };
+  const interactionCallbacks = window.PointerEvent ?
+    {
+      onPointerDown: onPointerDown,
+      onPointerMove: onMove,
+      onPointerUp: onPointerUp,
+    } :
+    {
+      onMouseDown: onMouseDown,
+      onMouseMove: onMove,
+      onMouseUp: onMouseUp,
+    };
 
-  const sliderStyle: CSSProperties = {
+  const sliderStyle: CSSProperties = useMemo(() => ({
     left: getAlphaDisplayValueFromAlpha(alpha, ALPHA_SYMBOL),
     backgroundColor: hex,
-  };
+  }), [alpha, hex]);
 
   const { red, green, blue } = hexToRgb(hex);
 
@@ -114,8 +122,14 @@ export const AlphaSlider = (props: AlphaSliderProps) => {
       title="Alpha"
       {...interactionCallbacks}
     >
-      <div className={s.alpha_slider_bg} style={alphaStyle} />
-      <div className={clsx(s.alpha_slider_picker)} style={sliderStyle} />
+      <div
+        className={s.alpha_slider_bg}
+        style={alphaStyle}
+      />
+      <div
+        className={clsx(s.alpha_slider_picker)}
+        style={sliderStyle}
+      />
     </div>
   );
-};
+}

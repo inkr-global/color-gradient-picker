@@ -4,18 +4,14 @@ import { memo, useEffect } from "react";
 export const ClosePanelWhenClickOutside = memo(function ClosePanelWhenClickOutside({
   containerRef,
   callback,
-  isDragging,
 }: {
   containerRef: React.RefObject<HTMLDivElement>,
   callback: () => void,
-  isDragging: boolean,
 }) {
 
   useEffect(() => {
 
     if (typeof document === "undefined") return () => undefined;
-
-    if (isDragging) return () => undefined;
 
     const handler = (e: Event) => {
       if (!containerRef.current?.contains(e.target as HTMLElement)) {
@@ -31,7 +27,7 @@ export const ClosePanelWhenClickOutside = memo(function ClosePanelWhenClickOutsi
       document.removeEventListener("touchstart", handler);
     };
 
-  }, [callback, containerRef, isDragging]);
+  }, [callback, containerRef]);
 
 
   return null;

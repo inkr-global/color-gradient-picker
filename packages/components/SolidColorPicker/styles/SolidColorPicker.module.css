@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 .sliders_wrapper {
   display: flex;
   flex-direction: row;

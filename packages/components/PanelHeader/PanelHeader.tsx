@@ -6,6 +6,7 @@ import {
 } from "../../types/colorGradientPicker";
 import s from "./PanelHeader.module.css";
 
+
 interface PanelHeaderProps {
   value: ColorGradientPickerColorType;
   onChange: (value: ColorGradientPickerColorType) => void;
@@ -69,7 +70,11 @@ export function PanelHeader({
         />
       )}
 
-      <button className={s.close_btn} onClick={onClosePanel} type="button">
+      <button
+        className={s.close_btn}
+        onClick={onClosePanel}
+        type="button"
+      >
         <svg
           width="16"
           height="16"

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useCallback } from "react";
 
 import { Alpha, Hex, Hsv, Rgb } from "../../../types/color";
 import { hexToHsv } from "../../../utils/color/utils";
@@ -20,19 +21,28 @@ interface InputFieldsProps {
   onEyeDropperClick?: () => void;
 }
 
-export function InputFields(props: InputFieldsProps) {
+
+export function InputFields({
+  hex,
+  alpha,
+  rgb,
+  setHexColor,
+  setAlpha,
+  setColorFromRgb,
+  hasAlphaInput = true,
+  showEyeDropperOnHover = false,
+  onEyeDropperClick,
+}: InputFieldsProps) {
+
   const {
-    hex,
-    alpha,
-    rgb,
-    setHexColor,
-    setAlpha,
-    setColorFromRgb,
-    hasAlphaInput = true,
-    showEyeDropperOnHover = false,
-    onEyeDropperClick,
-  } = props;
-  const { red, green, blue } = rgb;
+    red,
+    green,
+    blue,
+  } = rgb;
+
+  const handleInputAlphaChange = useCallback((_alpha: number) => {
+    setAlpha(_alpha);
+  }, [setAlpha]);
 
   return (
     <div
@@ -41,14 +51,15 @@ export function InputFields(props: InputFieldsProps) {
         !hasAlphaInput && s.no_alpha_input,
       )}
     >
+
       <ColorInputHex
         label="HEX"
         inputWidth={hasAlphaInput ? 100 : 180}
         className={s.hex}
         value={hex}
-        onChange={(_hex) => {
+        onChange={useCallback((_hex) => {
           setHexColor(_hex, hexToHsv(_hex));
-        }}
+        }, [setHexColor])}
         showEyeDropperOnFocus={showEyeDropperOnHover}
         onEyeDropperClick={onEyeDropperClick}
       />
@@ -58,9 +69,7 @@ export function InputFields(props: InputFieldsProps) {
           inputWidth={40}
           className={s.alpha}
           value={alpha}
-          onChange={(_alpha) => {
-            setAlpha(_alpha);
-          }}
+          onChange={handleInputAlphaChange}
         />
       )}
 
@@ -70,13 +79,13 @@ export function InputFields(props: InputFieldsProps) {
         inputWidth={31}
         className={s.red}
         value={red}
-        onChange={(_red) => {
+        onChange={useCallback((_red) => {
           setColorFromRgb({
             red: _red,
             green: green,
             blue: blue,
           });
-        }}
+        }, [blue, green, setColorFromRgb])}
       />
 
       <ColorInputRgb
@@ -84,13 +93,13 @@ export function InputFields(props: InputFieldsProps) {
         inputWidth={31}
         className={s.green}
         value={green}
-        onChange={(_green) => {
+        onChange={useCallback((_green) => {
           setColorFromRgb({
             red: red,
             green: _green,
             blue: blue,
           });
-        }}
+        }, [blue, red, setColorFromRgb])}
       />
 
       <ColorInputRgb
@@ -98,14 +107,15 @@ export function InputFields(props: InputFieldsProps) {
         inputWidth={31}
         className={s.blue}
         value={blue}
-        onChange={(_blue) => {
+        onChange={useCallback((_blue) => {
           setColorFromRgb({
             red: red,
             green: green,
             blue: _blue,
           });
-        }}
+        }, [green, red, setColorFromRgb])}
       />
+
     </div>
   );
 }

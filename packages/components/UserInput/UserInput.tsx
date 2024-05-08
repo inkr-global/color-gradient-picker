@@ -1,3 +1,5 @@
+import { memo, useCallback } from "react";
+
 import {
   ALPHA_VALUE_RANGE,
   DEFAULT_COLOR_TYPE,
@@ -14,17 +16,16 @@ import { ColorInputHex } from "../ColorInput/ColorInput.Hex";
 import s from "./UserInput.module.css";
 
 
-export function UserInput(props: UserInputProps) {
-  const {
-    color,
-    onSolidColorChange,
-    onAlphaChange,
-    hasAlphaInput,
-    inputWidth = 80,
-    theme,
-    onEyeDropperOpenChanged,
-    ...rest
-  } = props;
+export const UserInput = memo(function UserInput({
+  color,
+  onSolidColorChange,
+  onAlphaChange,
+  hasAlphaInput,
+  inputWidth = 80,
+  theme,
+  onEyeDropperOpenChanged,
+  ...rest
+}: UserInputProps) {
 
   const {
     type = DEFAULT_COLOR_TYPE,
@@ -49,18 +50,19 @@ export function UserInput(props: UserInputProps) {
 
   const shouldShowAndUpdateColorValue = !!color?.solid;
 
-  const handleEyeDropperClick = async () => {
+
+  const handleEyeDropperClick = useCallback(async () => {
+
     onEyeDropperOpenChanged?.(true);
+
     const _colorString = await openNativeEyeDropper(); // this will be rgb(r, g, b) in browser or #hex in electron
+
     onEyeDropperOpenChanged?.(false);
 
     const isRgbString = _colorString?.startsWith("rgb");
-    const isHex = _colorString?.startsWith("#");
-
     if (isRgbString) {
       const numberRegex = /\d+/g;
       const [red, green, blue] = _colorString.match(numberRegex).map(Number);
-
       if (_colorString !== null) {
         onSolidColorChange(
           rgbToHex({
@@ -70,14 +72,20 @@ export function UserInput(props: UserInputProps) {
           }),
         );
       }
-    } else if (isHex) {
+      return;
+    }
+
+    const isHex = _colorString?.startsWith("#");
+    if (isHex) {
       onSolidColorChange(_colorString);
     }
-  };
+
+  }, [onEyeDropperOpenChanged, onSolidColorChange]);
 
 
   return (
     <>
+
       {type === "solid" && (
         <ColorInputHex
           {...rest}
@@ -98,6 +106,8 @@ export function UserInput(props: UserInputProps) {
           value={gradient}
         />
       )}
+
     </>
   );
-}
+
+});

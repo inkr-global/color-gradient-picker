@@ -58,9 +58,9 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
     (theme === "dark" ? DEFAULT_HEX_DARK : DEFAULT_HEX_LIGHT),
   );
 
-  const totalAlpha = color?.alpha || ALPHA_VALUE_RANGE.MAX;
-  const linearGradient = color?.gradient || DEFAULT_GRADIENT;
-  const propColorType = color?.type || DEFAULT_COLOR_TYPE;
+  const totalAlpha = color?.alpha ?? ALPHA_VALUE_RANGE.MAX;
+  const linearGradient = color?.gradient ?? DEFAULT_GRADIENT;
+  const propColorType = color?.type ?? DEFAULT_COLOR_TYPE;
 
 
   // ------------------------------------------------------------------------------------------
@@ -203,11 +203,12 @@ export const ColorGradientPicker = memo(forwardRef(function ColorGradientPicker(
         </div>
       )}
 
-      <ClosePanelWhenClickOutside
-        containerRef={containerRef}
-        callback={onHidePanel}
-        isDragging={isDragging}
-      />
+      {(isPickerOpen && !isDragging) && (
+        <ClosePanelWhenClickOutside
+          containerRef={containerRef}
+          callback={onHidePanel}
+        />
+      )}
 
     </div>
   );

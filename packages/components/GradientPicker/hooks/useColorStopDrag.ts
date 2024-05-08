@@ -1,21 +1,33 @@
-import { DragEventHandler, useState } from "react";
+import { DragEventHandler, useCallback, useMemo, useState } from "react";
 
 import { DEFAULT_STOP_REMOVAL_DROP } from "../../../constants/gradientPicker";
 import { GradientLimits, GradientStop } from "../../../types/gradientPicker";
 import { useHandleColorStopDraggingEvent } from "./useHandleColorStopDraggingEvent";
 
+
 /**
  * Limits a client drag movement within given min / max
  */
-const limitPos = (offset: number, min: number, max: number) =>
-  Math.max(Math.min(offset, max), min);
+function limitPos(offset: number, min: number, max: number) {
+  return Math.max(Math.min(offset, max), min);
+}
 
-const getColorStopRefTop = (ref: React.RefObject<HTMLDivElement>) => {
+
+function getColorStopRefTop(ref: React.RefObject<HTMLDivElement>) {
   if (!ref.current) return 0;
   return ref.current.getBoundingClientRect().top;
-};
+}
 
-interface Params {
+
+export function useColorStopDrag({
+  stop,
+  limits,
+  colorStopRef,
+  onPosChange,
+  onDeleteColor,
+  onDragStart,
+  onDragEnd,
+}: {
   stop: GradientStop;
   limits: GradientLimits;
   colorStopRef: React.RefObject<HTMLDivElement>;
@@ -23,56 +35,58 @@ interface Params {
   onDeleteColor: (id: number) => void;
   onDragStart: (id: number) => void;
   onDragEnd?: (id: number) => void;
-}
+}) {
 
-export const useColorStopDrag = ({
-  limits,
-  stop,
-  colorStopRef,
-  onPosChange,
-  onDragStart,
-  onDragEnd,
-  onDeleteColor,
-}: Params) => {
-  const [posStart, setPosStart] = useState(0);
 
-  const handleDragStart: DragEventHandler = ({ clientX }) => {
+  const [startClientX, setStartClientX] = useState(0);
+  const [startOffset, setStartOffset] = useState(0);
+
+
+  const handleDragStart: DragEventHandler = useCallback(({ clientX }) => {
     if (typeof stop.id === "undefined") return;
-    setPosStart(clientX);
+    setStartClientX(clientX);
+    setStartOffset(stop.offset);
     onDragStart(stop.id);
-  };
+  }, [onDragStart, stop.id, stop.offset]);
 
-  const handleDrag: DragEventHandler = ({ clientX, clientY }) => {
-    const { id, offset } = stop;
+
+  const handleDrag: DragEventHandler = useCallback(({ clientX, clientY }) => {
+
+    if (typeof stop.id === "undefined") return;
+
     const { min, max } = limits;
-
-    if (typeof id === "undefined") return;
 
     // Removing if out of drop limit on Y axis.
     const top = getColorStopRefTop(colorStopRef);
     if (Math.abs(clientY - top) > (limits.drop || DEFAULT_STOP_REMOVAL_DROP)) {
       // deactivateEvent();
-      onDeleteColor(id);
+      onDeleteColor(stop.id);
       return;
     }
 
     // Limit movements
-    const dragOffset = offset - posStart;
-    const limitedPos = limitPos(dragOffset + clientX, min, max);
+    const newOffset = startOffset + (clientX - startClientX);
+    const limitedPos = limitPos(newOffset, min, max);
 
-    onPosChange(id, limitedPos);
-  };
+    onPosChange(stop.id, limitedPos);
 
-  const handleDragEnd = () => {
+  }, [colorStopRef, limits, onDeleteColor, onPosChange, startClientX, startOffset, stop.id]);
+
+
+  const handleDragEnd = useCallback(() => {
     if (typeof stop.id === "undefined") return;
     onDragEnd?.(stop.id);
-  };
+  }, [onDragEnd, stop.id]);
 
-  const [drag] = useHandleColorStopDraggingEvent({
+
+  const { dragHandler } = useHandleColorStopDraggingEvent({
     onDragStart: handleDragStart,
     onDrag: handleDrag,
     onDragEnd: handleDragEnd,
   });
 
-  return [drag];
-};
+
+  return useMemo(() => ({
+    dragHandler: dragHandler,
+  }), [dragHandler]);
+}

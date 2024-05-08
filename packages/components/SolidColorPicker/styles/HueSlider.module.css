@@ -1,18 +1,20 @@
+/* stylelint-disable selector-class-pattern */
+
 .hue_slider {
   position: relative;
   height: calc(var(--cgp-value-picker-width, 12px) - 4px);
   border-radius: calc((var(--cgp-value-picker-width, 12px) - 4px) / 2);
-
   background-image: linear-gradient(
     to left,
-    #ff0000 0%,
-    #ff00ff 16.66%,
-    #0000ff 33.33%,
-    #00ffff 50%,
-    #00ff00 66.66%,
-    #ffff00 80.33%,
-    #ff0000 100%
+    #f00 0%,
+    #f0f 16.66%,
+    #00f 33.33%,
+    #0ff 50%,
+    #0f0 66.66%,
+    #ff0 80.33%,
+    #f00 100%
   );
+  cursor: pointer;
 }
 
 .hue_slider_picker {
@@ -21,10 +23,9 @@
   left: 0;
   width: var(--cgp-value-picker-width, 12px);
   height: var(--cgp-value-picker-width, 12px);
-  border: var(--cgp-value-picker-border, 2px) solid #ffffff;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: #ff0000;
+  border: var(--cgp-value-picker-border, 2px) solid #fff;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 50%);
+  background-color: #f00;
   border-radius: 55%;
-  cursor: pointer;
   transform: translateX(-50%);
 }

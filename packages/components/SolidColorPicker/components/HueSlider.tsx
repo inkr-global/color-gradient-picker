@@ -1,9 +1,10 @@
 import clsx from "clsx";
-import React, { useCallback, useRef, useState } from "react";
+import React, { CSSProperties, useCallback, useMemo, useRef, useState } from "react";
 
 import { hsvToHex } from "../../../utils/color/utils";
 import { getHueFromPosition } from "../../../utils/common";
 import s from "../styles/HueSlider.module.css";
+
 
 type HueSliderProps = {
   hue: number;
@@ -11,7 +12,7 @@ type HueSliderProps = {
   className?: string;
 };
 
-export const HueSlider = (props: HueSliderProps) => {
+export function HueSlider(props: HueSliderProps) {
   const { hue, onChange, className } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -79,26 +80,26 @@ export const HueSlider = (props: HueSliderProps) => {
   //   1. It allows for pointer capture which allows for continued
   //      interaction even when the cursor/pointer outside of picker
   //   2. It allows for unified code across devices (mobile and desktop)
-  const interactionCallbacks = window.PointerEvent
-    ? {
-        onPointerDown,
-        onPointerMove: onMove,
-        onPointerUp,
-      }
-    : {
-        onMouseDown,
-        onMouseMove: onMove,
-        onMouseUp,
-      };
+  const interactionCallbacks = window.PointerEvent ?
+    {
+      onPointerDown: onPointerDown,
+      onPointerMove: onMove,
+      onPointerUp: onPointerUp,
+    } :
+    {
+      onMouseDown: onMouseDown,
+      onMouseMove: onMove,
+      onMouseUp: onMouseUp,
+    };
 
-  const sliderStyle = {
+  const sliderStyle = useMemo((): CSSProperties => ({
     left: `${(hue / 360) * 100}%`,
     backgroundColor: hsvToHex({
-      hue,
+      hue: hue,
       saturation: 1,
       value: 1,
     }),
-  };
+  }), [hue]);
 
   return (
     <div
@@ -107,7 +108,13 @@ export const HueSlider = (props: HueSliderProps) => {
       title="Hue"
       {...interactionCallbacks}
     >
-      <div className={clsx(s.hue_slider_picker)} style={sliderStyle} />
+
+      <div
+        className={clsx(s.hue_slider_picker)}
+        style={sliderStyle}
+      />
+
     </div>
   );
-};
+
+}

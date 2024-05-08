@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 .input_text {
   width: 16px;
   flex-basis: 16px;
@@ -5,7 +7,7 @@
   box-sizing: border-box;
   border-radius: 2px;
   display: inline-flex;
-  justify-content: center;
+  justify-content: left;
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;

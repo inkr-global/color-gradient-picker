@@ -5,14 +5,19 @@ import {
 import { PalletteProps } from "../../../types/gradientPicker";
 import { getLinearGradientBackgroundCss } from "../../../utils/common";
 
-export const Palette = (props: PalletteProps) => {
+
+export function Palette(props: PalletteProps) {
+
   const { points, onAddColor, disabled } = props;
 
+
   // ------------------------------------------------------------------------------------------
+
   const linearGradientColors = getLinearGradientBackgroundCss({
-    points,
+    points: points,
     degree: 90, // the palette color should always show vertical gradient
   });
+
 
   // ------------------------------------------------------------------------------------------
 
@@ -25,16 +30,23 @@ export const Palette = (props: PalletteProps) => {
     onAddColor(offset);
   };
 
+
+  // ------------------------------------------------------------------------------------------
+
   return (
     <div
+      role="presentation"
       style={{
         width: DEFAULT_PALETTE_WIDTH,
         height: DEFAULT_PALETTE_HEIGHT,
         marginTop: 8,
         backgroundImage: linearGradientColors,
-        cursor: disabled ? "default" : "copy",
+        cursor: (
+          disabled ? "default" :
+            "copy"
+        ),
       }}
       onMouseDown={handleColorAdd}
     />
   );
-};
+}

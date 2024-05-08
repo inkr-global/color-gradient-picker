@@ -6,6 +6,7 @@ import { hsvToHex } from "../../../utils/color/utils";
 import { getSaturationValueFromPosition } from "../../../utils/common";
 import s from "../styles/SaturationPicker.module.css";
 
+
 type SaturationPickerProps = {
   hue: number;
   saturation: number;
@@ -14,7 +15,8 @@ type SaturationPickerProps = {
   onChange: (saturationValue: SaturationValue) => void;
 };
 
-export const SaturationPicker = (props: SaturationPickerProps) => {
+
+export function SaturationPicker(props: SaturationPickerProps) {
   const { hue, saturation, value, onChange } = props;
 
   // ------------------------------------------------------------------------------------------
@@ -74,24 +76,24 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
   //   1. It allows for pointer capture which allows for continued
   //      interaction even when the cursor/pointer outside of picker
   //   2. It allows for unified code across devices (mobile and desktop)
-  const interactionCallbacks = window.PointerEvent
-    ? {
-        onPointerDown,
-        onPointerMove: onMove,
-        onPointerUp,
-      }
-    : {
-        onMouseDown,
-        onMouseMove: onMove,
-        onMouseUp,
-      };
+  const interactionCallbacks = window.PointerEvent ?
+    {
+      onPointerDown: onPointerDown,
+      onPointerMove: onMove,
+      onPointerUp: onPointerUp,
+    } :
+    {
+      onMouseDown: onMouseDown,
+      onMouseMove: onMove,
+      onMouseUp: onMouseUp,
+    };
 
   return (
     <div
       className={clsx(s.saturation_value_selector)}
       style={{
         backgroundColor: hsvToHex({
-          hue,
+          hue: hue,
           saturation: 1,
           value: 1,
         }),
@@ -100,6 +102,7 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
       title="Saturation and Value"
       {...interactionCallbacks}
     >
+
       <div
         className={clsx(s.saturation_value_picker)}
         style={{
@@ -108,6 +111,7 @@ export const SaturationPicker = (props: SaturationPickerProps) => {
           backgroundColor: "transparent",
         }}
       />
+
     </div>
   );
-};
+}

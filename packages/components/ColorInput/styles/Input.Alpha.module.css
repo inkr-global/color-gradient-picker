@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 .alpha_info {
   width: 16px;
   height: 16px;
@@ -5,21 +7,21 @@
   border: 2px solid #7e7e84;
   background-color: var(--cgp-background-color);
   background-image: linear-gradient(
-      45deg,
-      #7e7e84 25%,
-      transparent 25%,
-      transparent 75%,
-      #7e7e84 75%,
-      #7e7e84
-    ),
+    45deg,
+    #7e7e84 25%,
+    transparent 25%,
+    transparent 75%,
+    #7e7e84 75%,
+    #7e7e84
+  ),
     linear-gradient(
-      45deg,
-      #7e7e84 25%,
-      transparent 25%,
-      transparent 75%,
-      #7e7e84 75%,
-      #7e7e84
-    );
+    45deg,
+    #7e7e84 25%,
+    transparent 25%,
+    transparent 75%,
+    #7e7e84 75%,
+    #7e7e84
+  );
   background-position: 0 0, 4px 4px;
   background-size: 8px 8px, 8px 8px;
   background-repeat: repeat, repeat;

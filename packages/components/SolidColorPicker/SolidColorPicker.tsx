@@ -115,6 +115,7 @@ export function SolidColorPicker(props: ColorPickerProps) {
 
   return (
     <>
+
       <SaturationPicker
         hue={hsvState.hue}
         saturation={hsvState.saturation}

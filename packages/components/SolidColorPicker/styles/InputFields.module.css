@@ -1,3 +1,5 @@
+/* stylelint-disable selector-class-pattern */
+
 .color_inputs_wrapper {
   padding-left: 16px;
   padding-right: 16px;
@@ -20,7 +22,6 @@
 
 .red {
   grid-area: red;
-  margin-left: -2px;
 }
 
 .green {

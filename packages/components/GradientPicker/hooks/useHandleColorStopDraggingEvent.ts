@@ -4,10 +4,13 @@
 import {
   DragEventHandler,
   TouchEventHandler,
+  useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
+
 
 const Events = {
   MOUSEDOWN: "mousedown",
@@ -18,18 +21,21 @@ const Events = {
   TOUCHEND: "touchend",
 };
 
+
 const DRAG_HANDLERS = {
+
   MOUSE: {
     stop: (e: MouseEvent) => {
       e.stopPropagation();
     },
     coordinates: ({ clientX, clientY }: MouseEvent) => ({
-      clientX,
-      clientY,
+      clientX: clientX,
+      clientY: clientY,
     }),
     dragEvent: { name: Events.MOUSEMOVE },
     dragEndEvent: { name: Events.MOUSEUP },
   },
+
   TOUCH: {
     stop: () => undefined,
     coordinates: (e: TouchEvent) => {
@@ -48,9 +54,12 @@ const DRAG_HANDLERS = {
     },
     dragEndEvent: { name: Events.TOUCHEND },
   },
+
 };
 
+
 const isTouch = (e: Event) => e.type === Events.TOUCHSTART;
+
 
 interface UseColorStopDraggingParams {
   onDragStart: DragEventHandler;
@@ -58,52 +67,56 @@ interface UseColorStopDraggingParams {
   onDragEnd: DragEventHandler;
 }
 
-export const useHandleColorStopDraggingEvent = ({
+
+export function useHandleColorStopDraggingEvent({
   onDragStart,
   onDrag,
   onDragEnd,
-}: UseColorStopDraggingParams) => {
+}: UseColorStopDraggingParams) {
+
+
   const [dragging, setDragging] = useState(false);
 
   const dragContext = useRef<{ handler: typeof DRAG_HANDLERS }>({});
 
+
   // ------------------------------------------------------------------------------------------
 
-  const activateEvent = (
+  const activateEvent = useCallback((
     e: MouseEvent,
     handler: typeof DRAG_HANDLERS.MOUSE | typeof DRAG_HANDLERS.TOUCH,
   ) => {
     setDragging(true);
     dragContext.current.handler = handler;
-
     onDragStart(handler.coordinates(e));
-  };
+  }, [onDragStart]);
 
-  const deactivateEvent = () => {
+
+  const deactivateEvent = useCallback(() => {
     setDragging(false);
-
     onDragEnd(dragContext.current.change);
     dragContext.current = {};
-  };
+  }, [onDragEnd]);
 
-  const dragHandler: DragEventHandler | TouchEventHandler = (e: Dra) => {
+
+  const dragHandler: DragEventHandler | TouchEventHandler = useCallback((e: Dra) => {
     const handler = isTouch(e) ? DRAG_HANDLERS.TOUCH : DRAG_HANDLERS.MOUSE;
-
     handler.stop(e);
-
     activateEvent(e, handler);
-  };
+  }, [activateEvent]);
 
-  const handleDrag = (e: MouseEvent) => {
+
+  const handleDrag = useCallback((e: MouseEvent) => {
     const { handler } = dragContext.current;
     if (!dragging) return;
-
     dragContext.current.change = onDrag(handler.coordinates(e));
-  };
+  }, [dragging, onDrag]);
+
 
   useEffect(() => {
+
     const { handler } = dragContext.current;
-    if (!handler) return;
+    if (!handler) return () => undefined;
 
     const { dragEvent, dragEndEvent } = handler;
 
@@ -124,8 +137,11 @@ export const useHandleColorStopDraggingEvent = ({
       );
       document.removeEventListener(dragEndEvent.name, deactivateEvent);
     };
-  }, [dragging]);
 
-  return [dragHandler, activateEvent, deactivateEvent];
-};
+  }, [deactivateEvent, dragging, handleDrag]);
 
+
+  return useMemo(() => ({
+    dragHandler: dragHandler,
+  }), [dragHandler]);
+}
