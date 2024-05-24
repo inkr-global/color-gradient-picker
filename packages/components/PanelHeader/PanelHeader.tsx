@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 import {
   ColorGradientPickerColorType,
   ColorGradientPickerTheme,
@@ -27,36 +25,13 @@ export function PanelHeader({
   return (
     <div className={s.select_wrapper}>
       {/* component color type select */}
-      <select
-        className={clsx(s.select, colorSelectType !== "all" && s.no_arrow)}
-        value={value}
-        onChange={(e) => {
-          onChange(e.target.value as ColorGradientPickerColorType);
-        }}
-        style={{ width: value === "linear-gradient" ? 75 : 52 }}
-        disabled={colorSelectType !== "all"}
-      >
-        <option value="solid">Solid</option>
-        <option value="linear-gradient">Gradient</option>
-      </select>
 
-      {colorSelectType !== "all" ? null : (
-        <span className={s.arrow_icon}>
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8.63281 2.5H7.90039C7.85059 2.5 7.80371 2.52441 7.77442 2.56445L5 6.38867L2.22559 2.56445C2.19629 2.52441 2.14942 2.5 2.09961 2.5H1.36719C1.30371 2.5 1.2666 2.57227 1.30371 2.62402L4.74707 7.37109C4.87207 7.54297 5.12793 7.54297 5.25195 7.37109L8.69531 2.62402C8.7334 2.57227 8.69629 2.5 8.63281 2.5Z"
-              fill="black"
-              fillOpacity="0.45"
-            />
-          </svg>
-        </span>
-      )}
+      <SegmentedControl
+        segments={["Solid", "Gradient"]}
+        selectedIndex={value === "solid" ? 0 : 1}
+        onSelect={(index) => onChange(index === 0 ? "solid" : "linear-gradient")}
+        disabled={colorSelectType !== "all"}
+      />
 
       {draggableID && (
         <div
@@ -89,6 +64,33 @@ export function PanelHeader({
           />
         </svg>
       </button>
+    </div>
+  );
+}
+
+interface SegmentedControlProps {
+  segments: string[];
+  selectedIndex: number;
+  onSelect: (index: number) => void;
+  disabled?: boolean;
+}
+
+function SegmentedControl(props: SegmentedControlProps) {
+
+  const { segments, selectedIndex, onSelect, disabled = false } = props;
+
+  return (
+    <div className={s.segmentedControl}>
+      {segments.map((segment, index) => (
+        <div
+          role="presentation"
+          key={segment}
+          className={`${s.segment} ${selectedIndex === index ? s.segmentSelected : s.segmentNotSelected} ${disabled ? s.segmentDisabled : ""}`}
+          onClick={!disabled ? () => onSelect(index) : undefined}
+        >
+          {segment}
+        </div>
+      ))}
     </div>
   );
 }
